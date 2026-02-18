@@ -1654,6 +1654,8 @@ sup { font-size: 0.6em; vertical-align: super; }
     width: 100%;
     height: auto;
     display: block;
+    filter: invert(1) brightness(0.6) sepia(0.3) hue-rotate(180deg) saturate(0.5);
+    opacity: 0.35;
 }
 
 /* ---- Map Pins ---- */

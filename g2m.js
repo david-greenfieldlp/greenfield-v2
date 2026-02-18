@@ -107,6 +107,14 @@
         ease: 'power2.out',
     }, '-=0.5');
 
+    // CTA buttons
+    heroTl.to('.g2m-hero-cta-group', {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: 'power2.out',
+    }, '-=0.4');
+
     // Scroll indicator
     heroTl.to('.g2m-hero-scroll', {
         opacity: 1,
@@ -467,27 +475,15 @@
     const missionSection = document.querySelector('.g2m-mission');
 
     if (missionSection) {
-        // Parallax on background image
-        gsap.to('.g2m-mission-bg-image', {
-            y: 40,
-            ease: 'none',
-            scrollTrigger: {
-                trigger: '.g2m-mission',
-                start: 'top bottom',
-                end: 'bottom top',
-                scrub: true,
-            },
-        });
-
-        // Accent line
-        gsap.to('.g2m-mission-accent', {
+        // Quote mark fade in
+        gsap.to('.g2m-mission-quote-mark', {
             opacity: 1,
-            duration: 0.6,
-            ease: 'power2.out',
+            y: 0,
+            duration: 0.8,
+            ease: 'power3.out',
             scrollTrigger: {
                 trigger: '.g2m-mission',
-                start: 'top 70%',
-                toggleActions: 'play none none none',
+                start: 'top 75%',
             },
         });
 
@@ -495,12 +491,35 @@
         gsap.to('.g2m-mission-text', {
             opacity: 1,
             y: 0,
-            duration: 1,
-            ease: 'power2.out',
+            duration: 1.2,
+            ease: 'power3.out',
             scrollTrigger: {
                 trigger: '.g2m-mission',
-                start: 'top 65%',
-                toggleActions: 'play none none none',
+                start: 'top 70%',
+            },
+        });
+
+        // Image card rises into view
+        gsap.to('.g2m-mission-image-card', {
+            opacity: 1,
+            y: 0,
+            duration: 1.4,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: '.g2m-mission-image-card',
+                start: 'top 85%',
+            },
+        });
+
+        // Subtle parallax on the image inside the card
+        gsap.to('.g2m-mission-bg-image', {
+            y: -30,
+            ease: 'none',
+            scrollTrigger: {
+                trigger: '.g2m-mission-image-card',
+                start: 'top bottom',
+                end: 'bottom top',
+                scrub: true,
             },
         });
     }
