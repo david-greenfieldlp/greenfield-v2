@@ -1,0 +1,340 @@
+/* ============================================
+   INVESTMENT APPROACH PAGE
+   ============================================ */
+
+/* ---------- NAV — always solid on this page ---------- */
+.nav-approach {
+    background: rgba(1, 17, 50, 0.97) !important;
+    backdrop-filter: blur(20px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06) !important;
+}
+
+/* Nav link active state */
+.nav-link-active {
+    color: var(--white) !important;
+    opacity: 1 !important;
+}
+
+.nav-link-active::after {
+    width: 100% !important;
+}
+
+/* ---------- PAGE BODY ---------- */
+.approach-body {
+    background: var(--navy-deep);
+}
+
+.approach-main {
+    min-height: 100vh;
+}
+
+/* ---------- WAVE BANNER ---------- */
+.approach-wave-banner {
+    position: relative;
+    width: 100%;
+    height: clamp(180px, 22vw, 300px);
+    margin-top: 80px; /* nav height */
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.approach-wave-banner svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* H1 overlaid on the banner — left-aligned, vertically centred */
+.approach-banner-text {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: var(--container-max);
+    padding: 0 var(--container-pad);
+    pointer-events: none; /* pass-through except for the pill itself */
+}
+
+/* ---------- HEADLINE ---------- */
+.approach-h1-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 14px 28px;
+    border-radius: 999px;
+    background: rgba(1, 11, 32, 0.45);
+    backdrop-filter: blur(16px) saturate(160%);
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    pointer-events: auto;
+}
+
+.approach-h1 {
+    font-family: var(--font);
+    font-size: clamp(1.6rem, 3vw, 3rem);
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    color: var(--white);
+    white-space: nowrap;
+    margin: 0;
+}
+
+/* ---------- HERO ---------- */
+.approach-hero {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    overflow: hidden;
+}
+
+.approach-hero-inner {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: clamp(40px, 6vh, 80px) var(--container-pad) clamp(60px, 10vh, 120px);
+}
+
+.approach-hero-text {
+    max-width: 760px;
+}
+
+/* ---------- LEAD PARAGRAPH ---------- */
+.approach-lead {
+    font-family: var(--font);
+    font-size: clamp(1rem, 1.5vw, 1.25rem);
+    font-weight: 300;
+    line-height: 1.75;
+    letter-spacing: -0.01em;
+    color: rgba(255, 255, 255, 0.65);
+    max-width: 600px;
+    margin-bottom: 0;
+}
+
+/* ---------- TABS CARD ---------- */
+.approach-tabs-card {
+    display: flex;
+    flex-direction: column;
+    margin-top: clamp(48px, 6vw, 80px);
+    padding: 36px;
+    border-radius: 20px;
+    background: #ffffff;
+}
+
+/* ── TOP: Horizontal pill tab row ── */
+.approach-tabs-menu {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+}
+
+.approach-tab-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 18px 10px 12px;
+    border-radius: 999px;
+    border: 1.5px solid #cad2d1;
+    background: transparent;
+    cursor: pointer;
+    font-family: var(--font);
+    color: #717b7a;
+    transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+/* Active pill */
+.approach-tab-btn--active {
+    border-color: #06c4a2;
+    background: hsla(169, 94%, 40%, 0.08);
+    color: #010c33;
+}
+
+/* Icon wrapper */
+.approach-tab-icon {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 999px;
+    background-color: #f2f4f4;
+    transition: background-color 0.2s ease;
+}
+
+.approach-tab-icon--active {
+    background-color: #e0f7f4;
+}
+
+.approach-tab-icon-img {
+    display: block;
+    width: 18px;
+    height: 18px;
+    transition: filter 0.2s ease;
+    filter: brightness(70%) grayscale(100%);
+}
+
+/* Inline SVG icons — never grayscale, always teal */
+#tailored-crosshair-svg,
+#g2m-mountain-svg,
+#heritage-plant-svg {
+    filter: none !important;
+}
+
+.approach-tab-icon-img--active {
+    /* Colorize to #06c4a2 teal */
+    filter: invert(63%) sepia(60%) saturate(450%) hue-rotate(125deg) brightness(95%);
+}
+
+/* Tab label */
+.approach-tab-title {
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+    white-space: nowrap;
+}
+
+/* ── BOTTOM: Full-width content panel ── */
+.approach-tabs-content {
+    width: 100%;
+}
+
+.approach-tab-panel {
+    display: none;
+    color: #010c33;
+    animation: approachFadeIn 0.3s ease-out;
+}
+
+.approach-tab-panel--active {
+    display: block;
+}
+
+@keyframes approachFadeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to   { opacity: 1; transform: translateY(0);   }
+}
+
+/* Lead text */
+.approach-tab-lead {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.4;
+    color: #010c33;
+}
+
+/* Divider */
+.approach-tab-divider {
+    height: 1px;
+    margin: 24px 0;
+    background-color: #cad2d1;
+}
+
+/* Body text */
+.approach-tab-body {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #717b7a;
+}
+
+.approach-tab-body p {
+    margin: 0 0 1em;
+}
+
+.approach-tab-body p:last-child {
+    margin-bottom: 0;
+}
+
+.approach-tab-body strong {
+    color: #010c33;
+    font-weight: 700;
+}
+
+/* ---------- INFLECTION SECTION ---------- */
+.approach-inflection {
+    position: relative;
+    padding: clamp(80px, 10vw, 140px) 0;
+    background: var(--navy-deep);
+    overflow: hidden;
+}
+
+.approach-inflection-inner {
+    width: 100%;
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 var(--container-pad);
+}
+
+.approach-inflection-header {
+    max-width: 800px;
+    margin-bottom: clamp(48px, 6vw, 80px);
+}
+
+.approach-inflection-h2 {
+    font-family: var(--font);
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 300;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    color: var(--white);
+    margin: 0 0 clamp(20px, 2.5vw, 32px);
+}
+
+.approach-inflection-body {
+    font-family: var(--font);
+    font-size: clamp(0.95rem, 1.4vw, 1.15rem);
+    font-weight: 300;
+    line-height: 1.75;
+    letter-spacing: -0.01em;
+    color: rgba(255, 255, 255, 0.6);
+    margin: 0;
+}
+
+.approach-inflection-body strong {
+    color: rgba(255, 255, 255, 0.92);
+    font-weight: 600;
+}
+
+/* The diagram itself re-uses all .diagram-* classes from styles.css.
+   Only override what needs to be different in this context. */
+#approachDiagramDesktop .diagram-fade-left  { background: linear-gradient(90deg,  var(--navy-deep), transparent); }
+#approachDiagramDesktop .diagram-fade-right { background: linear-gradient(270deg, var(--navy-deep), transparent); }
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 768px) {
+    .approach-wave-banner {
+        height: clamp(140px, 30vw, 200px);
+    }
+
+    .approach-h1 {
+        font-size: clamp(1.4rem, 5.5vw, 2rem);
+        white-space: normal;
+    }
+
+    .approach-lead {
+        font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+    }
+
+    .approach-tabs-card {
+        padding: 20px;
+    }
+
+    .approach-tab-title {
+        white-space: normal;
+    }
+
+    .approach-tab-divider {
+        margin: 16px 0;
+    }
+}

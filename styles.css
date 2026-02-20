@@ -1597,160 +1597,6 @@ sup { font-size: 0.6em; vertical-align: super; }
     transform: scale(1.2);
 }
 
-/* ============================================
-   GLOBAL PRESENCE SECTION
-   ============================================ */
-
-.global-presence {
-    position: relative;
-    padding: var(--section-pad) 0;
-    background: linear-gradient(180deg, var(--navy-deep) 0%, #010e2a 50%, var(--navy-deep) 100%);
-    overflow: hidden;
-}
-
-.global-presence::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 800px;
-    height: 800px;
-    background: radial-gradient(circle, rgba(61, 207, 142, 0.04) 0%, transparent 70%);
-    pointer-events: none;
-}
-
-.global-container {
-    max-width: var(--container-max);
-    margin: 0 auto;
-    padding: 0 var(--container-pad);
-}
-
-.global-header {
-    text-align: center;
-    margin-bottom: 64px;
-}
-
-.global-tag {
-    opacity: 0;
-    transform: translateY(20px);
-}
-
-.global-title {
-    font-size: clamp(2.2rem, 4.5vw, 3.8rem);
-    font-weight: 200;
-    line-height: 1.1;
-    letter-spacing: -0.03em;
-}
-
-.global-title-line {
-    display: block;
-}
-
-.global-title em {
-    font-style: italic;
-    font-weight: 300;
-    background: linear-gradient(135deg, var(--white), var(--accent-green));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-/* Map wrapper — perspective container */
-.global-map-wrapper {
-    perspective: 1000px;
-    max-width: 900px;
-    margin: 0 auto;
-}
-
-/* Map — tilted plane */
-.global-map {
-    position: relative;
-    transform: rotateX(35deg);
-    transform-style: preserve-3d;
-}
-
-.global-map-svg {
-    width: 100%;
-    height: auto;
-    display: block;
-    filter: invert(1) brightness(0.6) sepia(0.3) hue-rotate(180deg) saturate(0.5);
-    opacity: 0.35;
-}
-
-/* ---- Map Pins ---- */
-.map-pin {
-    position: absolute;
-    transform: translate(-50%, -50%);
-    z-index: 10;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-}
-
-.map-pin-dot {
-    width: 10px;
-    height: 10px;
-    background: var(--accent-green);
-    border-radius: 50%;
-    position: relative;
-    z-index: 2;
-    box-shadow: 0 0 8px rgba(61, 207, 142, 0.6),
-                0 0 24px rgba(61, 207, 142, 0.3);
-}
-
-.map-pin-ping {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    border: 1.5px solid var(--accent-green);
-    opacity: 0;
-    z-index: 1;
-    animation: map-ping 2.5s ease-out infinite;
-}
-
-.map-pin[data-city="new-york"] .map-pin-ping {
-    animation-delay: 0s;
-}
-
-.map-pin[data-city="london"] .map-pin-ping {
-    animation-delay: 0.8s;
-}
-
-.map-pin[data-city="tel-aviv"] .map-pin-ping {
-    animation-delay: 1.6s;
-}
-
-@keyframes map-ping {
-    0% {
-        transform: translateX(-50%) scale(1);
-        opacity: 0.7;
-    }
-    100% {
-        transform: translateX(-50%) scale(4);
-        opacity: 0;
-    }
-}
-
-.map-pin-label {
-    font-family: var(--font);
-    font-size: 0.7rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--white);
-    white-space: nowrap;
-    text-shadow: 0 1px 8px rgba(0, 10, 31, 0.8),
-                 0 0 20px rgba(0, 10, 31, 0.6);
-    transform: rotateX(-35deg);
-    transform-origin: center top;
-}
-
 /* ---------- FOOTER ---------- */
 
 .site-footer {
@@ -2101,18 +1947,6 @@ sup { font-size: 0.6em; vertical-align: super; }
         gap: 40px;
     }
 
-    /* Global section 1024 */
-    .global-map-wrapper {
-        max-width: 700px;
-    }
-
-    .global-map {
-        transform: rotateX(28deg);
-    }
-
-    .map-pin-label {
-        transform: rotateX(-28deg);
-    }
 }
 
 @media (max-width: 768px) {
@@ -2183,24 +2017,6 @@ sup { font-size: 0.6em; vertical-align: super; }
         height: auto;
     }
 
-    /* Global section 768 */
-    .global-map-wrapper {
-        max-width: 100%;
-        perspective: 800px;
-    }
-
-    .global-map {
-        transform: rotateX(20deg);
-    }
-
-    .map-pin-label {
-        font-size: 0.6rem;
-        transform: rotateX(-20deg);
-    }
-
-    .global-header {
-        margin-bottom: 40px;
-    }
 }
 
 @media (max-width: 640px) {
@@ -2259,25 +2075,6 @@ sup { font-size: 0.6em; vertical-align: super; }
         gap: 14px;
     }
 
-    /* Global section 640 */
-    .global-map {
-        transform: rotateX(10deg);
-    }
-
-    .map-pin-dot {
-        width: 8px;
-        height: 8px;
-    }
-
-    .map-pin-ping {
-        width: 8px;
-        height: 8px;
-    }
-
-    .map-pin-label {
-        font-size: 0.55rem;
-        transform: rotateX(-10deg);
-    }
 }
 
 @media (max-width: 478px) {
@@ -2286,13 +2083,4 @@ sup { font-size: 0.6em; vertical-align: super; }
         font-size: 2rem;
     }
 
-    /* Global section 478 */
-    .global-map {
-        transform: rotateX(5deg);
-    }
-
-    .map-pin-label {
-        transform: rotateX(-5deg);
-        letter-spacing: 0.04em;
-    }
 }
