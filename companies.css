@@ -1,0 +1,575 @@
+/* ============================================
+   COMPANIES PAGE
+   ============================================ */
+
+/* ---------- NAV — always solid on this page ---------- */
+.nav-companies {
+    background: rgba(1, 17, 50, 0.97) !important;
+    backdrop-filter: blur(20px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06) !important;
+}
+
+.nav-link-active {
+    color: var(--white) !important;
+    opacity: 1 !important;
+}
+
+.nav-link-active::after {
+    width: 100% !important;
+}
+
+/* ---------- PAGE BODY ---------- */
+.companies-body {
+    background: var(--navy-deep);
+}
+
+.companies-main {
+    min-height: 100vh;
+    background: #f4f5f5;
+    --container-max: 1260px;
+    --container-pad: clamp(20px, 3.5vw, 64px);
+}
+
+/* ---------- BANNER ---------- */
+.companies-banner {
+    position: relative;
+    width: 100%;
+    height: clamp(180px, 22vw, 300px);
+    margin-top: 80px; /* nav height */
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+/* Wrapper handles Ken Burns (CSS scale) — isolates from JS parallax on the img */
+.companies-banner-img-wrap {
+    position: absolute;
+    inset: 0;
+    will-change: transform;
+    animation: bannerKenBurns 14s ease-out forwards;
+}
+
+@keyframes bannerKenBurns {
+    from { transform: scale(1.06); }
+    to   { transform: scale(1);    }
+}
+
+/* Image handles parallax (JS translateY) — extra height so edges never show */
+.companies-banner-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 130%;
+    object-fit: cover;
+    object-position: center top;
+    will-change: transform;
+}
+
+.companies-banner-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(1, 17, 50, 0.10) 0%,
+        rgba(1, 17, 50, 0.20) 40%,
+        rgba(1, 17, 50, 0.70) 75%,
+        rgba(1, 17, 50, 0.95) 100%
+    );
+    z-index: 1;
+}
+
+.companies-banner-text {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: var(--container-max);
+    padding: 0 var(--container-pad);
+    pointer-events: none;
+}
+
+.companies-h1-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 14px 28px;
+    border-radius: 999px;
+    background: rgba(1, 11, 32, 0.15);
+    backdrop-filter: blur(8px) saturate(120%);
+    -webkit-backdrop-filter: blur(8px) saturate(120%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    pointer-events: auto;
+}
+
+.companies-h1 {
+    font-family: var(--font);
+    font-size: clamp(1.6rem, 3vw, 3rem);
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    color: var(--white);
+    white-space: nowrap;
+    margin: 0;
+}
+
+/* ---------- FILTER BAR ---------- */
+.companies-filters {
+    background: #f4f5f5;
+    padding: clamp(28px, 4vw, 48px) 0 0;
+}
+
+.companies-filters-inner {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 var(--container-pad);
+}
+
+.companies-filter-top {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.companies-filter-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 6px;
+}
+
+/* Push view toggle to far right on the status row */
+.companies-filter-row .view-toggle {
+    margin-left: auto;
+}
+
+/* ---------- GRID / LIST TOGGLE ---------- */
+.view-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    border: 1.5px solid #cad2d1;
+    border-radius: 10px;
+    overflow: hidden;
+    flex-shrink: 0;
+    background: transparent;
+}
+
+.view-toggle-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 34px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    color: #9aa5a4;
+    transition: color 0.2s ease, background 0.2s ease;
+}
+
+.view-toggle-btn:hover {
+    background: #06c4a2;
+    color: #fff;
+}
+
+.view-toggle-btn--active {
+    background: #06c4a2;
+    color: #fff;
+}
+
+.view-toggle-btn svg {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+}
+
+.companies-filter-label {
+    font-family: var(--font);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(1, 12, 51, 0.4);
+    margin-right: 2px;
+    white-space: nowrap;
+}
+
+.companies-filter-divider {
+    width: 1px;
+    height: 24px;
+    background: rgba(1, 12, 51, 0.12);
+    margin: 0 8px;
+    flex-shrink: 0;
+}
+
+/* Filter pill buttons */
+.filter-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 12px;
+    border-radius: 999px;
+    border: 1.5px solid #cad2d1;
+    background: transparent;
+    cursor: pointer;
+    font-family: var(--font);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: #717b7a;
+    transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    white-space: nowrap;
+}
+
+.filter-pill:hover {
+    color: #010c33;
+    border-color: #9aa5a4;
+}
+
+.filter-pill--active {
+    border-color: #06c4a2;
+    background: hsla(169, 94%, 40%, 0.08);
+    color: #010c33;
+}
+
+/* ---------- PORTFOLIO GRID ---------- */
+.companies-portfolio {
+    background: #f4f5f5;
+    padding: clamp(24px, 3vw, 40px) 0 clamp(80px, 10vw, 140px);
+}
+
+.companies-portfolio-inner {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 var(--container-pad);
+}
+
+.companies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-auto-rows: 320px;
+    gap: 16px;
+}
+
+/* Card overrides — all same size, visible immediately */
+.companies-grid .bento-card {
+    opacity: 1;
+    transform: translateY(0);
+    border-radius: 16px;
+}
+
+.companies-grid .bento-card::before,
+.companies-grid .bento-card::after {
+    border-radius: 16px;
+}
+
+/* Normalize featured cards to same size as regular */
+.companies-grid .bento-card-featured {
+    grid-column: span 1;
+    grid-row: span 1;
+}
+
+.companies-grid .bento-card-featured .bento-card-name {
+    font-size: 1.4rem;
+}
+
+/* Ensure bg images fill uniformly */
+.companies-grid .bento-card-bg {
+    background-size: cover;
+    background-position: center center;
+}
+
+/* Exited badge on grid card — top-left corner, always visible */
+.bento-card-exited-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    z-index: 10;
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 10px;
+    border-radius: 999px;
+    background: #06c4a2;
+    color: #fff;
+    font-family: var(--font);
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+/* ---------- EMPTY STATE ---------- */
+.companies-empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 80px 20px;
+    font-family: var(--font);
+    font-size: 1rem;
+    font-weight: 500;
+    color: rgba(1, 12, 51, 0.35);
+}
+
+/* ---------- LIST VIEW ---------- */
+.companies-list {
+    display: none;
+    flex-direction: column;
+}
+
+.companies-list.view-active {
+    display: flex;
+}
+
+.companies-grid.view-active {
+    display: grid;
+}
+
+.companies-grid:not(.view-active) {
+    display: none;
+}
+
+/* Column headers */
+.list-header {
+    display: grid;
+    grid-template-columns: 260px 140px 1fr 160px 150px 100px;
+    gap: 24px;
+    align-items: center;
+    padding: 0 0 14px;
+    border-bottom: 1px solid rgba(1, 12, 51, 0.10);
+}
+
+.list-header-label {
+    font-family: var(--font);
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(1, 12, 51, 0.35);
+    white-space: nowrap;
+}
+
+.list-header-label:first-child {
+    text-align: center;
+}
+
+/* Row */
+.list-row {
+    display: grid;
+    grid-template-columns: 260px 140px 1fr 160px 150px 100px;
+    gap: 24px;
+    align-items: center;
+    padding: 48px 0;
+    border-bottom: 1px solid rgba(1, 12, 51, 0.08);
+    transition: background 0.2s ease;
+}
+
+.list-row:hover {
+    background: rgba(1, 12, 51, 0.025);
+}
+
+/* Logo cell */
+.list-logo {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+}
+
+.list-logo-img {
+    height: 28px;
+    width: auto;
+    max-width: 160px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+/* Exited badge — teal, pinned top-center, overlays the logo */
+.list-exited-badge {
+    position: absolute;
+    top: -28px;
+    left: calc(50% - 73px);
+    transform: translateX(-50%);
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 10px;
+    border-radius: 999px;
+    background: #06c4a2;
+    color: #fff;
+    font-family: var(--font);
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+/* Text cells */
+.list-sector {
+    font-family: var(--font);
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: #010c33;
+    white-space: nowrap;
+}
+
+.list-description {
+    font-family: var(--font);
+    font-size: 0.82rem;
+    font-weight: 400;
+    color: rgba(1, 12, 51, 0.65);
+    line-height: 1.4;
+    min-width: 0;
+}
+
+.list-ceo {
+    font-family: var(--font);
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: #010c33;
+    white-space: nowrap;
+}
+
+.list-partnered {
+    font-family: var(--font);
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: #010c33;
+    white-space: nowrap;
+}
+
+/* Website link */
+.list-website {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font);
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #010c33;
+    text-decoration: none;
+    transition: color 0.2s ease;
+    white-space: nowrap;
+}
+
+.list-website:hover {
+    color: #06c4a2;
+}
+
+.list-website svg {
+    width: 12px;
+    height: 12px;
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+}
+
+.list-website:hover svg {
+    transform: translate(2px, -2px);
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 1100px) {
+    .list-header,
+    .list-row {
+        grid-template-columns: 200px 120px 1fr 140px 130px 80px;
+        gap: 16px;
+    }
+}
+
+@media (max-width: 900px) {
+    .list-header,
+    .list-row {
+        grid-template-columns: 160px 1fr 130px 80px;
+        gap: 12px;
+    }
+
+    /* Hide sector and CEO on medium screens */
+    .list-header-label:nth-child(2),
+    .list-row .list-sector {
+        display: none;
+    }
+
+    .list-header-label:nth-child(4),
+    .list-row .list-ceo {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .companies-banner {
+        height: clamp(140px, 30vw, 200px);
+    }
+
+    .companies-h1 {
+        font-size: clamp(1.4rem, 5.5vw, 2rem);
+    }
+
+    .companies-filter-pills {
+        gap: 8px;
+    }
+
+    .filter-pill {
+        font-size: 0.7rem;
+        padding: 6px 12px;
+    }
+
+    .companies-filter-divider {
+        display: none;
+    }
+
+    .companies-grid {
+        grid-auto-rows: 280px;
+    }
+
+    .companies-filter-top {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .view-toggle {
+        align-self: flex-end;
+        margin-top: -34px;
+    }
+
+    /* List: stack on mobile */
+    .list-header {
+        display: none;
+    }
+
+    .list-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px 16px;
+        padding: 32px 0;
+    }
+
+    .list-logo {
+        width: 100%;
+        margin-bottom: 4px;
+    }
+
+    .list-sector,
+    .list-ceo {
+        display: inline;
+    }
+
+    .list-description {
+        width: 100%;
+    }
+
+    .list-partnered {
+        font-size: 0.75rem;
+        color: rgba(1, 12, 51, 0.5);
+    }
+}
+
+@media (max-width: 480px) {
+    .companies-grid {
+        grid-template-columns: 1fr;
+        grid-auto-rows: 260px;
+    }
+}
