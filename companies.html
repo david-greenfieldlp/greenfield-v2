@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
 
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="companies.css">
@@ -247,6 +248,7 @@
         var activeSector = 'all';
         var activeStatus = 'all';
         var activeView = 'grid';  // 'grid' | 'list'
+        var expandedCompanyId = null;
 
         // Sort portfolio alphabetically by name
         var sorted = PORTFOLIO.slice().sort(function (a, b) {
@@ -287,7 +289,7 @@
             var desc = company.description.replace(/<br\s*\/?>/gi, ' ');
             var exitedBadge = company.status === 'exited' ? '<span class="bento-card-exited-badge">Exited</span>' : '';
 
-            return '<div class="bento-card' + featuredClass + '" data-category="' + company.category + '">' +
+            return '<div class="bento-card' + featuredClass + '" data-category="' + company.category + '" data-company-id="' + company.id + '">' +
                 '<div class="bento-card-bg bento-card-bg-img" style="background-image: url(\'' + company.bg + '\')"></div>' +
                 '<div class="bento-card-bg-overlay"></div>' +
                 '<div class="bento-card-glow"></div>' +
@@ -323,7 +325,7 @@
             var websiteUrl = company.website || '#';
             var logoSrc = company.logo || company.favicon;
 
-            return '<div class="list-row">' +
+            return '<div class="list-row" data-company-id="' + company.id + '">' +
                 '<div class="list-logo">' +
                     '<img src="' + logoSrc + '" alt="' + company.name + '" class="list-logo-img">' +
                     exitedBadge +
@@ -336,8 +338,259 @@
             '</div>';
         }
 
+        // ── Build expand panel HTML ──
+        function buildExpandPanel(company) {
+            var sectorLabel = categoryLabels[company.category] || company.sector;
+            var logoSrc = company.logoWhite || company.favicon;
+            var statusDot = company.status === 'active'
+                ? '<span class="expand-status-dot active"></span>Active'
+                : '<span class="expand-status-dot exited"></span>' + (company.exitLabel || 'Exited');
+            var ceo = company.ceo || '\u2014';
+            var partnered = company.year || '\u2014';
+            var websiteUrl = company.website || '#';
+            var websiteDomain = websiteUrl.replace(/^https?:\/\//, '').replace(/\/$/, '');
+
+            // Deal team pills
+            var dealTeamHtml = '';
+            if (company.dealTeam && company.dealTeam.length) {
+                company.dealTeam.forEach(function (member) {
+                    dealTeamHtml += '<span class="expand-deal-pill">' + member + '</span>';
+                });
+            }
+
+            // Long description
+            var longDesc = company.longDescription || company.description.replace(/<br\s*\/?>/gi, ' ');
+
+            // Testimonial block
+            var testimonialHtml = '';
+            if (company.testimonial) {
+                testimonialHtml =
+                    '<div class="expand-testimonial">' +
+                        '<div class="expand-testimonial-quote">\u201C' + company.testimonial.quote + '\u201D</div>' +
+                        '<div class="expand-testimonial-author">\u2014 ' + company.testimonial.author + '</div>' +
+                    '</div>';
+            }
+
+            return '<div class="expand-panel" data-company-id="' + company.id + '">' +
+                '<div class="expand-panel-bg" style="background-image: url(\'' + company.bg + '\')"></div>' +
+                '<div class="expand-panel-bg-overlay"></div>' +
+                '<button class="expand-close" aria-label="Close">&times;</button>' +
+                '<div class="expand-content">' +
+                    '<div class="expand-left">' +
+                        '<div class="expand-logo">' +
+                            '<img src="' + logoSrc + '" alt="' + company.name + '">' +
+                        '</div>' +
+                        '<div class="expand-meta-grid">' +
+                            '<div class="expand-meta-item"><span class="expand-meta-label">Sector</span><span class="expand-meta-value">' + sectorLabel + '</span></div>' +
+                            '<div class="expand-meta-item"><span class="expand-meta-label">First Partnered</span><span class="expand-meta-value">' + partnered + '</span></div>' +
+                            '<div class="expand-meta-item"><span class="expand-meta-label">CEO</span><span class="expand-meta-value">' + ceo + '</span></div>' +
+                            '<div class="expand-meta-item"><span class="expand-meta-label">Status</span><span class="expand-meta-value">' + statusDot + '</span></div>' +
+                        '</div>' +
+                        (dealTeamHtml ? '<div class="expand-deal-team"><span class="expand-meta-label">Deal Team</span><div class="expand-deal-pills">' + dealTeamHtml + '</div></div>' : '') +
+                    '</div>' +
+                    '<div class="expand-right">' +
+                        '<div class="expand-long-desc">' + longDesc + '</div>' +
+                        testimonialHtml +
+                        '<a href="' + websiteUrl + '" target="_blank" rel="noopener" class="expand-website-link">Visit ' + websiteDomain + ' <svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M1 13L13 1M13 1H3M13 1V11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>' +
+                    '</div>' +
+                '</div>' +
+            '</div>';
+        }
+
+        // ── Animate panel open ──
+        function animatePanelOpen(panel, skipDim) {
+            var container = activeView === 'grid' ? grid : list;
+            var selector = activeView === 'grid' ? '.bento-card' : '.list-row';
+            var siblings = container.querySelectorAll(selector);
+            var contentEls = panel.querySelectorAll('.expand-left > *, .expand-right > *');
+
+            // Set initial state
+            gsap.set(panel, { height: 0, overflow: 'hidden', opacity: 1 });
+            gsap.set(contentEls, { opacity: 0, y: 14 });
+
+            var tl = gsap.timeline({
+                onComplete: function () {
+                    panel.style.height = 'auto';
+                }
+            });
+
+            // Step 1: Gentle dim — cards stay visually "there" and clickable
+            if (!skipDim) {
+                tl.to(siblings, {
+                    opacity: 0.55,
+                    duration: 0.4,
+                    ease: 'power1.out'
+                }, 0);
+            }
+
+            // Step 2: Expand panel height
+            tl.to(panel, {
+                height: 'auto',
+                duration: 0.5,
+                ease: 'power3.out'
+            }, 0.08);
+
+            // Step 3: Content fades in
+            tl.to(contentEls, {
+                opacity: 1,
+                y: 0,
+                duration: 0.4,
+                stagger: 0.04,
+                ease: 'power2.out'
+            }, 0.25);
+
+            // Step 4: Scroll to panel
+            tl.to(window, {
+                scrollTo: { y: panel, offsetY: 120 },
+                duration: 0.65,
+                ease: 'power2.inOut'
+            }, 0.2);
+        }
+
+        // ── Close expand panel (fast = true for quick swap between companies) ──
+        function closeExpandPanel(callback, fast) {
+            var panel = document.querySelector('.expand-panel');
+            if (!panel) {
+                expandedCompanyId = null;
+                if (callback) callback();
+                return;
+            }
+
+            var container = activeView === 'grid' ? grid : list;
+            var selector = activeView === 'grid' ? '.bento-card' : '.list-row';
+            var siblings = container.querySelectorAll(selector);
+            var contentEls = panel.querySelectorAll('.expand-left > *, .expand-right > *');
+
+            // Snap from auto to current pixel height so GSAP can animate to 0
+            panel.style.height = panel.offsetHeight + 'px';
+            panel.style.overflow = 'hidden';
+
+            var tl = gsap.timeline({
+                onComplete: function () {
+                    if (panel.parentNode) panel.parentNode.removeChild(panel);
+                    expandedCompanyId = null;
+                    if (callback) callback();
+                }
+            });
+
+            if (fast) {
+                // Fast swap: skip content fade, just collapse quickly
+                // Don't touch siblings — they stay dimmed for the new panel
+                tl.to(panel, {
+                    height: 0,
+                    opacity: 0,
+                    duration: 0.3,
+                    ease: 'power2.inOut'
+                }, 0);
+            } else {
+                // Normal close: full graceful animation
+                tl.to(contentEls, {
+                    opacity: 0,
+                    y: -8,
+                    duration: 0.2,
+                    ease: 'power2.in'
+                }, 0);
+
+                tl.to(panel, {
+                    height: 0,
+                    duration: 0.4,
+                    ease: 'power3.inOut'
+                }, 0.1);
+
+                tl.to(siblings, {
+                    opacity: 1,
+                    duration: 0.35,
+                    ease: 'power1.out'
+                }, 0.2);
+            }
+        }
+
+        // ── Open expand panel ──
+        function openExpandPanel(companyId) {
+            // Find the company data
+            var company = null;
+            for (var i = 0; i < sorted.length; i++) {
+                if (sorted[i].id === companyId) { company = sorted[i]; break; }
+            }
+            if (!company) return;
+
+            // If same company is already open, close it
+            if (expandedCompanyId === companyId) {
+                closeExpandPanel(function () {
+                    // Re-init glow after close
+                    if (activeView === 'grid' && typeof initBentoGlow === 'function') initBentoGlow();
+                });
+                return;
+            }
+
+            // If a different panel is open, close it fast then open new
+            if (expandedCompanyId !== null) {
+                closeExpandPanel(function () {
+                    doOpen(company, true);
+                }, true);
+                return;
+            }
+
+            doOpen(company, false);
+
+            function doOpen(comp, isSwap) {
+                expandedCompanyId = comp.id;
+                var panelHtml = buildExpandPanel(comp);
+                var container = activeView === 'grid' ? grid : list;
+
+                if (activeView === 'grid') {
+                    // Find the clicked card and its visual row
+                    var cards = container.querySelectorAll('.bento-card');
+                    var clickedCard = container.querySelector('.bento-card[data-company-id="' + comp.id + '"]');
+                    if (!clickedCard) return;
+
+                    var rowTop = clickedCard.offsetTop;
+                    var lastInRow = clickedCard;
+
+                    // Find last card in same visual row
+                    for (var j = 0; j < cards.length; j++) {
+                        if (cards[j].offsetTop === rowTop) {
+                            lastInRow = cards[j];
+                        }
+                    }
+
+                    // Insert panel after last card in row
+                    lastInRow.insertAdjacentHTML('afterend', panelHtml);
+                } else {
+                    // List view: insert after clicked row
+                    var clickedRow = container.querySelector('.list-row[data-company-id="' + comp.id + '"]');
+                    if (!clickedRow) return;
+                    clickedRow.insertAdjacentHTML('afterend', panelHtml);
+                }
+
+                var panel = container.querySelector('.expand-panel');
+
+                // Close button handler
+                panel.querySelector('.expand-close').addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    closeExpandPanel(function () {
+                        if (activeView === 'grid' && typeof initBentoGlow === 'function') initBentoGlow();
+                    });
+                });
+
+                // Prevent clicks on links inside panel from closing
+                panel.querySelectorAll('a').forEach(function (link) {
+                    link.addEventListener('click', function (e) {
+                        e.stopPropagation();
+                    });
+                });
+
+                // Animate open — skip re-dimming siblings if swapping
+                animatePanelOpen(panel, isSwap);
+            }
+        }
+
         // ── Render ──
         function render() {
+            // Clean up any open panel
+            expandedCompanyId = null;
+            var existingPanel = document.querySelector('.expand-panel');
+            if (existingPanel && existingPanel.parentNode) existingPanel.parentNode.removeChild(existingPanel);
             var filtered = getFiltered();
 
             if (filtered.length === 0) {
@@ -384,6 +637,26 @@
                     );
                 }
             }
+
+            // ── Expand panel click handlers ──
+            // Grid cards
+            grid.querySelectorAll('.bento-card').forEach(function (card) {
+                card.addEventListener('click', function (e) {
+                    // Don't intercept clicks on existing links
+                    if (e.target.closest('a')) return;
+                    var id = card.getAttribute('data-company-id');
+                    if (id) openExpandPanel(id);
+                });
+            });
+            // List rows
+            list.querySelectorAll('.list-row').forEach(function (row) {
+                row.addEventListener('click', function (e) {
+                    // Don't intercept clicks on existing links
+                    if (e.target.closest('a')) return;
+                    var id = row.getAttribute('data-company-id');
+                    if (id) openExpandPanel(id);
+                });
+            });
         }
 
         // ── Toggle view ──
@@ -442,6 +715,30 @@
                 mobileMenu.classList.toggle('active');
             });
         }
+
+        // ── Escape key to close panel ──
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && expandedCompanyId !== null) {
+                closeExpandPanel(function () {
+                    if (activeView === 'grid' && typeof initBentoGlow === 'function') initBentoGlow();
+                });
+            }
+        });
+
+        // ── Click outside to close panel ──
+        document.addEventListener('click', function (e) {
+            if (expandedCompanyId === null) return;
+            // If click is inside the panel, ignore
+            if (e.target.closest('.expand-panel')) return;
+            // If click is on a card/row (which triggers openExpandPanel), ignore
+            if (e.target.closest('.bento-card') || e.target.closest('.list-row')) return;
+            // If click is on filter pills or toggle, ignore (render() handles cleanup)
+            if (e.target.closest('.filter-pill') || e.target.closest('.view-toggle-btn')) return;
+            // Otherwise close
+            closeExpandPanel(function () {
+                if (activeView === 'grid' && typeof initBentoGlow === 'function') initBentoGlow();
+            });
+        });
 
         // ── Initial render ──
         render();
