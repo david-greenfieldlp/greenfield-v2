@@ -65,246 +65,6 @@
 
     <main class="approach-main">
 
-        <!-- ── WAVE BANNER ── -->
-        <div class="approach-wave-banner">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 300" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
-              <defs>
-                <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stop-color="#061f26"/>
-                  <stop offset="100%" stop-color="#0a6c63"/>
-                </linearGradient>
-                <linearGradient id="fade-grad" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stop-color="white" stop-opacity="0"/>
-                  <stop offset="8%" stop-color="white"/>
-                  <stop offset="92%" stop-color="white"/>
-                  <stop offset="100%" stop-color="white" stop-opacity="0"/>
-                </linearGradient>
-                <mask id="edgeFade">
-                  <rect width="1000" height="300" fill="url(#fade-grad)"/>
-                </mask>
-                <linearGradient id="strand-main" x1="0%" x2="100%">
-                  <stop offset="0%" stop-color="#5fffe0"/>
-                  <stop offset="50%" stop-color="#3dd6c6"/>
-                  <stop offset="100%" stop-color="#1aa79a"/>
-                </linearGradient>
-                <linearGradient id="strand-secondary" x1="0%" x2="100%">
-                  <stop offset="0%" stop-color="#7fffd4"/>
-                  <stop offset="50%" stop-color="#4fe0c8"/>
-                  <stop offset="100%" stop-color="#28b5a8"/>
-                </linearGradient>
-                <filter id="softGlow">
-                  <feGaussianBlur stdDeviation="2" result="b"/>
-                  <feMerge>
-                    <feMergeNode in="b"/>
-                    <feMergeNode in="SourceGraphic"/>
-                  </feMerge>
-                </filter>
-              </defs>
-              <rect width="1000" height="300" fill="url(#bg-grad)"/>
-              <g mask="url(#edgeFade)">
-                <g>
-                  <animateTransform attributeName="transform" type="translate" from="0 0" to="-1000 0" dur="26s" repeatCount="indefinite"/>
-                  <!-- MAIN STRAND -->
-                  <g filter="url(#softGlow)">
-                    <path fill="none" stroke="url(#strand-main)" stroke-width="6" stroke-linecap="round">
-                      <animate attributeName="d" dur="14s" repeatCount="indefinite" calcMode="spline"
-                        keyTimes="0;0.25;0.5;0.75;1"
-                        keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"
-                        values="
-                          M0 150 C200 145 300 145 500 150 C700 155 800 155 1000 150 C1200 145 1300 145 1500 150 C1700 155 1800 155 2000 150;
-                          M0 150 C200 110 300 110 500 150 C700 190 800 190 1000 150 C1200 110 1300 110 1500 150 C1700 190 1800 190 2000 150;
-                          M0 150 C200 10 300 10 500 150 C700 290 800 290 1000 150 C1200 10 1300 10 1500 150 C1700 290 1800 290 2000 150;
-                          M0 150 C200 120 300 120 500 150 C700 180 800 180 1000 150 C1200 120 1300 120 1500 150 C1700 180 1800 180 2000 150;
-                          M0 150 C200 145 300 145 500 150 C700 155 800 155 1000 150 C1200 145 1300 145 1500 150 C1700 155 1800 155 2000 150"/>
-                    </path>
-                  </g>
-                  <!-- SECONDARY STRAND (Mirrored) -->
-                  <g transform="scale(1,-1) translate(0,-300)">
-                    <path fill="none" stroke="url(#strand-secondary)" stroke-width="3" stroke-linecap="round" opacity="0.9">
-                      <animate attributeName="d" dur="14s" repeatCount="indefinite" calcMode="spline"
-                        keyTimes="0;0.25;0.5;0.75;1"
-                        keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"
-                        values="
-                          M0 150 C200 155 300 155 500 150 C700 145 800 145 1000 150 C1200 155 1300 155 1500 150 C1700 145 1800 145 2000 150;
-                          M0 150 C200 190 300 190 500 150 C700 110 800 110 1000 150 C1200 190 1300 190 1500 150 C1700 110 1800 110 2000 150;
-                          M0 150 C200 290 300 290 500 150 C700 10 800 10 1000 150 C1200 290 1300 290 1500 150 C1700 10 1800 10 2000 150;
-                          M0 150 C200 180 300 180 500 150 C700 120 800 120 1000 150 C1200 180 1300 180 1500 150 C1700 120 1800 120 2000 150;
-                          M0 150 C200 155 300 155 500 150 C700 145 800 145 1000 150 C1200 155 1300 155 1500 150 C1700 145 1800 145 2000 150"/>
-                    </path>
-                  </g>
-                </g>
-              </g>
-            </svg>
-
-            <!-- H1 overlaid left-aligned on the banner -->
-            <div class="approach-banner-text">
-                <div class="approach-h1-pill">
-                    <h1 class="approach-h1">Your Partner in Building for Scale</h1>
-                </div>
-            </div>
-        </div>
-        <!-- end .approach-wave-banner -->
-
-        <!-- ── HERO ── -->
-        <section class="approach-hero">
-            <div class="approach-hero-inner">
-                <div class="approach-hero-text">
-                    <p class="approach-lead">We partner with exceptional technology companies at the Early-Growth stage – when implementing an efficient go-to-market machine becomes the key to unlocking global scale.</p>
-                </div>
-
-                <!-- ── TABS CARD ── -->
-                <div class="approach-tabs-card">
-
-                    <!-- TOP: Pill tab row -->
-                    <div class="approach-tabs-menu" role="tablist">
-
-                        <button class="approach-tab-btn approach-tab-btn--active" role="tab" aria-selected="true" data-tab="0">
-                            <div class="approach-tab-icon approach-tab-icon--active" id="tailored-icon-wrap">
-                                <svg id="tailored-crosshair-svg" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 30 30" fill="none" class="approach-tab-icon-img">
-                                  <style>
-                                    #tailored-crosshair-svg .outer {
-                                      stroke-dasharray: 80;
-                                      stroke-dashoffset: 80;
-                                      animation: drawOuter 1.2s cubic-bezier(.4,0,.2,1) forwards;
-                                    }
-                                    #tailored-crosshair-svg .inner {
-                                      stroke-dasharray: 40;
-                                      stroke-dashoffset: 40;
-                                      animation: drawInner 1s cubic-bezier(.4,0,.2,1) 1s forwards;
-                                    }
-                                    #tailored-crosshair-svg .tick:nth-of-type(1) { stroke-dasharray: 6; stroke-dashoffset: 6; animation: drawTick .6s ease 2s forwards; }
-                                    #tailored-crosshair-svg .tick:nth-of-type(2) { stroke-dasharray: 6; stroke-dashoffset: 6; animation: drawTick .6s ease 2.2s forwards; }
-                                    #tailored-crosshair-svg .tick:nth-of-type(3) { stroke-dasharray: 6; stroke-dashoffset: 6; animation: drawTick .6s ease 2.4s forwards; }
-                                    #tailored-crosshair-svg .tick:nth-of-type(4) { stroke-dasharray: 6; stroke-dashoffset: 6; animation: drawTick .6s ease 2.6s forwards; }
-                                    @keyframes drawOuter { to { stroke-dashoffset: 0; } }
-                                    @keyframes drawInner { to { stroke-dashoffset: 0; } }
-                                    @keyframes drawTick  { to { stroke-dashoffset: 0; } }
-                                  </style>
-                                  <!-- Outer Ring -->
-                                  <circle class="outer" cx="15" cy="15" r="12.5" stroke="#06C4A2" stroke-width="2" fill="none"/>
-                                  <!-- Inner Ring -->
-                                  <circle class="inner" cx="15" cy="15" r="6.25" stroke="#06C4A2" stroke-width="2" fill="none"/>
-                                  <!-- Crosshair Ticks -->
-                                  <line class="tick" x1="15" y1="0"  x2="15" y2="5"  stroke="#06C4A2" stroke-width="2" stroke-linecap="round"/>
-                                  <line class="tick" x1="15" y1="25" x2="15" y2="30" stroke="#06C4A2" stroke-width="2" stroke-linecap="round"/>
-                                  <line class="tick" x1="0"  y1="15" x2="5"  y2="15" stroke="#06C4A2" stroke-width="2" stroke-linecap="round"/>
-                                  <line class="tick" x1="25" y1="15" x2="30" y2="15" stroke="#06C4A2" stroke-width="2" stroke-linecap="round"/>
-                                </svg>
-                            </div>
-                            <span class="approach-tab-title">Tailored Guidance, Hands-On Approach</span>
-                        </button>
-
-                        <button class="approach-tab-btn" role="tab" aria-selected="false" data-tab="1">
-                            <div class="approach-tab-icon" id="g2m-icon-wrap">
-                                <svg id="g2m-mountain-svg" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 30 30" fill="none" class="approach-tab-icon-img">
-                                  <style>
-                                    #g2m-mountain-svg .grow-main {
-                                      stroke-dasharray: 70;
-                                      stroke-dashoffset: 70;
-                                      animation: growMain 1.2s cubic-bezier(.4,0,.2,1) forwards;
-                                    }
-                                    #g2m-mountain-svg .grow-second {
-                                      stroke-dasharray: 45;
-                                      stroke-dashoffset: 45;
-                                      animation: growSecond .9s cubic-bezier(.4,0,.2,1) .9s forwards;
-                                    }
-                                    #g2m-mountain-svg .details {
-                                      stroke-dasharray: 40;
-                                      stroke-dashoffset: 40;
-                                      animation: drawDetails .8s ease 1.6s forwards;
-                                    }
-                                    @keyframes growMain   { to { stroke-dashoffset: 0; } }
-                                    @keyframes growSecond { to { stroke-dashoffset: 0; } }
-                                    @keyframes drawDetails { to { stroke-dashoffset: 0; } }
-                                  </style>
-                                  <!-- Main Mountain -->
-                                  <path class="grow-main" d="M10.9005 5.43359L20.4671 24.5667H1.33398L10.9005 5.43359Z" stroke="#06C4A2" stroke-width="2.18664" stroke-linejoin="round" fill="none"/>
-                                  <!-- Secondary Peak -->
-                                  <path class="grow-second" d="M17.7334 18.417L21.5922 13.6337L28.6666 24.5669H20.4667" stroke="#06C4A2" stroke-width="2.18664" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                                  <!-- Interior Ridge Details -->
-                                  <path class="details" d="M6.80024 13.6337H15.0001 M8.16689 10.9004L5.43359 16.367 M13.6335 10.9004L16.3668 16.367" stroke="#06C4A2" stroke-width="2.18664" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                                </svg>
-                            </div>
-                            <span class="approach-tab-title">Hyper-Focused on G<sup>2</sup>M Excellence</span>
-                        </button>
-
-                        <button class="approach-tab-btn" role="tab" aria-selected="false" data-tab="2">
-                            <div class="approach-tab-icon" id="heritage-icon-wrap">
-                                <svg id="heritage-plant-svg" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 30 30" fill="none" class="approach-tab-icon-img">
-                                  <style>
-                                    #heritage-plant-svg .stem {
-                                      stroke-dasharray: 11.25;
-                                      stroke-dashoffset: 11.25;
-                                      animation: drawStem 1s cubic-bezier(.2,.8,.2,1) forwards;
-                                    }
-                                    #heritage-plant-svg .leaf-left {
-                                      stroke-dasharray: 60;
-                                      stroke-dashoffset: 60;
-                                      animation: drawLeafLeft 1.4s cubic-bezier(.4,0,.2,1) .5s forwards;
-                                    }
-                                    #heritage-plant-svg .leaf-right {
-                                      stroke-dasharray: 60;
-                                      stroke-dashoffset: 60;
-                                      animation: drawLeafRight 1.7s cubic-bezier(.4,0,.2,1) .8s forwards;
-                                    }
-                                    @keyframes drawStem     { to { stroke-dashoffset: 0; } }
-                                    @keyframes drawLeafLeft  { to { stroke-dashoffset: 0; } }
-                                    @keyframes drawLeafRight { to { stroke-dashoffset: 0; } }
-                                  </style>
-                                  <!-- POT (static) -->
-                                  <path d="M5 20H25M22.5 20L20 28.75H10L7.5 20" stroke="#06C4A2" stroke-width="2" stroke-linecap="round"/>
-                                  <!-- STEM -->
-                                  <path class="stem" d="M15 20V8.75" stroke="#06C4A2" stroke-width="2" stroke-linecap="round" fill="none"/>
-                                  <!-- LEFT LEAF -->
-                                  <path class="leaf-left" d="M15 8.75C15 5 15 1.25 23.75 1.25C23.75 5 23.75 8.75 15 8.75" stroke="#06C4A2" stroke-width="2" stroke-linecap="round" fill="none"/>
-                                  <!-- RIGHT LEAF -->
-                                  <path class="leaf-right" d="M15 13.75C15 10 15 6.25 6.25 6.25C6.25 10 6.25 13.75 15 13.75" stroke="#06C4A2" stroke-width="2" stroke-linecap="round" fill="none"/>
-                                </svg>
-                            </div>
-                            <span class="approach-tab-title">Our Heritage</span>
-                        </button>
-
-                    </div>
-
-                    <!-- BOTTOM: Full-width content panels -->
-                    <div class="approach-tabs-content">
-
-                        <div class="approach-tab-panel approach-tab-panel--active" data-panel="0">
-                            <p class="approach-tab-lead">For us, partnership isn't just advice; it's action.</p>
-                            <div class="approach-tab-divider"></div>
-                            <div class="approach-tab-body">
-                                <p>We work alongside you to identify the most salient challenges and implement proven solutions to address them.</p>
-                                <p>With hundreds of data points to inform what <strong>'excellent'</strong> looks like and decades of combined experience <strong>executing</strong> towards it, our companies <strong>avoid the pitfalls</strong> that stand between <strong>potential</strong> and <strong>performance</strong>.</p>
-                                <p>We also recognize that sometimes, the greatest support we can provide our CEOs is to give them the runway to do what they do best – build unapologetically.</p>
-                            </div>
-                        </div>
-
-                        <div class="approach-tab-panel" data-panel="1">
-                            <p class="approach-tab-lead">We know what it takes to cross the product-market-sales-fit chasm.</p>
-                            <div class="approach-tab-divider"></div>
-                            <div class="approach-tab-body">
-                                <p>We've done it before and know what a <strong>world-class go-to-market organization</strong> looks like.</p>
-                                <p>And we know what achieving a high-powered yet <strong>efficient sales machine</strong> means for success – and speed – in scaling to the growth phase.</p>
-                                <p>That's why we've established the <strong>G<sup>2</sup>M 'Greenfield Growth Momentum'</strong> Program to guide companies through the <strong>Seven Pillars of Efficient Growth</strong>.</p>
-                            </div>
-                        </div>
-
-                        <div class="approach-tab-panel" data-panel="2">
-                            <p class="approach-tab-lead">We've worked together as a team since 2016.</p>
-                            <div class="approach-tab-divider"></div>
-                            <div class="approach-tab-body">
-                                <p>When Greenfield was founded as a TPG Growth investment platform focused on disruptive technology at the Early Growth stage.</p>
-                                <p>In 2019, we spun out to pursue our strategy independently on a global scale, enabling us to fuse the <strong>rigor</strong> and <strong>depth</strong> of late-stage investing honed under one of the world's most respected private investment organizations with the <strong>entrepreneurial spirit, agility, and grit</strong> of the innovative tech ecosystem in which we operate.</p>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-                <!-- end .approach-tabs-card -->
-
-            </div>
-        </section>
-
         <!-- ── EARLY GROWTH INFLECTION SECTION ── -->
         <section class="approach-inflection">
             <div class="approach-inflection-inner">
@@ -312,7 +72,7 @@
                 <!-- Section header -->
                 <div class="approach-inflection-header">
                     <h2 class="approach-inflection-h2">The Early Growth Inflection</h2>
-                    <p class="approach-inflection-body">There is a critical inflection point every high-growth technology company faces — when achieving product-market fit is no longer sufficient, and the ability to build a <strong>scalable, efficient go-to-market engine</strong> becomes the defining challenge. This is where companies either accelerate toward global scale or stall in the gap between potential and performance.</p>
+                    <p class="approach-inflection-body">There is a critical inflection point every high-growth technology company faces — when achieving product-market fit is no longer sufficient, and the ability to build a <strong class="approach-inflection-accent">scalable, efficient go-to-market engine</strong> becomes the defining challenge. This is where companies either accelerate toward global scale or stall in the gap between potential and performance.</p>
                 </div>
 
                 <!-- ── DESKTOP DIAGRAM (copied from homepage) ── -->
@@ -504,6 +264,166 @@
         </section>
         <!-- end .approach-inflection -->
 
+        <!-- ── HERO ── -->
+        <section class="approach-hero">
+            <div class="approach-hero-inner">
+                <div class="approach-hero-text">
+                    <p class="approach-lead">We partner with exceptional technology companies at the Early-Growth stage – when implementing an efficient go-to-market machine becomes the key to unlocking global scale.</p>
+                </div>
+
+                <!-- ── TABS CARD ── -->
+                <div class="approach-tabs-card">
+
+                    <!-- TOP: Pill tab row -->
+                    <div class="approach-tabs-menu" role="tablist">
+
+                        <button class="approach-tab-btn approach-tab-btn--active" role="tab" aria-selected="true" data-tab="0">
+                            <div class="approach-tab-icon approach-tab-icon--active" id="tailored-icon-wrap">
+                                <svg id="tailored-crosshair-svg" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 30 30" fill="none" class="approach-tab-icon-img">
+                                  <style>
+                                    #tailored-crosshair-svg .outer {
+                                      stroke-dasharray: 80;
+                                      stroke-dashoffset: 80;
+                                      animation: drawOuter 1.2s cubic-bezier(.4,0,.2,1) forwards;
+                                    }
+                                    #tailored-crosshair-svg .inner {
+                                      stroke-dasharray: 40;
+                                      stroke-dashoffset: 40;
+                                      animation: drawInner 1s cubic-bezier(.4,0,.2,1) 1s forwards;
+                                    }
+                                    #tailored-crosshair-svg .tick:nth-of-type(1) { stroke-dasharray: 6; stroke-dashoffset: 6; animation: drawTick .6s ease 2s forwards; }
+                                    #tailored-crosshair-svg .tick:nth-of-type(2) { stroke-dasharray: 6; stroke-dashoffset: 6; animation: drawTick .6s ease 2.2s forwards; }
+                                    #tailored-crosshair-svg .tick:nth-of-type(3) { stroke-dasharray: 6; stroke-dashoffset: 6; animation: drawTick .6s ease 2.4s forwards; }
+                                    #tailored-crosshair-svg .tick:nth-of-type(4) { stroke-dasharray: 6; stroke-dashoffset: 6; animation: drawTick .6s ease 2.6s forwards; }
+                                    @keyframes drawOuter { to { stroke-dashoffset: 0; } }
+                                    @keyframes drawInner { to { stroke-dashoffset: 0; } }
+                                    @keyframes drawTick  { to { stroke-dashoffset: 0; } }
+                                  </style>
+                                  <!-- Outer Ring -->
+                                  <circle class="outer" cx="15" cy="15" r="12.5" stroke="#06C4A2" stroke-width="2" fill="none"/>
+                                  <!-- Inner Ring -->
+                                  <circle class="inner" cx="15" cy="15" r="6.25" stroke="#06C4A2" stroke-width="2" fill="none"/>
+                                  <!-- Crosshair Ticks -->
+                                  <line class="tick" x1="15" y1="0"  x2="15" y2="5"  stroke="#06C4A2" stroke-width="2" stroke-linecap="round"/>
+                                  <line class="tick" x1="15" y1="25" x2="15" y2="30" stroke="#06C4A2" stroke-width="2" stroke-linecap="round"/>
+                                  <line class="tick" x1="0"  y1="15" x2="5"  y2="15" stroke="#06C4A2" stroke-width="2" stroke-linecap="round"/>
+                                  <line class="tick" x1="25" y1="15" x2="30" y2="15" stroke="#06C4A2" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                            </div>
+                            <span class="approach-tab-title">Tailored Guidance, Hands-On Approach</span>
+                        </button>
+
+                        <button class="approach-tab-btn" role="tab" aria-selected="false" data-tab="1">
+                            <div class="approach-tab-icon" id="g2m-icon-wrap">
+                                <svg id="g2m-mountain-svg" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 30 30" fill="none" class="approach-tab-icon-img">
+                                  <style>
+                                    #g2m-mountain-svg .grow-main {
+                                      stroke-dasharray: 70;
+                                      stroke-dashoffset: 70;
+                                      animation: growMain 1.2s cubic-bezier(.4,0,.2,1) forwards;
+                                    }
+                                    #g2m-mountain-svg .grow-second {
+                                      stroke-dasharray: 45;
+                                      stroke-dashoffset: 45;
+                                      animation: growSecond .9s cubic-bezier(.4,0,.2,1) .9s forwards;
+                                    }
+                                    #g2m-mountain-svg .details {
+                                      stroke-dasharray: 40;
+                                      stroke-dashoffset: 40;
+                                      animation: drawDetails .8s ease 1.6s forwards;
+                                    }
+                                    @keyframes growMain   { to { stroke-dashoffset: 0; } }
+                                    @keyframes growSecond { to { stroke-dashoffset: 0; } }
+                                    @keyframes drawDetails { to { stroke-dashoffset: 0; } }
+                                  </style>
+                                  <!-- Main Mountain -->
+                                  <path class="grow-main" d="M10.9005 5.43359L20.4671 24.5667H1.33398L10.9005 5.43359Z" stroke="#06C4A2" stroke-width="2.18664" stroke-linejoin="round" fill="none"/>
+                                  <!-- Secondary Peak -->
+                                  <path class="grow-second" d="M17.7334 18.417L21.5922 13.6337L28.6666 24.5669H20.4667" stroke="#06C4A2" stroke-width="2.18664" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                                  <!-- Interior Ridge Details -->
+                                  <path class="details" d="M6.80024 13.6337H15.0001 M8.16689 10.9004L5.43359 16.367 M13.6335 10.9004L16.3668 16.367" stroke="#06C4A2" stroke-width="2.18664" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                                </svg>
+                            </div>
+                            <span class="approach-tab-title">Hyper-Focused on G<sup>2</sup>M Excellence</span>
+                        </button>
+
+                        <button class="approach-tab-btn" role="tab" aria-selected="false" data-tab="2">
+                            <div class="approach-tab-icon" id="heritage-icon-wrap">
+                                <svg id="heritage-plant-svg" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 30 30" fill="none" class="approach-tab-icon-img">
+                                  <style>
+                                    #heritage-plant-svg .stem {
+                                      stroke-dasharray: 11.25;
+                                      stroke-dashoffset: 11.25;
+                                      animation: drawStem 1s cubic-bezier(.2,.8,.2,1) forwards;
+                                    }
+                                    #heritage-plant-svg .leaf-left {
+                                      stroke-dasharray: 60;
+                                      stroke-dashoffset: 60;
+                                      animation: drawLeafLeft 1.4s cubic-bezier(.4,0,.2,1) .5s forwards;
+                                    }
+                                    #heritage-plant-svg .leaf-right {
+                                      stroke-dasharray: 60;
+                                      stroke-dashoffset: 60;
+                                      animation: drawLeafRight 1.7s cubic-bezier(.4,0,.2,1) .8s forwards;
+                                    }
+                                    @keyframes drawStem     { to { stroke-dashoffset: 0; } }
+                                    @keyframes drawLeafLeft  { to { stroke-dashoffset: 0; } }
+                                    @keyframes drawLeafRight { to { stroke-dashoffset: 0; } }
+                                  </style>
+                                  <!-- POT (static) -->
+                                  <path d="M5 20H25M22.5 20L20 28.75H10L7.5 20" stroke="#06C4A2" stroke-width="2" stroke-linecap="round"/>
+                                  <!-- STEM -->
+                                  <path class="stem" d="M15 20V8.75" stroke="#06C4A2" stroke-width="2" stroke-linecap="round" fill="none"/>
+                                  <!-- LEFT LEAF -->
+                                  <path class="leaf-left" d="M15 8.75C15 5 15 1.25 23.75 1.25C23.75 5 23.75 8.75 15 8.75" stroke="#06C4A2" stroke-width="2" stroke-linecap="round" fill="none"/>
+                                  <!-- RIGHT LEAF -->
+                                  <path class="leaf-right" d="M15 13.75C15 10 15 6.25 6.25 6.25C6.25 10 6.25 13.75 15 13.75" stroke="#06C4A2" stroke-width="2" stroke-linecap="round" fill="none"/>
+                                </svg>
+                            </div>
+                            <span class="approach-tab-title">Our Heritage</span>
+                        </button>
+
+                    </div>
+
+                    <!-- BOTTOM: Full-width content panels -->
+                    <div class="approach-tabs-content">
+
+                        <div class="approach-tab-panel approach-tab-panel--active" data-panel="0">
+                            <p class="approach-tab-lead">For us, partnership isn't just advice; it's action.</p>
+                            <div class="approach-tab-divider"></div>
+                            <div class="approach-tab-body">
+                                <p>We work alongside you to identify the most salient challenges and implement proven solutions to address them.</p>
+                                <p>With hundreds of data points to inform what <strong>'excellent'</strong> looks like and decades of combined experience <strong>executing</strong> towards it, our companies <strong>avoid the pitfalls</strong> that stand between <strong>potential</strong> and <strong>performance</strong>.</p>
+                                <p>We also recognize that sometimes, the greatest support we can provide our CEOs is to give them the runway to do what they do best – build unapologetically.</p>
+                            </div>
+                        </div>
+
+                        <div class="approach-tab-panel" data-panel="1">
+                            <p class="approach-tab-lead">We know what it takes to cross the product-market-sales-fit chasm.</p>
+                            <div class="approach-tab-divider"></div>
+                            <div class="approach-tab-body">
+                                <p>We've done it before and know what a <strong>world-class go-to-market organization</strong> looks like.</p>
+                                <p>And we know what achieving a high-powered yet <strong>efficient sales machine</strong> means for success – and speed – in scaling to the growth phase.</p>
+                                <p>That's why we've established the <strong>G<sup>2</sup>M 'Greenfield Growth Momentum'</strong> Program to guide companies through the <strong>Seven Pillars of Efficient Growth</strong>.</p>
+                            </div>
+                        </div>
+
+                        <div class="approach-tab-panel" data-panel="2">
+                            <p class="approach-tab-lead">We've worked together as a team since 2016.</p>
+                            <div class="approach-tab-divider"></div>
+                            <div class="approach-tab-body">
+                                <p>When Greenfield was founded as a TPG Growth investment platform focused on disruptive technology at the Early Growth stage.</p>
+                                <p>In 2019, we spun out to pursue our strategy independently on a global scale, enabling us to fuse the <strong>rigor</strong> and <strong>depth</strong> of late-stage investing honed under one of the world's most respected private investment organizations with the <strong>entrepreneurial spirit, agility, and grit</strong> of the innovative tech ecosystem in which we operate.</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- end .approach-tabs-card -->
+
+            </div>
+        </section>
+
         <!-- ── GROWTH CHASM SECTION ── -->
         <section class="growth-chasm">
             <div class="growth-chasm-inner">
@@ -548,9 +468,6 @@
 
         <!-- ── G²M SECTION ── -->
         <section class="g2m-section">
-            <img src="assets/images/mountainview.avif" alt="" class="g2m-bg-img">
-            <div class="g2m-overlay"></div>
-
             <div class="g2m-content">
 
                 <!-- Intro text -->
@@ -796,6 +713,25 @@
         mobileDots.forEach(function (dot) {
             dot.addEventListener('click', function () { switchSlide(dot.dataset.dot); });
         });
+    })();
+
+    // ── Growth Chasm parallax ──────────────────
+    (function () {
+        var img  = document.querySelector('.growth-chasm-img');
+        var hero = document.querySelector('.growth-chasm-hero');
+        if (!img || !hero) return;
+
+        function tick() {
+            var rect     = hero.getBoundingClientRect();
+            var viewH    = window.innerHeight;
+            var progress = (viewH - rect.top) / (viewH + rect.height);
+            progress     = Math.max(0, Math.min(1, progress));
+            var offset   = (progress - 0.5) * 160; // moves ±80px as you scroll
+            img.style.transform = 'scale(1.22) translateY(' + offset + 'px)';
+        }
+
+        window.addEventListener('scroll', tick, { passive: true });
+        tick();
     })();
     </script>
 </body>

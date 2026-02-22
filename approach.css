@@ -106,7 +106,7 @@
     width: 100%;
     max-width: var(--container-max);
     margin: 0 auto;
-    padding: clamp(40px, 6vh, 80px) var(--container-pad) clamp(60px, 10vh, 120px);
+    padding: clamp(40px, 6vh, 80px) var(--container-pad) clamp(24px, 4vh, 48px);
 }
 
 .approach-hero-text {
@@ -116,11 +116,11 @@
 /* ---------- LEAD PARAGRAPH ---------- */
 .approach-lead {
     font-family: var(--font);
-    font-size: clamp(1rem, 1.5vw, 1.25rem);
-    font-weight: 500;
-    line-height: 1.75;
-    letter-spacing: -0.01em;
-    color: rgba(1, 12, 51, 0.7);
+    font-size: clamp(1.25rem, 2vw, 1.75rem);
+    font-weight: 600;
+    line-height: 1.55;
+    letter-spacing: -0.02em;
+    color: rgba(1, 12, 51, 0.75);
     max-width: 820px;
     margin-bottom: 0;
 }
@@ -483,6 +483,10 @@
     font-weight: 600;
 }
 
+.approach-inflection-accent {
+    color: #06c4a2 !important;
+}
+
 /* The diagram itself re-uses all .diagram-* classes from styles.css.
    Only override what needs to be different in this context. */
 #approachDiagramDesktop .diagram-fade-left  { background: linear-gradient(90deg,  var(--navy-deep), transparent); }
@@ -518,8 +522,8 @@
 
 /* ---------- GROWTH CHASM SECTION ---------- */
 .growth-chasm {
-    background: #ffffff;
-    padding: clamp(60px, 8vw, 120px) 0;
+    background: #f4f5f5;
+    padding: clamp(20px, 3vw, 40px) 0 clamp(20px, 2.5vw, 40px);
 }
 
 .growth-chasm-inner {
@@ -540,17 +544,19 @@
     display: block;
     min-height: clamp(420px, 38vw, 540px);
     object-fit: cover;
+    will-change: transform;
+    transform: scale(1.22) translateY(0px);
 }
 
-/* Full overlay — darker at bottom, lighter at top */
+/* Full overlay — cool navy tint, lighter in the middle */
 .growth-chasm-overlay {
     position: absolute;
     inset: 0;
     background: linear-gradient(
         180deg,
-        rgba(1, 12, 51, 0.55) 0%,
-        rgba(1, 12, 51, 0.35) 45%,
-        rgba(1, 12, 51, 0.7) 100%
+        rgba(1, 10, 60, 0.48) 0%,
+        rgba(1, 8, 50, 0.22) 45%,
+        rgba(1, 10, 60, 0.60) 100%
     );
 }
 
@@ -668,34 +674,33 @@
 .g2m-section {
     position: relative;
     overflow: hidden;
-    min-height: 90vh;
-    max-height: 90vh;
     display: flex;
     align-items: stretch;
+    background:
+        radial-gradient(ellipse 80% 50% at 50% 0%, rgba(6, 196, 162, 0.06) 0%, transparent 70%),
+        linear-gradient(180deg, #010e2a 0%, #011132 50%, var(--navy-deep) 100%);
 }
 
-/* Full-bleed background image */
-.g2m-bg-img {
+/* Teal accent line at the section top */
+.g2m-section::before {
+    content: '';
     position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center 30%;
-    display: block;
+    top: 0;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(6, 196, 162, 0.3), transparent);
+    z-index: 2;
 }
 
-/* Overlay — heavier navy at top, opens up in middle, fully dissolves to footer navy at bottom */
-.g2m-overlay {
+/* Subtle dot-grid texture */
+.g2m-section::after {
+    content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-        180deg,
-        rgba(1, 12, 51, 0.75) 0%,
-        rgba(1, 12, 51, 0.3) 35%,
-        rgba(1, 12, 51, 0.3) 45%,
-        rgba(0, 10, 31, 1.0) 85%
-    );
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.12) 1px, transparent 1px);
+    background-size: 32px 32px;
+    pointer-events: none;
 }
 
 /* Content container */
@@ -705,7 +710,7 @@
     width: 100%;
     max-width: var(--container-max);
     margin: 0 auto;
-    padding: clamp(36px, 5vw, 64px) var(--container-pad);
+    padding: clamp(64px, 8vw, 120px) var(--container-pad);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -746,22 +751,23 @@
     gap: clamp(16px, 2vw, 28px);
 }
 
-/* Individual card — frosted glass */
+/* Individual card — light glass over dark bg */
 .g2m-card {
-    background: rgba(255, 255, 255, 0.06);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 16px;
-    padding: clamp(18px, 2vw, 26px);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-top-color: rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    padding: clamp(20px, 2.5vw, 28px);
     display: flex;
     flex-direction: column;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07);
     transition: background 0.3s ease, border-color 0.3s ease;
 }
 
 .g2m-card:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.13);
+    border-top-color: rgba(255, 255, 255, 0.22);
 }
 
 /* Step number */
