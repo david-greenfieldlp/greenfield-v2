@@ -43,26 +43,7 @@
     gsap.ticker.add((time) => lenis.raf(time * 1000));
     gsap.ticker.lagSmoothing(0);
 
-    /* ---------- NAV SCROLL BEHAVIOR ---------- */
-    const nav = document.getElementById('nav');
-    let lastScroll = 0;
-
-    window.addEventListener('scroll', () => {
-        const currentScroll = window.scrollY;
-        if (nav) {
-            if (currentScroll > 80) {
-                nav.classList.add('nav-scrolled');
-            } else {
-                nav.classList.remove('nav-scrolled');
-            }
-            if (currentScroll > lastScroll && currentScroll > 400) {
-                nav.style.transform = 'translateY(-100%)';
-            } else {
-                nav.style.transform = 'translateY(0)';
-            }
-        }
-        lastScroll = currentScroll;
-    });
+    /* NAV SCROLL BEHAVIOR — handled globally by nav-scroll.js */
 
     /* ---------- HERO ANIMATIONS ---------- */
     const heroTl = gsap.timeline({ delay: 0.3 });

@@ -183,9 +183,29 @@ function initBentoGlow() {
 
 
 // ==========================================
-// 6. INIT
+// 6. VISIBILITY FAILSAFE
+// ==========================================
+// If GSAP animations get interrupted (e.g. rapid navigation),
+// elements can be stuck at opacity:0. This forces everything
+// visible after a generous timeout as a safety net.
+const ANIMATED_SELECTORS = '.clock-item, .dashboard-stat, .dashboard-headline-text, .dashboard-headline-btn, .dashboard-bento-grid .bento-card';
+
+function forceVisible() {
+    document.querySelectorAll(ANIMATED_SELECTORS).forEach(el => {
+        el.style.opacity = '1';
+        el.style.transform = 'none';
+    });
+}
+
+
+// ==========================================
+// 7. INIT
 // ==========================================
 window.addEventListener('load', () => {
     initEntryAnimations();
     initBentoGlow();
+
+    // Failsafe: guarantee everything is visible after 4 seconds
+    // even if GSAP somehow stalls or gets killed mid-animation
+    setTimeout(forceVisible, 4000);
 });

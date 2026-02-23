@@ -2,13 +2,9 @@
    INVESTMENT APPROACH PAGE
    ============================================ */
 
-/* ---------- NAV — always solid on this page ---------- */
-.nav-approach {
-    background: rgba(1, 17, 50, 0.97) !important;
-    backdrop-filter: blur(20px) saturate(180%) !important;
-    -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
-    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06) !important;
-}
+/* ---------- NAV ---------- */
+/* Nav is transparent at top on all pages via nav-scroll.js.
+   Blue background appears via .scrolled class when scrolled. */
 
 /* Nav link active state */
 .nav-link-active {
