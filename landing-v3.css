@@ -1,0 +1,491 @@
+/* ============================================
+   LANDING V3 — Hero (66vh) + Bento Grid Hybrid
+   ============================================ */
+
+/* CSS custom property for border beam animation */
+@property --beam-angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+}
+
+/* ---------- HERO: 66vh override ---------- */
+.hero.hero-v3 {
+    min-height: 66vh;
+    height: 66vh;
+}
+
+/* Background: show sky, extend element for smooth parallax pan */
+.hero-v3 .hero-bg-image {
+    background-position: center top;
+    /* Overhang above + below so the image pans sky → mountains
+       without any edge gaps as the element translates on scroll */
+    top:    -12%;
+    bottom: -12%;
+    left: 0;
+    right: 0;
+}
+
+/* Stats bar: floating on hero image, bottom-right corner */
+.hero-v3 .hero-stats {
+    position: absolute;
+    bottom: clamp(40px, 5vw, 80px);
+    left: clamp(32px, 8vw, 140px);
+    right: auto;
+    display: flex;
+    gap: clamp(20px, 2vw, 40px);
+    padding: 0;
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border: none;
+    z-index: 10;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: flex-end;
+}
+
+.hero-v3 .hero-stat {
+    padding: 0 clamp(20px, 2.5vw, 40px);
+    border-left: 1px solid rgba(255, 255, 255, 0.15);
+    border-right: none;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.hero-v3 .hero-stat:first-child {
+    border-left: none;
+    padding-left: 0;
+}
+
+.hero-v3 .hero-stat:last-child {
+    border-right: none;
+    padding-right: 0;
+}
+
+.hero-v3 .hero-stat-value {
+    justify-content: center;
+}
+
+.hero-v3 .hero-stat-label {
+    text-align: center;
+}
+
+/* World clocks — bottom right, vertically aligned with stats */
+.hero-v3 .hero-clocks {
+    position: absolute;
+    bottom: clamp(40px, 5vw, 80px);
+    right: clamp(32px, 8vw, 140px);
+    display: flex;
+    gap: clamp(20px, 2vw, 36px);
+    align-items: flex-end;
+    z-index: 10;
+}
+
+.clock-item { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.clock-face { width: clamp(40px, 3.2vw, 54px); height: clamp(40px, 3.2vw, 54px); }
+.clock-svg { width: 100%; height: 100%; }
+.clock-ring { fill: none; stroke: rgba(255,255,255,0.08); stroke-width: 1; }
+.clock-hand { stroke-linecap: round; transform-origin: 50px 50px; transition: transform 0.3s cubic-bezier(0.4, 2.08, 0.55, 0.44); }
+.clock-hand-hour   { stroke-width: 2.5; stroke: var(--white); }
+.clock-hand-minute { stroke-width: 1.5; stroke: rgba(255,255,255,0.8); }
+.clock-hand-second { stroke-width: 0.7; stroke: var(--accent-blue); }
+.clock-center-dot  { fill: var(--accent-blue); }
+.clock-city { font-family: var(--font); font-size: 0.5rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray-300); }
+.clock-time { font-family: var(--font); font-size: 0.65rem; font-weight: 300; letter-spacing: 0.05em; color: var(--white); font-variant-numeric: tabular-nums; }
+
+/* Content: left-aligned, pushed up to account for stat bar */
+.hero-v3 .hero-content {
+    text-align: left;
+    align-items: flex-start;
+    max-width: none;
+    width: 100%;
+    padding-top: 80px;
+    padding-bottom: 80px;
+    padding-left: clamp(32px, 8vw, 140px);
+    padding-right: clamp(32px, 8vw, 140px);
+}
+
+/* Title: single line, much smaller than the default 7.5rem max */
+.hero-v3 .hero-title {
+    font-size: clamp(1.8rem, 3.2vw, 3rem);
+    font-weight: 500;
+}
+
+/* Title lines: no line breaks, keep on one line */
+.hero-v3 .hero-title-line {
+    display: inline;
+}
+
+/* Subtitle: smaller text, expanded width */
+.hero-v3 .hero-subtitle {
+    max-width: 700px;
+    font-size: clamp(0.85rem, 1.4vw, 0.95rem);
+    text-align: left;
+}
+
+.hero-subtitle-accent {
+    font-weight: 600;
+}
+
+/* CTAs: left-aligned row */
+.hero-v3 .hero-cta-group {
+    justify-content: flex-start;
+}
+
+/* Scroll indicator: align to left edge, clear of content */
+.hero-v3 .hero-scroll-indicator {
+    left: clamp(32px, 8vw, 140px);
+    right: auto;
+    transform: none;
+}
+
+/* ---------- PORTFOLIO V3: Bento Section ---------- */
+.portfolio.portfolio-v3 {
+    background: var(--navy-deep);
+    padding-top: 24px;
+    padding-bottom: clamp(48px, 6vw, 80px);
+}
+
+.portfolio-v3 .portfolio-header {
+    margin-bottom: 16px;
+}
+
+.bento-v3-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+/* ---------- V3 BENTO GRID LAYOUT ---------- */
+.bento-grid-v3 {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* Row 1: Large (left ~60%) + Medium stack (right ~40%) */
+.bento-v3-row-top {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 16px;
+    min-height: 420px;
+}
+
+/* Large card fills full height of row 1 */
+.bento-v3-large {
+    min-height: 420px;
+}
+
+/* Medium stack: 2 cards stacked vertically */
+.bento-v3-medium-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.bento-v3-medium {
+    flex: 1;
+    min-height: 0;
+}
+
+/* Row 2: 5 equal small cards */
+.bento-v3-row-bottom {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+    min-height: 260px;
+}
+
+.bento-v3-small {
+    min-height: 260px;
+}
+
+/* ---------- CARD VISUAL OVERRIDES (dashboard-v2 effects) ---------- */
+
+/* All v3 cards: visible on load, rounded corners, blue border */
+.bento-grid-v3 .bento-card {
+    opacity: 1;
+    transform: none;
+    border-radius: 20px;
+    border: 1px solid rgba(74, 144, 217, 0.18);
+    overflow: hidden;
+    position: relative;
+}
+
+.bento-grid-v3 .bento-card::before,
+.bento-grid-v3 .bento-card::after {
+    border-radius: 20px;
+}
+
+/* No overlay at rest — transparent */
+.bento-grid-v3 .bento-card-bg-overlay {
+    background: transparent !important;
+}
+
+/* Bottom-heavy gradient on hover */
+.bento-grid-v3 .bento-card:hover .bento-card-bg-overlay {
+    background: linear-gradient(
+        180deg,
+        transparent 0%,
+        transparent 45%,
+        rgba(0, 10, 31, 0.55) 68%,
+        rgba(0, 10, 31, 0.88) 85%,
+        rgba(0, 10, 31, 0.96) 100%
+    ) !important;
+}
+
+/* AAI special case: stronger overlay */
+.bento-grid-v3 .bento-card[data-category="aai"]:hover .bento-card-bg-overlay {
+    background: linear-gradient(
+        180deg,
+        transparent 0%,
+        transparent 35%,
+        rgba(0, 10, 31, 0.65) 60%,
+        rgba(0, 10, 31, 0.92) 82%,
+        rgba(0, 10, 31, 0.98) 100%
+    ) !important;
+}
+
+/* Text shadow on card names */
+.bento-grid-v3 .bento-card-name {
+    text-shadow:
+        0 1px 6px rgba(0, 0, 0, 0.55),
+        0 2px 12px rgba(0, 0, 0, 0.35);
+}
+
+/* Top section absolutely positioned */
+.bento-grid-v3 .bento-card .bento-card-top {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+}
+
+/* Content: flex-end so bottom hugs card bottom */
+.bento-grid-v3 .bento-card .bento-card-content {
+    justify-content: flex-end;
+    opacity: 1;
+}
+
+/* Name always visible */
+.bento-grid-v3 .bento-card .bento-card-name {
+    opacity: 1;
+}
+
+/* Background always visible */
+.bento-grid-v3 .bento-card .bento-card-bg {
+    opacity: 1;
+}
+
+/* Desc collapsed at rest, expand on hover */
+.bento-grid-v3 .bento-card .bento-card-desc {
+    max-height: 0;
+    overflow: hidden;
+    margin-bottom: 0;
+    opacity: 0;
+    transform: translateY(6px);
+    transition:
+        max-height 0.4s ease,
+        margin-bottom 0.4s ease,
+        opacity 0.35s ease 0.03s,
+        transform 0.35s cubic-bezier(0.16, 1, 0.3, 1) 0.03s;
+}
+
+.bento-grid-v3 .bento-card:hover .bento-card-desc {
+    max-height: 60px;
+    margin-bottom: 8px;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Meta collapsed at rest, expand on hover */
+.bento-grid-v3 .bento-card .bento-card-meta {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(6px);
+    transition:
+        max-height 0.4s ease,
+        opacity 0.35s ease 0.06s,
+        transform 0.35s cubic-bezier(0.16, 1, 0.3, 1) 0.06s;
+}
+
+.bento-grid-v3 .bento-card:hover .bento-card-meta {
+    max-height: 30px;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Bottom lifts on hover */
+.bento-grid-v3 .bento-card .bento-card-bottom {
+    transform: translateY(0);
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.bento-grid-v3 .bento-card:hover .bento-card-bottom {
+    transform: translateY(-8px);
+}
+
+/* Meta text bold white like dashboard */
+.bento-grid-v3 .bento-card-stage,
+.bento-grid-v3 .bento-card-location {
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.95);
+}
+
+/* Border beam animation — conic gradient sweeps card border on hover */
+.bento-grid-v3 .bento-card-glow::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: 20px;
+    background: conic-gradient(
+        from var(--beam-angle, 0deg),
+        transparent 0deg,
+        transparent 60deg,
+        rgba(74, 144, 217, 0.75) 90deg,
+        rgba(147, 197, 253, 0.9) 100deg,
+        rgba(74, 144, 217, 0.75) 110deg,
+        transparent 140deg,
+        transparent 360deg
+    );
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    padding: 1px;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 4;
+    transition: opacity 0.2s ease;
+}
+
+.bento-grid-v3 .bento-card:hover .bento-card-glow::before {
+    opacity: 1;
+    animation: borderBeamV3 1.2s linear forwards;
+}
+
+@keyframes borderBeamV3 {
+    0%   { --beam-angle: 0deg;   opacity: 1; }
+    80%  { --beam-angle: 360deg; opacity: 1; }
+    100% { --beam-angle: 360deg; opacity: 0; }
+}
+
+/* ---------- CARD SIZE VARIANTS ---------- */
+
+/* Large card */
+.bento-v3-large .bento-card-content { padding: 28px; }
+.bento-v3-large .bento-card-name { font-size: 2rem; }
+.bento-v3-large .bento-card-desc { font-size: 0.9rem; color: rgba(255, 255, 255, 0.92); }
+
+/* Medium card */
+.bento-v3-medium .bento-card-content { padding: 22px; }
+.bento-v3-medium .bento-card-name { font-size: 1.3rem; }
+.bento-v3-medium .bento-card-desc { font-size: 0.8rem; color: rgba(255, 255, 255, 0.92); }
+
+/* Small card */
+.bento-v3-small .bento-card-content { padding: 20px; }
+.bento-v3-small .bento-card-name { font-size: 1.1rem; }
+.bento-v3-small .bento-card-desc { font-size: 0.75rem; color: rgba(255, 255, 255, 0.92); }
+.bento-v3-small .bento-card-logo-img { width: 36px; height: 36px; border-radius: 10px; }
+.bento-v3-small .bento-card-tag { font-size: 0.55rem; padding: 4px 10px; }
+.bento-v3-small .bento-card-meta { font-size: 0.65rem; }
+
+.bento-v3-large .bento-card-top { top: 28px; left: 28px; right: 28px; }
+.bento-v3-medium .bento-card-top { top: 22px; left: 22px; right: 22px; }
+.bento-v3-small .bento-card-top { top: 20px; left: 20px; right: 20px; }
+
+/* ---------- RESPONSIVE ---------- */
+
+@media (max-width: 1024px) {
+    .bento-v3-row-top {
+        grid-template-columns: 1fr 1fr;
+        min-height: 360px;
+    }
+
+    .bento-v3-row-bottom {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .bento-v3-small {
+        min-height: 240px;
+    }
+
+    .hero-v3 .hero-stats {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero.hero-v3 {
+        min-height: 80vh;
+        height: auto;
+    }
+
+    .hero-v3 .hero-content {
+        padding-bottom: 100px;
+    }
+
+    .bento-v3-row-top {
+        grid-template-columns: 1fr;
+        min-height: auto;
+    }
+
+    .bento-v3-large {
+        min-height: 320px;
+    }
+
+    .bento-v3-medium-stack {
+        flex-direction: row;
+        gap: 16px;
+    }
+
+    .bento-v3-medium {
+        min-height: 260px;
+    }
+
+    .bento-v3-row-bottom {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .bento-v3-small {
+        min-height: 220px;
+    }
+
+    .hero-v3 .hero-stat-label {
+        font-size: 0.55rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .bento-v3-row-top {
+        grid-template-columns: 1fr;
+    }
+
+    .bento-v3-medium-stack {
+        flex-direction: column;
+    }
+
+    .bento-v3-medium {
+        min-height: 240px;
+    }
+
+    .bento-v3-row-bottom {
+        grid-template-columns: 1fr;
+    }
+
+    .bento-v3-large {
+        min-height: 280px;
+    }
+
+    .bento-v3-small {
+        min-height: 220px;
+    }
+}
