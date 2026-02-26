@@ -243,23 +243,6 @@
     padding-bottom: clamp(20px, 3vh, 40px);
 }
 
-/* Growth chasm — fill viewport with the image */
-.snap-container .growth-chasm {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: clamp(20px, 3vw, 40px) 0;
-}
-
-.snap-container .growth-chasm-hero {
-    border-radius: 0;
-}
-
-.snap-container .growth-chasm-img {
-    min-height: 70vh;
-    transform: scale(1) translateY(0);
-}
-
 /* G²M cards section — centre content */
 .snap-container .g2m-section {
     display: flex;
@@ -326,11 +309,6 @@
     .snap-container .approach-banner {
         height: auto;
         min-height: 80vh;
-    }
-
-    .snap-container .growth-chasm {
-        min-height: auto;
-        padding: 0;
     }
 
     .snap-container .g2m-mission-alt {
@@ -912,156 +890,6 @@
 
     .approach-tab-divider {
         margin: 16px 0;
-    }
-}
-
-/* ---------- GROWTH CHASM SECTION ---------- */
-.growth-chasm {
-    background: #f4f5f5;
-    padding: clamp(20px, 3vw, 40px) 0 clamp(20px, 2.5vw, 40px);
-}
-
-.growth-chasm-inner {
-    max-width: var(--container-max);
-    margin: 0 auto;
-    padding: 0 var(--container-pad);
-}
-
-/* Hero — image fills, all content overlaid */
-.growth-chasm-hero {
-    position: relative;
-    border-radius: 20px;
-    overflow: hidden;
-}
-
-.growth-chasm-img {
-    width: 100%;
-    display: block;
-    min-height: clamp(420px, 38vw, 540px);
-    object-fit: cover;
-    will-change: transform;
-    transform: scale(1.22) translateY(0px);
-}
-
-/* Full overlay — cool navy tint, lighter in the middle */
-.growth-chasm-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-        180deg,
-        rgba(1, 10, 60, 0.48) 0%,
-        rgba(1, 8, 50, 0.22) 45%,
-        rgba(1, 10, 60, 0.60) 100%
-    );
-}
-
-/* Content container — fills the hero, flexes top-to-bottom */
-.growth-chasm-content {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: clamp(32px, 4vw, 56px);
-}
-
-/* Top-left: title + subtitle */
-.growth-chasm-header {
-    max-width: 560px;
-}
-
-.growth-chasm-h2 {
-    font-family: var(--font);
-    font-size: clamp(1.6rem, 2.5vw, 2.4rem);
-    font-weight: 500;
-    letter-spacing: -0.03em;
-    line-height: 1.15;
-    color: #ffffff;
-    margin: 0 0 10px;
-}
-
-.growth-chasm-sub {
-    font-family: var(--font);
-    font-size: clamp(0.95rem, 1.2vw, 1.1rem);
-    font-weight: 500;
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.65);
-    margin: 0;
-}
-
-/* Bottom: three-column checklist */
-.growth-chasm-list {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 0 clamp(20px, 2.5vw, 36px);
-    background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 14px;
-    padding: clamp(20px, 2.5vw, 32px);
-}
-
-.growth-chasm-item {
-    display: flex;
-    gap: 12px;
-    padding: 0;
-}
-
-.growth-chasm-item:nth-child(2) {
-    border-left: 1px solid rgba(255, 255, 255, 0.12);
-    border-right: 1px solid rgba(255, 255, 255, 0.12);
-    padding-left: clamp(20px, 2.5vw, 36px);
-    padding-right: clamp(20px, 2.5vw, 36px);
-}
-
-.growth-chasm-check {
-    flex-shrink: 0;
-    width: 22px;
-    height: 22px;
-    margin-top: 2px;
-    filter: brightness(0) invert(1);
-}
-
-.growth-chasm-item p {
-    font-family: var(--font);
-    font-size: clamp(0.85rem, 1vw, 0.95rem);
-    font-weight: 400;
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.75);
-    margin: 0;
-}
-
-.growth-chasm-item p strong {
-    font-weight: 600;
-    color: #ffffff;
-}
-
-/* Responsive */
-@media (max-width: 900px) {
-    .growth-chasm-img {
-        min-height: 560px;
-    }
-    .growth-chasm-list {
-        grid-template-columns: 1fr;
-        gap: 0;
-    }
-    .growth-chasm-item {
-        padding: 16px 0;
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
-    }
-    .growth-chasm-item:first-child {
-        border-top: none;
-        padding-top: 0;
-    }
-    .growth-chasm-item:last-child {
-        padding-bottom: 0;
-    }
-    .growth-chasm-item:nth-child(2) {
-        border-left: none;
-        border-right: none;
-        padding-left: 0;
-        padding-right: 0;
     }
 }
 
