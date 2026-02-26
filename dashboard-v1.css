@@ -46,7 +46,8 @@
 
 /* ---------- LAYOUT: two columns ---------- */
 .v1-layout {
-    height: 100%;
+    /* 75vh grid zone — leaves clean 25vh space below for additional elements */
+    height: calc(75vh - 80px);
     display: grid;
     grid-template-columns: 30% 70%;
     position: relative;
@@ -210,11 +211,11 @@
 }
 
 .v1-metrics-block .v1-divider:first-child {
-    margin-bottom: 100px;
+    margin-bottom: 52px;
 }
 
 .v1-metrics-block .v1-divider:last-child {
-    margin-top: 100px;
+    margin-top: 52px;
 }
 
 /* Metrics */
