@@ -3147,6 +3147,11 @@
     max-width: 380px;
 }
 
+.t2-subtitle-accent {
+    color: #06c4a2;
+    font-weight: 600;
+}
+
 /* ── Company logo ── */
 .t2-logo {
     height: 28px;
