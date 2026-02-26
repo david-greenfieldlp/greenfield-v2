@@ -47,7 +47,7 @@
 /* ---------- LAYOUT: two columns ---------- */
 .v1-layout {
     /* 75vh grid zone — leaves clean 25vh space below for additional elements */
-    height: calc(75vh - 80px);
+    height: calc(80vh - 80px);
     display: grid;
     grid-template-columns: 30% 70%;
     position: relative;
@@ -236,7 +236,7 @@
 
 /* ---------- BOTTOM ZONE: 25vh — clocks bottom-right ---------- */
 .v1-bottom {
-    height: 25vh;
+    height: 20vh;
     display: grid;
     grid-template-columns: 30% 70%;
     position: relative;
