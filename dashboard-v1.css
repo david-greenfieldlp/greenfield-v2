@@ -482,18 +482,18 @@
 /* View all link */
 .dashboard-view-all {
     font-family: var(--font);
-    font-size: 0.72rem;
+    font-size: 0.9rem;
     font-weight: 500;
     letter-spacing: 0.04em;
-    color: rgba(255, 255, 255, 0.45);
+    color: rgba(147, 197, 253, 0.85);
     text-decoration: none;
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    gap: 7px;
     transition: color 0.3s ease;
 }
-.dashboard-view-all:hover { color: rgba(255, 255, 255, 0.85); }
-.dashboard-view-all svg { width: 10px; height: 10px; transition: transform 0.3s ease; }
+.dashboard-view-all:hover { color: rgba(147, 197, 253, 1); }
+.dashboard-view-all svg { width: 12px; height: 12px; transition: transform 0.3s ease; }
 .dashboard-view-all:hover svg { transform: translate(2px, -2px); }
 
 /* ── Bento Rotation: crossfade support ── */
