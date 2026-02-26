@@ -16,7 +16,7 @@
 
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="g2m.css">
-    <link rel="stylesheet" href="approach.css?v=18">
+    <link rel="stylesheet" href="approach.css?v=19">
 
 </head>
 <body class="approach-body">
@@ -1474,26 +1474,23 @@
         <section class="snap-section approach-testimonials" id="testimonials" data-theme="dark">
             <div class="t2-layout">
 
-                <!-- Left: eyebrow pinned above + vertically centred photo -->
+                <!-- Left: eyebrow + subtitle in normal flow, photo fills remaining space below -->
                 <div class="t2-photo-col">
-                    <!-- Only eyebrow here — small enough to never overlap the photo -->
                     <div class="t2-left-header">
                         <div class="t2-eyebrow">
                             <span class="t2-eyebrow-rule"></span>
                             <span class="t2-eyebrow-text">In Their Own Words</span>
                         </div>
+                        <p class="t2-subtitle">We measure our success by our portfolio companies' success. Here's how founders describe the Greenfield difference.</p>
                     </div>
-                    <!-- Photo vertically centred in column by flexbox parent -->
+                    <!-- Photo fills remaining height; flex + min-height:0 prevents overflow -->
                     <div class="t2-photo-card">
                         <img class="t2-photo" id="testimonialPhoto" src="" alt="">
                     </div>
                 </div>
 
-                <!-- Right: subtitle (static) + quote content, centred vertically -->
+                <!-- Right: quote content only, centred vertically -->
                 <div class="t2-content-col">
-
-                    <!-- Subtitle — same for all testimonials, sits above logo -->
-                    <p class="t2-subtitle">We measure our success by our portfolio companies' success. Here's how founders describe the Greenfield difference.</p>
 
                     <!-- Logo -->
                     <img class="t2-logo" id="testimonialLogo" src="" alt="">
