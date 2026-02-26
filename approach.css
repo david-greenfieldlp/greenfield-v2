@@ -3166,7 +3166,7 @@
     align-items: center;
     gap: 8px;
     margin-top: 20px;
-    align-self: flex-start;
+    align-self: flex-end;
     flex-shrink: 0;
     padding: 9px 20px;
     border-radius: 9999px;
