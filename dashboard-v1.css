@@ -209,13 +209,6 @@
     width: 100%;
 }
 
-.v1-metrics-block .v1-divider:first-child {
-    margin-bottom: 14px;
-}
-
-.v1-metrics-block .v1-divider:last-child {
-    margin-top: 14px;
-}
 
 /* Metrics */
 .v1-metrics {
