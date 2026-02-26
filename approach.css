@@ -219,17 +219,6 @@
     margin: 0 auto;
 }
 
-/* Inflection — centre content in viewport */
-.snap-container .approach-inflection {
-    padding: clamp(24px, 2.5vw, 40px) 0;
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-}
-
-.snap-container .approach-inflection-inner {
-    padding-top: clamp(60px, 8vh, 80px);
-}
 
 /* Hero/tabs — centre the card in viewport */
 .snap-container .approach-hero {
@@ -812,9 +801,9 @@
 /* ---------- INFLECTION SECTION ---------- */
 .approach-inflection {
     position: relative;
-    padding: clamp(80px, 10vw, 140px) 0;
+    padding: clamp(80px, 10vw, 140px) 0 clamp(160px, 20vw, 260px);
     background: var(--navy-deep);
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 .approach-inflection-inner {
@@ -1638,9 +1627,13 @@
 
 .snap-container .approach-flywheel {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
-    padding: clamp(40px, 4vw, 64px) 0;
+    padding: clamp(72px, 9vh, 80px) 0 0;
+}
+/* Trim body margin so cycle-note stays within the 800px viewport boundary */
+.snap-container .approach-flywheel-body {
+    margin-bottom: 44px;
 }
 
 /* --- Inner wrapper (centered column) --- */
@@ -1996,6 +1989,9 @@
     background: #010c33;
     position: relative;
     overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .approach-orion::before {
@@ -2028,7 +2024,7 @@
     align-items: center;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 110px var(--container-pad, 40px) 60px;
+    padding: 60px var(--container-pad, 40px);
 }
 
 /* ═══ Left column — heading, description, features ═══ */
