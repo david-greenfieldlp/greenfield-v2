@@ -201,21 +201,20 @@
     flex-shrink: 0;
 }
 
-/* Metrics block — dividers are internal, 30px away from the stat numbers.
-   Flex: 1 allows this to grow and fill middle space between headline and clocks. */
+/* Metrics block — now lives in .v1-bottom-left */
 .v1-metrics-block {
-    flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    width: 100%;
 }
 
 .v1-metrics-block .v1-divider:first-child {
-    margin-bottom: 52px;
+    margin-bottom: 14px;
 }
 
 .v1-metrics-block .v1-divider:last-child {
-    margin-top: 52px;
+    margin-top: 14px;
 }
 
 /* Metrics */
@@ -244,7 +243,11 @@
 }
 
 .v1-bottom-left {
+    display: flex;
+    align-items: center;
     border-right: 1px solid rgba(255, 255, 255, 0.04);
+    margin-left: 60px;
+    padding: 0 var(--container-pad);
 }
 
 .v1-bottom-right {
