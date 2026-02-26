@@ -234,15 +234,31 @@
     border-left: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-/* Clocks — pinned to bottom of left column.
-   flex: 0 0 auto keeps them from growing.
-   padding-bottom: 26px aligns the .clock-time digit baseline with the bento card bottom edge. */
-.v1-clocks {
-    flex: 0 0 auto;
+/* ---------- BOTTOM ZONE: 25vh — clocks bottom-right ---------- */
+.v1-bottom {
+    height: 25vh;
+    display: grid;
+    grid-template-columns: 30% 70%;
+    position: relative;
+    z-index: 1;
+}
+
+.v1-bottom-left {
+    border-right: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.v1-bottom-right {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    padding-bottom: 76px;
+    align-items: flex-start;
+    justify-content: flex-end;
+    padding: 18px 16px 0;
+}
+
+/* Clocks — now lives in the 25vh bottom-right zone */
+.v1-clocks {
+    display: flex;
+    align-items: flex-start;
+    gap: 36px;
 }
 
 /* Clock styles (reused from dashboard.css) */
