@@ -38,56 +38,29 @@
     flex-shrink: 0;
 }
 
-/* ── Parallax hero image ── */
-.companies-banner-img {
-    position: absolute;
-    /* Oversized top & bottom so the parallax translateY has room to move */
-    inset: -80px 0;
-    background-image:
-        /* Dark gradient overlay — left-heavy so text stays readable */
-        linear-gradient(
-            105deg,
-            rgba(1, 12, 51, 0.90) 0%,
-            rgba(1, 12, 51, 0.68) 45%,
-            rgba(1, 12, 51, 0.40) 100%
-        ),
-        url('assets/images/Mountain-Companies.png');
-    background-size: cover;
-    background-position: center 45%;
-    will-change: transform;
-    z-index: 0;
-    /* Fade in on load — opacity only so JS transform isn't blocked */
-    animation: bannerImgReveal 1.2s cubic-bezier(0.22, 0.61, 0.36, 1) both;
-}
-
-@keyframes bannerImgReveal {
-    from { opacity: 0; }
-    to   { opacity: 1; }
-}
-
-/* Dot texture — sits above the image layer */
+/* Dot texture — same as landing page */
 .companies-banner::before {
     content: '';
     position: absolute;
     inset: 0;
-    z-index: 1;    /* raised from 0 */
+    z-index: 0;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28'%3E%3Ccircle cx='1' cy='1' r='1' fill='rgba(255,255,255,0.18)'/%3E%3C/svg%3E");
     background-size: 28px 28px;
-    opacity: 0.08;
+    opacity: 0.12;
     pointer-events: none;
     mask-image: radial-gradient(ellipse 100% 100% at 50% 50%, black 40%, transparent 100%);
     -webkit-mask-image: radial-gradient(ellipse 100% 100% at 50% 50%, black 40%, transparent 100%);
 }
 
-/* Subtle blue glow — sits above the image layer */
+/* Subtle blue glow — same as landing page */
 .companies-banner::after {
     content: '';
     position: absolute;
     top: -10%; right: -5%;
     width: 70%; height: 80%;
-    background: radial-gradient(ellipse at 70% 30%, rgba(74, 144, 217, 0.10) 0%, transparent 65%);
+    background: radial-gradient(ellipse at 70% 30%, rgba(74, 144, 217, 0.06) 0%, transparent 65%);
     pointer-events: none;
-    z-index: 1;    /* raised from 0 */
+    z-index: 0;
 }
 
 .companies-banner-text {
@@ -96,7 +69,7 @@
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    z-index: 3;    /* raised from 2 — sits above image (0) and pseudo overlays (1) */
+    z-index: 2;
     display: flex;
     align-items: center;
     padding-top: 80px; /* offset for transparent nav */
