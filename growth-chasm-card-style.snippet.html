@@ -1,0 +1,225 @@
+<!--
+  ══════════════════════════════════════════════════════════════
+  GROWTH CHASM — CARD STYLE (revert backup)
+
+  To restore:
+  1. Replace the <section class="growth-chasm"> ... </section> in approach.html
+     with the HTML block below.
+  2. Replace the "GROWTH CHASM SECTION" CSS block in approach.css (lines ~519–667)
+     with the CSS block below.
+  3. Restore the parallax JS to target .growth-chasm-hero instead of .growth-chasm:
+       var hero = document.querySelector('.growth-chasm-hero');
+  ══════════════════════════════════════════════════════════════
+-->
+
+<!-- ─── HTML ─── -->
+<!-- ── GROWTH CHASM SECTION ── -->
+<section class="growth-chasm">
+    <div class="growth-chasm-inner">
+
+        <div class="growth-chasm-hero">
+            <img src="assets/images/chasmv3.png" alt="Crossing the Growth Chasm" class="growth-chasm-img">
+            <div class="growth-chasm-overlay"></div>
+
+            <!-- All content inside the image -->
+            <div class="growth-chasm-content">
+
+                <!-- Top-left: title + subtitle -->
+                <div class="growth-chasm-header">
+                    <h2 class="growth-chasm-h2">Crossing the Growth Chasm</h2>
+                    <p class="growth-chasm-sub">Navigating this inflection point in a company's life is no simple feat:</p>
+                </div>
+
+                <!-- Bottom: checklist row -->
+                <div class="growth-chasm-list">
+                    <div class="growth-chasm-item">
+                        <img src="assets/images/checkmark.svg" alt="" class="growth-chasm-check">
+                        <p><strong>Founders face a pivotal shift</strong> from product-led growth to building repeatable, scalable go-to-market motions that can sustain rapid expansion.</p>
+                    </div>
+
+                    <div class="growth-chasm-item">
+                        <img src="assets/images/checkmark.svg" alt="" class="growth-chasm-check">
+                        <p><strong>Early-stage playbooks break down</strong> as companies must transition from founder-led sales to structured revenue organizations with defined processes and accountability.</p>
+                    </div>
+
+                    <div class="growth-chasm-item">
+                        <img src="assets/images/checkmark.svg" alt="" class="growth-chasm-check">
+                        <p><strong>Capital efficiency becomes critical</strong> — investors and boards demand not just growth, but growth with a clear path to profitability and sustainable unit economics.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+<!-- end .growth-chasm -->
+
+
+<!-- ─── CSS ─── -->
+<style>
+/* ---------- GROWTH CHASM SECTION (CARD STYLE) ---------- */
+.growth-chasm {
+    background: #f4f5f5;
+    padding: clamp(20px, 3vw, 40px) 0 clamp(60px, 8vw, 120px);
+}
+
+.growth-chasm-inner {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 var(--container-pad);
+}
+
+.growth-chasm-hero {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.growth-chasm-img {
+    width: 100%;
+    display: block;
+    min-height: clamp(420px, 38vw, 540px);
+    object-fit: cover;
+    will-change: transform;
+    transform: scale(1.22) translateY(0px);
+}
+
+.growth-chasm-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        180deg,
+        rgba(1, 10, 60, 0.48) 0%,
+        rgba(1, 8, 50, 0.22) 45%,
+        rgba(1, 10, 60, 0.60) 100%
+    );
+}
+
+.growth-chasm-content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: clamp(32px, 4vw, 56px);
+}
+
+.growth-chasm-header {
+    max-width: 560px;
+}
+
+.growth-chasm-h2 {
+    font-family: var(--font);
+    font-size: clamp(1.6rem, 2.5vw, 2.4rem);
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    color: #ffffff;
+    margin: 0 0 10px;
+}
+
+.growth-chasm-sub {
+    font-family: var(--font);
+    font-size: clamp(0.95rem, 1.2vw, 1.1rem);
+    font-weight: 500;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.65);
+    margin: 0;
+}
+
+.growth-chasm-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0 clamp(20px, 2.5vw, 36px);
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 14px;
+    padding: clamp(20px, 2.5vw, 32px);
+}
+
+.growth-chasm-item {
+    display: flex;
+    gap: 12px;
+    padding: 0;
+}
+
+.growth-chasm-item:nth-child(2) {
+    border-left: 1px solid rgba(255, 255, 255, 0.12);
+    border-right: 1px solid rgba(255, 255, 255, 0.12);
+    padding-left: clamp(20px, 2.5vw, 36px);
+    padding-right: clamp(20px, 2.5vw, 36px);
+}
+
+.growth-chasm-check {
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    margin-top: 2px;
+    filter: brightness(0) invert(1);
+}
+
+.growth-chasm-item p {
+    font-family: var(--font);
+    font-size: clamp(0.85rem, 1vw, 0.95rem);
+    font-weight: 400;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.75);
+    margin: 0;
+}
+
+.growth-chasm-item p strong {
+    font-weight: 600;
+    color: #ffffff;
+}
+
+@media (max-width: 900px) {
+    .growth-chasm-img {
+        min-height: 560px;
+    }
+    .growth-chasm-list {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+    .growth-chasm-item {
+        padding: 16px 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .growth-chasm-item:first-child {
+        border-top: none;
+        padding-top: 0;
+    }
+    .growth-chasm-item:last-child {
+        padding-bottom: 0;
+    }
+    .growth-chasm-item:nth-child(2) {
+        border-left: none;
+        border-right: none;
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+/* ─── PARALLAX JS ─── */
+/*
+(function () {
+    var img  = document.querySelector('.growth-chasm-img');
+    var hero = document.querySelector('.growth-chasm-hero');
+    if (!img || !hero) return;
+
+    function tick() {
+        var rect     = hero.getBoundingClientRect();
+        var viewH    = window.innerHeight;
+        var progress = (viewH - rect.top) / (viewH + rect.height);
+        progress     = Math.max(0, Math.min(1, progress));
+        var offset   = (progress - 0.5) * 160;
+        img.style.transform = 'scale(1.22) translateY(' + offset + 'px)';
+    }
+
+    window.addEventListener('scroll', tick, { passive: true });
+    tick();
+})();
+*/
+</style>

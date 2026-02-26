@@ -456,18 +456,6 @@
     const missionSection = document.querySelector('.g2m-mission');
 
     if (missionSection) {
-        // Quote mark fade in
-        gsap.to('.g2m-mission-quote-mark', {
-            opacity: 1,
-            y: 0,
-            duration: 0.8,
-            ease: 'power3.out',
-            scrollTrigger: {
-                trigger: '.g2m-mission',
-                start: 'top 75%',
-            },
-        });
-
         // Mission text reveal
         gsap.to('.g2m-mission-text', {
             opacity: 1,
@@ -501,6 +489,66 @@
                 start: 'top bottom',
                 end: 'bottom top',
                 scrub: true,
+            },
+        });
+    }
+
+
+
+    /* ============================================
+       MISSION ALT — Cinematic scroll animations
+       ============================================ */
+
+    const missionAlt = document.querySelector('.g2m-mission-alt');
+
+    if (missionAlt) {
+        // Parallax: background image drifts gently upward as section scrolls by
+        gsap.to('.g2m-mission-alt-bg', {
+            y: 70,
+            ease: 'none',
+            scrollTrigger: {
+                trigger: '.g2m-mission-alt',
+                start: 'top bottom',
+                end: 'bottom top',
+                scrub: true,
+            },
+        });
+
+        // Tag slides up first
+        gsap.to('.g2m-mission-alt-tag', {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: 'power2.out',
+            scrollTrigger: {
+                trigger: '.g2m-mission-alt',
+                start: 'top 74%',
+            },
+        });
+
+        // Rule sweeps out from left
+        gsap.to('.g2m-mission-alt-rule', {
+            opacity: 1,
+            scaleX: 1,
+            duration: 0.7,
+            ease: 'power2.out',
+            delay: 0.1,
+            scrollTrigger: {
+                trigger: '.g2m-mission-alt',
+                start: 'top 72%',
+            },
+        });
+
+        // Mission text rises in with weight
+        gsap.to('.g2m-mission-alt-text', {
+            opacity: 1,
+            y: 0,
+            duration: 1.3,
+            ease: 'power3.out',
+            delay: 0.15,
+            scrollTrigger: {
+                trigger: '.g2m-mission-alt',
+                start: 'top 68%',
             },
         });
     }

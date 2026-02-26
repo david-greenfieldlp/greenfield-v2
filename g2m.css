@@ -626,22 +626,6 @@
     align-items: center;
 }
 
-/* Giant quotation mark — decorative */
-.g2m-mission-quote-mark {
-    font-family: Georgia, 'Times New Roman', serif;
-    font-size: clamp(6rem, 12vw, 10rem);
-    font-weight: 400;
-    line-height: 0.6;
-    color: transparent;
-    background: linear-gradient(180deg, rgba(74, 144, 217, 0.25) 0%, rgba(61, 207, 142, 0.1) 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    margin-bottom: 8px;
-    opacity: 0;
-    transform: translateY(20px);
-    user-select: none;
-}
-
 /* Mission text */
 .g2m-mission-content {
     position: relative;
@@ -654,8 +638,8 @@
 .g2m-mission-text {
     font-family: var(--font);
     font-size: clamp(1.3rem, 3vw, 2.1rem);
-    font-weight: 300;
-    color: rgba(255, 255, 255, 0.65);
+    font-weight: 500;
+    color: var(--white);
     line-height: 1.7;
     letter-spacing: -0.01em;
     opacity: 0;
@@ -664,48 +648,32 @@
 
 .g2m-mission-text sup {
     font-size: 0.55em;
-    color: var(--accent-blue);
-    font-weight: 400;
+    color: inherit;
+    font-weight: inherit;
     vertical-align: super;
     line-height: 0;
 }
 
-/* Bold white phrases */
-.g2m-mission-bold {
-    color: var(--white);
-    font-weight: 600;
-}
-
-/* Teal emphasis — "scalable, efficient GTM engine" */
-.g2m-mission-em-teal {
-    color: var(--accent-green);
-    font-weight: 600;
-}
-
-/* Blue emphasis — "durable growth" */
-.g2m-mission-em-blue {
-    color: var(--accent-blue);
-    font-weight: 600;
-}
-
-/* "Growth Chasm" emphasis — bold italic + gradient underline */
-.g2m-mission-highlight {
-    color: var(--white);
-    font-weight: 700;
-    font-style: italic;
+/* Gradient underline — sole emphasis treatment */
+.g2m-mission-underline {
     position: relative;
 }
 
-.g2m-mission-highlight::after {
+.g2m-mission-underline::after {
     content: '';
     position: absolute;
     left: 0;
     right: 0;
-    bottom: -2px;
-    height: 2px;
+    bottom: -3px;
+    height: 1.5px;
     background: linear-gradient(90deg, var(--accent-blue), var(--accent-green));
     border-radius: 1px;
-    opacity: 0.7;
+    opacity: 0.6;
+}
+
+/* Italic — used on "Growth Chasm" only */
+.g2m-mission-italic {
+    font-style: italic;
 }
 
 /* ---- Cinematic image strip ---- */
@@ -757,6 +725,114 @@
     right: 10%;
     height: 1px;
     background: linear-gradient(90deg, transparent, rgba(74, 144, 217, 0.4) 30%, rgba(61, 207, 142, 0.4) 70%, transparent);
+}
+
+
+/* ============================================
+   G2M MISSION ALT — Cinematic full-bleed layout
+   ============================================ */
+
+.g2m-mission-alt {
+    position: relative;
+    width: 100%;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* Full-bleed photo — extended for parallax travel */
+.g2m-mission-alt-bg {
+    position: absolute;
+    inset: -50px;
+    background-size: cover;
+    /* Nudge right so the bright lit peak lands in the revealed zone;
+       pull up to favour sky + summits over lower forest floor */
+    background-position: 60% 25%;
+    background-repeat: no-repeat;
+    will-change: transform;
+}
+
+/* Gradient: dark zone pushed further right so text has a wider dark canvas;
+   photograph reveals cleanly from ~76% onward */
+.g2m-mission-alt-veil {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to right,
+        rgba(0, 10, 31, 0.97) 0%,
+        rgba(0, 10, 31, 0.95) 30%,
+        rgba(0, 10, 31, 0.85) 48%,
+        rgba(0, 10, 31, 0.50) 62%,
+        rgba(0, 10, 31, 0.12) 76%,
+        rgba(0, 10, 31, 0.0)  88%
+    );
+}
+
+/* Subtle film-grain overlay */
+.g2m-mission-alt-grain {
+    position: absolute;
+    inset: 0;
+    opacity: 0.025;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    pointer-events: none;
+}
+
+/* Text content — left-anchored */
+.g2m-mission-alt-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 660px;
+    padding-top: clamp(80px, 10vw, 140px);
+    padding-bottom: clamp(80px, 10vw, 140px);
+    padding-left: clamp(60px, 8vw, 150px);
+    padding-right: clamp(32px, 4vw, 60px);
+}
+
+/* "THE MISSION" label */
+.g2m-mission-alt-tag {
+    display: block;
+    font-family: var(--font);
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent-blue);
+    margin-bottom: 18px;
+    opacity: 0;
+    transform: translateY(10px);
+}
+
+/* Gradient rule — accent line below the tag */
+.g2m-mission-alt-rule {
+    width: 48px;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(74, 144, 217, 0.65), transparent);
+    margin-bottom: 32px;
+    opacity: 0;
+    transform: scaleX(0);
+    transform-origin: left;
+}
+
+/* Mission text — larger and left-aligned vs the centered version above */
+.g2m-mission-alt-text {
+    font-family: var(--font);
+    font-size: clamp(1.55rem, 3.3vw, 2.6rem);
+    font-weight: 500;
+    color: var(--white);
+    line-height: 1.65;
+    letter-spacing: -0.02em;
+    opacity: 0;
+    transform: translateY(28px);
+}
+
+.g2m-mission-alt-text sup {
+    font-size: 0.52em;
+    color: inherit;
+    font-weight: inherit;
+    vertical-align: super;
+    line-height: 0;
 }
 
 
@@ -826,6 +902,32 @@
 
     .g2m-mission-image-card {
         border-radius: 14px;
+    }
+
+    /* Mission alt — on mobile the gradient shifts to top-to-bottom
+       so the photo shows through at the bottom behind the text */
+    .g2m-mission-alt {
+        min-height: 70vh;
+        align-items: flex-end;
+    }
+
+    .g2m-mission-alt-veil {
+        background: linear-gradient(
+            to bottom,
+            rgba(0, 10, 31, 0.97) 0%,
+            rgba(0, 10, 31, 0.92) 55%,
+            rgba(0, 10, 31, 0.60) 80%,
+            rgba(0, 10, 31, 0.25) 100%
+        );
+    }
+
+    .g2m-mission-alt-inner {
+        padding: clamp(40px, 6vw, 72px) clamp(24px, 5vw, 48px) clamp(48px, 8vw, 80px);
+        max-width: 100%;
+    }
+
+    .g2m-mission-alt-text {
+        font-size: clamp(1.25rem, 5vw, 1.75rem);
     }
 }
 

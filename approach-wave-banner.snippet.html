@@ -1,0 +1,88 @@
+<!--
+  SNIPPET NAME: approach-wave-banner
+  Description: Animated SVG sine-wave banner with dark teal gradient background
+               and "Your Partner in Building for Scale" headline overlay.
+               Originally the top hero element on approach.html.
+  To restore: paste this block into approach.html inside <main class="approach-main">
+              as the first child, before the first <section>.
+-->
+
+<!-- ── WAVE BANNER ── -->
+<div class="approach-wave-banner">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 300" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#061f26"/>
+          <stop offset="100%" stop-color="#0a6c63"/>
+        </linearGradient>
+        <linearGradient id="fade-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="white" stop-opacity="0"/>
+          <stop offset="8%" stop-color="white"/>
+          <stop offset="92%" stop-color="white"/>
+          <stop offset="100%" stop-color="white" stop-opacity="0"/>
+        </linearGradient>
+        <mask id="edgeFade">
+          <rect width="1000" height="300" fill="url(#fade-grad)"/>
+        </mask>
+        <linearGradient id="strand-main" x1="0%" x2="100%">
+          <stop offset="0%" stop-color="#5fffe0"/>
+          <stop offset="50%" stop-color="#3dd6c6"/>
+          <stop offset="100%" stop-color="#1aa79a"/>
+        </linearGradient>
+        <linearGradient id="strand-secondary" x1="0%" x2="100%">
+          <stop offset="0%" stop-color="#7fffd4"/>
+          <stop offset="50%" stop-color="#4fe0c8"/>
+          <stop offset="100%" stop-color="#28b5a8"/>
+        </linearGradient>
+        <filter id="softGlow">
+          <feGaussianBlur stdDeviation="2" result="b"/>
+          <feMerge>
+            <feMergeNode in="b"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+      </defs>
+      <rect width="1000" height="300" fill="url(#bg-grad)"/>
+      <g mask="url(#edgeFade)">
+        <g>
+          <animateTransform attributeName="transform" type="translate" from="0 0" to="-1000 0" dur="26s" repeatCount="indefinite"/>
+          <!-- MAIN STRAND -->
+          <g filter="url(#softGlow)">
+            <path fill="none" stroke="url(#strand-main)" stroke-width="6" stroke-linecap="round">
+              <animate attributeName="d" dur="14s" repeatCount="indefinite" calcMode="spline"
+                keyTimes="0;0.25;0.5;0.75;1"
+                keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"
+                values="
+                  M0 150 C200 145 300 145 500 150 C700 155 800 155 1000 150 C1200 145 1300 145 1500 150 C1700 155 1800 155 2000 150;
+                  M0 150 C200 110 300 110 500 150 C700 190 800 190 1000 150 C1200 110 1300 110 1500 150 C1700 190 1800 190 2000 150;
+                  M0 150 C200 10 300 10 500 150 C700 290 800 290 1000 150 C1200 10 1300 10 1500 150 C1700 290 1800 290 2000 150;
+                  M0 150 C200 120 300 120 500 150 C700 180 800 180 1000 150 C1200 120 1300 120 1500 150 C1700 180 1800 180 2000 150;
+                  M0 150 C200 145 300 145 500 150 C700 155 800 155 1000 150 C1200 145 1300 145 1500 150 C1700 155 1800 155 2000 150"/>
+            </path>
+          </g>
+          <!-- SECONDARY STRAND (Mirrored) -->
+          <g transform="scale(1,-1) translate(0,-300)">
+            <path fill="none" stroke="url(#strand-secondary)" stroke-width="3" stroke-linecap="round" opacity="0.9">
+              <animate attributeName="d" dur="14s" repeatCount="indefinite" calcMode="spline"
+                keyTimes="0;0.25;0.5;0.75;1"
+                keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"
+                values="
+                  M0 150 C200 155 300 155 500 150 C700 145 800 145 1000 150 C1200 155 1300 155 1500 150 C1700 145 1800 145 2000 150;
+                  M0 150 C200 190 300 190 500 150 C700 110 800 110 1000 150 C1200 190 1300 190 1500 150 C1700 110 1800 110 2000 150;
+                  M0 150 C200 290 300 290 500 150 C700 10 800 10 1000 150 C1200 290 1300 290 1500 150 C1700 10 1800 10 2000 150;
+                  M0 150 C200 180 300 180 500 150 C700 120 800 120 1000 150 C1200 180 1300 180 1500 150 C1700 120 1800 120 2000 150;
+                  M0 150 C200 155 300 155 500 150 C700 145 800 145 1000 150 C1200 155 1300 155 1500 150 C1700 145 1800 145 2000 150"/>
+            </path>
+          </g>
+        </g>
+      </g>
+    </svg>
+
+    <!-- H1 overlaid left-aligned on the banner -->
+    <div class="approach-banner-text">
+        <div class="approach-h1-pill">
+            <h1 class="approach-h1">Your Partner in Building for Scale</h1>
+        </div>
+    </div>
+</div>
+<!-- end .approach-wave-banner -->
