@@ -3,6 +3,9 @@
    Hide on scroll down, show on scroll up,
    blue background when away from top,
    transparent at very top of page.
+
+   On snap-container pages: nav stays always visible,
+   uses container scrollTop instead of window.scrollY.
    ============================================ */
 
 (function () {
@@ -10,6 +13,10 @@
 
     var nav = document.getElementById('nav');
     if (!nav) return;
+
+    // Detect snap-container page (approach page)
+    var snapContainer = document.querySelector('.snap-container');
+    var isSnapPage = !!snapContainer;
 
     var lastScrollY = 0;
     var scrollUpAccumulator = 0;
@@ -20,9 +27,15 @@
     var SCROLL_CLASS = 'scrolled';
     var HIDDEN_CLASS = 'nav-hidden';
 
+    function getScrollY() {
+        if (isSnapPage && snapContainer) {
+            return snapContainer.scrollTop;
+        }
+        return window.scrollY;
+    }
+
     function onScroll() {
-        var currentScrollY = window.scrollY;
-        var delta = currentScrollY - lastScrollY;
+        var currentScrollY = getScrollY();
 
         // At top of page: transparent, always visible
         if (currentScrollY <= 10) {
@@ -36,6 +49,16 @@
 
         // Below top: add scrolled background
         nav.classList.add(SCROLL_CLASS);
+
+        // On snap pages: never hide the nav (discrete jumps feel disorienting)
+        if (isSnapPage) {
+            nav.classList.remove(HIDDEN_CLASS);
+            isHidden = false;
+            lastScrollY = currentScrollY;
+            return;
+        }
+
+        var delta = currentScrollY - lastScrollY;
 
         if (delta > 0) {
             // Scrolling DOWN
@@ -56,7 +79,12 @@
         lastScrollY = currentScrollY;
     }
 
-    window.addEventListener('scroll', onScroll, { passive: true });
+    // Listen on the right scroll target
+    if (isSnapPage && snapContainer) {
+        snapContainer.addEventListener('scroll', onScroll, { passive: true });
+    } else {
+        window.addEventListener('scroll', onScroll, { passive: true });
+    }
 
     // Initial check (in case page loads mid-scroll)
     onScroll();
