@@ -233,6 +233,7 @@
     grid-template-columns: 30% 70%;
     position: relative;
     z-index: 1;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .v1-bottom-left {
