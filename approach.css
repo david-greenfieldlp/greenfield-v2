@@ -3095,16 +3095,24 @@
     opacity: 0;
 }
 
-/* ── Content column: flex col, vertically centred ── */
+/* ── Right shell — takes the grid cell, holds carousel + static CTA ── */
+.t2-right {
+    display: flex;
+    flex-direction: column;
+    padding: clamp(44px, 8vh, 76px) clamp(40px, 6vw, 88px) clamp(32px, 4vh, 48px) clamp(24px, 3vw, 52px);
+    background: #010c33;
+}
+
+/* ── Carousel group — fades on transition, fills available height ── */
 .t2-content-col {
+    flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: clamp(44px, 8vh, 76px) clamp(40px, 6vw, 88px) clamp(44px, 7vh, 68px) clamp(24px, 3vw, 52px);
-    background: #010c33;
     opacity: 1;
     transition: opacity 0.28s ease;
     overflow-y: auto;
+    min-height: 0;
 }
 
 .t2-content--out {
@@ -3152,13 +3160,14 @@
     font-weight: 600;
 }
 
-/* ── Portfolio CTA — bottom of left column, outside carousel ── */
+/* ── Portfolio CTA — below carousel in right shell, outside fade group ── */
 .t2-portfolio-cta {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    margin-top: auto;           /* pushes to bottom of flex column */
+    margin-top: 20px;
     align-self: flex-start;
+    flex-shrink: 0;
     padding: 9px 20px;
     border-radius: 9999px;
     border: 1.5px solid rgba(255, 255, 255, 0.2);
@@ -3334,8 +3343,11 @@
         border-radius: 8px;
     }
 
+    .t2-right {
+        padding: 16px 24px 32px;
+    }
+
     .t2-content-col {
-        padding: 16px 24px 40px;
         justify-content: flex-start;
     }
 

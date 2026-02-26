@@ -16,7 +16,7 @@
 
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="g2m.css">
-    <link rel="stylesheet" href="approach.css?v=21">
+    <link rel="stylesheet" href="approach.css?v=22">
 
 </head>
 <body class="approach-body">
@@ -1488,47 +1488,54 @@
                         <img class="t2-photo" id="testimonialPhoto" src="" alt="">
                     </div>
                     <!-- CTA — outside the carousel, anchored to bottom of left col -->
+                </div>
+
+                <!-- Right shell: carousel fades inside, CTA sits outside below -->
+                <div class="t2-right">
+
+                    <!-- Carousel — this whole block fades on transition -->
+                    <div class="t2-content-col">
+
+                        <!-- Logo -->
+                        <img class="t2-logo" id="testimonialLogo" src="" alt="">
+
+                        <!-- Quote -->
+                        <div class="t2-quote-block">
+                            <span class="t2-quotemark">&ldquo;</span>
+                            <blockquote class="t2-quote" id="testimonialQuote"></blockquote>
+                        </div>
+
+                        <!-- Attribution -->
+                        <div class="t2-attribution">
+                            <div class="t2-attr-rule"></div>
+                            <p class="t2-attr-name" id="testimonialName"></p>
+                            <p class="t2-attr-role" id="testimonialRole"></p>
+                        </div>
+
+                        <!-- Navigation -->
+                        <div class="t2-nav">
+                            <div class="t2-tracks" id="testimonialDots"></div>
+                            <div class="t2-nav-btns">
+                                <button class="t2-btn" id="testimonialPrev" aria-label="Previous testimonial">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                                </button>
+                                <button class="t2-btn" id="testimonialNext" aria-label="Next testimonial">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div><!-- /.t2-content-col -->
+
+                    <!-- CTA — outside the fade group, always visible -->
                     <a href="companies.html" class="t2-portfolio-cta">
                         Our Portfolio
                         <svg width="13" height="13" viewBox="0 0 14 14" fill="none" aria-hidden="true">
                             <path d="M1 13L13 1M13 1H3M13 1V11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </a>
-                </div>
 
-                <!-- Right: quote content only, centred vertically -->
-                <div class="t2-content-col">
-
-                    <!-- Logo -->
-                    <img class="t2-logo" id="testimonialLogo" src="" alt="">
-
-                    <!-- Quote -->
-                    <div class="t2-quote-block">
-                        <span class="t2-quotemark">&ldquo;</span>
-                        <blockquote class="t2-quote" id="testimonialQuote"></blockquote>
-                    </div>
-
-                    <!-- Attribution -->
-                    <div class="t2-attribution">
-                        <div class="t2-attr-rule"></div>
-                        <p class="t2-attr-name" id="testimonialName"></p>
-                        <p class="t2-attr-role" id="testimonialRole"></p>
-                    </div>
-
-                    <!-- Navigation -->
-                    <div class="t2-nav">
-                        <div class="t2-tracks" id="testimonialDots"></div>
-                        <div class="t2-nav-btns">
-                            <button class="t2-btn" id="testimonialPrev" aria-label="Previous testimonial">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-                            </button>
-                            <button class="t2-btn" id="testimonialNext" aria-label="Next testimonial">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-                            </button>
-                        </div>
-                    </div>
-
-                </div><!-- /.t2-content-col -->
+                </div><!-- /.t2-right -->
             </div><!-- /.t2-layout -->
         </section>
         <!-- end testimonials -->
