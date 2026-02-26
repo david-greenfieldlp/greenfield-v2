@@ -79,6 +79,7 @@
 
         <!-- ── PAGE HEADER ── -->
         <div class="companies-banner">
+            <div class="companies-banner-img"></div>
             <div class="companies-banner-text">
                 <div class="companies-banner-headline-wrap">
                     <h1 class="companies-banner-headline">Hungry<span class="companies-banner-comma">,</span> Humble<span class="companies-banner-comma">,</span> Smart</h1>
@@ -741,29 +742,74 @@
 
     })();
 
-    // ── Banner parallax ──
+    // ── Banner parallax + mouse depth ──
     (function () {
         var img    = document.querySelector('.companies-banner-img');
         var banner = document.querySelector('.companies-banner');
         if (!img || !banner) return;
 
-        var ticking = false;
+        var scrollY   = 0;
+        var mouseX    = 0;   // current lerp target (px)
+        var mouseY    = 0;
+        var curX      = 0;   // smoothed value
+        var curY      = 0;
+        var ticking   = false;
+        var rafId     = null;
+        var MAX_SHIFT = 10;  // max px shift from mouse (subtle)
 
-        function tick() {
-            var sy = window.pageYOffset;
-            // Only animate while banner is still in (or near) view
-            if (sy < banner.offsetHeight * 2) {
-                img.style.transform = 'translateY(' + Math.round(-sy * 0.28) + 'px)';
+        function applyTransform() {
+            // Lerp mouse offset toward target (smooth lag)
+            curX += (mouseX - curX) * 0.08;
+            curY += (mouseY - curY) * 0.08;
+
+            var ty = -scrollY * 0.28 + curY;
+            var tx = curX;
+            img.style.transform = 'translate(' + tx.toFixed(2) + 'px, ' + ty.toFixed(2) + 'px)';
+
+            // Keep looping only while mouse offset hasn't fully settled
+            var settled = Math.abs(mouseX - curX) < 0.05 && Math.abs(mouseY - curY) < 0.05;
+            if (!settled) {
+                rafId = requestAnimationFrame(applyTransform);
+            } else {
+                rafId = null;
             }
             ticking = false;
         }
 
-        window.addEventListener('scroll', function () {
+        function schedule() {
             if (!ticking) {
-                requestAnimationFrame(tick);
                 ticking = true;
+                if (rafId) cancelAnimationFrame(rafId);
+                rafId = requestAnimationFrame(applyTransform);
+            }
+        }
+
+        // Scroll: update scrollY and trigger
+        window.addEventListener('scroll', function () {
+            if (window.pageYOffset < banner.offsetHeight * 2) {
+                scrollY = window.pageYOffset;
+                schedule();
             }
         }, { passive: true });
+
+        // Mouse move over banner: subtle image shift opposite to cursor
+        banner.addEventListener('mousemove', function (e) {
+            var rect = banner.getBoundingClientRect();
+            var nx   = ((e.clientX - rect.left) / rect.width)  * 2 - 1;  // -1 → +1
+            var ny   = ((e.clientY - rect.top)  / rect.height) * 2 - 1;
+            mouseX   = -nx * MAX_SHIFT;
+            mouseY   = -ny * (MAX_SHIFT * 0.4);
+            schedule();
+        });
+
+        banner.addEventListener('mouseleave', function () {
+            mouseX = 0;
+            mouseY = 0;
+            schedule();
+        });
+
+        // Initial position
+        applyTransform();
     })();
     </script>
     <script src="nav-scroll.js"></script>
