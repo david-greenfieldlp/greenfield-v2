@@ -16,7 +16,7 @@
 
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="g2m.css">
-    <link rel="stylesheet" href="approach.css?v=16">
+    <link rel="stylesheet" href="approach.css?v=17">
 
 </head>
 <body class="approach-body">
@@ -1474,22 +1474,24 @@
         <section class="snap-section approach-testimonials" id="testimonials" data-theme="dark">
             <div class="t2-layout">
 
-                <!-- Left: eyebrow label + constrained portrait photo -->
+                <!-- Left: fixed header (eyebrow + subtitle) + vertically centred photo -->
                 <div class="t2-photo-col">
-                    <div class="t2-eyebrow">
-                        <span class="t2-eyebrow-rule"></span>
-                        <span class="t2-eyebrow-text">In Their Own Words</span>
+                    <!-- Pinned below nav bar — not part of photo flow -->
+                    <div class="t2-left-header">
+                        <div class="t2-eyebrow">
+                            <span class="t2-eyebrow-rule"></span>
+                            <span class="t2-eyebrow-text">In Their Own Words</span>
+                        </div>
+                        <p class="t2-subtitle">We measure our success by our portfolio companies' success. Here's how founders describe the Greenfield difference.</p>
                     </div>
+                    <!-- Photo vertically centred in column by flexbox parent -->
                     <div class="t2-photo-card">
                         <img class="t2-photo" id="testimonialPhoto" src="" alt="">
                     </div>
                 </div>
 
-                <!-- Right: subtitle + content -->
+                <!-- Right: quote content, centred vertically -->
                 <div class="t2-content-col">
-
-                    <!-- Subtitle -->
-                    <p class="t2-subtitle">We measure our success by our portfolio companies' success. Here's how founders describe the Greenfield difference.</p>
 
                     <!-- Logo -->
                     <img class="t2-logo" id="testimonialLogo" src="" alt="">
