@@ -16,7 +16,7 @@
 
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="g2m.css">
-    <link rel="stylesheet" href="approach.css?v=17">
+    <link rel="stylesheet" href="approach.css?v=18">
 
 </head>
 <body class="approach-body">
@@ -1474,15 +1474,14 @@
         <section class="snap-section approach-testimonials" id="testimonials" data-theme="dark">
             <div class="t2-layout">
 
-                <!-- Left: fixed header (eyebrow + subtitle) + vertically centred photo -->
+                <!-- Left: eyebrow pinned above + vertically centred photo -->
                 <div class="t2-photo-col">
-                    <!-- Pinned below nav bar — not part of photo flow -->
+                    <!-- Only eyebrow here — small enough to never overlap the photo -->
                     <div class="t2-left-header">
                         <div class="t2-eyebrow">
                             <span class="t2-eyebrow-rule"></span>
                             <span class="t2-eyebrow-text">In Their Own Words</span>
                         </div>
-                        <p class="t2-subtitle">We measure our success by our portfolio companies' success. Here's how founders describe the Greenfield difference.</p>
                     </div>
                     <!-- Photo vertically centred in column by flexbox parent -->
                     <div class="t2-photo-card">
@@ -1490,8 +1489,11 @@
                     </div>
                 </div>
 
-                <!-- Right: quote content, centred vertically -->
+                <!-- Right: subtitle (static) + quote content, centred vertically -->
                 <div class="t2-content-col">
+
+                    <!-- Subtitle — same for all testimonials, sits above logo -->
+                    <p class="t2-subtitle">We measure our success by our portfolio companies' success. Here's how founders describe the Greenfield difference.</p>
 
                     <!-- Logo -->
                     <img class="t2-logo" id="testimonialLogo" src="" alt="">
