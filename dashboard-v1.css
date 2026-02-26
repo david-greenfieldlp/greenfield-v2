@@ -245,9 +245,9 @@
 
 .v1-bottom-right {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     justify-content: flex-end;
-    padding: 18px 16px 0;
+    padding: 0 16px;
 }
 
 /* Clocks — now lives in the 25vh bottom-right zone */
