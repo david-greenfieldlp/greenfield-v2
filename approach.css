@@ -3038,3 +3038,217 @@
     opacity: 0.55;
     margin-top: 2px;
 }
+
+/* ============================================
+   FOUNDER TESTIMONIALS SECTION
+   ============================================ */
+
+.approach-testimonials {
+    position: relative;
+    background: #ffffff;
+}
+
+.approach-testimonials-inner {
+    width: 100%;
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: clamp(80px, 10vh, 104px) var(--container-pad) clamp(40px, 5vh, 60px);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ── Header ── */
+.approach-testimonials-header {
+    margin-bottom: clamp(28px, 3.5vh, 40px);
+}
+
+.approach-testimonials-h2 {
+    font-family: var(--font);
+    font-size: clamp(1.8rem, 3.5vw, 3rem);
+    font-weight: 300;
+    letter-spacing: -0.03em;
+    color: #010e2a;
+    margin: 0 0 clamp(10px, 1.2vh, 16px);
+}
+
+.approach-testimonials-desc {
+    font-family: var(--font);
+    font-size: clamp(0.9rem, 1.2vw, 1.05rem);
+    font-weight: 300;
+    line-height: 1.7;
+    color: rgba(1, 14, 42, 0.55);
+    max-width: 620px;
+    margin: 0;
+}
+
+.approach-testimonials-accent {
+    color: #06c4a2;
+    font-weight: 500;
+}
+
+/* ── Card ── */
+.testimonial-card {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    min-height: 360px;
+    border-radius: 24px;
+    overflow: hidden;
+    background: #f7f8fa;
+    border: 1px solid rgba(1, 14, 42, 0.08);
+    flex: 1;
+    max-height: 440px;
+    transition: opacity 0.22s ease;
+}
+
+.testimonial-card--fade {
+    opacity: 0;
+}
+
+/* Left: photo */
+.testimonial-photo-wrap {
+    position: relative;
+    overflow: hidden;
+}
+
+.testimonial-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+}
+
+/* Right: content */
+.testimonial-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: clamp(28px, 4vw, 48px);
+    border-left: 2px solid rgba(6, 196, 162, 0.35);
+    gap: 16px;
+}
+
+.testimonial-logo {
+    height: 36px;
+    width: auto;
+    object-fit: contain;
+    object-position: left center;
+    display: block;
+}
+
+.testimonial-quote {
+    font-family: var(--font);
+    font-size: clamp(0.88rem, 1.15vw, 1.05rem);
+    font-weight: 300;
+    line-height: 1.75;
+    color: rgba(1, 14, 42, 0.8);
+    margin: 0;
+    font-style: normal;
+}
+
+.testimonial-attribution {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+}
+
+.testimonial-name {
+    font-family: var(--font);
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: #010e2a;
+}
+
+.testimonial-sep {
+    color: rgba(1, 14, 42, 0.25);
+    font-size: 0.9rem;
+}
+
+.testimonial-role {
+    font-family: var(--font);
+    font-size: 0.85rem;
+    color: rgba(1, 14, 42, 0.5);
+}
+
+/* ── Navigation row ── */
+.testimonial-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: clamp(16px, 2.5vh, 24px);
+}
+
+.testimonial-nav-spacer {
+    width: 160px;
+}
+
+.testimonial-controls {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.testimonial-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(1, 14, 42, 0.2);
+    background: transparent;
+    color: #010e2a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.testimonial-btn:hover {
+    border-color: #06c4a2;
+    background: rgba(6, 196, 162, 0.08);
+    color: #06c4a2;
+}
+
+.testimonial-dots {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.testimonial-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 9999px;
+    border: none;
+    background: rgba(1, 14, 42, 0.2);
+    cursor: pointer;
+    transition: width 0.3s ease, background 0.3s ease;
+    padding: 0;
+}
+
+.testimonial-dot--active {
+    width: 28px;
+    background: #06c4a2;
+}
+
+/* ── CTA ── */
+.testimonial-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 22px;
+    border-radius: 9999px;
+    border: 2px solid #010e2a;
+    color: #010e2a;
+    font-family: var(--font);
+    font-size: 0.88rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background 0.25s ease, color 0.25s ease;
+}
+
+.testimonial-cta:hover {
+    background: #010e2a;
+    color: #ffffff;
+}

@@ -16,7 +16,7 @@
 
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="g2m.css">
-    <link rel="stylesheet" href="approach.css?v=13">
+    <link rel="stylesheet" href="approach.css?v=14">
 
 </head>
 <body class="approach-body">
@@ -114,7 +114,10 @@
         <button class="snap-dot" data-section="10" aria-label="Expert Network">
             <span class="snap-dot-label">Experts</span>
         </button>
-        <button class="snap-dot" data-section="11" aria-label="Footer">
+        <button class="snap-dot" data-section="11" aria-label="Testimonials">
+            <span class="snap-dot-label">Founders</span>
+        </button>
+        <button class="snap-dot" data-section="12" aria-label="Footer">
             <span class="snap-dot-label">Contact</span>
         </button>
     </nav>
@@ -1466,7 +1469,168 @@
         <!-- end expert network -->
 
         <!-- ══════════════════════════════════════
-             SECTION 12: FOOTER
+             SECTION 12: FOUNDER TESTIMONIALS
+             ══════════════════════════════════════ -->
+        <section class="snap-section snap-section--scrollable approach-testimonials" id="testimonials" data-theme="light">
+            <div class="approach-testimonials-inner">
+
+                <!-- Section Header -->
+                <div class="approach-testimonials-header">
+                    <h2 class="approach-testimonials-h2">In Their Own Words</h2>
+                    <p class="approach-testimonials-desc">We measure our success by our portfolio companies' success. Here's how founders describe the <strong class="approach-testimonials-accent">Greenfield difference</strong>.</p>
+                </div>
+
+                <!-- Carousel Card -->
+                <div class="testimonial-card" id="testimonialCard">
+                    <!-- Left: Founder photo -->
+                    <div class="testimonial-photo-wrap">
+                        <img class="testimonial-photo" id="testimonialPhoto" src="" alt="">
+                    </div>
+                    <!-- Right: Quote content -->
+                    <div class="testimonial-content">
+                        <img class="testimonial-logo" id="testimonialLogo" src="" alt="">
+                        <blockquote class="testimonial-quote" id="testimonialQuote"></blockquote>
+                        <div class="testimonial-attribution">
+                            <span class="testimonial-name" id="testimonialName"></span>
+                            <span class="testimonial-sep">|</span>
+                            <span class="testimonial-role" id="testimonialRole"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Controls row -->
+                <div class="testimonial-nav">
+                    <div class="testimonial-nav-spacer"></div>
+                    <div class="testimonial-controls">
+                        <button class="testimonial-btn" id="testimonialPrev" aria-label="Previous testimonial">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                        </button>
+                        <div class="testimonial-dots" id="testimonialDots"></div>
+                        <button class="testimonial-btn" id="testimonialNext" aria-label="Next testimonial">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                        </button>
+                    </div>
+                    <a href="companies.html" class="testimonial-cta">
+                        Companies
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </a>
+                </div>
+
+            </div><!-- /.approach-testimonials-inner -->
+        </section>
+        <!-- end testimonials -->
+
+        <script>
+        (function() {
+            var testimonials = [
+                {
+                    name: 'Renen Hallak',
+                    title: 'CEO & Co-Founder',
+                    company: 'VAST Data',
+                    photo: 'assets/Testimonial/renen-hallak.webp',
+                    logo: 'assets/Testimonial/vast-data-logo.svg',
+                    quote: 'When we first partnered with Greenfield, they rolled up their sleeves, dug into the Excel, and helped us highlight how the company could shine through the metrics. Greenfield brought an analytical perspective that we didn\'t have internally, guiding us throughout our entire journey. They were true professionals in every interaction, and from the initial investment onward, they consistently acted in the best interests of the company at every step.'
+                },
+                {
+                    name: 'Assaf Resnick',
+                    title: 'CEO & Co-Founder',
+                    company: 'BigPanda',
+                    photo: 'assets/Testimonial/assaf-resnick.avif',
+                    logo: 'assets/Testimonial/bigpanda-logo.svg',
+                    quote: 'Greenfield invested the time to build a trusting relationship with us over the years. My experience with Shay and the team convinced me that having smart, pleasant partners is more valuable than just big investor names—they help you make good decisions in both good times and bad. As a young company, we hadn\'t fully considered scaling, organizational DNA, or data-driven strategies, but Greenfield\'s involvement opened our eyes and made us much smarter about building a scalable, data-driven company.'
+                },
+                {
+                    name: 'Ariel Assaraf',
+                    title: 'CEO & Co-Founder',
+                    company: 'Coralogix',
+                    photo: 'assets/Testimonial/ariel-assaraf.avif',
+                    logo: 'assets/Testimonial/coralogix-logo.svg',
+                    quote: 'Greenfield partnered with us at a critical point in our company\'s growth. They introduced us to key metrics for our north star, helping us focus on what truly drives growth. With their guidance we became a data-driven company, providing us with the expertise we needed to scale effectively.'
+                },
+                {
+                    name: 'Jeremy Suard',
+                    title: 'CEO & Co-Founder',
+                    company: 'Exodigo',
+                    photo: 'assets/Testimonial/jeremy-suard.png',
+                    logo: 'assets/Testimonial/exodigo-logo.svg',
+                    quote: 'We wanted a conversation with investors who truly understand us. I value investors who recognize that I need the freedom to make my own mistakes and ultimately make my own decisions. The Greenfield team grasped this quickly, which is exactly what I was looking for. We\'re a complex business, but that instant click of understanding, which we saw during the due diligence process, was exactly what we needed.'
+                }
+            ];
+
+            var activeIndex = 0;
+            var isAnimating = false;
+            var autoTimer = null;
+            var AUTO_MS = 8000;
+
+            var card    = document.getElementById('testimonialCard');
+            var photo   = document.getElementById('testimonialPhoto');
+            var logo    = document.getElementById('testimonialLogo');
+            var quote   = document.getElementById('testimonialQuote');
+            var name    = document.getElementById('testimonialName');
+            var role    = document.getElementById('testimonialRole');
+            var dotsEl  = document.getElementById('testimonialDots');
+            var prevBtn = document.getElementById('testimonialPrev');
+            var nextBtn = document.getElementById('testimonialNext');
+
+            // Build dots
+            testimonials.forEach(function(_, i) {
+                var dot = document.createElement('button');
+                dot.className = 'testimonial-dot' + (i === 0 ? ' testimonial-dot--active' : '');
+                dot.setAttribute('aria-label', 'Go to testimonial ' + (i + 1));
+                dot.addEventListener('click', function() { goTo(i); });
+                dotsEl.appendChild(dot);
+            });
+
+            function render(t) {
+                photo.src = t.photo;
+                photo.alt = t.name;
+                logo.src  = t.logo;
+                logo.alt  = t.company;
+                quote.textContent = '\u201c' + t.quote + '\u201d';
+                name.textContent  = t.name;
+                role.textContent  = t.title + ', ' + t.company;
+            }
+
+            function updateDots() {
+                var dots = dotsEl.querySelectorAll('.testimonial-dot');
+                dots.forEach(function(d, i) {
+                    d.className = 'testimonial-dot' + (i === activeIndex ? ' testimonial-dot--active' : '');
+                });
+            }
+
+            function goTo(index) {
+                if (isAnimating || index === activeIndex) return;
+                isAnimating = true;
+                card.classList.add('testimonial-card--fade');
+                setTimeout(function() {
+                    activeIndex = (index + testimonials.length) % testimonials.length;
+                    render(testimonials[activeIndex]);
+                    updateDots();
+                    card.classList.remove('testimonial-card--fade');
+                    isAnimating = false;
+                }, 220);
+                resetAuto();
+            }
+
+            function goNext() { goTo(activeIndex + 1); }
+            function goPrev() { goTo(activeIndex - 1); }
+
+            function resetAuto() {
+                clearInterval(autoTimer);
+                autoTimer = setInterval(goNext, AUTO_MS);
+            }
+
+            prevBtn.addEventListener('click', goPrev);
+            nextBtn.addEventListener('click', goNext);
+
+            // Initial render
+            render(testimonials[0]);
+            resetAuto();
+        })();
+        </script>
+
+        <!-- ══════════════════════════════════════
+             SECTION 13: FOOTER
              ══════════════════════════════════════ -->
         <footer class="snap-section snap-section--footer site-footer" id="footer" data-theme="dark">
             <!-- Full background image -->
