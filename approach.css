@@ -1677,7 +1677,7 @@
     display: flex;
     align-items: flex-start;
     justify-content: center;
-    padding: clamp(72px, 9vh, 80px) 0 0;
+    padding: clamp(100px, 13vh, 130px) 0 0;
 }
 /* Trim body margin so cycle-note stays within the 800px viewport boundary */
 .snap-container .approach-flywheel-body {
@@ -1699,13 +1699,14 @@
 /* --- Heading --- */
 .approach-flywheel-heading {
     font-family: var(--font, 'Manrope', sans-serif);
-    font-size: clamp(1.6rem, 2.5vw, 2.4rem);
+    font-size: clamp(1.4rem, 1.9vw, 2rem);
     font-weight: 600;
     line-height: 1.2;
     letter-spacing: -0.02em;
     color: #fff;
     margin: 0 0 24px 0;
-    max-width: 800px;
+    max-width: 100%;
+    white-space: nowrap;
 }
 
 .approach-flywheel-heading sup {
@@ -1731,7 +1732,7 @@
     line-height: 1.7;
     color: rgba(255, 255, 255, 0.65);
     margin: 0 0 clamp(32px, 4vw, 56px) 0;
-    max-width: 720px;
+    max-width: 920px;
 }
 
 /* ═══ HORIZONTAL STEPPER ═══ */
@@ -1741,7 +1742,7 @@
     align-items: flex-start;
     justify-content: space-between;
     width: 100%;
-    max-width: 680px;
+    max-width: 920px;
     margin-bottom: clamp(28px, 3vw, 48px);
     padding-top: 20px;
 }
@@ -1863,8 +1864,8 @@
 /* ═══ CONTENT CARD (glassmorphism) ═══ */
 .flywheel-card {
     width: 100%;
-    max-width: 720px;
-    height: 320px;
+    max-width: 920px;
+    height: 280px;
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-top-color: rgba(255, 255, 255, 0.15);
@@ -1984,6 +1985,7 @@
 
     .approach-flywheel-heading {
         font-size: clamp(1.4rem, 5vw, 1.8rem);
+        white-space: normal;
     }
 
     .flywheel-stepper {
@@ -2858,8 +2860,8 @@
     width: 100%;
     max-width: var(--container-max);
     margin: 0 auto;
-    padding: clamp(80px, 10vh, 104px) var(--container-pad) clamp(48px, 6vh, 72px);
-    height: 100%;
+    padding: clamp(80px, 10vh, 104px) var(--container-pad) clamp(80px, 10vh, 120px);
+    min-height: 100%;
     display: flex;
     flex-direction: column;
 }
