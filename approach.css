@@ -387,6 +387,53 @@
     line-height: 1.5;
 }
 
+.approach-banner-ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 8px;
+    pointer-events: auto;
+}
+
+.approach-banner-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 22px;
+    border-radius: 100px;
+    font-family: var(--font);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1.5px solid transparent;
+}
+
+.approach-banner-btn--primary {
+    background: #06c4a2;
+    border-color: #06c4a2;
+    color: #010c33;
+}
+
+.approach-banner-btn--primary:hover {
+    background: #05b393;
+    border-color: #05b393;
+    transform: translateY(-1px);
+}
+
+.approach-banner-btn--secondary {
+    background: transparent;
+    border-color: rgba(255, 255, 255, 0.3);
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.approach-banner-btn--secondary:hover {
+    border-color: rgba(255, 255, 255, 0.7);
+    color: var(--white);
+    transform: translateY(-1px);
+}
+
 .approach-main {
     min-height: 100vh;
     /* Scale down spacing & container width to reduce the "zoomed in" feel */
