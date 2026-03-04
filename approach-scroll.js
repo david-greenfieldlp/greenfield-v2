@@ -425,7 +425,7 @@
 
     function isMobileChart() { return window.innerWidth < 768; }
 
-    function buildChart() {
+    function buildChartIn(chartArea, labelsRow) {
         if (!chartArea) return;
 
         // Clear previous dynamic elements (keep the SVG)
@@ -603,20 +603,23 @@
                 labelsRow.appendChild(div);
             });
         }
-    }
+    } // end buildChartIn
 
-    // Dismiss tooltips on outside tap (mobile)
+    // Dismiss tooltips on outside tap (mobile) — covers all chart instances
     document.addEventListener('touchstart', function (e) {
         if (!e.target.closest('.g2m-bar') && !e.target.closest('.g2m-gap-pill')) {
-            if (chartArea) {
-                chartArea.querySelectorAll('.g2m-tooltip-visible').forEach(function (t) { t.classList.remove('g2m-tooltip-visible'); });
-                chartArea.querySelectorAll('.g2m-bar-hovered').forEach(function (b) { b.classList.remove('g2m-bar-hovered'); });
-                chartArea.querySelectorAll('.g2m-gap-hovered').forEach(function (g) { g.classList.remove('g2m-gap-hovered'); });
-            }
+            document.querySelectorAll('.g2m-chart-area').forEach(function (area) {
+                area.querySelectorAll('.g2m-tooltip-visible').forEach(function (t) { t.classList.remove('g2m-tooltip-visible'); });
+                area.querySelectorAll('.g2m-bar-hovered').forEach(function (b) { b.classList.remove('g2m-bar-hovered'); });
+                area.querySelectorAll('.g2m-gap-hovered').forEach(function (g) { g.classList.remove('g2m-gap-hovered'); });
+            });
         }
     });
 
-    // Build chart & rebuild on resize
+    function buildChart() {
+        buildChartIn(chartArea, labelsRow);
+    }
+
     buildChart();
     var resizeTimer;
     window.addEventListener('resize', function () {
@@ -659,64 +662,76 @@
         var thesisSection = document.querySelector('.g2m-thesis');
 
         if (thesisSection) {
-            // Chart card entrance
-            gsap.from('.g2m-chart-card', {
+
+            // Coordinated chart entrance timeline
+            var chartTl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: '.g2m-thesis',
+                    start: 'top 60%',
+                    toggleActions: 'play none none none',
+                },
+            });
+
+            // 1. Card slides up from below
+            chartTl.from('.g2m-chart-card', {
                 opacity: 0,
-                y: 50,
+                y: 48,
                 scale: 0.97,
-                duration: 0.9,
-                ease: 'power2.out',
-                scrollTrigger: {
-                    trigger: '.g2m-chart-card',
-                    start: 'top 80%',
-                    toggleActions: 'play none none none',
-                },
-            });
-
-            // Bars animate from 0 height
-            gsap.from('.g2m-bar', {
-                scaleY: 0,
-                transformOrigin: 'bottom center',
                 duration: 0.8,
-                ease: 'power3.out',
-                stagger: 0.12,
-                scrollTrigger: {
-                    trigger: '.g2m-chart-area',
-                    start: 'top 80%',
-                    toggleActions: 'play none none none',
-                },
-            });
-
-            // Gap zones fade in after bars
-            gsap.from('.g2m-gap-zone', {
-                opacity: 0,
-                duration: 0.6,
                 ease: 'power2.out',
-                stagger: 0.15,
-                delay: 0.3,
-                scrollTrigger: {
-                    trigger: '.g2m-chart-area',
-                    start: 'top 80%',
-                    toggleActions: 'play none none none',
-                },
-            });
+            }, 0);
 
-            // Chart labels
-            gsap.from('.g2m-chart-label', {
+            // 2. Chart title fades down into place
+            chartTl.from('.g2m-chart-title', {
                 opacity: 0,
-                y: 12,
+                y: -10,
                 duration: 0.5,
                 ease: 'power2.out',
-                stagger: 0.08,
-                delay: 0.3,
-                scrollTrigger: {
-                    trigger: '.g2m-chart-labels',
-                    start: 'top 90%',
-                    toggleActions: 'play none none none',
-                },
-            });
+            }, 0.3);
 
-            // Thesis divider
+            // 3. Bars grow up from baseline, left to right
+            chartTl.from('.g2m-bar', {
+                scaleY: 0,
+                transformOrigin: 'bottom center',
+                duration: 0.65,
+                ease: 'power3.out',
+                stagger: 0.1,
+            }, 0.45);
+
+            // 4. X-axis labels fade up beneath bars
+            chartTl.from('.g2m-chart-label', {
+                opacity: 0,
+                y: 10,
+                duration: 0.4,
+                ease: 'power2.out',
+                stagger: 0.08,
+            }, 0.55);
+
+            // 5. ARR curve draws in left to right via clip-path
+            chartTl.fromTo('.g2m-arr-curve',
+                { clipPath: 'inset(0 100% 0 0)' },
+                { clipPath: 'inset(0 0% 0 0)', duration: 1.1, ease: 'power2.inOut' },
+            0.85);
+
+            // 6. Gap zones (dotted lines) fade in
+            chartTl.from('.g2m-gap-zone', {
+                opacity: 0,
+                duration: 0.45,
+                ease: 'power2.out',
+                stagger: 0.12,
+            }, 1.05);
+
+            // 7. Fail-rate pills pop in with a bounce
+            chartTl.from('.g2m-gap-pill', {
+                scale: 0,
+                opacity: 0,
+                transformOrigin: 'center center',
+                duration: 0.4,
+                ease: 'back.out(2.2)',
+                stagger: 0.12,
+            }, 1.15);
+
+            // Thesis divider (independent, fires on section enter)
             gsap.to('.g2m-thesis-divider', {
                 opacity: 1,
                 scaleX: 1,

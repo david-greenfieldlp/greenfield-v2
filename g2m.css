@@ -289,6 +289,134 @@
         0 1px 4px rgba(0, 0, 0, 0.06);
 }
 
+/* ============================================
+   CHART CARD VARIANTS — test branch
+   Delete unused variants once option is chosen.
+   ============================================ */
+
+/* Option A: Dark Glass */
+.g2m-chart-card--glass {
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+}
+
+/* Option B: Deep Navy */
+.g2m-chart-card--navy {
+    background: #0d1f45;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+}
+
+/* Option C: Borderless */
+.g2m-chart-card--borderless {
+    background: transparent;
+    border-radius: 0;
+    box-shadow: none;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+/* Shared dark-variant text & element overrides */
+.g2m-chart-card--glass .g2m-chart-title,
+.g2m-chart-card--navy .g2m-chart-title,
+.g2m-chart-card--borderless .g2m-chart-title {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.g2m-chart-card--glass .g2m-chart-label-stage,
+.g2m-chart-card--navy .g2m-chart-label-stage,
+.g2m-chart-card--borderless .g2m-chart-label-stage {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.g2m-chart-card--glass .g2m-chart-label-arr,
+.g2m-chart-card--navy .g2m-chart-label-arr,
+.g2m-chart-card--borderless .g2m-chart-label-arr {
+    color: rgba(255, 255, 255, 0.45);
+}
+
+.g2m-chart-card--glass .g2m-bar-label-above,
+.g2m-chart-card--navy .g2m-bar-label-above,
+.g2m-chart-card--borderless .g2m-bar-label-above {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.g2m-chart-card--glass .g2m-legend-item span,
+.g2m-chart-card--navy .g2m-legend-item span,
+.g2m-chart-card--borderless .g2m-legend-item span {
+    color: rgba(255, 255, 255, 0.55);
+}
+
+.g2m-chart-card--glass .g2m-chart-legend,
+.g2m-chart-card--navy .g2m-chart-legend,
+.g2m-chart-card--borderless .g2m-chart-legend {
+    border-top-color: rgba(255, 255, 255, 0.1);
+}
+
+.g2m-chart-card--glass .g2m-legend-arr-line,
+.g2m-chart-card--navy .g2m-legend-arr-line,
+.g2m-chart-card--borderless .g2m-legend-arr-line {
+    background-image: repeating-linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0.5) 0px,
+        rgba(255, 255, 255, 0.5) 6px,
+        transparent 6px,
+        transparent 10px
+    );
+}
+
+/* ============================================
+   CHART TEST SECTION LAYOUT
+   ============================================ */
+
+.chart-test-section {
+    background: var(--navy-deep);
+}
+
+.chart-test-inner {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 80px var(--container-pad) 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+}
+
+.chart-test-heading {
+    font-family: var(--font);
+    font-size: clamp(1.2rem, 2vw, 1.6rem);
+    font-weight: 300;
+    color: var(--white);
+    margin: 0;
+    letter-spacing: -0.02em;
+}
+
+.chart-test-subhead {
+    font-family: var(--font);
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.45);
+    margin: -32px 0 0;
+    line-height: 1.6;
+}
+
+.chart-test-option {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.chart-test-label {
+    font-family: var(--font);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #06c4a2;
+}
+
 .g2m-chart-title {
     font-family: var(--font);
     font-size: clamp(0.95rem, 1.4vw, 1.15rem);
@@ -509,6 +637,7 @@
     display: flex;
     justify-content: space-around;
     padding: 14px 0 0;
+    margin: 0 24px;
 }
 
 .g2m-chart-label {
@@ -888,7 +1017,8 @@
     }
 
     .g2m-chart-labels {
-        padding: 12px 4px 0;
+        padding: 12px 0 0;
+        margin: 0 12px;
     }
 
     /* Mission banner */
