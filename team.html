@@ -85,6 +85,66 @@
             </div>
         </div>
 
+        <!-- ── PARTNERSHIP / DIFFERENTIATORS ── -->
+        <section class="team-partnership">
+            <div class="team-partnership-inner">
+
+                <p class="team-partnership-opener">Partnership means more than capital.</p>
+
+                <div class="tsx-c-card">
+
+                    <div class="tsx-c-tabs" role="tablist">
+                        <button class="tsx-c-btn tsx-c-btn--active" role="tab" aria-selected="true" data-tsx-c="0">
+                            Tailored<br>Guidance
+                        </button>
+                        <button class="tsx-c-btn" role="tab" aria-selected="false" data-tsx-c="1">
+                            G<sup>2</sup>M<br>Excellence
+                        </button>
+                        <button class="tsx-c-btn" role="tab" aria-selected="false" data-tsx-c="2">
+                            Our<br>Heritage
+                        </button>
+                    </div>
+
+                    <div class="tsx-c-divider-top"></div>
+
+                    <div class="tsx-c-content">
+
+                        <div class="tsx-c-panel tsx-c-panel--active" data-tsx-c-panel="0">
+                            <p class="tsx-c-subtitle">Tailored Guidance, Hands-On Approach</p>
+                            <p class="tsx-c-lead">For us, partnership isn't just advice; it's action.</p>
+                            <div class="tsx-c-body">
+                                <p>We work alongside you to identify the most salient challenges and implement proven solutions to address them.</p>
+                                <p>With hundreds of data points to inform what <strong>'excellent'</strong> looks like and decades of combined experience <strong>executing</strong> towards it, our companies <strong>avoid the pitfalls</strong> that stand between <strong>potential</strong> and <strong>performance</strong>.</p>
+                                <p>We also recognize that sometimes, the greatest support we can provide our CEOs is to give them the runway to do what they do best – build unapologetically.</p>
+                            </div>
+                        </div>
+
+                        <div class="tsx-c-panel" data-tsx-c-panel="1">
+                            <p class="tsx-c-subtitle">Hyper-Focused on G<sup>2</sup>M Excellence</p>
+                            <p class="tsx-c-lead">We know what it takes to cross the product-market-sales-fit chasm.</p>
+                            <div class="tsx-c-body">
+                                <p>We've done it before and know what a <strong>world-class go-to-market organization</strong> looks like.</p>
+                                <p>And we know what achieving a high-powered yet <strong>efficient sales machine</strong> means for success – and speed – in scaling to the growth phase.</p>
+                                <p>That's why we've established the <strong>G<sup>2</sup>M 'Greenfield Growth Momentum'</strong> Program to guide companies through the <strong>Seven Pillars of Efficient Growth</strong>.</p>
+                            </div>
+                        </div>
+
+                        <div class="tsx-c-panel" data-tsx-c-panel="2">
+                            <p class="tsx-c-subtitle">Our Heritage</p>
+                            <p class="tsx-c-lead">We've worked together as a team since 2016.</p>
+                            <div class="tsx-c-body">
+                                <p>When Greenfield was founded as a TPG Growth investment platform focused on disruptive technology at the Early Growth stage.</p>
+                                <p>In 2019, we spun out to pursue our strategy independently on a global scale, enabling us to fuse the <strong>rigor</strong> and <strong>depth</strong> of late-stage investing honed under one of the world's most respected private investment organizations with the <strong>entrepreneurial spirit, agility, and grit</strong> of the innovative tech ecosystem in which we operate.</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <!-- end team-partnership -->
+
     </main>
 
     <script>
@@ -99,6 +159,28 @@
         }
     </script>
     <script src="nav-scroll.js"></script>
+    <script>
+        // ── Partnership tabs (tsx-c) ──
+        (function () {
+            var btns   = document.querySelectorAll('.tsx-c-btn');
+            var panels = document.querySelectorAll('.tsx-c-panel');
+            if (!btns.length) return;
+            function activate(i) {
+                btns.forEach(function (b, j) {
+                    b.classList.toggle('tsx-c-btn--active', j === i);
+                    b.setAttribute('aria-selected', j === i ? 'true' : 'false');
+                });
+                panels.forEach(function (p, j) {
+                    p.classList.toggle('tsx-c-panel--active', j === i);
+                });
+            }
+            btns.forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    activate(parseInt(btn.dataset.tsxC, 10));
+                });
+            });
+        })();
+    </script>
 
 </body>
 </html>

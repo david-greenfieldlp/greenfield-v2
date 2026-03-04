@@ -975,15 +975,16 @@
     justify-content: center;
 }
 
-/* Intro paragraph — strong, white */
+/* Intro paragraph — smaller label above headline */
 .g2m-intro {
     font-family: var(--font);
-    font-size: clamp(1rem, 1.5vw, 1.3rem);
+    font-size: clamp(0.8rem, 1vw, 0.95rem);
     font-weight: 600;
     line-height: 1.5;
-    color: rgba(255, 255, 255, 0.7);
-    max-width: 900px;
-    margin: 0 0 clamp(20px, 2.5vw, 32px);
+    color: rgba(255, 255, 255, 0.55);
+    max-width: 560px;
+    margin: 0 0 clamp(10px, 1.5vw, 18px);
+    letter-spacing: 0.01em;
 }
 
 /* Headline */
@@ -3407,4 +3408,396 @@
     }
 
     .t2-attribution { margin-bottom: 20px; }
+}
+
+
+/* ============================================================
+   TSX TEST SECTION — Tabs Card Layout Variants
+   (ApproachTSX-test branch — delete before merging)
+   ============================================================ */
+
+.tsx-test-section {
+    background: #f4f5f5;
+}
+
+.tsx-test-inner {
+    width: 100%;
+    max-width: 1020px;
+    margin: 0 auto;
+    padding: clamp(40px, 6vh, 72px) var(--container-pad) clamp(40px, 6vh, 72px);
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+}
+
+.tsx-test-header {
+    border-bottom: 1px solid rgba(1, 12, 51, 0.12);
+    padding-bottom: 24px;
+}
+
+.tsx-test-eyebrow {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #06c4a2;
+    margin: 0 0 8px;
+}
+
+.tsx-test-heading {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 800;
+    color: #010c33;
+    margin: 0 0 8px;
+    letter-spacing: -0.03em;
+}
+
+.tsx-test-subhead {
+    font-size: 0.9rem;
+    color: rgba(1, 12, 51, 0.5);
+    margin: 0;
+}
+
+.tsx-test-option {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.tsx-test-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(1, 12, 51, 0.4);
+}
+
+
+/* ────────────────────────────────────────────
+   TSX-A — Sidebar Split
+   ──────────────────────────────────────────── */
+
+.tsx-a-card {
+    display: flex;
+    background: #010c33;
+    border-radius: 20px;
+    overflow: hidden;
+    min-height: 380px;
+}
+
+/* Left sidebar nav */
+.tsx-a-nav {
+    width: 240px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 8px 0;
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.tsx-a-btn {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 16px 20px;
+    border: none;
+    border-left: 3px solid transparent;
+    background: transparent;
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.45);
+    text-align: left;
+    font-family: var(--font);
+    font-size: 0.8rem;
+    font-weight: 600;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+    transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.tsx-a-btn:hover {
+    color: rgba(255, 255, 255, 0.75);
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.tsx-a-btn--active {
+    color: #ffffff;
+    border-left-color: #06c4a2;
+    background: rgba(6, 196, 162, 0.08);
+}
+
+.tsx-a-icon {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.06);
+    color: rgba(255, 255, 255, 0.4);
+    margin-top: 1px;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.tsx-a-btn--active .tsx-a-icon {
+    background: rgba(6, 196, 162, 0.15);
+    color: #06c4a2;
+}
+
+.tsx-a-btn-label {
+    padding-top: 4px;
+}
+
+/* Right content area */
+.tsx-a-content {
+    flex: 1;
+    padding: 36px 40px;
+    min-width: 0;
+}
+
+.tsx-a-panel {
+    display: none;
+    animation: tsxFadeIn 0.28s ease-out;
+}
+
+.tsx-a-panel--active {
+    display: block;
+}
+
+@keyframes tsxFadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.tsx-a-lead {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 700;
+    line-height: 1.4;
+    color: #ffffff;
+    letter-spacing: -0.02em;
+}
+
+.tsx-a-divider {
+    height: 1px;
+    margin: 20px 0;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.tsx-a-body {
+    font-size: 0.9375rem;
+    line-height: 1.65;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 450;
+}
+
+.tsx-a-body p { margin: 0 0 0.9em; }
+.tsx-a-body p:last-child { margin-bottom: 0; }
+.tsx-a-body strong { color: rgba(255, 255, 255, 0.85); font-weight: 600; }
+
+
+/* ────────────────────────────────────────────
+   TSX-B — Numbered Accordion
+   ──────────────────────────────────────────── */
+
+.tsx-b-card {
+    background: #ffffff;
+    border-radius: 20px;
+    border: 1px solid rgba(1, 12, 51, 0.10);
+    overflow: hidden;
+}
+
+.tsx-b-item {
+    display: flex;
+    gap: 28px;
+    padding: 28px 32px;
+    border-bottom: 1px solid rgba(1, 12, 51, 0.08);
+    cursor: pointer;
+    transition: background 0.2s ease;
+    align-items: flex-start;
+}
+
+.tsx-b-item:last-child { border-bottom: none; }
+
+.tsx-b-item:hover { background: rgba(6, 196, 162, 0.03); }
+.tsx-b-item--active { background: rgba(6, 196, 162, 0.04); }
+
+.tsx-b-num {
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 1;
+    color: rgba(1, 12, 51, 0.12);
+    min-width: 52px;
+    padding-top: 3px;
+    font-variant-numeric: tabular-nums;
+    transition: color 0.2s ease;
+    letter-spacing: -0.04em;
+}
+
+.tsx-b-item--active .tsx-b-num { color: #06c4a2; }
+
+.tsx-b-text { flex: 1; min-width: 0; }
+
+.tsx-b-title-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.tsx-b-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #010c33;
+    line-height: 1.3;
+    letter-spacing: -0.02em;
+}
+
+.tsx-b-chevron {
+    flex-shrink: 0;
+    color: rgba(1, 12, 51, 0.3);
+    transition: transform 0.25s ease, color 0.2s ease;
+}
+
+.tsx-b-item--active .tsx-b-chevron {
+    transform: rotate(180deg);
+    color: #06c4a2;
+}
+
+/* Accordion body — hidden unless active */
+.tsx-b-body {
+    display: none;
+    margin-top: 16px;
+    animation: tsxFadeIn 0.28s ease-out;
+}
+
+.tsx-b-item--active .tsx-b-body { display: block; }
+
+.tsx-b-lead {
+    margin: 0;
+    font-size: 0.9375rem;
+    font-weight: 700;
+    color: #010c33;
+    line-height: 1.45;
+}
+
+.tsx-b-divider {
+    height: 1px;
+    margin: 16px 0;
+    background: rgba(1, 12, 51, 0.08);
+}
+
+.tsx-b-content {
+    font-size: 0.9rem;
+    line-height: 1.65;
+    color: #717b7a;
+    font-weight: 500;
+}
+
+.tsx-b-content p { margin: 0 0 0.85em; }
+.tsx-b-content p:last-child { margin-bottom: 0; }
+
+
+/* ────────────────────────────────────────────
+   TSX-C — Editorial Oversized Tabs
+   ──────────────────────────────────────────── */
+
+.tsx-c-card {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 36px 40px;
+    border: 1px solid rgba(1, 12, 51, 0.10);
+    margin-top: clamp(24px, 3vw, 40px);
+}
+
+/* Oversized tab row */
+.tsx-c-tabs {
+    display: flex;
+    gap: 0;
+    align-items: flex-end;
+}
+
+.tsx-c-btn {
+    flex: 1;
+    background: transparent;
+    border: none;
+    border-bottom: 3px solid rgba(1, 12, 51, 0.08);
+    padding: 0 0 16px;
+    cursor: pointer;
+    font-family: var(--font);
+    font-size: clamp(1.4rem, 2.5vw, 2rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.04em;
+    color: rgba(1, 12, 51, 0.2);
+    text-align: left;
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.tsx-c-btn:hover { color: rgba(1, 12, 51, 0.5); }
+
+.tsx-c-btn--active {
+    color: #010c33;
+    border-bottom-color: #06c4a2;
+}
+
+.tsx-c-divider-top {
+    height: 0;
+    margin-bottom: 32px;
+}
+
+/* Content panels */
+.tsx-c-content { width: 100%; }
+
+.tsx-c-panel {
+    display: none;
+    animation: tsxFadeIn 0.28s ease-out;
+}
+
+.tsx-c-panel--active { display: block; }
+
+.tsx-c-subtitle {
+    margin: 0 0 12px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #06c4a2;
+}
+
+.tsx-c-lead {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.4;
+    color: #010c33;
+    letter-spacing: -0.02em;
+    max-width: 640px;
+}
+
+.tsx-c-body {
+    margin-top: 20px;
+    font-size: 0.9375rem;
+    line-height: 1.65;
+    color: #717b7a;
+    font-weight: 500;
+    max-width: 740px;
+}
+
+.tsx-c-body p { margin: 0 0 0.85em; }
+.tsx-c-body p:last-child { margin-bottom: 0; }
+
+
+/* ── Responsive: stack tsx-a sidebar on narrow screens ── */
+@media (max-width: 680px) {
+    .tsx-a-card { flex-direction: column; }
+    .tsx-a-nav { width: 100%; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); padding: 8px 0; }
+    .tsx-a-btn { border-left: none; border-bottom: 3px solid transparent; }
+    .tsx-a-btn--active { border-left: none; border-bottom-color: #06c4a2; }
+    .tsx-a-content { padding: 24px 20px; }
+
+    .tsx-c-btn { font-size: clamp(1rem, 4vw, 1.4rem); }
+    .tsx-b-item { padding: 20px; }
+    .tsx-b-num { font-size: 1.5rem; min-width: 40px; }
 }

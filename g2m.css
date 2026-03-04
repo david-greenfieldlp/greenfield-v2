@@ -870,31 +870,32 @@
     overflow: hidden;
 }
 
-/* Full-bleed photo — extended for parallax travel */
+/* Full-bleed photo — not cover-constrained so the peak can bleed off-edge */
 .g2m-mission-alt-bg {
     position: absolute;
     inset: -50px;
-    background-size: cover;
-    /* Nudge right so the bright lit peak lands in the revealed zone;
-       pull up to favour sky + summits over lower forest floor */
-    background-position: 60% 25%;
+    /* Zoom height to ~180% so the image is wide enough to fill;
+       top-align (0%) so the snowy peak at the top of the photo
+       is NOT clipped by the section ceiling */
+    background-size: auto 180%;
+    background-position: 50% 0%;
     background-repeat: no-repeat;
     will-change: transform;
 }
 
-/* Gradient: dark zone pushed further right so text has a wider dark canvas;
-   photograph reveals cleanly from ~76% onward */
+/* Gradient: left ~42% is opaque navy (no image behind it);
+   fades in from 42% so the mountain emerges from the dark */
 .g2m-mission-alt-veil {
     position: absolute;
     inset: 0;
     background: linear-gradient(
         to right,
         rgba(0, 10, 31, 0.97) 0%,
-        rgba(0, 10, 31, 0.95) 30%,
-        rgba(0, 10, 31, 0.85) 48%,
-        rgba(0, 10, 31, 0.50) 62%,
-        rgba(0, 10, 31, 0.12) 76%,
-        rgba(0, 10, 31, 0.0)  88%
+        rgba(0, 10, 31, 0.97) 40%,
+        rgba(0, 10, 31, 0.80) 54%,
+        rgba(0, 10, 31, 0.40) 68%,
+        rgba(0, 10, 31, 0.08) 82%,
+        rgba(0, 10, 31, 0.0)  92%
     );
 }
 
@@ -912,7 +913,7 @@
 .g2m-mission-alt-inner {
     position: relative;
     z-index: 2;
-    max-width: 660px;
+    max-width: 880px;
     padding-top: clamp(80px, 10vw, 140px);
     padding-bottom: clamp(80px, 10vw, 140px);
     padding-left: clamp(60px, 8vw, 150px);

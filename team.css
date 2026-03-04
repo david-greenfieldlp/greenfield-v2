@@ -93,3 +93,117 @@
     color: var(--white);
     margin: 0;
 }
+
+
+/* ── PARTNERSHIP / DIFFERENTIATORS SECTION ── */
+
+.team-partnership {
+    background: #f4f5f5;
+    padding: clamp(48px, 7vh, 96px) var(--container-pad);
+}
+
+.team-partnership-inner {
+    max-width: var(--container-max);
+    margin: 0 auto;
+}
+
+.team-partnership-opener {
+    font-family: var(--font);
+    font-size: clamp(1.25rem, 2vw, 1.75rem);
+    font-weight: 600;
+    line-height: 1.55;
+    letter-spacing: -0.02em;
+    color: rgba(1, 12, 51, 0.75);
+    margin: 0;
+}
+
+/* ── tsx-c Card ── */
+.tsx-c-card {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 36px 40px;
+    border: 1px solid rgba(1, 12, 51, 0.10);
+    margin-top: clamp(24px, 3vw, 40px);
+}
+
+.tsx-c-tabs {
+    display: flex;
+    gap: 0;
+    align-items: flex-end;
+}
+
+.tsx-c-btn {
+    flex: 1;
+    background: transparent;
+    border: none;
+    border-bottom: 3px solid rgba(1, 12, 51, 0.08);
+    padding: 0 0 16px;
+    cursor: pointer;
+    font-family: var(--font);
+    font-size: clamp(1.4rem, 2.5vw, 2rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.04em;
+    color: rgba(1, 12, 51, 0.2);
+    text-align: left;
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.tsx-c-btn:hover { color: rgba(1, 12, 51, 0.5); }
+
+.tsx-c-btn--active {
+    color: #010c33;
+    border-bottom-color: #06c4a2;
+}
+
+.tsx-c-divider-top { margin-bottom: 32px; }
+
+.tsx-c-content { width: 100%; }
+
+.tsx-c-panel {
+    display: none;
+    animation: tsxFadeIn 0.28s ease-out;
+}
+
+.tsx-c-panel--active { display: block; }
+
+@keyframes tsxFadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.tsx-c-subtitle {
+    margin: 0 0 12px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #06c4a2;
+}
+
+.tsx-c-lead {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.4;
+    color: #010c33;
+    letter-spacing: -0.02em;
+    max-width: 640px;
+}
+
+.tsx-c-body {
+    margin-top: 20px;
+    font-size: 0.9375rem;
+    line-height: 1.65;
+    color: #717b7a;
+    font-weight: 500;
+    max-width: 740px;
+}
+
+.tsx-c-body p { margin: 0 0 0.85em; }
+.tsx-c-body p:last-child { margin-bottom: 0; }
+
+@media (max-width: 680px) {
+    .tsx-c-card { padding: 24px 20px; }
+    .tsx-c-btn { font-size: clamp(1rem, 4vw, 1.4rem); }
+}
