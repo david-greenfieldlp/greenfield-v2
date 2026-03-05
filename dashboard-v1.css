@@ -221,6 +221,7 @@
 .v1-stat {
     text-align: center;
     flex: 1;
+    padding: 0 6px;
 }
 
 .v1-stat + .v1-stat {
@@ -242,7 +243,7 @@
     align-items: center;
     border-right: 1px solid rgba(255, 255, 255, 0.04);
     margin-left: 60px;
-    padding: 0 var(--container-pad);
+    padding: 0 20px;
 }
 
 .v1-bottom-right {
@@ -272,15 +273,15 @@
 .clock-city { font-family: var(--font); font-size: 0.55rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray-300); }
 .clock-time { font-family: var(--font); font-size: 0.7rem; font-weight: 300; letter-spacing: 0.05em; color: var(--white); font-variant-numeric: tabular-nums; }
 
-/* Metrics font size override — larger but single-line safe */
+/* Metrics font size override — scales with viewport */
 .v1-metrics .hero-stat-number,
 .v1-metrics .hero-stat-prefix,
 .v1-metrics .hero-stat-suffix {
-    font-size: clamp(1.6rem, 2.4vw, 2.2rem);
+    font-size: clamp(1.3rem, 2vw, 2.1rem);
 }
 
 .v1-metrics .hero-stat-label {
-    font-size: 0.6rem;
+    font-size: clamp(0.5rem, 0.55vw, 0.6rem);
 }
 
 /* ---------- RIGHT COLUMN ---------- */
@@ -505,6 +506,140 @@
 
 .dashboard-bento-grid .bento-card-content {
     opacity: 1;
+}
+
+/* ============================================
+   INTERMEDIATE BREAKPOINT — SQUEEZE MODE
+   2-col bento, tighter margins, side-by-side kept
+   ============================================ */
+
+@media (max-width: 1100px) {
+
+    /* Reduce left margin to reclaim space */
+    .v1-left { margin-left: 30px; }
+    .v1-bottom-left { margin-left: 30px; }
+
+    /* Bento grid: 2 columns instead of 3 */
+    .dashboard-bento-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+
+    /* Featured card: span full width, single row */
+    .dashboard-bento-grid > .bento-card-featured {
+        grid-column: span 2;
+        grid-row: span 1;
+    }
+
+    /* Row-four: 2 columns */
+    .dashboard-bento-grid .bento-row-four {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Tighten gaps */
+    .dashboard-bento-grid { gap: 8px !important; }
+    .dashboard-bento-grid .bento-row-four { gap: 8px; }
+
+    /* Slightly smaller clock gaps */
+    .v1-clocks { gap: 24px; }
+
+    /* Metrics: tighter padding, smaller font to fit 30% column */
+    .v1-bottom-left { padding: 0 12px; }
+    .v1-metrics .hero-stat-number,
+    .v1-metrics .hero-stat-prefix,
+    .v1-metrics .hero-stat-suffix {
+        font-size: clamp(1.1rem, 1.8vw, 1.6rem);
+    }
+    .v1-metrics .hero-stat-label {
+        font-size: 0.5rem;
+    }
+}
+
+/* ============================================
+   INTERMEDIATE BREAKPOINT — STACK MODE
+   Side-by-side no longer fits; stack vertically,
+   keep 2-col bento, page becomes scrollable
+   ============================================ */
+
+@media (max-width: 900px) {
+
+    /* ── Unlock from fixed viewport height — page scrolls ── */
+    .dashboard-body { height: auto; overflow-y: auto; }
+    .dashboard-main { height: auto; overflow-y: visible; }
+
+    /* ── Stack hero layout vertically ── */
+    .v1-layout {
+        height: auto;
+        grid-template-columns: 1fr;
+    }
+
+    /* Headline section: full width, no border, reset margin */
+    .v1-left {
+        border-right: none;
+        margin-left: 0;
+        padding: 32px var(--container-pad, 20px) 24px;
+        height: auto;
+    }
+
+    .v1-headline { padding-top: 16px; }
+
+    /* Bento grid: full width, auto height */
+    .v1-right {
+        padding: 0 var(--container-pad, 20px) 16px;
+    }
+
+    .v1-right > .bento-grid {
+        flex: none;
+        overflow: visible;
+    }
+
+    .dashboard-bento-grid {
+        height: auto;
+        grid-template-rows: auto !important;
+        grid-auto-rows: 200px !important;
+    }
+
+    /* Featured card needs explicit height since bg-image doesn't size it */
+    .dashboard-bento-grid > .bento-card-featured {
+        min-height: 240px;
+    }
+
+    /* ── Bottom zone: stack metrics above clocks ── */
+    .v1-bottom {
+        height: auto;
+        grid-template-columns: 1fr;
+        border-top: none;
+        padding: 0 var(--container-pad, 20px);
+    }
+
+    .v1-bottom-left {
+        margin-left: 0;
+        padding: 36px 0;
+        border-right: none;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        justify-content: center;
+    }
+
+    .v1-bottom-right {
+        justify-content: center;
+        padding: 36px 0 48px;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    /* Metrics: full width now — generous sizing */
+    .v1-metrics {
+        justify-content: space-evenly;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+    .v1-stat { padding: 0 16px; }
+    .v1-metrics .hero-stat-number,
+    .v1-metrics .hero-stat-prefix,
+    .v1-metrics .hero-stat-suffix {
+        font-size: 1.6rem;
+    }
+    .v1-metrics .hero-stat-label {
+        font-size: 0.55rem;
+    }
 }
 
 /* ============================================
