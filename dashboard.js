@@ -178,16 +178,40 @@ function initMobileTapReveal() {
 
     document.querySelectorAll('.dashboard-bento-grid .bento-card').forEach(card => {
         card.addEventListener('click', function (e) {
-            // If card is a link, only toggle — don't navigate
             const isAlreadyTapped = card.classList.contains('mobile-tapped');
+
+            // Second tap → navigate to portfolio page with popup
+            if (isAlreadyTapped) {
+                var companyId = card.getAttribute('data-company-id');
+                if (companyId) window.location.href = 'companies.html?company=' + companyId;
+                return;
+            }
 
             // Close any other open card
             document.querySelectorAll('.dashboard-bento-grid .bento-card.mobile-tapped').forEach(c => {
                 if (c !== card) c.classList.remove('mobile-tapped');
             });
 
-            // Toggle this card
-            card.classList.toggle('mobile-tapped');
+            // First tap → reveal info
+            card.classList.add('mobile-tapped');
+        });
+    });
+}
+
+
+// ==========================================
+// 7. DESKTOP BENTO CARD CLICK → PORTFOLIO
+// ==========================================
+function initBentoCardLinks() {
+    if (window.innerWidth <= 768) return;
+
+    document.querySelectorAll('.dashboard-bento-grid .bento-card').forEach(card => {
+        card.style.cursor = 'pointer';
+        card.addEventListener('click', function (e) {
+            // Don't intercept clicks on existing links
+            if (e.target.closest('a')) return;
+            var companyId = card.getAttribute('data-company-id');
+            if (companyId) window.location.href = 'companies.html?company=' + companyId;
         });
     });
 }
@@ -216,6 +240,7 @@ window.addEventListener('load', () => {
     initEntryAnimations();
     initBentoGlow();
     initMobileTapReveal();
+    initBentoCardLinks();
 
     // Failsafe: guarantee everything is visible after 4 seconds
     // even if GSAP somehow stalls or gets killed mid-animation

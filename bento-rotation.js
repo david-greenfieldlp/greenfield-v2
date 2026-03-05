@@ -75,6 +75,9 @@
         // data-category (for AAI special hover styling, etc.)
         cardEl.setAttribute('data-category', company.category);
 
+        // data-company-id (for click-to-navigate)
+        cardEl.setAttribute('data-company-id', company.id);
+
         // Favicon / logo
         const logo = cardEl.querySelector('.bento-card-logo-img');
         if (logo) {

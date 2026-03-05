@@ -813,8 +813,20 @@
             });
         });
 
+        // ── Auto-open panel from URL param ──
+        // Supports deep-linking: companies.html?company=vast
+        var urlParams = new URLSearchParams(window.location.search);
+        var autoOpenId = urlParams.get('company');
+
         // ── Initial render ──
         render();
+
+        // If deep-linking, open panel immediately (skip waiting for entry anims)
+        if (autoOpenId) {
+            requestAnimationFrame(function () {
+                openExpandPanel(autoOpenId);
+            });
+        }
 
     })();
 
