@@ -87,6 +87,7 @@
     font-style: italic;
     font-weight: 400;
     color: var(--accent-blue);
+    margin-right: 0.2em;
 }
 
 /* ── CTA Button: Why Partner with Us ── */
@@ -504,4 +505,248 @@
 
 .dashboard-bento-grid .bento-card-content {
     opacity: 1;
+}
+
+/* ============================================
+   MOBILE RESPONSIVE
+   ============================================ */
+
+@media (max-width: 768px) {
+
+    /* ── Unlock viewport — page becomes scrollable ── */
+    .dashboard-body {
+        height: auto;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+
+    .dashboard-main {
+        height: auto;
+        overflow-x: hidden;
+        overflow-y: visible;
+        padding-top: 72px;
+    }
+
+    /* Allow nav to get scrolled bg on mobile */
+    .nav-dashboard {
+        transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    /* ── Stack main layout to single column ── */
+    .v1-layout {
+        height: auto;
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    /* ── Headline section ── */
+    .v1-left {
+        border-right: none;
+        margin-left: 0;
+        padding: 32px var(--container-pad, 20px) 24px;
+        height: auto;
+    }
+
+    .v1-headline {
+        padding-top: 16px;
+        gap: 20px;
+    }
+
+    .v1-headline-text {
+        font-size: clamp(1.2rem, 5vw, 1.6rem);
+        line-height: 1.5;
+    }
+
+    /* ── Bento grid ── */
+    .v1-right {
+        padding: 0 var(--container-pad, 20px) 16px;
+    }
+
+    .v1-right > .bento-grid {
+        flex: none;
+        overflow: visible;
+    }
+
+    .dashboard-bento-grid {
+        height: auto;
+        grid-template-columns: 1fr !important;
+        grid-template-rows: auto !important;
+        grid-auto-rows: 220px !important;
+        gap: 12px !important;
+    }
+
+    /* Show only 4 cards on mobile: 3 top-level + 1 from row-four */
+    .dashboard-bento-grid > .bento-card-featured {
+        grid-column: span 1;
+        grid-row: span 1;
+    }
+
+    .dashboard-bento-grid .bento-row-four {
+        display: contents !important;
+    }
+
+    /* Hide all row-four cards except the first */
+    .dashboard-bento-grid .bento-row-four .bento-card:nth-child(n+2) {
+        display: none !important;
+    }
+
+    /* ── Uniform card height ── */
+    .dashboard-bento-grid .bento-card {
+        height: 220px !important;
+        min-height: 220px !important;
+        max-height: 220px !important;
+    }
+
+    /* ── Uniform name size on mobile ── */
+    .dashboard-bento-grid .bento-card-name,
+    .dashboard-bento-grid .bento-card-featured .bento-card-name {
+        font-size: 1.15rem !important;
+    }
+
+    /* ── Icon + tag always visible ── */
+    .dashboard-bento-grid .bento-card .bento-card-icon {
+        opacity: 1;
+        transform: none;
+    }
+
+    .dashboard-bento-grid .bento-card .bento-card-tag {
+        opacity: 1;
+        transform: none;
+    }
+
+    /* ── Desc + meta hidden by default, revealed on tap ── */
+    .dashboard-bento-grid .bento-card .bento-card-desc {
+        max-height: 0;
+        margin-bottom: 0;
+        opacity: 0;
+        transform: translateY(6px);
+        overflow: hidden;
+        transition: max-height 0.35s ease, opacity 0.3s ease, transform 0.3s ease, margin-bottom 0.35s ease;
+    }
+
+    .dashboard-bento-grid .bento-card .bento-card-meta {
+        max-height: 0;
+        opacity: 0;
+        transform: translateY(6px);
+        overflow: hidden;
+        transition: max-height 0.35s ease, opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    /* Tapped state: reveal desc + meta */
+    .dashboard-bento-grid .bento-card.mobile-tapped .bento-card-desc {
+        max-height: 60px;
+        margin-bottom: 8px;
+        opacity: 1;
+        transform: none;
+    }
+
+    .dashboard-bento-grid .bento-card.mobile-tapped .bento-card-meta {
+        max-height: 30px;
+        opacity: 1;
+        transform: none;
+    }
+
+    /* Overlay hidden at rest, shown on tap for text legibility */
+    .dashboard-bento-grid .bento-card-bg-overlay {
+        background: linear-gradient(
+            180deg,
+            transparent 0%,
+            transparent 50%,
+            rgba(0, 10, 31, 0.4) 75%,
+            rgba(0, 10, 31, 0.75) 100%
+        ) !important;
+        transition: background 0.3s ease;
+    }
+
+    .dashboard-bento-grid .bento-card.mobile-tapped .bento-card-bg-overlay {
+        background: linear-gradient(
+            180deg,
+            transparent 0%,
+            transparent 30%,
+            rgba(0, 10, 31, 0.5) 55%,
+            rgba(0, 10, 31, 0.85) 80%,
+            rgba(0, 10, 31, 0.95) 100%
+        ) !important;
+    }
+
+    /* Disable hover lift on mobile */
+    .dashboard-bento-grid .bento-card:hover .bento-card-bottom {
+        transform: none;
+    }
+
+    /* Lift bottom block on tap */
+    .dashboard-bento-grid .bento-card.mobile-tapped .bento-card-bottom {
+        transform: translateY(-8px);
+    }
+
+    /* Disable border beam animation */
+    .dashboard-bento-grid .bento-card-glow::before {
+        display: none;
+    }
+
+    /* ── View All link ── */
+    .v1-bento-footer {
+        justify-content: center;
+        padding: 16px 0;
+    }
+
+    /* ── Bottom zone: stack metrics + clocks with dividers ── */
+    .v1-bottom {
+        height: auto;
+        grid-template-columns: 1fr;
+        gap: 0;
+        border-top: none;
+        padding: 0 var(--container-pad, 20px);
+    }
+
+    .v1-bottom-left {
+        margin-left: 0;
+        padding: 48px 0;
+        border-right: none;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        justify-content: center;
+    }
+
+    .v1-bottom-right {
+        justify-content: center;
+        padding: 48px 0 64px;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .v1-clocks {
+        justify-content: center;
+        gap: 32px;
+    }
+
+    .clock-face {
+        width: 56px;
+        height: 56px;
+    }
+
+    /* Metrics sizing */
+    .v1-metrics .hero-stat-number,
+    .v1-metrics .hero-stat-prefix,
+    .v1-metrics .hero-stat-suffix {
+        font-size: clamp(1.3rem, 5vw, 1.8rem);
+    }
+
+    .v1-metrics .hero-stat-label {
+        font-size: 0.55rem;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .v1-headline-text {
+        font-size: clamp(1.1rem, 5vw, 1.4rem);
+    }
+
+    .v1-clocks {
+        gap: 24px;
+    }
+
+    .clock-face {
+        width: 48px;
+        height: 48px;
+    }
 }

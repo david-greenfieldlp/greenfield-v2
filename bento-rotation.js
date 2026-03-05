@@ -14,13 +14,15 @@
     const INITIAL_DELAY     = 4000;   // ms before first rotation (let entry anims finish)
 
     // ── Slot order (clockwise path) ────────────────
-    //  0 = featured (entry) → 1 → 2 → 3 → 4 → 5 → 6 (exit)
-    const SLOT_ORDER = [0, 1, 2, 3, 4, 5, 6];
+    //  Desktop: 0 = featured (entry) → 1 → 2 → 3 → 4 → 5 → 6 (exit)
+    //  Mobile:  0 → 1 → 2 → 6 (only 4 visible cards)
+    const isMobile = window.innerWidth <= 768;
+    const SLOT_ORDER = isMobile ? [0, 1, 2, 6] : [0, 1, 2, 3, 4, 5, 6];
     const SLOT_COUNT = SLOT_ORDER.length;
 
     // ── Initial slot → company mapping ─────────────
     //  Matches the HTML data-slot attributes
-    const initialSlotIds = [
+    const initialSlotIdsDesktop = [
         'vast',       // slot 0 — featured
         'coralogix',  // slot 1 — top-mid
         'exodigo',    // slot 2 — top-right
@@ -29,6 +31,13 @@
         'torq',       // slot 5 — bot-mid-left
         'robco',      // slot 6 — bot-left (exit)
     ];
+    const initialSlotIdsMobile = [
+        'vast',       // slot 0
+        'coralogix',  // slot 1
+        'exodigo',    // slot 2
+        'robco',      // slot 6 (first card in row-four, only one visible)
+    ];
+    const initialSlotIds = isMobile ? initialSlotIdsMobile : initialSlotIdsDesktop;
 
     // ── Build full rotation queue ──────────────────
     //  Staged companies enter after the initial 7, then loop.
@@ -91,11 +100,11 @@
     // ── Core rotation tick ─────────────────────────
 
     function rotateTick() {
-        // Determine the new company entering slot 0
+        // Determine the new company entering position 0
         const enteringId = allCompanyIds[nextEntryIndex % allCompanyIds.length];
         nextEntryIndex++;
 
-        // Build new slot state: each slot takes the previous slot's company
+        // Build new slot state: each position takes the previous position's company
         const oldState = [...slotState];
         const newState = [enteringId];
         for (let i = 1; i < SLOT_COUNT; i++) {
@@ -105,19 +114,19 @@
         // Animate crossfade, staggered clockwise
         const tl = gsap.timeline();
 
-        SLOT_ORDER.forEach(function (slotIdx, i) {
+        SLOT_ORDER.forEach(function (slotIdx, positionIdx) {
             const cardEl = getSlotEl(slotIdx);
             if (!cardEl) return;
 
-            const newCompany = getCompany(newState[slotIdx]);
+            const newCompany = getCompany(newState[positionIdx]);
             if (!newCompany) return;
 
             // Skip if content isn't changing
-            if (newState[slotIdx] === oldState[slotIdx]) return;
+            if (newState[positionIdx] === oldState[positionIdx]) return;
 
             const content = cardEl.querySelector('.bento-card-content');
             const bgEl    = cardEl.querySelector('.bento-card-bg');
-            const delay   = i * STAGGER_DELAY;
+            const delay   = positionIdx * STAGGER_DELAY;
             const half    = FADE_DURATION * 0.5;
 
             // Phase 1: fade out
@@ -160,6 +169,9 @@
         if (!grid) return;
         grid.addEventListener('mouseenter', function () { isPaused = true; });
         grid.addEventListener('mouseleave', function () { isPaused = false; });
+        // Touch support: pause while finger is on the grid
+        grid.addEventListener('touchstart', function () { isPaused = true; }, { passive: true });
+        grid.addEventListener('touchend', function () { isPaused = false; }, { passive: true });
     }
 
     // Pause when tab is hidden

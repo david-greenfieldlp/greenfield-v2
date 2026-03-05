@@ -69,24 +69,9 @@ updateClocks(); // initial call
 
 
 // ==========================================
-// 2. NAVIGATION (simplified — no scroll/Lenis)
+// 2. NAVIGATION
 // ==========================================
-const navHamburger = document.getElementById('navHamburger');
-const mobileMenu = document.getElementById('mobileMenu');
-
-if (navHamburger && mobileMenu) {
-    navHamburger.addEventListener('click', () => {
-        navHamburger.classList.toggle('active');
-        mobileMenu.classList.toggle('active');
-    });
-
-    document.querySelectorAll('.mobile-menu-link, .mobile-cta').forEach(link => {
-        link.addEventListener('click', () => {
-            navHamburger.classList.remove('active');
-            mobileMenu.classList.remove('active');
-        });
-    });
-}
+// Hamburger toggle is handled by nav-scroll.js (shared across all pages)
 
 
 // ==========================================
@@ -167,6 +152,9 @@ function initEntryAnimations() {
 // 5. BENTO CARD HOVER GLOW
 // ==========================================
 function initBentoGlow() {
+    // Mousemove glow doesn't work on touch devices
+    if (window.innerWidth <= 768) return;
+
     document.querySelectorAll('.bento-card').forEach(card => {
         const glow = card.querySelector('.bento-card-glow');
         if (!glow) return;
@@ -183,7 +171,30 @@ function initBentoGlow() {
 
 
 // ==========================================
-// 6. VISIBILITY FAILSAFE
+// 6. MOBILE TAP-TO-REVEAL (bento cards)
+// ==========================================
+function initMobileTapReveal() {
+    if (window.innerWidth > 768) return;
+
+    document.querySelectorAll('.dashboard-bento-grid .bento-card').forEach(card => {
+        card.addEventListener('click', function (e) {
+            // If card is a link, only toggle — don't navigate
+            const isAlreadyTapped = card.classList.contains('mobile-tapped');
+
+            // Close any other open card
+            document.querySelectorAll('.dashboard-bento-grid .bento-card.mobile-tapped').forEach(c => {
+                if (c !== card) c.classList.remove('mobile-tapped');
+            });
+
+            // Toggle this card
+            card.classList.toggle('mobile-tapped');
+        });
+    });
+}
+
+
+// ==========================================
+// 8. VISIBILITY FAILSAFE
 // ==========================================
 // If GSAP animations get interrupted (e.g. rapid navigation),
 // elements can be stuck at opacity:0. This forces everything
@@ -199,11 +210,12 @@ function forceVisible() {
 
 
 // ==========================================
-// 7. INIT
+// 9. INIT
 // ==========================================
 window.addEventListener('load', () => {
     initEntryAnimations();
     initBentoGlow();
+    initMobileTapReveal();
 
     // Failsafe: guarantee everything is visible after 4 seconds
     // even if GSAP somehow stalls or gets killed mid-animation
