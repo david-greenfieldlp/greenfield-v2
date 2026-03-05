@@ -636,6 +636,42 @@
 }
 
 /* ============================================
+   SKELETON LOADING PLACEHOLDERS
+   ============================================ */
+
+.skeleton-card {
+    position: relative;
+    border-radius: 16px;
+    background: #0d1b3e;
+    min-height: 320px;
+    overflow: hidden;
+}
+
+.skeleton-shimmer {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        110deg,
+        transparent 30%,
+        rgba(255, 255, 255, 0.04) 50%,
+        transparent 70%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.8s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+@media (max-width: 768px) {
+    .skeleton-card {
+        min-height: 200px;
+    }
+}
+
+/* ============================================
    EXPAND-IN-PLACE DETAIL PANEL
    ============================================ */
 
