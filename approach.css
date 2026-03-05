@@ -259,50 +259,192 @@
 }
 
 /* ============================================
-   MOBILE — relax snap, restore natural heights
+   MOBILE — disable snap, natural scroll
    ============================================ */
 
 @media (max-width: 768px) {
+
+    /* --- Prevent horizontal overflow from fixed nav elements --- */
+    html {
+        overflow-x: hidden;
+    }
+
+    /* --- Disable snap-scroll entirely --- */
     .snap-container {
-        scroll-snap-type: y proximity;
+        scroll-snap-type: none;
+        height: auto;
+        overflow-y: visible;
     }
 
     .snap-section {
+        scroll-snap-align: none;
+        scroll-snap-stop: normal;
         height: auto;
-        min-height: 100vh;
+        min-height: auto;
+        overflow: visible;
+    }
+
+    .snap-section--scrollable {
+        overflow-y: visible;
     }
 
     .snap-section--footer {
         min-height: auto;
+        scroll-snap-align: none;
     }
 
+    /* --- Hide desktop-only UI --- */
     .snap-dots {
-        right: 12px;
-        gap: 10px;
+        display: none;
     }
 
-    .snap-dot {
-        width: 8px;
-        height: 8px;
-    }
-
-    .snap-dot-label {
+    .snap-container .approach-banner-ctas {
         display: none;
     }
 
     .snap-scroll-indicator {
-        bottom: 24px;
+        display: none;
     }
 
-    /* Restore natural section heights on mobile */
+    /* --- Override all .snap-container section overrides --- */
     .snap-container .approach-banner {
         height: auto;
-        min-height: 80vh;
+        min-height: 60vh;
+        display: flex;
+        align-items: center;
+    }
+
+    .snap-container .approach-banner-text {
+        position: relative;
+        top: auto;
+        bottom: auto;
+        left: auto;
+        right: auto;
+        transform: none;
+        padding-top: 80px;
+        padding-bottom: 48px;
+        pointer-events: auto;
+    }
+
+    .snap-container .approach-hero {
+        display: block;
+    }
+
+    .snap-container .g2m-section {
+        display: block;
+    }
+
+    .snap-container .g2m-thesis {
+        display: block;
+        padding: clamp(48px, 8vw, 64px) 0;
     }
 
     .snap-container .g2m-mission-alt {
         height: auto;
-        min-height: 70vh;
+        min-height: auto;
+        overflow-x: hidden;
+    }
+
+    /* --- Hero banner --- */
+    .approach-banner {
+        min-height: 60vh;
+    }
+
+    .snap-container .approach-banner-headline {
+        font-size: clamp(1.4rem, 6vw, 2rem);
+    }
+
+    .snap-container .approach-banner-headline-wrap {
+        gap: 12px;
+    }
+
+    .snap-container .approach-banner-text {
+        padding-bottom: 48px;
+    }
+
+    /* --- Inflection --- */
+    .snap-container .approach-inflection {
+        padding-bottom: 32px;
+    }
+
+    /* --- Flywheel --- */
+    .snap-container .approach-flywheel {
+        padding-top: clamp(64px, 10vh, 96px);
+    }
+
+    .flywheel-card {
+        height: auto;
+        min-height: 200px;
+    }
+
+    /* --- ORION --- */
+    .orion-dash {
+        max-width: 100%;
+    }
+
+    /* --- Expert Network (use .approach-experts prefix for specificity) --- */
+    .approach-experts .approach-experts-layout {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+
+    .approach-experts .approach-experts-featured {
+        flex-direction: row;
+        align-items: center;
+        gap: 20px;
+        border-right: none;
+        border-bottom: 1px solid rgba(1, 14, 42, 0.1);
+        padding-right: 0;
+        padding-bottom: 24px;
+    }
+
+    .approach-experts .approach-experts-avatar--xl {
+        width: 80px;
+        height: 80px;
+        margin-bottom: 0;
+        flex-shrink: 0;
+    }
+
+    .approach-experts .approach-experts-featured-divider {
+        display: none;
+    }
+
+    .approach-experts .approach-experts-prev-label {
+        margin-top: 8px;
+    }
+
+    .approach-experts .approach-experts-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .approach-experts .approach-experts-inner {
+        padding-top: clamp(48px, 7vh, 72px);
+        padding-bottom: clamp(48px, 7vh, 72px);
+    }
+}
+
+/* --- Expert Network 480px compaction --- */
+@media (max-width: 480px) {
+    .approach-experts .approach-experts-featured {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .approach-experts .approach-expert-card {
+        padding: 10px 8px;
+    }
+
+    .approach-experts .approach-expert-avatar {
+        width: 40px;
+        height: 40px;
+    }
+
+    .approach-experts .approach-expert-name {
+        font-size: 0.65rem;
+    }
+
+    .approach-experts .approach-expert-title {
+        font-size: 0.58rem;
     }
 }
 
@@ -2629,6 +2771,10 @@
     .orion-pillar-row {
         grid-template-columns: repeat(2, 1fr);
     }
+
+    .orion-feature--active .orion-feature-desc {
+        max-height: 300px;
+    }
 }
 
 /* ══════════════════════════════════════════════════════
@@ -2834,6 +2980,10 @@
 
     .pillars-heading-break {
         display: inline;
+    }
+
+    .pillar-item--active .pillar-body {
+        max-height: 300px;
     }
 }
 

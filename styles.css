@@ -349,6 +349,13 @@ sup { font-size: 0.6em; vertical-align: super; }
     opacity: 0;
 }
 
+.mobile-cta-icon {
+    display: inline-flex;
+    align-items: center;
+    margin-left: 8px;
+    vertical-align: middle;
+}
+
 .mobile-menu.active .mobile-cta {
     transform: translateY(0);
     opacity: 1;
@@ -1968,6 +1975,8 @@ sup { font-size: 0.6em; vertical-align: super; }
 }
 
 @media (max-width: 768px) {
+    .btn-cta { display: none; }
+
     .hero-stats {
         flex-wrap: wrap;
         justify-content: center;
@@ -2073,6 +2082,15 @@ sup { font-size: 0.6em; vertical-align: super; }
 
     .diagram-mobile-tab {
         font-size: 0.8rem;
+    }
+
+    .diagram-mobile-graph-wrap,
+    .diagram-mobile-dots {
+        display: none;
+    }
+
+    .diagram-mobile-slide-list {
+        margin-bottom: 0;
     }
 
     /* Footer 640 */

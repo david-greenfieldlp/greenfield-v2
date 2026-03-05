@@ -62,6 +62,7 @@
 
     // Observe sections to determine which is active
     if (container && sections.length) {
+        var isMobileNav = window.innerWidth <= 768;
         var observer = new IntersectionObserver(function (entries) {
             entries.forEach(function (entry) {
                 if (entry.isIntersecting) {
@@ -70,7 +71,7 @@
                 }
             });
         }, {
-            root: container,
+            root: isMobileNav ? null : container,
             threshold: 0.55
         });
 
@@ -100,6 +101,7 @@
     var revealEls = document.querySelectorAll('.snap-reveal');
 
     if (revealEls.length) {
+        var isMobileReveal = window.innerWidth <= 768;
         var revealObserver = new IntersectionObserver(function (entries) {
             entries.forEach(function (entry) {
                 if (entry.isIntersecting) {
@@ -107,7 +109,7 @@
                 }
             });
         }, {
-            root: container,
+            root: isMobileReveal ? null : container,
             threshold: 0.15
         });
 
@@ -634,29 +636,33 @@
        ============================================ */
 
     if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined' && container) {
-        // Tell ScrollTrigger to use the snap container as the scrolling element
-        ScrollTrigger.defaults({ scroller: container });
-        ScrollTrigger.scrollerProxy(container, {
-            scrollTop: function (value) {
-                if (arguments.length) {
-                    container.scrollTop = value;
-                }
-                return container.scrollTop;
-            },
-            getBoundingClientRect: function () {
-                return {
-                    top: 0,
-                    left: 0,
-                    width: window.innerWidth,
-                    height: window.innerHeight
-                };
-            },
-            pinType: 'transform'
-        });
+        var isMobile = window.innerWidth <= 768;
 
-        // Refresh ScrollTrigger on snap container scroll
-        container.addEventListener('scroll', function () { ScrollTrigger.update(); });
-        ScrollTrigger.addEventListener('refresh', function () { return ScrollTrigger.update(); });
+        // On desktop, use snap container as the custom scroller;
+        // on mobile, snap is disabled so use default window scroller
+        if (!isMobile) {
+            ScrollTrigger.defaults({ scroller: container });
+            ScrollTrigger.scrollerProxy(container, {
+                scrollTop: function (value) {
+                    if (arguments.length) {
+                        container.scrollTop = value;
+                    }
+                    return container.scrollTop;
+                },
+                getBoundingClientRect: function () {
+                    return {
+                        top: 0,
+                        left: 0,
+                        width: window.innerWidth,
+                        height: window.innerHeight
+                    };
+                },
+                pinType: 'transform'
+            });
+
+            container.addEventListener('scroll', function () { ScrollTrigger.update(); });
+            ScrollTrigger.addEventListener('refresh', function () { return ScrollTrigger.update(); });
+        }
 
         // Thesis section animations
         var thesisSection = document.querySelector('.g2m-thesis');

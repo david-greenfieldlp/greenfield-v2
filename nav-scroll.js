@@ -18,6 +18,10 @@
     var snapContainer = document.querySelector('.snap-container');
     var isSnapPage = !!snapContainer;
 
+    // On mobile, snap is disabled and window is the scroller
+    var isMobile = window.innerWidth <= 768;
+    var useWindowScroll = !isSnapPage || isMobile;
+
     var lastScrollY = 0;
     var scrollUpAccumulator = 0;
     var isHidden = false;
@@ -28,7 +32,7 @@
     var HIDDEN_CLASS = 'nav-hidden';
 
     function getScrollY() {
-        if (isSnapPage && snapContainer) {
+        if (!useWindowScroll && snapContainer) {
             return snapContainer.scrollTop;
         }
         return window.scrollY;
@@ -50,8 +54,8 @@
         // Below top: add scrolled background
         nav.classList.add(SCROLL_CLASS);
 
-        // On snap pages: never hide the nav (discrete jumps feel disorienting)
-        if (isSnapPage) {
+        // On desktop snap pages: never hide the nav (discrete jumps feel disorienting)
+        if (isSnapPage && !isMobile) {
             nav.classList.remove(HIDDEN_CLASS);
             isHidden = false;
             lastScrollY = currentScrollY;
@@ -80,7 +84,7 @@
     }
 
     // Listen on the right scroll target
-    if (isSnapPage && snapContainer) {
+    if (!useWindowScroll && snapContainer) {
         snapContainer.addEventListener('scroll', onScroll, { passive: true });
     } else {
         window.addEventListener('scroll', onScroll, { passive: true });
