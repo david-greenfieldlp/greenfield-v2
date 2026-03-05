@@ -341,8 +341,32 @@
 
     .snap-container .g2m-mission-alt {
         height: auto;
-        min-height: auto;
-        overflow-x: hidden;
+        min-height: 60vh;
+        overflow: hidden;
+    }
+
+    /* Section dividers on mobile */
+    .snap-container #g2m-thesis,
+    .snap-container #g2m-flywheel {
+        border-top: 2px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .snap-container .g2m-mission-alt-bg {
+        inset: 0;
+        background-size: cover;
+        background-position: center top;
+        will-change: auto;
+    }
+
+    /* Flip veil: reveal peak at top, dark at bottom where text lives */
+    .snap-container .g2m-mission-alt-veil {
+        background: linear-gradient(
+            to bottom,
+            rgba(0, 10, 31, 0.05) 0%,
+            rgba(0, 10, 31, 0.30) 35%,
+            rgba(0, 10, 31, 0.80) 65%,
+            rgba(0, 10, 31, 0.97) 100%
+        );
     }
 
     /* --- Hero banner --- */
@@ -426,8 +450,34 @@
 /* --- Expert Network 480px compaction --- */
 @media (max-width: 480px) {
     .approach-experts .approach-experts-featured {
-        flex-direction: column;
-        align-items: flex-start;
+        display: grid;
+        grid-template-columns: 80px 1fr;
+        grid-template-rows: auto auto auto auto;
+        column-gap: 10px;
+        row-gap: 2px;
+        align-items: center;
+    }
+
+    .approach-experts .approach-experts-avatar--xl {
+        grid-column: 1;
+        grid-row: 1 / 3;
+        width: 80px;
+        height: 80px;
+    }
+
+    .approach-experts .approach-experts-featured-name {
+        grid-column: 2;
+        grid-row: 1;
+    }
+
+    .approach-experts .approach-experts-featured-title {
+        grid-column: 2;
+        grid-row: 2;
+    }
+
+    .approach-experts .approach-experts-prev-label,
+    .approach-experts .approach-experts-prev-list {
+        grid-column: 1 / -1;
     }
 
     .approach-experts .approach-expert-card {
@@ -2122,7 +2172,9 @@
 /* ═══ RESPONSIVE ═══ */
 @media (max-width: 768px) {
     .approach-flywheel-inner {
-        padding: 0 var(--container-pad, 20px);
+        padding: 0 var(--container-pad, 20px) 64px;
+        align-items: flex-start;
+        text-align: left;
     }
 
     .approach-flywheel-heading {
@@ -2133,6 +2185,11 @@
     .flywheel-stepper {
         max-width: 100%;
         padding-top: 16px;
+    }
+
+    .flywheel-cycle-note {
+        align-self: center;
+        text-align: center;
     }
 
     .flywheel-pin-number {
@@ -2151,6 +2208,7 @@
 
     .flywheel-card {
         padding: 20px;
+        height: auto;
     }
 }
 
