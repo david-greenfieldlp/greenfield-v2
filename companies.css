@@ -503,6 +503,13 @@
 }
 
 @media (max-width: 768px) {
+
+    /* ── Contain horizontal overflow ── */
+    .companies-body,
+    .companies-main {
+        overflow-x: hidden;
+    }
+
     .companies-banner {
         height: clamp(140px, 30vw, 200px);
     }
@@ -511,34 +518,64 @@
         font-size: clamp(1.4rem, 5.5vw, 2rem);
     }
 
-    .companies-filter-pills {
-        gap: 8px;
-    }
-
-    .filter-pill {
-        font-size: 0.7rem;
-        padding: 6px 12px;
-    }
-
     .companies-filter-divider {
         display: none;
     }
 
-    .companies-grid {
-        grid-auto-rows: minmax(280px, auto);
-    }
-
+    /* ── Filter rows: swipeable, labels stay visible ── */
     .companies-filter-top {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: stretch;
+        gap: 8px;
+    }
+
+    .companies-filter-row {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        padding-bottom: 4px;
+    }
+
+    .companies-filter-row::-webkit-scrollbar {
+        display: none;
+    }
+
+    .filter-pill {
+        font-size: 0.7rem;
+        padding: 5px 11px;
+        flex-shrink: 0;
+    }
+
+    /* ── View toggle: sits right of status pills naturally ── */
+    .companies-filter-row .view-toggle {
+        margin-left: auto;
+        flex-shrink: 0;
     }
 
     .view-toggle {
-        align-self: flex-end;
-        margin-top: -34px;
+        margin-top: 0;
+        align-self: auto;
     }
 
-    /* List: stack on mobile */
+    /* ── Grid: tighter cards single-column ── */
+    .companies-grid {
+        grid-template-columns: 1fr;
+        grid-auto-rows: minmax(200px, auto);
+        gap: 12px;
+    }
+
+    /* Lock bento cards to 200px; let expand panel grow freely */
+    .companies-grid .bento-card {
+        height: 200px;
+    }
+
+    .companies-grid .expand-panel {
+        height: auto;
+        min-height: 0;
+    }
+
+    /* ── List: stack on mobile ── */
     .list-header {
         display: none;
     }
@@ -553,6 +590,22 @@
     .list-logo {
         width: 100%;
         margin-bottom: 4px;
+        justify-content: flex-start;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+
+    /* Unstick the exited badge — static flow, above the logo, left-aligned */
+    .list-exited-badge {
+        position: static;
+        transform: none;
+        top: auto;
+        left: auto;
+        order: -1;
+        font-size: 0.55rem;
+        padding: 2px 7px;
+        margin-top: -18px;
     }
 
     .list-sector,
@@ -572,8 +625,13 @@
 
 @media (max-width: 480px) {
     .companies-grid {
-        grid-template-columns: 1fr;
-        grid-auto-rows: minmax(260px, auto);
+        grid-auto-rows: minmax(200px, auto);
+    }
+
+    /* Expand panel must always grow freely on small screens */
+    .companies-grid .expand-panel {
+        height: auto;
+        min-height: 0;
     }
 }
 
