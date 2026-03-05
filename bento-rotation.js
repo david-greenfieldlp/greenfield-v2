@@ -40,16 +40,21 @@
     const initialSlotIds = isMobile ? initialSlotIdsMobile : initialSlotIdsDesktop;
 
     // ── Build full rotation queue ──────────────────
-    //  Staged companies enter after the initial 7, then loop.
-    const stagedIds = PORTFOLIO
-        .map(c => c.id)
+    //  Only rotate through these 9 companies on the homepage.
+    const ROTATION_WHITELIST = [
+        'vast', 'exodigo', 'coralogix', 'commcrete', 'regulus',
+        'silverfort', 'aai', 'robco', 'torq'
+    ];
+    const stagedIds = ROTATION_WHITELIST
         .filter(id => !initialSlotIds.includes(id));
 
-    const allCompanyIds = [...initialSlotIds, ...stagedIds];
+    // Reserve queue: companies not currently visible, FIFO order.
+    // Entering companies pull from the front; exiting companies push to the back.
+    // This guarantees no company appears in two slots at once.
+    let reserveQueue = [...stagedIds];
 
     // Track current state: index = slot, value = company id
     let slotState = [...initialSlotIds];
-    let nextEntryIndex = SLOT_COUNT; // first "new" company
 
     // ── Helpers ────────────────────────────────────
 
@@ -100,9 +105,12 @@
     // ── Core rotation tick ─────────────────────────
 
     function rotateTick() {
-        // Determine the new company entering position 0
-        const enteringId = allCompanyIds[nextEntryIndex % allCompanyIds.length];
-        nextEntryIndex++;
+        // Exiting company (last slot) goes to back of reserve
+        const exitingId = slotState[SLOT_COUNT - 1];
+        reserveQueue.push(exitingId);
+
+        // Entering company pulls from front of reserve
+        const enteringId = reserveQueue.shift();
 
         // Build new slot state: each position takes the previous position's company
         const oldState = [...slotState];
