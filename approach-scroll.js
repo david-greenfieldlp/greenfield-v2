@@ -11,27 +11,6 @@
     var sections  = container ? container.querySelectorAll('.snap-section') : [];
     var dots      = document.querySelectorAll('#snapDots .snap-dot');
 
-    /* ---------- MOBILE NAV (hamburger toggle) ---------- */
-    var hamburger  = document.getElementById('navHamburger');
-    var mobileMenu = document.getElementById('mobileMenu');
-
-    if (hamburger && mobileMenu) {
-        hamburger.addEventListener('click', function () {
-            hamburger.classList.toggle('active');
-            mobileMenu.classList.toggle('active');
-            document.body.classList.toggle('menu-open');
-        });
-
-        mobileMenu.querySelectorAll('a').forEach(function (link) {
-            link.addEventListener('click', function () {
-                hamburger.classList.remove('active');
-                mobileMenu.classList.remove('active');
-                document.body.classList.remove('menu-open');
-            });
-        });
-    }
-
-
     /* ============================================
        DOT NAVIGATION
        ============================================ */
