@@ -603,18 +603,19 @@
         font-size: 1.15rem !important;
     }
 
-    /* ── Icon + tag always visible ── */
+    /* ── Default: hide icon, tag, desc, meta — only name shows ── */
     .dashboard-bento-grid .bento-card .bento-card-icon {
-        opacity: 1;
-        transform: none;
+        opacity: 0;
+        transform: translateY(-4px);
+        transition: opacity 0.3s ease, transform 0.3s ease;
     }
 
     .dashboard-bento-grid .bento-card .bento-card-tag {
-        opacity: 1;
-        transform: none;
+        opacity: 0;
+        transform: translateY(-4px);
+        transition: opacity 0.3s ease, transform 0.3s ease;
     }
 
-    /* ── Desc + meta hidden by default, revealed on tap ── */
     .dashboard-bento-grid .bento-card .bento-card-desc {
         max-height: 0;
         margin-bottom: 0;
@@ -632,7 +633,17 @@
         transition: max-height 0.35s ease, opacity 0.3s ease, transform 0.3s ease;
     }
 
-    /* Tapped state: reveal desc + meta */
+    /* ── Tapped state: reveal everything ── */
+    .dashboard-bento-grid .bento-card.mobile-tapped .bento-card-icon {
+        opacity: 1;
+        transform: none;
+    }
+
+    .dashboard-bento-grid .bento-card.mobile-tapped .bento-card-tag {
+        opacity: 1;
+        transform: none;
+    }
+
     .dashboard-bento-grid .bento-card.mobile-tapped .bento-card-desc {
         max-height: 60px;
         margin-bottom: 8px;
@@ -646,18 +657,19 @@
         transform: none;
     }
 
-    /* Overlay hidden at rest, shown on tap for text legibility */
+    /* Minimal overlay at rest (just enough for name legibility) */
     .dashboard-bento-grid .bento-card-bg-overlay {
         background: linear-gradient(
             180deg,
             transparent 0%,
-            transparent 50%,
-            rgba(0, 10, 31, 0.4) 75%,
-            rgba(0, 10, 31, 0.75) 100%
+            transparent 60%,
+            rgba(0, 10, 31, 0.3) 80%,
+            rgba(0, 10, 31, 0.6) 100%
         ) !important;
         transition: background 0.3s ease;
     }
 
+    /* Heavier overlay on tap for full content legibility */
     .dashboard-bento-grid .bento-card.mobile-tapped .bento-card-bg-overlay {
         background: linear-gradient(
             180deg,

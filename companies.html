@@ -98,14 +98,11 @@
                     <div class="companies-filter-row">
                         <span class="companies-filter-label">Sector</span>
                         <button class="filter-pill filter-pill--active" data-filter="sector" data-value="all">All</button>
-                        <button class="filter-pill" data-filter="sector" data-value="ai-infra">AI Infrastructure</button>
                         <button class="filter-pill" data-filter="sector" data-value="cybersecurity">Cybersecurity</button>
+                        <button class="filter-pill" data-filter="sector" data-value="ai-infra">AI Infrastructure</button>
                         <button class="filter-pill" data-filter="sector" data-value="deep-tech">Deep Tech</button>
-                        <button class="filter-pill" data-filter="sector" data-value="defense">Defense</button>
-                        <button class="filter-pill" data-filter="sector" data-value="fintech">Fintech</button>
-                        <button class="filter-pill" data-filter="sector" data-value="internet">Internet / Digital Media</button>
-                        <button class="filter-pill" data-filter="sector" data-value="it-infra">IT Infrastructure</button>
                         <button class="filter-pill" data-filter="sector" data-value="vertical-ai">Vertical AI</button>
+                        <button class="filter-pill" data-filter="sector" data-value="other">Other</button>
                     </div>
 
                     <!-- Row 2: Status filters + Grid/List toggle -->
@@ -272,7 +269,11 @@
         // ── Filter helper ──
         function getFiltered() {
             return sorted.filter(function (c) {
-                var sectorMatch = activeSector === 'all' || c.category === activeSector || (activeSector === 'ai-infra' && c.category === 'aai');
+                var sectorMatch = activeSector === 'all'
+                    || c.category === activeSector
+                    || (activeSector === 'ai-infra' && (c.category === 'aai' || c.category === 'it-infra'))
+                    || (activeSector === 'deep-tech' && c.category === 'defense')
+                    || (activeSector === 'other' && (c.category === 'fintech' || c.category === 'internet'));
                 var statusMatch = activeStatus === 'all' || c.status === activeStatus;
                 return sectorMatch && statusMatch;
             });
