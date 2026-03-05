@@ -643,6 +643,14 @@
 .companies-grid .bento-card { cursor: pointer; }
 .list-row { cursor: pointer; }
 
+/* When a panel is open, GSAP dims siblings to 0.5 opacity.
+   Restore full brightness on hover so the card feels interactive. */
+.companies-grid .bento-card:hover,
+.list-row:hover {
+    opacity: 1 !important;
+    transition: opacity 0.25s ease;
+}
+
 /* Panel base */
 .expand-panel {
     position: relative;
@@ -652,6 +660,7 @@
     background: #010e2a;
     border: 1px solid rgba(6, 196, 162, 0.12);
     margin: 12px 0;
+    will-change: height, opacity;
 }
 
 /* Teal glow line at top edge */
@@ -902,12 +911,28 @@
     padding: 0;
 }
 
+/* Footer: photo + author name side by side */
+.expand-testimonial-footer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.expand-testimonial-photo {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 1.5px solid rgba(6, 196, 162, 0.25);
+}
+
 .expand-testimonial-author {
     font-family: var(--font);
     font-size: 0.82rem;
     font-weight: 500;
     color: rgba(255, 255, 255, 0.55);
-    margin-top: 4px;
+    margin-top: 0;
 }
 
 /* ── Expand Panel Responsive ── */

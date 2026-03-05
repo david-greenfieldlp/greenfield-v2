@@ -28,6 +28,7 @@ const PORTFOLIO = [
         testimonial: {
             quote: 'When we first partnered with Greenfield, they rolled up their sleeves, dug into the Excel, and helped us highlight how the company could shine through the metrics. Greenfield brought an analytical perspective that we didn\'t have internally, guiding us throughout our entire journey. They were true professionals in every interaction, and from the initial investment onward, they consistently acted in the best interests of the company at every step.',
             author: 'Renen Hallak',
+            photo: 'assets/Testimonial/renen-hallak.webp',
         },
         website: 'http://vastdata.com/',
         favicon: 'assets/Favicons/vast favicon.png',
@@ -51,6 +52,7 @@ const PORTFOLIO = [
         testimonial: {
             quote: 'Greenfield partnered with us at a critical point in our company\'s growth. They introduced us to key metrics for our north star, helping us focus on what truly drives growth. With their guidance we became a data-driven company, providing us with the expertise we needed to scale effectively.',
             author: 'Ariel Assaraf',
+            photo: 'assets/Testimonial/ariel-assaraf.avif',
         },
         website: 'https://www.coralogix.com/',
         favicon: 'assets/Coralogix/cropped-cropped-favicon-192x192.png',
@@ -74,6 +76,7 @@ const PORTFOLIO = [
         testimonial: {
             quote: 'We wanted a conversation with investors who truly understand us. I value investors who recognize that I need the freedom to make my own mistakes and ultimately make my own decisions. The Greenfield team grasped this quickly, which is exactly what I was looking for. We\'re a complex business, but that instant click of understanding, which we saw during the due diligence process, was exactly what we needed.',
             author: 'Jeremy Suard',
+            photo: 'assets/Testimonial/jeremy-suard.png',
         },
         website: 'http://exodigo.com/',
         favicon: 'assets/Favicons/exodigo favicon.png',
@@ -180,6 +183,7 @@ const PORTFOLIO = [
         testimonial: {
             quote: 'Greenfield invested the time to build a trusting relationship with us over the years. My experience with Shay and the team convinced me that having smart, pleasant partners is more valuable than just big investor names\u2014they help you make good decisions in both good times and bad. As a young company, we hadn\u2019t fully considered scaling, organizational DNA, or data-driven strategies, but Greenfield\u2019s involvement opened our eyes and made us much smarter about building a scalable, data-driven company.',
             author: 'Assaf Resnick',
+            photo: 'assets/Testimonial/assaf-resnick.avif',
         },
         website: 'https://www.bigpanda.io/',
         favicon: 'assets/Favicons/bigpanda favicon.png',

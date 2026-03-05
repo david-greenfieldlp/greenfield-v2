@@ -362,10 +362,16 @@
             // Testimonial block
             var testimonialHtml = '';
             if (company.testimonial) {
+                var photoHtml = company.testimonial.photo
+                    ? '<img class="expand-testimonial-photo" src="' + company.testimonial.photo + '" alt="' + company.testimonial.author + '">'
+                    : '';
                 testimonialHtml =
                     '<div class="expand-testimonial">' +
                         '<div class="expand-testimonial-quote">\u201C' + company.testimonial.quote + '\u201D</div>' +
-                        '<div class="expand-testimonial-author">\u2014 ' + company.testimonial.author + '</div>' +
+                        '<div class="expand-testimonial-footer">' +
+                            photoHtml +
+                            '<div class="expand-testimonial-author">\u2014 ' + company.testimonial.author + '</div>' +
+                        '</div>' +
                     '</div>';
             }
 
@@ -395,57 +401,88 @@
             '</div>';
         }
 
-        // ── Animate panel open ──
+        // ── Animate panel open — smooth "unfurl" ──
         function animatePanelOpen(panel, skipDim) {
             var container = activeView === 'grid' ? grid : list;
             var selector = activeView === 'grid' ? '.bento-card' : '.list-row';
             var siblings = container.querySelectorAll(selector);
-            var contentEls = panel.querySelectorAll('.expand-left > *, .expand-right > *');
 
-            // Set initial state
-            gsap.set(panel, { height: 0, overflow: 'hidden', opacity: 1 });
-            gsap.set(contentEls, { opacity: 0, y: 14 });
+            // Separate left/right columns for independent cascades
+            var leftEls = panel.querySelectorAll('.expand-left > *');
+            var rightEls = panel.querySelectorAll('.expand-right > *');
+            var closeBtn = panel.querySelector('.expand-close');
+
+            // Initial state: collapsed, slightly faded
+            gsap.set(panel, { height: 0, overflow: 'hidden', opacity: 0.6, transformOrigin: 'top center' });
+            gsap.set(leftEls, { opacity: 0, y: 20, x: -8 });
+            gsap.set(rightEls, { opacity: 0, y: 24 });
+            gsap.set(closeBtn, { opacity: 0, scale: 0.8 });
 
             var tl = gsap.timeline({
                 onComplete: function () {
                     panel.style.height = 'auto';
+                    panel.style.overflow = '';
                 }
             });
 
-            // Step 1: Gentle dim — cards stay visually "there" and clickable
+            // Step 1: Dim siblings
             if (!skipDim) {
                 tl.to(siblings, {
-                    opacity: 0.55,
-                    duration: 0.4,
-                    ease: 'power1.out'
+                    opacity: 0.5,
+                    duration: 0.5,
+                    ease: 'power2.out'
                 }, 0);
             }
 
-            // Step 2: Expand panel height
+            // Step 2: Panel unfurls — opacity fades up while height expands
+            tl.to(panel, {
+                opacity: 1,
+                duration: 0.35,
+                ease: 'power2.out'
+            }, 0.04);
+
             tl.to(panel, {
                 height: 'auto',
-                duration: 0.5,
-                ease: 'power3.out'
-            }, 0.08);
+                duration: 0.6,
+                ease: 'power4.out'
+            }, 0.04);
 
-            // Step 3: Content fades in
-            tl.to(contentEls, {
+            // Step 3: Left column cascades in
+            tl.to(leftEls, {
                 opacity: 1,
                 y: 0,
-                duration: 0.4,
-                stagger: 0.04,
-                ease: 'power2.out'
-            }, 0.25);
+                x: 0,
+                duration: 0.5,
+                stagger: 0.09,
+                ease: 'power3.out'
+            }, 0.3);
 
-            // Step 4: Scroll to panel
+            // Step 4: Right column cascades in (slightly delayed)
+            tl.to(rightEls, {
+                opacity: 1,
+                y: 0,
+                duration: 0.5,
+                stagger: 0.1,
+                ease: 'power3.out'
+            }, 0.4);
+
+            // Step 5: Close button pops in
+            tl.to(closeBtn, {
+                opacity: 1,
+                scale: 1,
+                duration: 0.4,
+                ease: 'back.out(1.4)'
+            }, 0.35);
+
+            // Step 6: Scroll AFTER panel has finished expanding (0.04 + 0.6 = 0.64s)
             tl.to(window, {
-                scrollTo: { y: panel, offsetY: 120 },
-                duration: 0.65,
-                ease: 'power2.inOut'
-            }, 0.2);
+                scrollTo: { y: panel, offsetY: 100 },
+                duration: 0.7,
+                ease: 'power3.inOut'
+            }, 0.65);
         }
 
-        // ── Close expand panel (fast = true for quick swap between companies) ──
+        // ── Close expand panel — gentle "fold" (fast = true for quick swap) ──
         function closeExpandPanel(callback, fast) {
             var panel = document.querySelector('.expand-panel');
             if (!panel) {
@@ -457,7 +494,9 @@
             var container = activeView === 'grid' ? grid : list;
             var selector = activeView === 'grid' ? '.bento-card' : '.list-row';
             var siblings = container.querySelectorAll(selector);
-            var contentEls = panel.querySelectorAll('.expand-left > *, .expand-right > *');
+            var leftEls = panel.querySelectorAll('.expand-left > *');
+            var rightEls = panel.querySelectorAll('.expand-right > *');
+            var closeBtn = panel.querySelector('.expand-close');
 
             // Snap from auto to current pixel height so GSAP can animate to 0
             panel.style.height = panel.offsetHeight + 'px';
@@ -465,41 +504,71 @@
 
             var tl = gsap.timeline({
                 onComplete: function () {
-                    if (panel.parentNode) panel.parentNode.removeChild(panel);
-                    expandedCompanyId = null;
-                    if (callback) callback();
+                    requestAnimationFrame(function () {
+                        if (panel.parentNode) panel.parentNode.removeChild(panel);
+                        expandedCompanyId = null;
+                        if (callback) callback();
+                    });
                 }
             });
 
             if (fast) {
-                // Fast swap: skip content fade, just collapse quickly
-                // Don't touch siblings — they stay dimmed for the new panel
+                // Fast swap: quick collapse, no content choreography
                 tl.to(panel, {
                     height: 0,
                     opacity: 0,
-                    duration: 0.3,
-                    ease: 'power2.inOut'
+                    duration: 0.28,
+                    ease: 'power3.out'
                 }, 0);
             } else {
-                // Normal close: full graceful animation
-                tl.to(contentEls, {
+                // Normal close: gentle fold choreography
+
+                // Step 1: Close button vanishes first
+                tl.to(closeBtn, {
                     opacity: 0,
-                    y: -8,
-                    duration: 0.2,
+                    scale: 0.8,
+                    duration: 0.15,
                     ease: 'power2.in'
                 }, 0);
 
+                // Step 2: Right column fades down (larger content, eye is here)
+                tl.to(rightEls, {
+                    opacity: 0,
+                    y: 12,
+                    duration: 0.28,
+                    stagger: 0.04,
+                    ease: 'power2.in'
+                }, 0);
+
+                // Step 3: Left column fades down
+                tl.to(leftEls, {
+                    opacity: 0,
+                    y: 10,
+                    x: -6,
+                    duration: 0.25,
+                    stagger: 0.03,
+                    ease: 'power2.in'
+                }, 0.06);
+
+                // Step 4: Panel collapses + recedes — starts while content still fading
                 tl.to(panel, {
                     height: 0,
-                    duration: 0.4,
-                    ease: 'power3.inOut'
-                }, 0.1);
+                    duration: 0.35,
+                    ease: 'power4.out'
+                }, 0.12);
 
+                tl.to(panel, {
+                    opacity: 0.4,
+                    duration: 0.28,
+                    ease: 'power2.out'
+                }, 0.12);
+
+                // Step 5: Siblings breathe back
                 tl.to(siblings, {
                     opacity: 1,
-                    duration: 0.35,
-                    ease: 'power1.out'
-                }, 0.2);
+                    duration: 0.4,
+                    ease: 'power2.out'
+                }, 0.22);
             }
         }
 
