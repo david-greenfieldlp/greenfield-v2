@@ -166,10 +166,14 @@
     pointer-events: all;
 }
 
-.td-overlay--has-logos {
-    align-items: flex-start;
+.td-overlay--has-logos .td-overlay-inner {
+    max-height: 75vh;
     overflow-y: auto;
-    padding: 80px 0;
+    scrollbar-width: none;
+}
+
+.td-overlay--has-logos .td-overlay-inner::-webkit-scrollbar {
+    display: none;
 }
 
 .td-overlay-close {
