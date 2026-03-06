@@ -94,6 +94,16 @@
     margin: 0;
 }
 
+.team-banner-subline {
+    font-family: var(--font);
+    font-size: clamp(0.875rem, 1.1vw, 1rem);
+    font-weight: 300;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.65);
+    margin: 0;
+    max-width: 600px;
+}
+
 
 /* ── PARTNERSHIP / DIFFERENTIATORS SECTION ── */
 
