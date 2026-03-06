@@ -373,18 +373,23 @@
         grid-template-columns: repeat(2, 1fr);
     }
 
+    /* Section headers: add line before label so label is centered between two lines */
+    .td-section-header::before {
+        content: '';
+        flex: 1;
+        height: 1px;
+        background: rgba(1, 12, 51, 0.08);
+    }
+
+    /* Popup: left-align all content */
     .td-overlay-inner {
         flex-direction: column;
-        text-align: center;
+        text-align: left;
+        align-items: flex-start;
     }
 
     .td-overlay-location {
-        justify-content: center;
-    }
-
-    .td-overlay-divider {
-        margin-left: auto;
-        margin-right: auto;
+        justify-content: flex-start;
     }
 
     .td-overlay-photo-wrap {
@@ -393,8 +398,11 @@
 }
 
 @media (max-width: 480px) {
+    /* Center the single-column card grid */
     .td-grid {
         grid-template-columns: 1fr;
         max-width: 280px;
+        margin-left: auto;
+        margin-right: auto;
     }
 }
