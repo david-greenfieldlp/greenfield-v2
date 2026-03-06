@@ -693,16 +693,6 @@
             });
         });
 
-        // ── Hamburger menu toggle ──
-        var hamburger = document.getElementById('navHamburger');
-        var mobileMenu = document.getElementById('mobileMenu');
-        if (hamburger && mobileMenu) {
-            hamburger.addEventListener('click', function () {
-                hamburger.classList.toggle('active');
-                mobileMenu.classList.toggle('active');
-            });
-        }
-
         // ── Escape key to close panel ──
         document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape' && expandedCompanyId !== null) {
