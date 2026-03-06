@@ -381,11 +381,28 @@
         background: rgba(1, 12, 51, 0.08);
     }
 
-    /* Popup: left-align all content */
+    /* Overlay: full-screen scrollable from top on mobile */
+    .td-overlay {
+        align-items: flex-start;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* Popup: left-align all content, add padding for scroll */
     .td-overlay-inner {
         flex-direction: column;
         text-align: left;
         align-items: flex-start;
+        padding-top: 60px;
+        padding-bottom: 40px;
+    }
+
+    /* Close button fixed to viewport on mobile */
+    .td-overlay-close {
+        position: fixed;
+        top: 12px;
+        right: 12px;
+        z-index: 2001;
     }
 
     .td-overlay-location {
@@ -394,6 +411,12 @@
 
     .td-overlay-photo-wrap {
         width: clamp(180px, 50vw, 260px);
+    }
+
+    /* Remove max-height constraint on mobile — overlay itself scrolls */
+    .td-overlay--has-logos .td-overlay-inner {
+        max-height: none;
+        overflow-y: visible;
     }
 }
 

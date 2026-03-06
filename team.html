@@ -493,17 +493,6 @@
 
     </main>
 
-    <script>
-        // Hamburger menu toggle
-        var hamburger = document.getElementById('navHamburger');
-        var mobileMenu = document.getElementById('mobileMenu');
-        if (hamburger && mobileMenu) {
-            hamburger.addEventListener('click', function () {
-                hamburger.classList.toggle('active');
-                mobileMenu.classList.toggle('active');
-            });
-        }
-    </script>
     <script src="nav-scroll.js"></script>
     <script>
         // Partnership tabs
@@ -807,13 +796,29 @@
                     overlay.classList.remove('td-overlay--has-logos');
                 }
                 overlay.classList.add('td-overlay--active');
+                // Lock background scroll (position:fixed for iOS)
+                var scrollY = window.scrollY;
+                document.body.style.position = 'fixed';
+                document.body.style.top = '-' + scrollY + 'px';
+                document.body.style.left = '0';
+                document.body.style.right = '0';
                 document.body.style.overflow = 'hidden';
+                document.body.dataset.scrollY = scrollY;
+                // Scroll overlay to top so popup always starts at beginning
+                overlay.scrollTop = 0;
             });
         });
 
         function closeOverlay() {
             overlay.classList.remove('td-overlay--active');
+            // Restore background scroll
+            var scrollY = document.body.dataset.scrollY || 0;
+            document.body.style.position = '';
+            document.body.style.top = '';
+            document.body.style.left = '';
+            document.body.style.right = '';
             document.body.style.overflow = '';
+            window.scrollTo(0, parseInt(scrollY));
         }
 
         closeBtn.addEventListener('click', closeOverlay);
