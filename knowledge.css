@@ -5,7 +5,7 @@
 
 /* ---------- PAGE BODY ---------- */
 .knowledge-body {
-    background: #ffffff;
+    background: #f4f5f5;
 }
 
 /* Blog post pages: nav starts with blue background (white page = no dark hero beneath it) */
@@ -26,7 +26,7 @@
 
 /* ---------- FILTERS ---------- */
 .kn-filters {
-    background: #ffffff;
+    background: #f4f5f5;
 }
 
 .kn-filters-inner {
@@ -516,6 +516,7 @@
     max-width: 860px;
     margin: 0 auto;
     padding: clamp(40px, 5vh, 64px) var(--container-pad) clamp(64px, 8vh, 120px);
+    background: #ffffff;
 }
 
 /* ---------- BACK LINK (bottom of article) ---------- */
