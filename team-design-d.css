@@ -6,7 +6,7 @@
 
 /* ---------- SECTIONS WRAPPER ---------- */
 .td-sections {
-    background: #ffffff;
+    background: #f4f5f5;
     padding: 0 var(--container-pad);
     padding-bottom: clamp(48px, 7vh, 96px);
 }
