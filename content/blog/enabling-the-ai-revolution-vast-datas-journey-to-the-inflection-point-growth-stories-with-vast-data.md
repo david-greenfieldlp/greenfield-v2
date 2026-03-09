@@ -5,7 +5,7 @@ date: 2023-12-14
 author: "Avery Schwartz"
 cover_image: "https://cdn.prod.website-files.com/66fa660f46b01edefb1e5fa6/670693501c12869a34ae5204_657b0d7e75769d7e25dac0fc_Video%2520Series%2520Thumbnails%2520(1).png"
 excerpt: "Fresh off of $118 Million in Series E funding, VAST Data triples it's valuation in 3 years at $9.1 billion Led by Fidelity Investments, advancing it's momentum as the only provider of AI infrastructure architected from the ground up to power deep learning and GPU-accelerated data centers and clouds."
-category: Insights
+category: Growth Stories
 draft: false
 ---
 

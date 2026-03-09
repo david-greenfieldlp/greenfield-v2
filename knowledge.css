@@ -16,6 +16,61 @@
    LISTING PAGE
    ============================================ */
 
+/* ---------- FILTERS ---------- */
+.kn-filters {
+    background: #ffffff;
+    border-bottom: 1px solid #eaeaea;
+    padding: 0 var(--container-pad);
+    position: sticky;
+    top: 64px;
+    z-index: 10;
+}
+
+.kn-filters-inner {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.kn-filters-inner::-webkit-scrollbar {
+    display: none;
+}
+
+.kn-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 14px;
+    border-radius: 999px;
+    border: 1.5px solid #cad2d1;
+    background: transparent;
+    cursor: pointer;
+    font-family: var(--font);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: #717b7a;
+    transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.kn-pill:hover {
+    color: #010c33;
+    border-color: #9aa5a4;
+}
+
+.kn-pill--active {
+    border-color: #06c4a2;
+    background: hsla(169, 94%, 40%, 0.08);
+    color: #010c33;
+}
+
 /* ---------- HERO ---------- */
 .kn-hero {
     background: linear-gradient(165deg, #000a1f 0%, #011132 50%, #021b4a 100%);

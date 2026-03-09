@@ -5,7 +5,7 @@ date: 2024-12-02
 author: "Shay Grinfeld"
 cover_image: "https://cdn.prod.website-files.com/66fa660f46b01edefb1e5fa6/674dbf72552bec54f565e8c0_On%20Od%20Podcast%20with%20Guy%20Katsovich.png"
 excerpt: "Shay Grinfeld joins Guy Katsovich on his show Od Podcast for Startups"
-category: Insights
+category: Growth Stories
 draft: false
 ---
 

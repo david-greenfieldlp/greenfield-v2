@@ -5,7 +5,7 @@ date: 2022-06-07
 author: "Shay Grinfeld"
 cover_image: "https://cdn.prod.website-files.com/66fa660f46b01edefb1e5fa6/6706991ac93b70a7789158b8_scaling-and-key-kp.avif"
 excerpt: "In our first episode of our Growth Stories podcast, Managing Partner Shay Grinfeld is joined by Coralogix CEO Ariel Assaraf in a conversation about maintaining growth and executing on key KPI's amongst today's market conditions."
-category: Insights
+category: Growth Stories
 draft: true
 ---
 

@@ -139,7 +139,7 @@ function buildListing(posts) {
             : 'background: linear-gradient(135deg, #011132 0%, #021b4a 100%)';
 
         return '' +
-            '<a href="' + post.slug + '/" class="kn-card">' +
+            '<a href="' + post.slug + '/" class="kn-card" data-category="' + post.category + '">' +
                 '<div class="kn-card-cover" style="' + coverStyle + '"></div>' +
                 '<div class="kn-card-body">' +
                     '<span class="kn-card-category">' + post.category + '</span>' +

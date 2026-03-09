@@ -29,8 +29,7 @@ collections:
         options:
           - "Insights"
           - "Portfolio"
-          - "Growth"
-          - "Technology"
+          - "Growth Stories"
           - "Market"
       - { label: "Draft", name: "draft", widget: "boolean", default: true }
       - { label: "Body", name: "body", widget: "markdown" }

@@ -5,7 +5,7 @@ date: 2022-03-28
 author: "Avery Schwartz"
 cover_image: "https://cdn.prod.website-files.com/66fa660f46b01edefb1e5fa6/670696a3af573d68a804cca1_vast.avif"
 excerpt: "VAST Data continues to establish itself as the fastest-selling storage company in history, with a mission to democratize flash storage for all enterprises."
-category: Insights
+category: Growth Stories
 draft: false
 ---
 

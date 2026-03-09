@@ -5,7 +5,7 @@ date: 2022-02-08
 author: "Shay Grinfeld"
 cover_image: "https://cdn.prod.website-files.com/66fa660f46b01edefb1e5fa6/67069745ab24e5d3d4db3ec1_BigPanda.jpeg"
 excerpt: "For several years BigPanda has established itself as a category leader in the AIOps space. Their $190 million Series D earlier this year brings their valuation to $1.2 billion, securing their spot amongst Israel’s unicorns.‍"
-category: Insights
+category: Growth Stories
 draft: false
 ---
 

@@ -5,7 +5,7 @@ date: 2026-02-03
 author: "Shay Grinfeld"
 cover_image: "https://cdn.prod.website-files.com/66fa660f46b01edefb1e5fa6/6981f7772fad2cf25a4c44be_image%20-%202026-02-03T152601.630.png"
 excerpt: "What does it take to grow from $10M to $100M in revenue and beyond? Managing Partner Shay Grinfeld sits down with James Spiro to unpack Greenfield's approach to early growth investing, the 7 Pillars of Go-To-Market, and why \"hungry, humble, smart\" defines the founders who make it."
-category: Insights
+category: Growth Stories
 draft: false
 ---
 

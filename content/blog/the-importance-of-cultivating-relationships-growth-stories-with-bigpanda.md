@@ -5,7 +5,7 @@ date: 2022-08-23
 author: "Shay Grinfeld"
 cover_image: "https://cdn.prod.website-files.com/66fa660f46b01edefb1e5fa6/67069804d7cd6761974cc88b_The%20Importance%20of%20Cultivating.avif"
 excerpt: "For several years BigPanda has established itself as a category leader in the AIOps space. Recently, BigPanda has raised $20 million from top customers UBS and Wells Fargo in an extension to their $190 million Series D earlier this year at a valuation of $1.2 billion."
-category: Insights
+category: Growth Stories
 draft: false
 ---
 
