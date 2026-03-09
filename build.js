@@ -38,6 +38,17 @@ var CATEGORY_CLASSES = {
     'Market':         'kn-cat-market'
 };
 
+// ── Constants ────────────────────────────────
+var MONTHS_FULL = [
+    'January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December'
+];
+var MONTHS_SHORT = [
+    'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+    'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+];
+var COVER_FALLBACK = 'background: linear-gradient(135deg, #011132 0%, #021b4a 100%)';
+
 // ── Helpers ───────────────────────────────────
 function ensureDir(dir) {
     if (!fs.existsSync(dir)) {
@@ -51,20 +62,12 @@ function readTemplate(name) {
 
 function formatDate(dateInput) {
     var d = new Date(dateInput);
-    var months = [
-        'January', 'February', 'March', 'April', 'May', 'June',
-        'July', 'August', 'September', 'October', 'November', 'December'
-    ];
-    return months[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
+    return MONTHS_FULL[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
 }
 
 function formatDateShort(dateInput) {
     var d = new Date(dateInput);
-    var months = [
-        'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-        'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
-    ];
-    return months[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
+    return MONTHS_SHORT[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
 }
 
 function isoDate(dateInput) {
@@ -72,8 +75,8 @@ function isoDate(dateInput) {
 }
 
 function readingTime(text) {
-    // Strip HTML tags, count words, assume 200 wpm
-    var words = text.replace(/<[^>]+>/g, '').split(/\s+/).filter(Boolean).length;
+    // Count words in raw markdown, assume 200 wpm
+    var words = text.split(/\s+/).filter(Boolean).length;
     var minutes = Math.max(1, Math.round(words / 200));
     return minutes + ' min read';
 }
@@ -116,6 +119,12 @@ function buildAuthorHTML(authors) {
     return '<div class="kn-authors">' + cards + '</div>';
 }
 
+function coverStyle(imageUrl) {
+    return imageUrl
+        ? 'background-image: url(\'' + imageUrl + '\')'
+        : COVER_FALLBACK;
+}
+
 function categoryLabel(category) {
     return CATEGORY_LABELS[category] || category;
 }
@@ -150,10 +159,15 @@ function getPosts() {
         var authorStr = data.author || 'Greenfield Partners';
         var authors = parseAuthors(authorStr);
 
+        var postDate = data.date || new Date();
+
         return {
             title: data.title || 'Untitled',
             slug: data.slug || file.replace('.md', ''),
-            date: data.date || new Date(),
+            date: postDate,
+            dateFull: formatDate(postDate),
+            dateShort: formatDateShort(postDate),
+            dateISO: isoDate(postDate),
             author: authorStr,
             authors: authors,
             cover_image: data.cover_image || '',
@@ -180,35 +194,48 @@ function getPosts() {
     return posts;
 }
 
+// ── Shared card HTML builder ─────────────────
+function buildCardHTML(post, opts) {
+    var href = (opts.hrefPrefix || '') + post.slug + '/';
+    var classes = 'kn-card' + (opts.extraClass ? ' ' + opts.extraClass : '');
+    var dataCat = opts.dataCategory ? ' data-category="' + post.category + '"' : '';
+
+    return '' +
+        '<a href="' + href + '" class="' + classes + '"' + dataCat + '>' +
+            '<div class="kn-card-cover" style="' + coverStyle(post.cover_image) + '"></div>' +
+            '<div class="kn-card-body">' +
+                '<span class="kn-card-category">' + categoryLabel(post.category) + '</span>' +
+                '<h3 class="kn-card-title">' + post.title + '</h3>' +
+                '<p class="kn-card-excerpt">' + post.excerpt + '</p>' +
+                '<div class="kn-card-meta">' +
+                    '<time datetime="' + post.dateISO + '">' + post.dateShort + '</time>' +
+                    '<span class="kn-card-read">Read &rarr;</span>' +
+                '</div>' +
+            '</div>' +
+        '</a>';
+}
+
+// ── Build category index for O(N) related lookups ──
+function buildCategoryIndex(posts) {
+    var index = {};
+    posts.forEach(function (p) {
+        if (!index[p.category]) index[p.category] = [];
+        index[p.category].push(p);
+    });
+    return index;
+}
+
 // ── Build related articles section HTML ───────
-function buildRelatedHTML(currentPost, allPosts) {
-    // Find posts with the same category, excluding the current post, max 3
-    var related = allPosts.filter(function (p) {
-        return p.slug !== currentPost.slug && p.category === currentPost.category;
+function buildRelatedHTML(currentPost, categoryIndex) {
+    var sameCat = categoryIndex[currentPost.category] || [];
+    var related = sameCat.filter(function (p) {
+        return p.slug !== currentPost.slug;
     }).slice(0, 3);
 
     if (related.length === 0) return '';
 
     var cards = related.map(function (r) {
-        var rCoverStyle = r.cover_image
-            ? 'background-image: url(\'' + r.cover_image + '\')'
-            : 'background: linear-gradient(135deg, #011132 0%, #021b4a 100%)';
-
-        var rCatLabel = categoryLabel(r.category);
-
-        return '' +
-            '<a href="../' + r.slug + '/" class="kn-card kn-related-card">' +
-                '<div class="kn-card-cover" style="' + rCoverStyle + '"></div>' +
-                '<div class="kn-card-body">' +
-                    '<span class="kn-card-category">' + rCatLabel + '</span>' +
-                    '<h3 class="kn-card-title">' + r.title + '</h3>' +
-                    '<p class="kn-card-excerpt">' + r.excerpt + '</p>' +
-                    '<div class="kn-card-meta">' +
-                        '<time datetime="' + isoDate(r.date) + '">' + formatDateShort(r.date) + '</time>' +
-                        '<span class="kn-card-read">Read &rarr;</span>' +
-                    '</div>' +
-                '</div>' +
-            '</a>';
+        return buildCardHTML(r, { hrefPrefix: '../', extraClass: 'kn-related-card' });
     }).join('\n                    ');
 
     return '' +
@@ -229,7 +256,7 @@ function buildRelatedHTML(currentPost, allPosts) {
 }
 
 // ── Generate individual post pages ────────────
-function buildPosts(posts) {
+function buildPosts(posts, categoryIndex) {
     var template = readTemplate('post.html');
 
     posts.forEach(function (post) {
@@ -239,10 +266,6 @@ function buildPosts(posts) {
         var coverHTML = post.cover_image
             ? '<div class="kn-post-cover"><img src="' + post.cover_image + '" alt="' + post.title + '" loading="lazy"></div>'
             : '';
-
-        var coverStyle = post.cover_image
-            ? 'background-image: url(\'' + post.cover_image + '\')'
-            : 'background: linear-gradient(135deg, #011132 0%, #021b4a 100%)';
 
         // Fix author photo paths: authors.json uses absolute /assets/... paths.
         // Post pages live at knowledge/{slug}/, so convert to ../../assets/...
@@ -256,15 +279,15 @@ function buildPosts(posts) {
         });
 
         var authorsHTML = buildAuthorHTML(postAuthors);
-        var readTime = readingTime(post.body);
+        var readTime = readingTime(post.rawContent);
         var catLabel = categoryLabel(post.category);
         var catClass = categoryClass(post.category);
-        var relatedHTML = buildRelatedHTML(post, posts);
+        var relatedHTML = buildRelatedHTML(post, categoryIndex);
 
         var html = template
             .replace(/\{\{title\}\}/g, post.title)
-            .replace(/\{\{date\}\}/g, formatDate(post.date))
-            .replace(/\{\{date_iso\}\}/g, isoDate(post.date))
+            .replace(/\{\{date\}\}/g, post.dateFull)
+            .replace(/\{\{date_iso\}\}/g, post.dateISO)
             .replace(/\{\{author\}\}/g, post.author)
             .replace(/\{\{authors_html\}\}/g, authorsHTML)
             .replace(/\{\{category\}\}/g, post.category)
@@ -273,7 +296,7 @@ function buildPosts(posts) {
             .replace(/\{\{reading_time\}\}/g, readTime)
             .replace(/\{\{excerpt\}\}/g, post.excerpt)
             .replace(/\{\{cover_image\}\}/g, post.cover_image)
-            .replace(/\{\{cover_style\}\}/g, coverStyle)
+            .replace(/\{\{cover_style\}\}/g, coverStyle(post.cover_image))
             .replace(/\{\{cover_html\}\}/g, coverHTML)
             .replace(/\{\{body\}\}/g, post.body)
             .replace(/\{\{slug\}\}/g, post.slug)
@@ -289,23 +312,7 @@ function buildListing(posts) {
     var template = readTemplate('listing.html');
 
     var cards = posts.map(function (post) {
-        var coverStyle = post.cover_image
-            ? 'background-image: url(\'' + post.cover_image + '\')'
-            : 'background: linear-gradient(135deg, #011132 0%, #021b4a 100%)';
-
-        return '' +
-            '<a href="' + post.slug + '/" class="kn-card" data-category="' + post.category + '">' +
-                '<div class="kn-card-cover" style="' + coverStyle + '"></div>' +
-                '<div class="kn-card-body">' +
-                    '<span class="kn-card-category">' + post.category + '</span>' +
-                    '<h3 class="kn-card-title">' + post.title + '</h3>' +
-                    '<p class="kn-card-excerpt">' + post.excerpt + '</p>' +
-                    '<div class="kn-card-meta">' +
-                        '<time datetime="' + isoDate(post.date) + '">' + formatDateShort(post.date) + '</time>' +
-                        '<span class="kn-card-read">Read &rarr;</span>' +
-                    '</div>' +
-                '</div>' +
-            '</a>';
+        return buildCardHTML(post, { dataCategory: true });
     }).join('\n            ');
 
     var emptyState = posts.length === 0
@@ -343,7 +350,8 @@ function main() {
         console.log('  No posts found. Creating empty listing page.\n');
     }
 
-    buildPosts(posts);
+    var categoryIndex = buildCategoryIndex(posts);
+    buildPosts(posts, categoryIndex);
     buildListing(posts);
     preserveAdmin();
 

@@ -6,6 +6,7 @@
 /* ---------- PAGE BODY ---------- */
 .knowledge-body {
     background: #f4f5f5;
+    font-family: var(--font);
 }
 
 /* Blog post pages: nav starts with blue background (white page = no dark hero beneath it) */
@@ -53,7 +54,6 @@
     border: 1.5px solid #cad2d1;
     background: transparent;
     cursor: pointer;
-    font-family: var(--font);
     font-size: 0.82rem;
     font-weight: 600;
     letter-spacing: -0.01em;
@@ -128,18 +128,7 @@
     padding-right: var(--container-pad);
 }
 
-.kn-hero-label {
-    font-family: var(--font);
-    font-size: 0.75rem;
-    font-weight: 400;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: #06c4a2;
-    margin: 0;
-}
-
 .kn-hero-title {
-    font-family: var(--font);
     font-size: clamp(2rem, 4vw, 3.5rem);
     font-weight: 300;
     color: #ffffff;
@@ -149,7 +138,6 @@
 }
 
 .kn-hero-subtitle {
-    font-family: var(--font);
     font-size: clamp(0.875rem, 1.1vw, 1rem);
     font-weight: 300;
     color: rgba(255, 255, 255, 0.65);
@@ -217,7 +205,6 @@
 
 .kn-card-category {
     display: inline-block;
-    font-family: var(--font);
     font-size: 0.6875rem;
     font-weight: 700;
     letter-spacing: 0.08em;
@@ -227,7 +214,6 @@
 }
 
 .kn-card-title {
-    font-family: var(--font);
     font-size: 1.0625rem;
     font-weight: 700;
     color: #010c33;
@@ -237,7 +223,6 @@
 }
 
 .kn-card-excerpt {
-    font-family: var(--font);
     font-size: 0.8125rem;
     font-weight: 400;
     color: rgba(1, 12, 51, 0.5);
@@ -260,14 +245,12 @@
 }
 
 .kn-card-meta time {
-    font-family: var(--font);
     font-size: 0.75rem;
     font-weight: 500;
     color: rgba(1, 12, 51, 0.35);
 }
 
 .kn-card-read {
-    font-family: var(--font);
     font-size: 0.75rem;
     font-weight: 700;
     color: rgba(1, 12, 51, 0.3);
@@ -280,7 +263,6 @@
 
 /* ---------- EMPTY STATE ---------- */
 .kn-empty {
-    font-family: var(--font);
     font-size: 1rem;
     font-weight: 500;
     color: rgba(1, 12, 51, 0.3);
@@ -325,7 +307,6 @@
 }
 
 .kn-breadcrumb-link {
-    font-family: var(--font);
     font-size: 0.8125rem;
     font-weight: 500;
     color: rgba(1, 12, 51, 0.4);
@@ -346,7 +327,6 @@
 .kn-breadcrumb-cat:hover { opacity: 0.75; }
 
 .kn-breadcrumb-sep {
-    font-family: var(--font);
     font-size: 0.8125rem;
     color: rgba(1, 12, 51, 0.2);
     flex-shrink: 0;
@@ -354,7 +334,6 @@
 }
 
 .kn-breadcrumb-current {
-    font-family: var(--font);
     font-size: 0.8125rem;
     font-weight: 500;
     color: rgba(1, 12, 51, 0.35);
@@ -369,7 +348,6 @@
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    font-family: var(--font);
     font-size: 0.8125rem;
     font-weight: 600;
     color: rgba(255, 255, 255, 0.5);
@@ -398,7 +376,6 @@
     align-items: center;
     padding: 6px 16px;
     border-radius: 999px;
-    font-family: var(--font);
     font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.02em;
@@ -426,7 +403,6 @@
 }
 
 .kn-post-readtime {
-    font-family: var(--font);
     font-size: 0.8125rem;
     font-weight: 500;
     color: rgba(255, 255, 255, 0.4);
@@ -435,7 +411,6 @@
 
 /* Post hero title */
 .kn-post-hero-title {
-    font-family: var(--font);
     font-size: clamp(1.5rem, 2.8vw, 2.25rem);
     font-weight: 800;
     color: #ffffff;
@@ -468,9 +443,6 @@
 }
 
 .kn-author-photo--placeholder {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
     background: rgba(255, 255, 255, 0.08);
 }
 
@@ -481,14 +453,12 @@
 }
 
 .kn-author-name {
-    font-family: var(--font);
     font-size: 0.875rem;
     font-weight: 700;
     color: #ffffff;
 }
 
 .kn-author-role {
-    font-family: var(--font);
     font-size: 0.75rem;
     font-weight: 500;
     color: rgba(255, 255, 255, 0.45);
@@ -496,7 +466,6 @@
 
 /* Published date */
 .kn-post-hero-date {
-    font-family: var(--font);
     font-size: 0.8125rem;
     font-weight: 500;
     color: rgba(255, 255, 255, 0.35);
@@ -525,7 +494,6 @@
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    font-family: var(--font);
     font-size: 0.8125rem;
     font-weight: 600;
     color: rgba(1, 12, 51, 0.4);
@@ -539,7 +507,6 @@
 
 /* ---------- ARTICLE BODY (Rich text) ---------- */
 .kn-article-body {
-    font-family: var(--font);
     font-size: 1.0625rem;
     font-weight: 400;
     color: #1a1a2e;
@@ -694,7 +661,6 @@
 }
 
 .kn-related-title {
-    font-family: var(--font);
     font-size: clamp(1.5rem, 2.5vw, 2.25rem);
     font-weight: 300;
     color: #ffffff;
@@ -710,7 +676,6 @@
     border-radius: 999px;
     border: 1.5px solid rgba(255, 255, 255, 0.25);
     background: transparent;
-    font-family: var(--font);
     font-size: 0.8125rem;
     font-weight: 600;
     color: rgba(255, 255, 255, 0.75);
@@ -750,10 +715,7 @@
    ============================================ */
 
 @media (max-width: 960px) {
-    .kn-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
+    .kn-grid,
     .kn-related-grid {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -769,13 +731,7 @@
 }
 
 @media (max-width: 600px) {
-    .kn-grid {
-        grid-template-columns: 1fr;
-        max-width: 420px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
+    .kn-grid,
     .kn-related-grid {
         grid-template-columns: 1fr;
         max-width: 420px;
