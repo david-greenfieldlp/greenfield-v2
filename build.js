@@ -244,7 +244,18 @@ function buildPosts(posts) {
             ? 'background-image: url(\'' + post.cover_image + '\')'
             : 'background: linear-gradient(135deg, #011132 0%, #021b4a 100%)';
 
-        var authorsHTML = buildAuthorHTML(post.authors);
+        // Fix author photo paths: authors.json uses absolute /assets/... paths.
+        // Post pages live at knowledge/{slug}/, so convert to ../../assets/...
+        // so they work on both GitHub Pages subdirectory and custom domain deployments.
+        var postAuthors = post.authors.map(function (a) {
+            var photo = a.photo;
+            if (photo && photo.startsWith('/')) {
+                photo = '../..' + photo;
+            }
+            return { name: a.name, role: a.role, photo: photo };
+        });
+
+        var authorsHTML = buildAuthorHTML(postAuthors);
         var readTime = readingTime(post.body);
         var catLabel = categoryLabel(post.category);
         var catClass = categoryClass(post.category);

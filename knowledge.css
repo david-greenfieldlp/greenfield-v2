@@ -648,7 +648,8 @@
     max-width: 100%;
     height: auto;
     border-radius: 10px;
-    margin: 24px 0;
+    margin: 24px auto;
+    display: block;
 }
 
 .kn-article-body hr {
