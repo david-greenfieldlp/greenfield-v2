@@ -317,27 +317,27 @@
     padding: clamp(32px, 4vh, 56px) var(--container-pad) clamp(32px, 4vh, 56px) var(--container-pad);
 }
 
-/* ---------- BREADCRUMB ---------- */
+/* ---------- BREADCRUMB (sits above article body on white bg) ---------- */
 .kn-breadcrumb {
     display: flex;
     align-items: center;
     gap: 8px;
     flex-wrap: wrap;
-    margin-bottom: 8px;
+    margin-bottom: 32px;
 }
 
 .kn-breadcrumb-link {
     font-family: var(--font);
     font-size: 0.8125rem;
     font-weight: 500;
-    color: rgba(255, 255, 255, 0.45);
+    color: rgba(1, 12, 51, 0.4);
     text-decoration: none;
     transition: color 0.2s;
     white-space: nowrap;
 }
 
 .kn-breadcrumb-link:hover {
-    color: rgba(255, 255, 255, 0.85);
+    color: rgba(1, 12, 51, 0.8);
 }
 
 /* Category crumb — colored per category */
@@ -350,7 +350,7 @@
 .kn-breadcrumb-sep {
     font-family: var(--font);
     font-size: 0.8125rem;
-    color: rgba(255, 255, 255, 0.2);
+    color: rgba(1, 12, 51, 0.2);
     flex-shrink: 0;
     user-select: none;
 }
@@ -359,11 +359,11 @@
     font-family: var(--font);
     font-size: 0.8125rem;
     font-weight: 500;
-    color: rgba(255, 255, 255, 0.25);
+    color: rgba(1, 12, 51, 0.35);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 320px;
+    max-width: 360px;
 }
 
 /* Back link (in hero = light color) */
