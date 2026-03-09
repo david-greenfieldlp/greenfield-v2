@@ -1,0 +1,58 @@
+{
+  "Shay Grinfeld": {
+    "role": "Managing Partner",
+    "photo": "/assets/team/investment team/Shay.png"
+  },
+  "Raz Mangel": {
+    "role": "Partner",
+    "photo": "/assets/team/investment team/Raz.png"
+  },
+  "Itay Inbar": {
+    "role": "Partner",
+    "photo": "/assets/team/investment team/Itay.png"
+  },
+  "Avery Schwartz": {
+    "role": "Venture Partner",
+    "photo": "/assets/team/investment team/Avery.png"
+  },
+  "Yuda Doron": {
+    "role": "Founding Partner",
+    "photo": "/assets/team/investment team/Yuda.png"
+  },
+  "Meir Cohen": {
+    "role": "Principal",
+    "photo": "/assets/team/investment team/Meir.png"
+  },
+  "Ortal Sasson Hendin": {
+    "role": "Principal",
+    "photo": "/assets/team/investment team/Ortal.png"
+  },
+  "Josh Trup": {
+    "role": "Principal",
+    "photo": "/assets/team/investment team/Josh.png"
+  },
+  "Olivia Levine": {
+    "role": "Growth Investor",
+    "photo": "/assets/team/investment team/Olivia.png"
+  },
+  "Nir Goldstein": {
+    "role": "Operating Partner",
+    "photo": "/assets/team/platform team/Nir.png"
+  },
+  "David Ohana": {
+    "role": "VC Operations Associate",
+    "photo": "/assets/team/platform team/David.png"
+  },
+  "Lior Sulkin Levy": {
+    "role": "Head of Data",
+    "photo": "/assets/team/platform team/Lior.png"
+  },
+  "Greenfield Team": {
+    "role": "Greenfield Partners",
+    "photo": null
+  },
+  "Greenfield Partners": {
+    "role": "",
+    "photo": null
+  }
+}

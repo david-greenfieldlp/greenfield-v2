@@ -79,30 +79,34 @@
 
     <main class="knowledge-main">
 
-        <!-- ARTICLE -->
-        <article class="kn-article">
+        <!-- POST HERO — two-column split header -->
+        <section class="kn-post-hero">
+            <div class="kn-post-hero-inner">
+                <!-- Left: text info -->
+                <div class="kn-post-hero-text">
+                    <a href="../" class="kn-article-back">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        Back to Knowledge
+                    </a>
 
-            <!-- Back link -->
-            <div class="kn-article-back-wrap">
-                <a href="../" class="kn-article-back">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    Back to Knowledge
-                </a>
-            </div>
+                    <div class="kn-post-hero-tagline">
+                        <span class="kn-post-pill {{category_class}}">{{category_label}}</span>
+                        <span class="kn-post-readtime">{{reading_time}}</span>
+                    </div>
 
-            <!-- Header -->
-            <header class="kn-article-header">
-                <span class="kn-article-category">{{category}}</span>
-                <h1 class="kn-article-title">{{title}}</h1>
-                <div class="kn-article-meta">
-                    <span class="kn-article-author">{{author}}</span>
-                    <span class="kn-article-meta-sep">&middot;</span>
-                    <time class="kn-article-date" datetime="{{date_iso}}">{{date}}</time>
+                    <h1 class="kn-post-hero-title">{{title}}</h1>
+
+                    {{authors_html}}
+
+                    <p class="kn-post-hero-date">Published on {{date}}</p>
                 </div>
-            </header>
+                <!-- Right: cover image -->
+                <div class="kn-post-hero-cover" style="{{cover_style}}"></div>
+            </div>
+        </section>
 
-            <!-- Cover image -->
-            {{cover_html}}
+        <!-- ARTICLE BODY -->
+        <article class="kn-article">
 
             <!-- Body -->
             <div class="kn-article-body">

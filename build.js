@@ -13,8 +13,30 @@ const { marked } = require('marked');
 // ── Paths ─────────────────────────────────────
 const ROOT = __dirname;
 const CONTENT_DIR = path.join(ROOT, 'content', 'blog');
+const AUTHORS_FILE = path.join(ROOT, 'content', 'authors.json');
 const TEMPLATES_DIR = path.join(ROOT, 'templates');
 const OUTPUT_DIR = path.join(ROOT, 'knowledge');
+
+// ── Authors lookup ────────────────────────────
+var AUTHORS = {};
+if (fs.existsSync(AUTHORS_FILE)) {
+    AUTHORS = JSON.parse(fs.readFileSync(AUTHORS_FILE, 'utf-8'));
+}
+
+// ── Category display labels & CSS classes ─────
+var CATEGORY_LABELS = {
+    'Insights':       'Insights',
+    'Portfolio':      'Why We Invested',
+    'Growth Stories': 'Growth Stories',
+    'Market':         'Market Report'
+};
+
+var CATEGORY_CLASSES = {
+    'Insights':       'kn-cat-insights',
+    'Portfolio':      'kn-cat-portfolio',
+    'Growth Stories': 'kn-cat-growth',
+    'Market':         'kn-cat-market'
+};
 
 // ── Helpers ───────────────────────────────────
 function ensureDir(dir) {
@@ -49,6 +71,59 @@ function isoDate(dateInput) {
     return new Date(dateInput).toISOString().split('T')[0];
 }
 
+function readingTime(text) {
+    // Strip HTML tags, count words, assume 200 wpm
+    var words = text.replace(/<[^>]+>/g, '').split(/\s+/).filter(Boolean).length;
+    var minutes = Math.max(1, Math.round(words / 200));
+    return minutes + ' min read';
+}
+
+function parseAuthors(authorString) {
+    // Split comma-separated author string, trim, look up each
+    return authorString.split(',').map(function (name) {
+        name = name.trim();
+        var info = AUTHORS[name] || { role: '', photo: null };
+        return {
+            name: name,
+            role: info.role || '',
+            photo: info.photo || ''
+        };
+    });
+}
+
+function buildAuthorHTML(authors) {
+    if (authors.length === 0) return '';
+
+    var cards = authors.map(function (a) {
+        var photoHTML = a.photo
+            ? '<img class="kn-author-photo" src="' + a.photo + '" alt="' + a.name + '" loading="lazy">'
+            : '<div class="kn-author-photo kn-author-photo--placeholder"></div>';
+
+        var roleHTML = a.role
+            ? '<span class="kn-author-role">' + a.role + '</span>'
+            : '';
+
+        return '' +
+            '<div class="kn-author-card">' +
+                photoHTML +
+                '<div class="kn-author-info">' +
+                    '<span class="kn-author-name">' + a.name + '</span>' +
+                    roleHTML +
+                '</div>' +
+            '</div>';
+    }).join('\n                        ');
+
+    return '<div class="kn-authors">' + cards + '</div>';
+}
+
+function categoryLabel(category) {
+    return CATEGORY_LABELS[category] || category;
+}
+
+function categoryClass(category) {
+    return CATEGORY_CLASSES[category] || 'kn-cat-insights';
+}
+
 // ── Configure marked ──────────────────────────
 marked.setOptions({
     breaks: false,
@@ -72,16 +147,21 @@ function getPosts() {
         var data = parsed.data;
         var body = marked.parse(parsed.content);
 
+        var authorStr = data.author || 'Greenfield Partners';
+        var authors = parseAuthors(authorStr);
+
         return {
             title: data.title || 'Untitled',
             slug: data.slug || file.replace('.md', ''),
             date: data.date || new Date(),
-            author: data.author || 'Greenfield Partners',
+            author: authorStr,
+            authors: authors,
             cover_image: data.cover_image || '',
             excerpt: data.excerpt || '',
             category: data.category || 'Insights',
             draft: data.draft === true,
             body: body,
+            rawContent: parsed.content,
             file: file
         };
     });
@@ -112,14 +192,28 @@ function buildPosts(posts) {
             ? '<div class="kn-post-cover"><img src="' + post.cover_image + '" alt="' + post.title + '" loading="lazy"></div>'
             : '';
 
+        var coverStyle = post.cover_image
+            ? 'background-image: url(\'' + post.cover_image + '\')'
+            : 'background: linear-gradient(135deg, #011132 0%, #021b4a 100%)';
+
+        var authorsHTML = buildAuthorHTML(post.authors);
+        var readTime = readingTime(post.body);
+        var catLabel = categoryLabel(post.category);
+        var catClass = categoryClass(post.category);
+
         var html = template
             .replace(/\{\{title\}\}/g, post.title)
             .replace(/\{\{date\}\}/g, formatDate(post.date))
             .replace(/\{\{date_iso\}\}/g, isoDate(post.date))
             .replace(/\{\{author\}\}/g, post.author)
+            .replace(/\{\{authors_html\}\}/g, authorsHTML)
             .replace(/\{\{category\}\}/g, post.category)
+            .replace(/\{\{category_label\}\}/g, catLabel)
+            .replace(/\{\{category_class\}\}/g, catClass)
+            .replace(/\{\{reading_time\}\}/g, readTime)
             .replace(/\{\{excerpt\}\}/g, post.excerpt)
             .replace(/\{\{cover_image\}\}/g, post.cover_image)
+            .replace(/\{\{cover_style\}\}/g, coverStyle)
             .replace(/\{\{cover_html\}\}/g, coverHTML)
             .replace(/\{\{body\}\}/g, post.body)
             .replace(/\{\{slug\}\}/g, post.slug);
