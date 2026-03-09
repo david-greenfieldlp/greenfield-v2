@@ -180,6 +180,54 @@ function getPosts() {
     return posts;
 }
 
+// ── Build related articles section HTML ───────
+function buildRelatedHTML(currentPost, allPosts) {
+    // Find posts with the same category, excluding the current post, max 3
+    var related = allPosts.filter(function (p) {
+        return p.slug !== currentPost.slug && p.category === currentPost.category;
+    }).slice(0, 3);
+
+    if (related.length === 0) return '';
+
+    var cards = related.map(function (r) {
+        var rCoverStyle = r.cover_image
+            ? 'background-image: url(\'' + r.cover_image + '\')'
+            : 'background: linear-gradient(135deg, #011132 0%, #021b4a 100%)';
+
+        var rCatLabel = categoryLabel(r.category);
+
+        return '' +
+            '<a href="../' + r.slug + '/" class="kn-card kn-related-card">' +
+                '<div class="kn-card-cover" style="' + rCoverStyle + '"></div>' +
+                '<div class="kn-card-body">' +
+                    '<span class="kn-card-category">' + rCatLabel + '</span>' +
+                    '<h3 class="kn-card-title">' + r.title + '</h3>' +
+                    '<p class="kn-card-excerpt">' + r.excerpt + '</p>' +
+                    '<div class="kn-card-meta">' +
+                        '<time datetime="' + isoDate(r.date) + '">' + formatDateShort(r.date) + '</time>' +
+                        '<span class="kn-card-read">Read &rarr;</span>' +
+                    '</div>' +
+                '</div>' +
+            '</a>';
+    }).join('\n                    ');
+
+    return '' +
+        '<section class="kn-related">\n' +
+        '        <div class="kn-related-inner">\n' +
+        '            <div class="kn-related-header">\n' +
+        '                <h2 class="kn-related-title">Related Articles</h2>\n' +
+        '                <a href="../" class="kn-related-btn">\n' +
+        '                    <span>All Articles</span>\n' +
+        '                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>\n' +
+        '                </a>\n' +
+        '            </div>\n' +
+        '            <div class="kn-related-grid">\n' +
+        '                    ' + cards + '\n' +
+        '            </div>\n' +
+        '        </div>\n' +
+        '    </section>';
+}
+
 // ── Generate individual post pages ────────────
 function buildPosts(posts) {
     var template = readTemplate('post.html');
@@ -200,6 +248,7 @@ function buildPosts(posts) {
         var readTime = readingTime(post.body);
         var catLabel = categoryLabel(post.category);
         var catClass = categoryClass(post.category);
+        var relatedHTML = buildRelatedHTML(post, posts);
 
         var html = template
             .replace(/\{\{title\}\}/g, post.title)
@@ -216,7 +265,8 @@ function buildPosts(posts) {
             .replace(/\{\{cover_style\}\}/g, coverStyle)
             .replace(/\{\{cover_html\}\}/g, coverHTML)
             .replace(/\{\{body\}\}/g, post.body)
-            .replace(/\{\{slug\}\}/g, post.slug);
+            .replace(/\{\{slug\}\}/g, post.slug)
+            .replace(/\{\{related_articles\}\}/g, relatedHTML);
 
         fs.writeFileSync(path.join(postDir, 'index.html'), html, 'utf-8');
         console.log('  Built: knowledge/' + post.slug + '/index.html');

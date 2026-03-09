@@ -670,11 +670,90 @@
 }
 
 /* ============================================
+   RELATED ARTICLES (bottom of post pages)
+   ============================================ */
+
+.kn-related {
+    background: linear-gradient(180deg, #01102e 0%, var(--navy-deep, #000a1f) 100%);
+    padding: clamp(56px, 7vh, 88px) var(--container-pad) clamp(64px, 8vh, 96px);
+    margin: 0;
+}
+
+.kn-related-inner {
+    max-width: var(--container-max);
+    margin: 0 auto;
+}
+
+/* Header row: title + button */
+.kn-related-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: clamp(32px, 4vh, 48px);
+}
+
+.kn-related-title {
+    font-family: var(--font);
+    font-size: clamp(1.5rem, 2.5vw, 2.25rem);
+    font-weight: 300;
+    color: #ffffff;
+    letter-spacing: -0.03em;
+    margin: 0;
+}
+
+.kn-related-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 24px;
+    border-radius: 999px;
+    border: 1.5px solid rgba(255, 255, 255, 0.25);
+    background: transparent;
+    font-family: var(--font);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.75);
+    text-decoration: none;
+    transition: border-color 0.25s, color 0.25s, background 0.25s;
+}
+
+.kn-related-btn:hover {
+    border-color: rgba(255, 255, 255, 0.5);
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.kn-related-btn svg {
+    flex-shrink: 0;
+}
+
+/* Card grid — 3 columns */
+.kn-related-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(20px, 2.5vw, 32px);
+}
+
+/* Cards on dark background — override border for contrast */
+.kn-related-card {
+    border-color: rgba(255, 255, 255, 0.06);
+}
+
+.kn-related-card:hover {
+    border-color: rgba(6, 196, 162, 0.35);
+    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* ============================================
    RESPONSIVE
    ============================================ */
 
 @media (max-width: 960px) {
     .kn-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .kn-related-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 
@@ -694,6 +773,19 @@
         max-width: 420px;
         margin-left: auto;
         margin-right: auto;
+    }
+
+    .kn-related-grid {
+        grid-template-columns: 1fr;
+        max-width: 420px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .kn-related-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
     }
 
     .kn-post-hero-cover {
