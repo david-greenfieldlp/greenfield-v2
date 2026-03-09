@@ -317,6 +317,55 @@
     padding: clamp(32px, 4vh, 56px) var(--container-pad) clamp(32px, 4vh, 56px) var(--container-pad);
 }
 
+/* ---------- BREADCRUMB ---------- */
+.kn-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+}
+
+.kn-breadcrumb-link {
+    font-family: var(--font);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.45);
+    text-decoration: none;
+    transition: color 0.2s;
+    white-space: nowrap;
+}
+
+.kn-breadcrumb-link:hover {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+/* Category crumb — colored per category */
+.kn-breadcrumb-cat[data-cat="Insights"]       { color: #06c4a2; }
+.kn-breadcrumb-cat[data-cat="Portfolio"]       { color: #e8836b; }
+.kn-breadcrumb-cat[data-cat="Growth Stories"]  { color: #4a90d9; }
+.kn-breadcrumb-cat[data-cat="Market"]          { color: #a882d6; }
+.kn-breadcrumb-cat:hover { opacity: 0.75; }
+
+.kn-breadcrumb-sep {
+    font-family: var(--font);
+    font-size: 0.8125rem;
+    color: rgba(255, 255, 255, 0.2);
+    flex-shrink: 0;
+    user-select: none;
+}
+
+.kn-breadcrumb-current {
+    font-family: var(--font);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.25);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 320px;
+}
+
 /* Back link (in hero = light color) */
 .kn-article-back {
     display: inline-flex;

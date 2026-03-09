@@ -186,6 +186,14 @@
         var empty = document.getElementById('knEmpty');
         var active = 'all';
 
+        // Auto-activate filter from breadcrumb link (?category=Portfolio etc.)
+        var urlCat = new URLSearchParams(window.location.search).get('category');
+        if (urlCat) {
+            Object.keys(FILTER_MAP).forEach(function (key) {
+                if (FILTER_MAP[key] === urlCat) { active = key; }
+            });
+        }
+
         pills.forEach(function (pill) {
             pill.addEventListener('click', function () {
                 active = this.getAttribute('data-filter');
@@ -205,6 +213,17 @@
                 if (show) visible++;
             });
             empty.style.display = visible === 0 ? 'block' : 'none';
+        }
+
+        // Apply initial state on page load (handles ?category= URL param)
+        if (active !== 'all') {
+            pills.forEach(function (p) {
+                p.classList.remove('kn-pill--active');
+                if (p.getAttribute('data-filter') === active) {
+                    p.classList.add('kn-pill--active');
+                }
+            });
+            filterCards();
         }
     })();
     </script>
