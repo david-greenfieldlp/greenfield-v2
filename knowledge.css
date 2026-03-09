@@ -8,6 +8,14 @@
     background: #ffffff;
 }
 
+/* Blog post pages: nav starts with blue background (white page = no dark hero beneath it) */
+.knowledge-post-body #nav {
+    background: rgba(1, 17, 50, 0.97);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
 .knowledge-main {
     min-height: 100vh;
 }
