@@ -30,7 +30,6 @@
 }
 
 .td-section-label {
-    font-family: var(--font);
     font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.1em;
@@ -118,7 +117,6 @@
 }
 
 .td-card-name {
-    font-family: var(--font);
     font-size: 0.9375rem;
     font-weight: 700;
     color: #010c33;
@@ -127,7 +125,6 @@
 }
 
 .td-card-title {
-    font-family: var(--font);
     font-size: 0.75rem;
     font-weight: 500;
     color: rgba(1, 12, 51, 0.45);
@@ -136,7 +133,6 @@
 
 /* ---------- COMING SOON ---------- */
 .td-coming-soon {
-    font-family: var(--font);
     font-size: 0.875rem;
     font-weight: 500;
     color: rgba(1, 12, 51, 0.3);
@@ -163,7 +159,7 @@
 
 .td-overlay--active {
     opacity: 1;
-    pointer-events: all;
+    pointer-events: auto;
 }
 
 .td-overlay--has-logos .td-overlay-inner {
@@ -233,7 +229,6 @@
 }
 
 .td-overlay-name {
-    font-family: var(--font);
     font-size: clamp(1.5rem, 3vw, 2.25rem);
     font-weight: 800;
     color: #ffffff;
@@ -242,7 +237,6 @@
 }
 
 .td-overlay-title {
-    font-family: var(--font);
     font-size: 1rem;
     font-weight: 600;
     color: #06c4a2;
@@ -254,7 +248,6 @@
     align-items: center;
     gap: 8px;
     margin-top: 16px;
-    font-family: var(--font);
     font-size: 0.875rem;
     font-weight: 500;
     color: rgba(255, 255, 255, 0.45);
@@ -273,7 +266,6 @@
 }
 
 .td-overlay-bio {
-    font-family: var(--font);
     font-size: 0.9375rem;
     font-weight: 400;
     line-height: 1.75;
@@ -287,7 +279,6 @@
     align-items: center;
     gap: 10px;
     margin-top: 28px;
-    font-family: var(--font);
     font-size: 0.8125rem;
     font-weight: 600;
     color: rgba(255, 255, 255, 0.7);

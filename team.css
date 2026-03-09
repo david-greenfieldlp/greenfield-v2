@@ -15,6 +15,14 @@
     width: 100% !important;
 }
 
+/* ---------- SCROLL LOCK (used by overlay) ---------- */
+body.scroll-locked {
+    position: fixed;
+    left: 0;
+    right: 0;
+    overflow: hidden;
+}
+
 /* ---------- PAGE BODY ---------- */
 .team-body {
     background: var(--navy-deep);
@@ -85,7 +93,6 @@
 }
 
 .team-banner-headline {
-    font-family: var(--font);
     font-size: clamp(2rem, 4vw, 3.5rem);
     font-weight: 300;
     line-height: 1.1;
@@ -95,7 +102,6 @@
 }
 
 .team-banner-subline {
-    font-family: var(--font);
     font-size: clamp(0.875rem, 1.1vw, 1rem);
     font-weight: 300;
     line-height: 1.7;
@@ -118,7 +124,6 @@
 }
 
 .team-partnership-opener {
-    font-family: var(--font);
     font-size: clamp(1.25rem, 2vw, 1.75rem);
     font-weight: 600;
     line-height: 1.55;
@@ -149,7 +154,6 @@
     border-bottom: 3px solid rgba(1, 12, 51, 0.08);
     padding: 0 0 16px;
     cursor: pointer;
-    font-family: var(--font);
     font-size: clamp(1.4rem, 2.5vw, 2rem);
     font-weight: 800;
     line-height: 1.1;
