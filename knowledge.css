@@ -466,7 +466,7 @@
 
 /* ---------- ARTICLE WRAPPER ---------- */
 .kn-article {
-    max-width: 760px;
+    max-width: 860px;
     margin: 0 auto;
     padding: clamp(40px, 5vh, 64px) var(--container-pad) clamp(64px, 8vh, 120px);
 }
