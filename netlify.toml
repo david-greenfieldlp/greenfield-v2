@@ -1,0 +1,9 @@
+[build]
+  command = "cp knowledge/admin/config.production.yml knowledge/admin/config.yml && npm run build"
+  publish = "."
+
+[[headers]]
+  for = "/knowledge/admin/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"

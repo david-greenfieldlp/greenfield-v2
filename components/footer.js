@@ -4,12 +4,13 @@
 
     var extraClasses = mount.getAttribute('data-extra-classes') || '';
     var theme = mount.getAttribute('data-theme') || '';
+    var basePath = mount.getAttribute('data-base-path') || '';
 
     var classes = 'site-footer' + (extraClasses ? ' ' + extraClasses : '');
     var themeAttr = theme ? ' data-theme="' + theme + '"' : '';
 
     var html = '<footer class="' + classes + '" id="footer"' + themeAttr + '>' +
-        '<div class="footer-bg-image" style="background-image: url(\'assets/images/footer.png\')"></div>' +
+        '<div class="footer-bg-image" style="background-image: url(\'' + basePath + 'assets/images/footer.png\')"></div>' +
         '<div class="footer-bg-overlay"></div>' +
         '<div class="footer-content">' +
 
@@ -31,7 +32,7 @@
 
             '<div class="footer-mid">' +
                 '<div class="footer-logo">' +
-                    '<a href="index.html" aria-label="Greenfield Partners Home">' +
+                    '<a href="' + basePath + 'index.html" aria-label="Greenfield Partners Home">' +
                         '<svg width="200" height="42" viewBox="0 0 156 32" fill="none" xmlns="http://www.w3.org/2000/svg">' +
                             '<path d="M25.0404 4.8001V4.2751C25.0404 4.1751 24.972 4.1001 24.8808 4.1001H3.89987C3.80865 4.1001 3.74023 4.1751 3.74023 4.2751V27.5251C3.74023 27.6001 3.78585 27.6751 3.83146 27.7001C3.85426 27.7001 3.87707 27.7001 3.89987 27.7001C3.94548 27.7001 25.0632 27.7001 25.1088 27.7001C25.1316 27.7001 25.1544 27.7001 25.1772 27.7001C25.2457 27.6751 25.2685 27.6001 25.2685 27.5251V15.5001C25.2685 15.4001 25.2001 15.3251 25.1088 15.3251H24.6299C24.5387 15.3251 24.4703 15.4001 24.4703 15.5001V26.8751H4.56123V4.9751H24.9036C24.972 4.9751 25.0404 4.9001 25.0404 4.8001Z" fill="white"/>' +
                             '<path d="M8.27866 9.0752H21.1409C21.2321 9.0752 21.3006 9.00022 21.3006 8.90022V8.37522C21.3006 8.27522 21.2321 8.2002 21.1409 8.2002H7.64011C7.54889 8.2002 7.48047 8.27522 7.48047 8.37522V23.4502C7.48047 23.5252 7.52608 23.6002 7.57169 23.6252C7.5945 23.6252 7.6173 23.6252 7.64011 23.6252C7.68572 23.6252 21.3462 23.6252 21.3918 23.6252C21.4146 23.6252 21.4374 23.6252 21.4602 23.6252C21.5286 23.6002 21.5514 23.5252 21.5514 23.4502V15.4752C21.5514 15.3752 21.483 15.3002 21.3918 15.3002H20.9129C20.8216 15.3002 20.7532 15.3752 20.7532 15.4752V22.8002H8.27866V9.0752Z" fill="white"/>' +
@@ -51,12 +52,12 @@
                 '</div>' +
 
                 '<nav class="footer-nav">' +
-                    '<a href="index.html" class="footer-nav-link">Home</a>' +
-                    '<a href="approach.html" class="footer-nav-link">Approach</a>' +
-                    '<a href="approach.html#g2m-platform" class="footer-nav-link">G<sup>2</sup>M</a>' +
-                    '<a href="companies.html" class="footer-nav-link">Portfolio</a>' +
-                    '<a href="team.html" class="footer-nav-link">Team</a>' +
-                    '<a href="#" class="footer-nav-link">Knowledge</a>' +
+                    '<a href="' + basePath + 'index.html" class="footer-nav-link">Home</a>' +
+                    '<a href="' + basePath + 'approach.html" class="footer-nav-link">Approach</a>' +
+                    '<a href="' + basePath + 'approach.html#g2m-platform" class="footer-nav-link">G<sup>2</sup>M</a>' +
+                    '<a href="' + basePath + 'companies.html" class="footer-nav-link">Portfolio</a>' +
+                    '<a href="' + basePath + 'team.html" class="footer-nav-link">Team</a>' +
+                    '<a href="' + basePath + 'knowledge/" class="footer-nav-link">Knowledge</a>' +
                     '<a href="#" class="footer-nav-link">Careers</a>' +
                 '</nav>' +
             '</div>' +

@@ -1,0 +1,12 @@
+---
+title: "Podcast: When Product-Marketing Fit Is Only the Beginning"
+slug: podcast-when-product-marketing-fit-is-only-the-beginning
+date: 2026-02-03
+author: "Shay Grinfeld"
+cover_image: "https://cdn.prod.website-files.com/66fa660f46b01edefb1e5fa6/6981f7772fad2cf25a4c44be_image%20-%202026-02-03T152601.630.png"
+excerpt: "What does it take to grow from $10M to $100M in revenue and beyond? Managing Partner Shay Grinfeld sits down with James Spiro to unpack Greenfield's approach to early growth investing, the 7 Pillars of Go-To-Market, and why \"hungry, humble, smart\" defines the founders who make it."
+category: Insights
+draft: false
+---
+
+<p>There's a moment in every startup's journey when dreaming gives way to math. When the founders who sold the first 20 deals have to figure out if anyone else can. In this conversation with James Spiro, Shay Grinfeld breaks down what Greenfield looks for at that inflection point; the leading indicators that signal a company is ready to scale, the 7 Pillars that drive efficient go-to-market, and why the best founders stay hungry, humble, and smart long after they've proven product-market fit.</p><p>Listen now on James Spiro website here: <a href="https://www.thespirocircle.com/p/product-market-greenfield-partners" target="_blank">https://www.thespirocircle.com/p/product-market-greenfield-partners</a></p><p>‍</p><p>Stream via Apple Podcasts:</p><figure class="w-richtext-figure-type-image w-richtext-align-normal" data-rt-type="image" data-rt-align="normal"><a href="https://podcasts.apple.com/us/podcast/גייסתם-סיד-ועכשיו-איך-להכין-את-הסטארט-אפ-לשלבי-צמיחה/id1252035397?i=1000678757982" target="_blank"><div><img src="https://cdn.prod.website-files.com/66fa660f46b01edefb1e5fa6/6706936e0123e022f08588da_62c45b75c7a5fc4a19a9ee24_en-us.svg" alt="Listen on Apple Podcasts" width="auto" height="auto" loading="auto"></div></a></figure><p>‍</p><p>Stream via Spotify:</p><figure class="w-richtext-figure-type-image w-richtext-align-normal" style="max-width:165px" data-rt-type="image" data-rt-align="normal" data-rt-max-width="165px"><a href="https://open.spotify.com/episode/4idntZxfKEdkEChagKwvHh?si=fe0eec98d11f458a" target="_blank"><div><img src="https://cdn.prod.website-files.com/66fa660f46b01edefb1e5fa6/671652fc86d363be95f5d61f_6706935ac93b70a7788c5fc6_629f1b1f10ef491be37854eb_output-onlinepngtools.png" width="auto" height="auto" alt="" loading="auto"></div></a></figure><p>‍</p>
