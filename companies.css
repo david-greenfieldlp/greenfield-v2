@@ -2,19 +2,6 @@
    COMPANIES PAGE
    ============================================ */
 
-/* ---------- NAV ---------- */
-/* Nav is transparent at top on all pages via nav-scroll.js.
-   Blue background appears via .scrolled class when scrolled. */
-
-.nav-link-active {
-    color: var(--white) !important;
-    opacity: 1 !important;
-}
-
-.nav-link-active::after {
-    width: 100% !important;
-}
-
 /* ---------- PAGE BODY ---------- */
 .companies-body {
     background: var(--navy-deep);
@@ -87,7 +74,6 @@
 }
 
 .companies-banner-headline {
-    font-family: var(--font);
     font-size: clamp(2rem, 4vw, 3.5rem);
     font-weight: 300;
     line-height: 1.1;
@@ -102,7 +88,6 @@
 }
 
 .companies-banner-tagline {
-    font-family: var(--font);
     font-size: clamp(0.95rem, 1.6vw, 1.25rem);
     font-weight: 300;
     letter-spacing: -0.01em;
@@ -111,7 +96,6 @@
 }
 
 .companies-banner-sub {
-    font-family: var(--font);
     font-size: clamp(0.7rem, 1vw, 0.85rem);
     font-weight: 400;
     letter-spacing: 0.12em;
@@ -192,7 +176,6 @@
 }
 
 .companies-filter-label {
-    font-family: var(--font);
     font-size: 0.72rem;
     font-weight: 600;
     letter-spacing: 0.1em;
@@ -200,14 +183,6 @@
     color: rgba(1, 12, 51, 0.4);
     margin-right: 2px;
     white-space: nowrap;
-}
-
-.companies-filter-divider {
-    width: 1px;
-    height: 24px;
-    background: rgba(1, 12, 51, 0.12);
-    margin: 0 8px;
-    flex-shrink: 0;
 }
 
 /* Filter pill buttons */
@@ -219,7 +194,7 @@
     border: 1.5px solid #cad2d1;
     background: transparent;
     cursor: pointer;
-    font-family: var(--font);
+
     font-size: 0.72rem;
     font-weight: 600;
     letter-spacing: -0.01em;
@@ -270,16 +245,6 @@
     border-radius: 16px;
 }
 
-/* Normalize featured cards to same size as regular */
-.companies-grid .bento-card-featured {
-    grid-column: span 1;
-    grid-row: span 1;
-}
-
-.companies-grid .bento-card-featured .bento-card-name {
-    font-size: 1.4rem;
-}
-
 /* Ensure bg images fill uniformly */
 .companies-grid .bento-card-bg {
     background-size: cover;
@@ -298,7 +263,7 @@
     border-radius: 999px;
     background: #06c4a2;
     color: #fff;
-    font-family: var(--font);
+
     font-size: 0.62rem;
     font-weight: 600;
     letter-spacing: 0.06em;
@@ -311,7 +276,7 @@
     grid-column: 1 / -1;
     text-align: center;
     padding: 80px 20px;
-    font-family: var(--font);
+
     font-size: 1rem;
     font-weight: 500;
     color: rgba(1, 12, 51, 0.35);
@@ -346,7 +311,6 @@
 }
 
 .list-header-label {
-    font-family: var(--font);
     font-size: 0.68rem;
     font-weight: 600;
     letter-spacing: 0.12em;
@@ -403,7 +367,7 @@
     border-radius: 999px;
     background: #06c4a2;
     color: #fff;
-    font-family: var(--font);
+
     font-size: 0.62rem;
     font-weight: 600;
     letter-spacing: 0.06em;
@@ -412,8 +376,9 @@
 }
 
 /* Text cells */
-.list-sector {
-    font-family: var(--font);
+.list-sector,
+.list-ceo,
+.list-partnered {
     font-size: 0.82rem;
     font-weight: 500;
     color: #010c33;
@@ -421,7 +386,6 @@
 }
 
 .list-description {
-    font-family: var(--font);
     font-size: 0.82rem;
     font-weight: 400;
     color: rgba(1, 12, 51, 0.65);
@@ -429,28 +393,12 @@
     min-width: 0;
 }
 
-.list-ceo {
-    font-family: var(--font);
-    font-size: 0.82rem;
-    font-weight: 500;
-    color: #010c33;
-    white-space: nowrap;
-}
-
-.list-partnered {
-    font-family: var(--font);
-    font-size: 0.82rem;
-    font-weight: 500;
-    color: #010c33;
-    white-space: nowrap;
-}
-
 /* Website link */
 .list-website {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    font-family: var(--font);
+
     font-size: 0.78rem;
     font-weight: 600;
     color: #010c33;
@@ -503,7 +451,6 @@
 }
 
 @media (max-width: 768px) {
-
     /* ── Contain horizontal overflow ── */
     .companies-body,
     .companies-main {
@@ -512,14 +459,6 @@
 
     .companies-banner {
         height: clamp(140px, 30vw, 200px);
-    }
-
-    .companies-h1 {
-        font-size: clamp(1.4rem, 5.5vw, 2rem);
-    }
-
-    .companies-filter-divider {
-        display: none;
     }
 
     /* ── Filter rows: swipeable, labels stay visible ── */
@@ -811,7 +750,6 @@
 }
 
 .expand-meta-label {
-    font-family: var(--font);
     font-size: 0.65rem;
     font-weight: 600;
     letter-spacing: 0.12em;
@@ -820,7 +758,6 @@
 }
 
 .expand-meta-value {
-    font-family: var(--font);
     font-size: 0.88rem;
     font-weight: 500;
     color: rgba(255, 255, 255, 0.9);
@@ -867,7 +804,7 @@
     border-radius: 999px;
     background: rgba(255, 255, 255, 0.06);
     border: 1px solid rgba(255, 255, 255, 0.08);
-    font-family: var(--font);
+
     font-size: 0.78rem;
     font-weight: 500;
     color: rgba(255, 255, 255, 0.8);
@@ -884,7 +821,7 @@
     border: 1.5px solid #06c4a2;
     background: rgba(6, 196, 162, 0.08);
     color: #06c4a2;
-    font-family: var(--font);
+
     font-size: 0.82rem;
     font-weight: 600;
     text-decoration: none;
@@ -917,7 +854,6 @@
 }
 
 .expand-long-desc {
-    font-family: var(--font);
     font-size: 1rem;
     font-weight: 300;
     line-height: 1.7;
@@ -936,7 +872,6 @@
 }
 
 .expand-testimonial-quote {
-    font-family: var(--font);
     font-size: 0.92rem;
     font-weight: 400;
     font-style: italic;
@@ -964,7 +899,6 @@
 }
 
 .expand-testimonial-author {
-    font-family: var(--font);
     font-size: 0.82rem;
     font-weight: 500;
     color: rgba(255, 255, 255, 0.55);

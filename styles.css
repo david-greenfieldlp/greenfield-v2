@@ -214,6 +214,15 @@ sup { font-size: 0.6em; vertical-align: super; }
     width: 100%;
 }
 
+.nav-link-active {
+    color: var(--white) !important;
+    opacity: 1 !important;
+}
+
+.nav-link-active::after {
+    width: 100% !important;
+}
+
 .nav-actions {
     display: flex;
     align-items: center;

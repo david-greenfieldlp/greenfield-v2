@@ -152,7 +152,26 @@
     <script src="components/footer.js"></script>
 
     <script src="portfolio-data.js"></script>
-    <script src="dashboard.js"></script>
+    <script>
+    // ── Bento card hover glow (event-delegated, no listener accumulation) ──
+    function initBentoGlow() {
+        if (window.innerWidth <= 768) return;
+        var grid = document.getElementById('companiesGrid');
+        if (!grid || grid._glowBound) return;
+        grid._glowBound = true;
+        grid.addEventListener('mousemove', function (e) {
+            var card = e.target.closest('.bento-card');
+            if (!card) return;
+            var glow = card.querySelector('.bento-card-glow');
+            if (!glow) return;
+            var rect = card.getBoundingClientRect();
+            var x = e.clientX - rect.left;
+            var y = e.clientY - rect.top;
+            glow.style.background =
+                'radial-gradient(600px circle at ' + x + 'px ' + y + 'px, rgba(74, 144, 217, 0.08), transparent 40%)';
+        });
+    }
+    </script>
     <script>
     // ── Companies Page — Filter, Grid/List Toggle & Render ───────
     (function () {
@@ -186,6 +205,15 @@
         var list = document.getElementById('companiesList');
         var arrowSVG = '<svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M1 13L13 1M13 1H3M13 1V11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 
+        // ── Helpers ──
+        function refreshGlow() {
+            if (activeView === 'grid') initBentoGlow();
+        }
+
+        function cleanDesc(company) {
+            return company.description.replace(/<br\s*\/?>/gi, ' ');
+        }
+
         // ── Filter helper ──
         function getFiltered() {
             return sorted.filter(function (c) {
@@ -201,13 +229,11 @@
 
         // ── Build grid card ──
         function buildCard(company) {
-            var featuredClass = company.featured ? ' bento-card-featured' : '';
             var sectorLabel = categoryLabels[company.category] || company.sector;
-            // Strip <br> tags for grid card description
-            var desc = company.description.replace(/<br\s*\/?>/gi, ' ');
+            var desc = cleanDesc(company);
             var exitedBadge = company.status === 'exited' ? '<span class="bento-card-exited-badge">Exited</span>' : '';
 
-            return '<div class="bento-card' + featuredClass + '" data-category="' + company.category + '" data-company-id="' + company.id + '">' +
+            return '<div class="bento-card" data-category="' + company.category + '" data-company-id="' + company.id + '" role="button" tabindex="0">' +
                 '<div class="bento-card-bg bento-card-bg-img" style="background-image: url(\'' + company.bg + '\')"></div>' +
                 '<div class="bento-card-bg-overlay"></div>' +
                 '<div class="bento-card-glow"></div>' +
@@ -215,7 +241,7 @@
                 '<div class="bento-card-content">' +
                     '<div class="bento-card-top">' +
                         '<div class="bento-card-icon">' +
-                            '<img src="' + company.favicon + '" alt="' + company.name + '" class="bento-card-logo-img">' +
+                            '<img src="' + company.favicon + '" alt="' + company.name + '" loading="lazy" class="bento-card-logo-img">' +
                         '</div>' +
                         '<span class="bento-card-tag">' + sectorLabel + '</span>' +
                     '</div>' +
@@ -236,16 +262,16 @@
         // ── Build list row ──
         function buildRow(company) {
             var sectorLabel = categoryLabels[company.category] || company.sector;
-            var desc = company.description.replace(/<br\s*\/?>/gi, ' ');
+            var desc = cleanDesc(company);
             var exitedBadge = company.status === 'exited' ? '<span class="list-exited-badge">Exited</span>' : '';
             var ceo = company.ceo || '';
             var partnered = company.round + ' | ' + company.year;
             var websiteUrl = company.website || '#';
             var logoSrc = company.logo || company.favicon;
 
-            return '<div class="list-row" data-company-id="' + company.id + '">' +
+            return '<div class="list-row" data-company-id="' + company.id + '" role="button" tabindex="0">' +
                 '<div class="list-logo">' +
-                    '<img src="' + logoSrc + '" alt="' + company.name + '" class="list-logo-img">' +
+                    '<img src="' + logoSrc + '" alt="' + company.name + '" loading="lazy" class="list-logo-img">' +
                     exitedBadge +
                 '</div>' +
                 '<span class="list-sector">' + sectorLabel + '</span>' +
@@ -277,7 +303,7 @@
             }
 
             // Long description
-            var longDesc = company.longDescription || company.description.replace(/<br\s*\/?>/gi, ' ');
+            var longDesc = company.longDescription || cleanDesc(company);
 
             // Testimonial block
             var testimonialHtml = '';
@@ -315,7 +341,7 @@
                     '<div class="expand-right">' +
                         '<div class="expand-long-desc">' + longDesc + '</div>' +
                         testimonialHtml +
-                        '<a href="' + websiteUrl + '" target="_blank" rel="noopener" class="expand-website-link">Visit ' + websiteDomain + ' <svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M1 13L13 1M13 1H3M13 1V11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>' +
+                        '<a href="' + websiteUrl + '" target="_blank" rel="noopener" class="expand-website-link">Visit ' + websiteDomain + ' ' + arrowSVG + '</a>' +
                     '</div>' +
                 '</div>' +
             '</div>';
@@ -503,10 +529,7 @@
 
             // If same company is already open, close it
             if (expandedCompanyId === companyId) {
-                closeExpandPanel(function () {
-                    // Re-init glow after close
-                    if (activeView === 'grid' && typeof initBentoGlow === 'function') initBentoGlow();
-                });
+                closeExpandPanel(refreshGlow);
                 return;
             }
 
@@ -555,9 +578,7 @@
                 // Close button handler
                 panel.querySelector('.expand-close').addEventListener('click', function (e) {
                     e.stopPropagation();
-                    closeExpandPanel(function () {
-                        if (activeView === 'grid' && typeof initBentoGlow === 'function') initBentoGlow();
-                    });
+                    closeExpandPanel(refreshGlow);
                 });
 
                 // Prevent clicks on links inside panel from closing
@@ -604,9 +625,7 @@
             list.innerHTML = listHtml;
 
             // Re-init bento glow if grid is visible
-            if (activeView === 'grid' && typeof initBentoGlow === 'function') {
-                initBentoGlow();
-            }
+            refreshGlow();
 
             // GSAP staggered entrance
             if (typeof gsap !== 'undefined') {
@@ -624,27 +643,33 @@
                     );
                 }
             }
-
-            // ── Expand panel click handlers ──
-            // Grid cards
-            grid.querySelectorAll('.bento-card').forEach(function (card) {
-                card.addEventListener('click', function (e) {
-                    // Don't intercept clicks on existing links
-                    if (e.target.closest('a')) return;
-                    var id = card.getAttribute('data-company-id');
-                    if (id) openExpandPanel(id);
-                });
-            });
-            // List rows
-            list.querySelectorAll('.list-row').forEach(function (row) {
-                row.addEventListener('click', function (e) {
-                    // Don't intercept clicks on existing links
-                    if (e.target.closest('a')) return;
-                    var id = row.getAttribute('data-company-id');
-                    if (id) openExpandPanel(id);
-                });
-            });
         }
+
+        // ── Event delegation for card/row clicks ──
+        function handleCompanyAction(e) {
+            // Don't intercept clicks on links (e.g. website column)
+            if (e.target.closest('a')) return;
+            var card = e.target.closest('.bento-card');
+            var row = e.target.closest('.list-row');
+            var el = card || row;
+            if (!el) return;
+            var id = el.getAttribute('data-company-id');
+            if (id) openExpandPanel(id);
+        }
+        grid.addEventListener('click', handleCompanyAction);
+        list.addEventListener('click', handleCompanyAction);
+
+        // ── Keyboard: Enter/Space on cards/rows ──
+        function handleCompanyKeydown(e) {
+            if (e.key !== 'Enter' && e.key !== ' ') return;
+            var el = e.target.closest('.bento-card') || e.target.closest('.list-row');
+            if (!el) return;
+            e.preventDefault();
+            var id = el.getAttribute('data-company-id');
+            if (id) openExpandPanel(id);
+        }
+        grid.addEventListener('keydown', handleCompanyKeydown);
+        list.addEventListener('keydown', handleCompanyKeydown);
 
         // ── Toggle view ──
         function setView(view) {
@@ -696,9 +721,7 @@
         // ── Escape key to close panel ──
         document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape' && expandedCompanyId !== null) {
-                closeExpandPanel(function () {
-                    if (activeView === 'grid' && typeof initBentoGlow === 'function') initBentoGlow();
-                });
+                closeExpandPanel(refreshGlow);
             }
         });
 
@@ -712,9 +735,7 @@
             // If click is on filter pills or toggle, ignore (render() handles cleanup)
             if (e.target.closest('.filter-pill') || e.target.closest('.view-toggle-btn')) return;
             // Otherwise close
-            closeExpandPanel(function () {
-                if (activeView === 'grid' && typeof initBentoGlow === 'function') initBentoGlow();
-            });
+            closeExpandPanel(refreshGlow);
         });
 
         // ── Auto-open panel from URL param ──
@@ -732,31 +753,6 @@
             });
         }
 
-    })();
-
-    // ── Banner parallax ──
-    (function () {
-        var img    = document.querySelector('.companies-banner-img');
-        var banner = document.querySelector('.companies-banner');
-        if (!img || !banner) return;
-
-        var ticking = false;
-
-        function tick() {
-            var sy = window.pageYOffset;
-            // Only animate while banner is still in (or near) view
-            if (sy < banner.offsetHeight * 2) {
-                img.style.transform = 'translateY(' + Math.round(-sy * 0.28) + 'px)';
-            }
-            ticking = false;
-        }
-
-        window.addEventListener('scroll', function () {
-            if (!ticking) {
-                requestAnimationFrame(tick);
-                ticking = true;
-            }
-        }, { passive: true });
     })();
     </script>
     <script src="nav-scroll.js"></script>

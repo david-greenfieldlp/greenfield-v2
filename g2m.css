@@ -188,11 +188,6 @@
     50% { opacity: 1; transform: scaleY(1.15); }
 }
 
-/* Active nav link indicator */
-.nav-link-active {
-    color: var(--white) !important;
-}
-
 /* ============================================
    G2M THESIS — Two-column: Text + Chart
    ============================================ */

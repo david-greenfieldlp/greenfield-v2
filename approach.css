@@ -2,20 +2,6 @@
    INVESTMENT APPROACH PAGE
    ============================================ */
 
-/* ---------- NAV ---------- */
-/* Nav is transparent at top on all pages via nav-scroll.js.
-   Blue background appears via .scrolled class when scrolled. */
-
-/* Nav link active state */
-.nav-link-active {
-    color: var(--white) !important;
-    opacity: 1 !important;
-}
-
-.nav-link-active::after {
-    width: 100% !important;
-}
-
 /* ---------- PAGE BODY ---------- */
 .approach-body {
     background: var(--navy-deep);
