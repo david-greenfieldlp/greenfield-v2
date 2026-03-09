@@ -97,52 +97,15 @@
 
 
     /* ============================================
-       TABS — Pill tab switching (approach section)
+       SCROLL-TO BUTTONS — [data-scroll-to] handler
        ============================================ */
 
-    (function () {
-        var buttons = document.querySelectorAll('.approach-tab-btn');
-        var panels  = document.querySelectorAll('.approach-tab-panel');
-
-        function restartSVG(id) {
-            var old = document.getElementById(id);
-            if (!old) return;
-            var clone = old.cloneNode(true);
-            old.parentNode.replaceChild(clone, old);
-        }
-
-        function activate(index) {
-            buttons.forEach(function (btn, i) {
-                var isActive = i === index;
-                btn.classList.toggle('approach-tab-btn--active', isActive);
-                btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
-
-                // Skip filter toggling for inline SVG icons
-                var img = btn.querySelector('.approach-tab-icon-img');
-                if (img && img.tagName.toLowerCase() !== 'svg') {
-                    img.classList.toggle('approach-tab-icon-img--active', isActive);
-                }
-
-                var iconWrap = btn.querySelector('.approach-tab-icon');
-                if (iconWrap) iconWrap.classList.toggle('approach-tab-icon--active', isActive);
-            });
-
-            panels.forEach(function (panel, i) {
-                panel.classList.toggle('approach-tab-panel--active', i === index);
-            });
-
-            // Replay animated SVG icons on activation
-            if (index === 0) restartSVG('tailored-crosshair-svg');
-            if (index === 1) restartSVG('g2m-mountain-svg');
-            if (index === 2) restartSVG('heritage-plant-svg');
-        }
-
-        buttons.forEach(function (btn) {
-            btn.addEventListener('click', function () {
-                activate(parseInt(btn.dataset.tab, 10));
-            });
+    document.querySelectorAll('[data-scroll-to]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            var target = document.getElementById(btn.dataset.scrollTo);
+            if (target) target.scrollIntoView({ behavior: 'smooth' });
         });
-    })();
+    });
 
 
     /* ============================================
