@@ -21,9 +21,6 @@
     background: #ffffff;
     border-bottom: 1px solid #eaeaea;
     padding: 0 var(--container-pad);
-    position: sticky;
-    top: 64px;
-    z-index: 10;
 }
 
 .kn-filters-inner {
@@ -45,13 +42,13 @@
 .kn-pill {
     display: inline-flex;
     align-items: center;
-    padding: 6px 14px;
+    padding: 8px 18px;
     border-radius: 999px;
     border: 1.5px solid #cad2d1;
     background: transparent;
     cursor: pointer;
     font-family: var(--font);
-    font-size: 0.72rem;
+    font-size: 0.82rem;
     font-weight: 600;
     letter-spacing: -0.01em;
     color: #717b7a;
@@ -75,7 +72,7 @@
 .kn-hero {
     background: linear-gradient(165deg, #000a1f 0%, #011132 50%, #021b4a 100%);
     padding: clamp(140px, 18vh, 200px) var(--container-pad) clamp(60px, 8vh, 100px);
-    text-align: center;
+    text-align: left;
 }
 
 .kn-hero-inner {
