@@ -108,13 +108,13 @@ function initEntryAnimations() {
     });
 
     // Headline text
-    tl.from('.dashboard-headline-text', {
+    tl.from('.v1-headline-text', {
         y: 30,
         opacity: 0,
         duration: 1,
     })
     // Headline button
-    .from('.dashboard-headline-btn', {
+    .from('.v1-cta-btn', {
         y: 15,
         opacity: 0,
         duration: 0.6,
@@ -136,7 +136,7 @@ function initEntryAnimations() {
         ease: 'back.out(1.4)',
     }, '-=0.5')
     // Stats
-    .from('.dashboard-stat', {
+    .from('.v1-stat', {
         y: 15,
         opacity: 0,
         duration: 0.6,
@@ -177,7 +177,11 @@ function initMobileTapReveal() {
     if (window.innerWidth > 768) return;
 
     document.querySelectorAll('.dashboard-bento-grid .bento-card').forEach(card => {
-        card.addEventListener('click', function (e) {
+        card.setAttribute('tabindex', '0');
+        card.setAttribute('role', 'link');
+        card.setAttribute('aria-label', (card.querySelector('.bento-card-name')?.textContent || '') + ' — view company');
+
+        function handleTap() {
             const isAlreadyTapped = card.classList.contains('mobile-tapped');
 
             // Second tap → navigate to portfolio page with popup
@@ -194,6 +198,14 @@ function initMobileTapReveal() {
 
             // First tap → reveal info
             card.classList.add('mobile-tapped');
+        }
+
+        card.addEventListener('click', handleTap);
+        card.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                handleTap();
+            }
         });
     });
 }
@@ -206,12 +218,26 @@ function initBentoCardLinks() {
     if (window.innerWidth <= 768) return;
 
     document.querySelectorAll('.dashboard-bento-grid .bento-card').forEach(card => {
+        var companyId = card.getAttribute('data-company-id');
+        if (!companyId) return;
+
         card.style.cursor = 'pointer';
-        card.addEventListener('click', function (e) {
+        card.setAttribute('tabindex', '0');
+        card.setAttribute('role', 'link');
+        card.setAttribute('aria-label', (card.querySelector('.bento-card-name')?.textContent || '') + ' — view company');
+
+        function navigate(e) {
             // Don't intercept clicks on existing links
-            if (e.target.closest('a')) return;
-            var companyId = card.getAttribute('data-company-id');
-            if (companyId) window.location.href = 'companies.html?company=' + companyId;
+            if (e.target && e.target.closest && e.target.closest('a')) return;
+            window.location.href = 'companies.html?company=' + companyId;
+        }
+
+        card.addEventListener('click', navigate);
+        card.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                navigate(e);
+            }
         });
     });
 }
@@ -223,7 +249,7 @@ function initBentoCardLinks() {
 // If GSAP animations get interrupted (e.g. rapid navigation),
 // elements can be stuck at opacity:0. This forces everything
 // visible after a generous timeout as a safety net.
-const ANIMATED_SELECTORS = '.clock-item, .dashboard-stat, .dashboard-headline-text, .dashboard-headline-btn, .dashboard-bento-grid .bento-card';
+const ANIMATED_SELECTORS = '.clock-item, .v1-stat, .v1-headline-text, .v1-cta-btn, .dashboard-bento-grid .bento-card';
 
 function forceVisible() {
     document.querySelectorAll(ANIMATED_SELECTORS).forEach(el => {
