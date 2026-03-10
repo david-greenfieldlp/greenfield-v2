@@ -193,10 +193,13 @@
     // ── Preload images ─────────────────────────────
 
     function preloadImages() {
-        PORTFOLIO.forEach(function (company) {
+        // Only preload images for companies in the rotation (not all 23).
+        // Skip initially-visible cards — the browser already loads those.
+        stagedIds.forEach(function (id) {
+            var company = getCompany(id);
+            if (!company) return;
             var img = new Image();
             img.src = company.bg;
-            // Also preload favicons
             var fav = new Image();
             fav.src = company.favicon;
         });
