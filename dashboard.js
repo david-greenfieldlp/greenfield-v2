@@ -7,59 +7,56 @@
 // ==========================================
 // 1. WORLD CLOCKS
 // ==========================================
-const TIMEZONES = [
+// Pre-build formatters and cache DOM refs (avoids creating 6 Intl objects + 18 DOM queries per second)
+const clockCache = [
     { id: 'clock-ny',  tz: 'America/New_York'  },
     { id: 'clock-tlv', tz: 'Asia/Jerusalem'     },
     { id: 'clock-ldn', tz: 'Europe/London'      },
-];
+].map(({ id, tz }) => ({
+    id, tz,
+    partsFormatter: new Intl.DateTimeFormat('en-US', {
+        timeZone: tz, hour: 'numeric', minute: '2-digit', second: '2-digit', hour12: false,
+    }),
+    displayFormatter: new Intl.DateTimeFormat('en-US', {
+        timeZone: tz, hour: '2-digit', minute: '2-digit', hour12: false,
+    }),
+    el: null, hourHand: null, minuteHand: null, secondHand: null, resolved: false,
+}));
 
 function updateClocks() {
-    TIMEZONES.forEach(({ id, tz }) => {
-        const now = new Date();
+    const now = new Date();
 
-        // Get time parts in the target timezone
-        const formatter = new Intl.DateTimeFormat('en-US', {
-            timeZone: tz,
-            hour: 'numeric',
-            minute: '2-digit',
-            second: '2-digit',
-            hour12: false,
-        });
+    clockCache.forEach(clock => {
+        // Lazy-resolve DOM refs on first tick (elements may not exist at parse time)
+        if (!clock.resolved) {
+            clock.el = document.getElementById(clock.id);
+            const item = document.querySelector(`[data-timezone="${clock.tz}"]`);
+            const svg = item && item.querySelector('.clock-svg');
+            if (svg) {
+                clock.hourHand   = svg.querySelector('.clock-hand-hour');
+                clock.minuteHand = svg.querySelector('.clock-hand-minute');
+                clock.secondHand = svg.querySelector('.clock-hand-second');
+            }
+            clock.resolved = true;
+        }
 
-        const parts = formatter.formatToParts(now);
+        const parts = clock.partsFormatter.formatToParts(now);
         const hours24 = parseInt(parts.find(p => p.type === 'hour').value);
         const minutes = parseInt(parts.find(p => p.type === 'minute').value);
         const seconds = parseInt(parts.find(p => p.type === 'second').value);
 
-        // Digital time display (HH:MM format)
-        const displayFormatter = new Intl.DateTimeFormat('en-US', {
-            timeZone: tz,
-            hour: '2-digit',
-            minute: '2-digit',
-            hour12: false,
-        });
-        const el = document.getElementById(id);
-        if (el) el.textContent = displayFormatter.format(now);
+        // Digital time display
+        if (clock.el) clock.el.textContent = clock.displayFormatter.format(now);
 
         // Analog clock hands
-        const clockItem = document.querySelector(`[data-timezone="${tz}"]`);
-        if (!clockItem) return;
-
-        const svgContainer = clockItem.querySelector('.clock-svg');
-        if (!svgContainer) return;
-
-        const hourHand = svgContainer.querySelector('.clock-hand-hour');
-        const minuteHand = svgContainer.querySelector('.clock-hand-minute');
-        const secondHand = svgContainer.querySelector('.clock-hand-second');
-
         const hours12 = hours24 % 12;
-        const hourDeg = (hours12 * 30) + (minutes * 0.5);   // 360/12 = 30° per hour
-        const minuteDeg = (minutes * 6) + (seconds * 0.1);   // 360/60 = 6° per minute
-        const secondDeg = seconds * 6;                        // 360/60 = 6° per second
+        const hourDeg = (hours12 * 30) + (minutes * 0.5);
+        const minuteDeg = (minutes * 6) + (seconds * 0.1);
+        const secondDeg = seconds * 6;
 
-        if (hourHand)   hourHand.style.transform   = `rotate(${hourDeg}deg)`;
-        if (minuteHand) minuteHand.style.transform = `rotate(${minuteDeg}deg)`;
-        if (secondHand) secondHand.style.transform = `rotate(${secondDeg}deg)`;
+        if (clock.hourHand)   clock.hourHand.style.transform   = `rotate(${hourDeg}deg)`;
+        if (clock.minuteHand) clock.minuteHand.style.transform = `rotate(${minuteDeg}deg)`;
+        if (clock.secondHand) clock.secondHand.style.transform = `rotate(${secondDeg}deg)`;
     });
 }
 
@@ -155,7 +152,7 @@ function initBentoGlow() {
     // Mousemove glow doesn't work on touch devices
     if (window.innerWidth <= 768) return;
 
-    document.querySelectorAll('.bento-card').forEach(card => {
+    document.querySelectorAll('.dashboard-bento-grid .bento-card').forEach(card => {
         const glow = card.querySelector('.bento-card-glow');
         if (!glow) return;
 
@@ -186,7 +183,7 @@ function initMobileTapReveal() {
 
             // Second tap → navigate to portfolio page with popup
             if (isAlreadyTapped) {
-                var companyId = card.getAttribute('data-company-id');
+                const companyId = card.getAttribute('data-company-id');
                 if (companyId) window.location.href = 'companies.html?company=' + companyId;
                 return;
             }
@@ -218,7 +215,7 @@ function initBentoCardLinks() {
     if (window.innerWidth <= 768) return;
 
     document.querySelectorAll('.dashboard-bento-grid .bento-card').forEach(card => {
-        var companyId = card.getAttribute('data-company-id');
+        const companyId = card.getAttribute('data-company-id');
         if (!companyId) return;
 
         card.style.cursor = 'pointer';

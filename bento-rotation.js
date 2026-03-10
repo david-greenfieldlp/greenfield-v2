@@ -108,6 +108,9 @@
     // ── Core rotation tick ─────────────────────────
 
     function rotateTick() {
+        // Guard: need at least one reserve company to rotate
+        if (reserveQueue.length === 0) return;
+
         // Exiting company (last slot) goes to back of reserve
         const exitingId = slotState[SLOT_COUNT - 1];
         reserveQueue.push(exitingId);

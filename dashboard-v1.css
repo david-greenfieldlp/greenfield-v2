@@ -488,15 +488,6 @@
 .dashboard-view-all svg { width: 12px; height: 12px; transition: transform 0.3s ease; }
 .dashboard-view-all:hover svg { transform: translate(2px, -2px); }
 
-/* ── Bento Rotation: crossfade support ── */
-.dashboard-bento-grid .bento-card-bg {
-    opacity: 1;
-}
-
-.dashboard-bento-grid .bento-card-content {
-    opacity: 1;
-}
-
 /* ============================================
    INTERMEDIATE BREAKPOINT — SQUEEZE MODE
    2-col bento, tighter margins, side-by-side kept
