@@ -357,9 +357,16 @@
     }
 
     /* Section dividers on mobile */
-    .snap-container #g2m-thesis,
-    .snap-container #g2m-flywheel {
-        border-top: 2px solid rgba(255, 255, 255, 0.15);
+    .snap-container #g2m-thesis::before,
+    .snap-container #g2m-flywheel::before {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 70%;
+        height: 1px;
+        background: rgba(255, 255, 255, 0.15);
     }
 
     .snap-container .g2m-mission-alt-bg {
