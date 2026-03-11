@@ -669,16 +669,6 @@
                 stagger: 0.12,
             }, 1.05);
 
-            // 7. Fail-rate pills pop in with a bounce
-            chartTl.from('.g2m-gap-pill', {
-                scale: 0,
-                opacity: 0,
-                transformOrigin: 'center center',
-                duration: 0.4,
-                ease: 'back.out(2.2)',
-                stagger: 0.12,
-            }, 1.15);
-
             // Thesis divider (independent, fires on section enter)
             gsap.to('.g2m-thesis-divider', {
                 opacity: 1,
