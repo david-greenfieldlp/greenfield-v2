@@ -71,13 +71,13 @@
 
 /* Highlight styles */
 .g2m-highlight-orange {
-    color: #ff5100;
-    font-weight: 600;
+    color: #ffffff;
+    font-weight: 700;
 }
 
 .g2m-highlight-teal {
-    color: var(--accent-green);
-    font-weight: 600;
+    color: #ffffff;
+    font-weight: 700;
 }
 
 .g2m-highlight-italic {
