@@ -71,8 +71,8 @@
                         '</a>' +
                     '</div>' +
                     '<div class="fc-bottom-right">' +
-                        '<a href="#" class="fc-legal-link">Privacy Policy</a>' +
-                        '<a href="#" class="fc-legal-link">Terms of Service</a>' +
+                        '<a href="' + basePath + 'privacy-policy.html" class="fc-legal-link">Privacy Policy</a>' +
+                        '<a href="' + basePath + 'terms-of-service.html" class="fc-legal-link">Terms of Service</a>' +
                         '<span class="fc-copyright">&copy; Greenfield Partners. All Rights Reserved.</span>' +
                     '</div>' +
                 '</div>' +

@@ -1,0 +1,188 @@
+/* ============================================
+   LEGAL PAGES (Privacy Policy, Terms of Service)
+   ============================================ */
+
+/* ---------- PAGE BODY ---------- */
+.legal-body {
+    background: var(--navy-deep);
+}
+
+.legal-main {
+    min-height: 100vh;
+    background: #f4f5f5;
+    padding-bottom: 80px;
+}
+
+/* ---------- BANNER ---------- */
+.legal-banner {
+    position: relative;
+    width: 100%;
+    height: 36vh;
+    min-height: 220px;
+    background: var(--navy-deep);
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+/* Dot texture — same as team/companies banner */
+.legal-banner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28'%3E%3Ccircle cx='1' cy='1' r='1' fill='rgba(255,255,255,0.18)'/%3E%3C/svg%3E");
+    background-size: 28px 28px;
+    opacity: 0.12;
+    pointer-events: none;
+    mask-image: radial-gradient(ellipse 100% 100% at 50% 50%, black 40%, transparent 100%);
+    -webkit-mask-image: radial-gradient(ellipse 100% 100% at 50% 50%, black 40%, transparent 100%);
+}
+
+/* Subtle blue glow — same as team/companies banner */
+.legal-banner::after {
+    content: '';
+    position: absolute;
+    top: -10%; right: -5%;
+    width: 70%; height: 80%;
+    background: radial-gradient(ellipse at 70% 30%, rgba(74, 144, 217, 0.06) 0%, transparent 65%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.legal-banner-text {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    padding-top: 80px; /* offset for transparent nav */
+    width: 100%;
+    max-width: var(--container-max);
+    padding-left: var(--container-pad);
+    padding-right: var(--container-pad);
+    pointer-events: none;
+}
+
+.legal-banner-headline {
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 300;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    color: var(--white);
+    margin: 0;
+}
+
+
+/* ---------- ARTICLE WRAPPER ---------- */
+.legal-article {
+    max-width: 860px;
+    margin: 32px auto 0;
+    padding: clamp(40px, 5vh, 64px) var(--container-pad) clamp(64px, 8vh, 120px);
+    background: #ffffff;
+    border-radius: 16px;
+}
+
+.legal-effective-date {
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: rgba(1, 12, 51, 0.4);
+    margin: 0 0 32px;
+}
+
+
+/* ---------- ARTICLE BODY (Prose) ---------- */
+.legal-body-text {
+    font-size: 1.0625rem;
+    font-weight: 400;
+    color: #1a1a2e;
+    line-height: 1.8;
+}
+
+.legal-body-text h2 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #010c33;
+    letter-spacing: -0.02em;
+    margin: 48px 0 16px;
+    line-height: 1.3;
+}
+
+.legal-body-text h3 {
+    font-size: 1.1875rem;
+    font-weight: 700;
+    color: #010c33;
+    letter-spacing: -0.01em;
+    margin: 36px 0 12px;
+    line-height: 1.35;
+}
+
+.legal-body-text p {
+    margin: 0 0 20px;
+}
+
+.legal-body-text strong {
+    font-weight: 700;
+    color: #010c33;
+}
+
+.legal-body-text a {
+    color: #06c4a2;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color 0.2s;
+}
+
+.legal-body-text a:hover {
+    color: #011132;
+}
+
+.legal-body-text ul,
+.legal-body-text ol {
+    margin: 0 0 20px;
+    padding-left: 24px;
+}
+
+.legal-body-text li {
+    margin-bottom: 8px;
+}
+
+.legal-body-text li strong {
+    color: #010c33;
+}
+
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 768px) {
+    .legal-banner {
+        height: clamp(140px, 30vw, 200px);
+        min-height: unset;
+    }
+
+    .legal-banner-headline {
+        font-size: clamp(1.6rem, 5vw, 2rem);
+    }
+
+    .legal-article {
+        margin: 20px 16px;
+        border-radius: 12px;
+    }
+}
+
+@media (max-width: 600px) {
+    .legal-body-text {
+        font-size: 1rem;
+    }
+
+    .legal-body-text h2 {
+        font-size: 1.3rem;
+        margin: 36px 0 12px;
+    }
+
+    .legal-body-text h3 {
+        font-size: 1.1rem;
+        margin: 28px 0 10px;
+    }
+}
