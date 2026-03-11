@@ -1960,51 +1960,51 @@ sup { font-size: 0.6em; vertical-align: super; }
         padding: 0 20px;
     }
 
-    /* ── PORTFOLIO SECTION (scoped to homepage — companies page uses zoom) ── */
-    .dashboard-main .portfolio-title {
+    /* ── PORTFOLIO SECTION ── */
+    .portfolio-title {
         font-size: clamp(2rem, 3.8vw, 3.2rem);
     }
 
-    .dashboard-main .portfolio-header {
+    .portfolio-header {
         margin-bottom: 48px;
         gap: 32px;
     }
 
-    .dashboard-main .portfolio-description {
+    .portfolio-description {
         font-size: 0.85rem;
     }
 
-    .dashboard-main .portfolio-header-right {
+    .portfolio-header-right {
         max-width: 340px;
     }
 
-    /* ── BENTO GRID (scoped to homepage — companies page uses zoom) ── */
-    .dashboard-main .bento-grid {
+    /* ── BENTO GRID ── */
+    .bento-grid {
         gap: 12px;
         grid-auto-rows: minmax(240px, auto);
     }
 
-    .dashboard-main .bento-card-content {
+    .bento-card-content {
         padding: 24px;
     }
 
-    .dashboard-main .bento-card-name {
+    .bento-card-name {
         font-size: 1.25rem;
     }
 
-    .dashboard-main .bento-card-featured .bento-card-name {
+    .bento-card-featured .bento-card-name {
         font-size: 1.7rem;
     }
 
-    .dashboard-main .bento-card-desc {
+    .bento-card-desc {
         font-size: 0.8rem;
     }
 
-    .dashboard-main .bento-card-wide-full {
+    .bento-card-wide-full {
         min-height: 240px;
     }
 
-    .dashboard-main .bento-card-tag {
+    .bento-card-tag {
         font-size: 0.6rem;
     }
 
