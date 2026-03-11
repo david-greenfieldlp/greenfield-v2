@@ -41,8 +41,8 @@
 }
 
 .g2m-thesis-divider {
-    width: 48px;
-    height: 2px;
+    width: 70%;
+    height: 1px;
     background: linear-gradient(90deg, var(--accent-blue), transparent);
     margin-bottom: 32px;
     opacity: 0;
