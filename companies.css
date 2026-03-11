@@ -422,24 +422,21 @@
     transform: translate(2px, -2px);
 }
 
-/* ── SCALED DISPLAY FIX — Companies page ── */
+/* ── SCALED DISPLAY FIX — Companies page ──
+   Uses CSS zoom to replicate the effect of Ctrl-minus twice (80% browser zoom).
+   The <main> element gets zoom:0.8 + width:125%, making internal layout 1600px
+   wide (1280 * 1.25) then visually scaling to 1280px (1600 * 0.8).
+   The nav is outside <main>, so it stays at 100%.
+   ── */
 @media (min-width: 1025px) and (max-width: 1439px) {
 
-    .companies-banner {
-        height: 30vh;
-        min-height: 200px;
+    html, .companies-body {
+        overflow-x: hidden;
     }
 
-    .companies-banner-headline {
-        font-size: clamp(1.8rem, 3.2vw, 2.8rem);
-    }
-
-    .companies-banner-tagline {
-        font-size: clamp(0.85rem, 1.3vw, 1.1rem);
-    }
-
-    .companies-banner-sub {
-        font-size: clamp(0.65rem, 0.85vw, 0.8rem);
+    .companies-main {
+        zoom: 0.8;
+        width: 125%;
     }
 }
 
