@@ -512,6 +512,82 @@
 .dashboard-view-all:hover svg { transform: translate(2px, -2px); }
 
 /* ============================================
+   SCALED DISPLAY FIX — Dashboard
+   Targets 1025–1439px: proportions feel like ~1600px
+   ============================================ */
+@media (min-width: 1025px) and (max-width: 1439px) {
+
+    .v1-left {
+        padding: 32px 16px 0 24px;
+        margin-left: 40px;
+    }
+
+    .v1-headline {
+        gap: 20px;
+        padding-top: 32px;
+    }
+
+    .v1-headline-text {
+        font-size: clamp(1rem, 1.5vw, 1.4rem);
+    }
+
+    .v1-bottom-left {
+        margin-left: 40px;
+        padding: 0 16px;
+    }
+
+    .v1-tagline {
+        font-size: clamp(0.8rem, 1.1vw, 1.05rem);
+        max-width: 480px;
+    }
+
+    .v1-metrics .hero-stat-number,
+    .v1-metrics .hero-stat-prefix,
+    .v1-metrics .hero-stat-suffix {
+        font-size: clamp(1.3rem, 2vw, 2.2rem);
+    }
+
+    .v1-metrics .hero-stat-label {
+        font-size: clamp(0.48rem, 0.55vw, 0.6rem);
+    }
+
+    .v1-stat + .v1-stat {
+        padding-left: 24px;
+    }
+
+    .v1-metrics {
+        gap: 24px;
+    }
+
+    /* Bento overrides */
+    .dashboard-bento-grid {
+        gap: 8px !important;
+    }
+
+    .dashboard-bento-grid .bento-card-featured .bento-card-name {
+        font-size: 1.25rem;
+    }
+
+    .dashboard-bento-grid .bento-card-name {
+        font-size: 0.9rem;
+    }
+
+    .dashboard-bento-grid .bento-card-content {
+        padding: 14px;
+    }
+
+    /* Clocks */
+    .v1-clocks {
+        gap: 28px;
+    }
+
+    .clock-face {
+        width: clamp(44px, 3.8vw, 60px);
+        height: clamp(44px, 3.8vw, 60px);
+    }
+}
+
+/* ============================================
    INTERMEDIATE BREAKPOINT — SQUEEZE MODE
    2-col bento, tighter margins, side-by-side kept
    ============================================ */

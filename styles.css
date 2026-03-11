@@ -1913,6 +1913,119 @@ sup { font-size: 0.6em; vertical-align: super; }
     .nav-link { font-size: 0.75rem; }
 }
 
+/* ============================================
+   INTERMEDIATE VIEWPORT — SCALED DISPLAY FIX
+   Targets effective viewports of 1025px – 1439px
+   (e.g., 1920×1200 at 150% OS scaling = 1280px CSS).
+   Scales content proportions to match the feel of a
+   ~1600px viewport. Nav is intentionally excluded.
+   ============================================ */
+@media (min-width: 1025px) and (max-width: 1439px) {
+
+    /* ── Root spacing: tighter section/container padding ── */
+    :root {
+        --section-pad: clamp(64px, 8vw, 120px);
+        --container-pad: clamp(20px, 3.5vw, 64px);
+    }
+
+    /* ── HERO ── */
+    .hero-title {
+        font-size: clamp(3rem, 6.5vw, 5.5rem);
+    }
+
+    .hero-subtitle {
+        font-size: clamp(0.95rem, 1.6vw, 1.15rem);
+        margin-bottom: 36px;
+    }
+
+    .hero-content {
+        max-width: 900px;
+    }
+
+    .hero-badge {
+        margin-bottom: 24px;
+    }
+
+    .hero-stat-number,
+    .hero-stat-prefix,
+    .hero-stat-suffix {
+        font-size: 1.4rem;
+    }
+
+    .hero-stat-label {
+        font-size: 0.55rem;
+    }
+
+    .hero-stat {
+        padding: 0 20px;
+    }
+
+    /* ── PORTFOLIO SECTION ── */
+    .portfolio-title {
+        font-size: clamp(2rem, 3.8vw, 3.2rem);
+    }
+
+    .portfolio-header {
+        margin-bottom: 48px;
+        gap: 32px;
+    }
+
+    .portfolio-description {
+        font-size: 0.85rem;
+    }
+
+    .portfolio-header-right {
+        max-width: 340px;
+    }
+
+    /* ── BENTO GRID ── */
+    .bento-grid {
+        gap: 12px;
+        grid-auto-rows: minmax(240px, auto);
+    }
+
+    .bento-card-content {
+        padding: 24px;
+    }
+
+    .bento-card-name {
+        font-size: 1.25rem;
+    }
+
+    .bento-card-featured .bento-card-name {
+        font-size: 1.7rem;
+    }
+
+    .bento-card-desc {
+        font-size: 0.8rem;
+    }
+
+    .bento-card-wide-full {
+        min-height: 240px;
+    }
+
+    .bento-card-tag {
+        font-size: 0.6rem;
+    }
+
+    /* ── INVESTMENT APPROACH ── */
+    .invest-lead-text {
+        font-size: 2.1rem;
+        max-width: 620px;
+    }
+
+    .invest-approach-pill-btn {
+        font-size: 0.8rem;
+        padding: 9px 20px;
+    }
+
+    /* ── SECTION TAG (shared) ── */
+    .section-tag {
+        font-size: 0.65rem;
+        margin-bottom: 12px;
+    }
+}
+
 @media (max-width: 1024px) {
     .nav-links { display: none; }
     .nav-hamburger { display: flex; }

@@ -240,6 +240,35 @@
     height: 100vh;
 }
 
+/* ── SCALED DISPLAY FIX — Approach page ── */
+@media (min-width: 1025px) and (max-width: 1439px) {
+
+    .approach-banner {
+        height: 36vh;
+        min-height: 240px;
+    }
+
+    .approach-banner-headline {
+        font-size: clamp(1.4rem, 2.6vw, 2.4rem);
+    }
+
+    .approach-banner-tagline {
+        font-size: clamp(0.8rem, 1.2vw, 1rem);
+    }
+
+    .approach-inflection-h2 {
+        font-size: clamp(1.8rem, 3.2vw, 2.8rem);
+    }
+
+    .approach-inflection-body {
+        font-size: clamp(0.88rem, 1.2vw, 1.05rem);
+    }
+
+    .approach-inflection {
+        padding: clamp(64px, 8vw, 110px) 0 clamp(120px, 16vw, 200px);
+    }
+}
+
 /* ============================================
    MOBILE — disable snap, natural scroll
    ============================================ */
