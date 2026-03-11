@@ -333,6 +333,23 @@
         // Initialise with default state on load
         setDefault();
 
+        // Mobile: tab + dot switching
+        var mobileTabs   = document.querySelectorAll('#approachDiagramMobile .diagram-mobile-tab');
+        var mobileSlides = document.querySelectorAll('#approachDiagramMobile .diagram-mobile-slide');
+        var mobileDots   = document.querySelectorAll('#approachDiagramMobile .diagram-mobile-dot');
+
+        function switchSlide(index) {
+            mobileTabs.forEach(function (t, i)   { t.classList.toggle('diagram-mobile-tab-active',   i == index); });
+            mobileSlides.forEach(function (s, i)  { s.classList.toggle('diagram-mobile-slide-active', i == index); });
+            mobileDots.forEach(function (d, i)    { d.classList.toggle('diagram-mobile-dot-active',   i == index); });
+        }
+
+        mobileTabs.forEach(function (tab) {
+            tab.addEventListener('click', function () { switchSlide(tab.dataset.tab); });
+        });
+        mobileDots.forEach(function (dot) {
+            dot.addEventListener('click', function () { switchSlide(dot.dataset.dot); });
+        });
     })();
 
 
