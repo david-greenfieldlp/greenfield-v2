@@ -379,7 +379,6 @@ function initDiagramInteractions() {
     // --- MOBILE: Tab switching ---
     const mobileTabs = document.querySelectorAll('.diagram-mobile-tab');
     const mobileSlides = document.querySelectorAll('.diagram-mobile-slide');
-    const mobileDots = document.querySelectorAll('.diagram-mobile-dot');
 
     function switchMobileSlide(index) {
         // Update tabs
@@ -391,19 +390,10 @@ function initDiagramInteractions() {
         mobileSlides.forEach((slide, i) => {
             slide.classList.toggle('diagram-mobile-slide-active', i == index);
         });
-
-        // Update dots
-        mobileDots.forEach((dot, i) => {
-            dot.classList.toggle('diagram-mobile-dot-active', i == index);
-        });
     }
 
     mobileTabs.forEach(tab => {
         tab.addEventListener('click', () => switchMobileSlide(tab.dataset.tab));
-    });
-
-    mobileDots.forEach(dot => {
-        dot.addEventListener('click', () => switchMobileSlide(dot.dataset.dot));
     });
 
     // --- SCROLL ANIMATIONS for the section ---
