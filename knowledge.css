@@ -710,6 +710,15 @@
     box-shadow: 0 14px 40px rgba(0, 0, 0, 0.3);
 }
 
+/* ── SCALED DISPLAY FIX — Knowledge page ── */
+@media (min-width: 1025px) and (max-width: 1439px) {
+
+    .kn-hero {
+        height: 44vh;
+        min-height: 280px;
+    }
+}
+
 /* ============================================
    RESPONSIVE
    ============================================ */

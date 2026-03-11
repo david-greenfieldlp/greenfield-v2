@@ -158,12 +158,8 @@
 @media (min-width: 1025px) and (max-width: 1439px) {
 
     .legal-banner {
-        height: 30vh;
-        min-height: 200px;
-    }
-
-    .legal-banner-headline {
-        font-size: clamp(1.8rem, 3.2vw, 2.8rem);
+        height: 44vh;
+        min-height: 280px;
     }
 }
 
