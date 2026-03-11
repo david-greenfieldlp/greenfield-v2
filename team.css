@@ -213,28 +213,7 @@ body.scroll-locked {
 @media (min-width: 1025px) and (max-width: 1439px) {
 
     .team-banner {
-        height: 30vh;
-        min-height: 200px;
-    }
-
-    .team-banner-headline {
-        font-size: clamp(1.8rem, 3.2vw, 2.8rem);
-    }
-
-    .team-banner-subline {
-        font-size: clamp(0.825rem, 0.95vw, 0.95rem);
-        max-width: 520px;
-    }
-
-    .team-partnership-opener {
-        font-size: clamp(1.15rem, 1.7vw, 1.5rem);
-    }
-
-    .tsx-c-btn {
-        font-size: clamp(1.2rem, 2.1vw, 1.7rem);
-    }
-
-    .tsx-c-card {
-        padding: 28px 32px;
+        height: 44vh;
+        min-height: 280px;
     }
 }

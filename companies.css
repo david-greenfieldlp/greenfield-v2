@@ -426,20 +426,8 @@
 @media (min-width: 1025px) and (max-width: 1439px) {
 
     .companies-banner {
-        height: 30vh;
-        min-height: 200px;
-    }
-
-    .companies-banner-headline {
-        font-size: clamp(1.8rem, 3.2vw, 2.8rem);
-    }
-
-    .companies-banner-tagline {
-        font-size: clamp(0.85rem, 1.3vw, 1.1rem);
-    }
-
-    .companies-banner-sub {
-        font-size: clamp(0.65rem, 0.85vw, 0.8rem);
+        height: 44vh;
+        min-height: 280px;
     }
 }
 
