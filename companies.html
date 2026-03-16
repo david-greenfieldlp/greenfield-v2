@@ -351,6 +351,8 @@
                             '<div class="expand-meta-item"><span class="expand-meta-label">Status</span><span class="expand-meta-value">' + statusDot + '</span></div>' +
                         '</div>' +
                         (dealTeamHtml ? '<div class="expand-deal-team"><span class="expand-meta-label">Deal Team</span><div class="expand-deal-pills">' + dealTeamHtml + '</div></div>' : '') +
+                        (company.totalRaised ? '<div class="expand-total-raised"><span class="expand-meta-label">Total Raised</span><span class="expand-total-raised-value">' + company.totalRaised + '</span></div>' : '') +
+                        (company.acquisitionPrice ? '<div class="expand-total-raised"><span class="expand-meta-label">Acquisition Price</span><span class="expand-total-raised-value">' + company.acquisitionPrice + '</span></div>' : '') +
                     '</div>' +
                     '<div class="expand-right">' +
                         '<div class="expand-long-desc">' + longDesc + '</div>' +
