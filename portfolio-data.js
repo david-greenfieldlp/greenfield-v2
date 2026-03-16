@@ -185,7 +185,7 @@ const PORTFOLIO = [
         favicon: 'assets/Favicons/AAI favicon.png',
         bg: 'assets/portfolio bgs/aai bg.png',
         logo: 'assets/portfolio logo colors/AAI Logo.png',
-        logoWhite: 'assets/portfolio assets/portfolio logos w/AAI W.png',
+        logoWhite: 'assets/portfolio assets/portfolio logos w/AAI W.svg',
     },
     {
         id: 'silverfort',
@@ -413,8 +413,8 @@ const PORTFOLIO = [
     {
         id: 'dustphotonics',
         name: 'DustPhotonics',
-        sector: 'Deep Tech',
-        category: 'deep-tech',
+        sector: 'AI Infrastructure',
+        category: 'ai-infra',
         description: 'Optical Communication with Silicon Photonics',
         longDescription: 'DustPhotonics designs and manufactures high-speed optical communication solutions for data centers, high performance computing and enterprise networks, offering a new standard to optimize high volume data center connectivity, performance and reliability, and best in class alignment.',
         round: 'Led Series B',
