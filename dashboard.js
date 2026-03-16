@@ -110,12 +110,12 @@ function initEntryAnimations() {
         opacity: 0,
         duration: 1,
     })
-    // Headline button
+    // Headline button — enters immediately after headline text finishes
     .from('.v1-cta-btn', {
         y: 15,
         opacity: 0,
         duration: 0.6,
-    }, '-=0.5')
+    })
     // Bento cards stagger in
     .from('.dashboard-bento-grid .bento-card', {
         y: 20,
