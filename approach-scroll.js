@@ -50,7 +50,7 @@
                 }
             });
         }, {
-            root: isMobileNav ? null : container,
+            root: null,  // always use viewport — body is the single scroll context
             threshold: 0.55
         });
 
@@ -88,7 +88,7 @@
                 }
             });
         }, {
-            root: isMobileReveal ? null : container,
+            root: null,  // always use viewport
             threshold: 0.15
         });
 
@@ -569,37 +569,11 @@
 
     /* ============================================
        GSAP SCROLL-TRIGGERED ANIMATIONS
-       (adapted for snap container as scroller)
+       (window / viewport is the scroll context)
        ============================================ */
 
-    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined' && container) {
-        var isMobile = window.innerWidth <= 768;
-
-        // On desktop, use snap container as the custom scroller;
-        // on mobile, snap is disabled so use default window scroller
-        if (!isMobile) {
-            ScrollTrigger.defaults({ scroller: container });
-            ScrollTrigger.scrollerProxy(container, {
-                scrollTop: function (value) {
-                    if (arguments.length) {
-                        container.scrollTop = value;
-                    }
-                    return container.scrollTop;
-                },
-                getBoundingClientRect: function () {
-                    return {
-                        top: 0,
-                        left: 0,
-                        width: window.innerWidth,
-                        height: window.innerHeight
-                    };
-                },
-                pinType: 'transform'
-            });
-
-            container.addEventListener('scroll', function () { ScrollTrigger.update(); });
-            ScrollTrigger.addEventListener('refresh', function () { return ScrollTrigger.update(); });
-        }
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+        // Body is now the single scroll context — GSAP uses window by default, no proxy needed
 
         // Thesis section animations
         var thesisSection = document.querySelector('.g2m-thesis');

@@ -5,6 +5,13 @@
 /* ---------- PAGE BODY ---------- */
 .approach-body {
     background: var(--navy-deep);
+    /* Propagates scroll-snap to the viewport — window is the single scroll context */
+    scroll-snap-type: y mandatory;
+}
+
+/* Enable smooth scroll for dot-nav & scrollIntoView on approach page */
+html:has(body.approach-body) {
+    scroll-behavior: smooth;
 }
 
 /* ============================================
@@ -12,10 +19,7 @@
    ============================================ */
 
 .snap-container {
-    height: 100vh;
-    overflow-y: auto;
-    scroll-snap-type: y mandatory;
-    scroll-behavior: smooth;
+    /* Scroll is now handled by body — no inner scroll context */
 }
 
 .snap-section {
