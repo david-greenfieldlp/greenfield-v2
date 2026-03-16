@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Greenfield Homepage — Background Color Options</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --font: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+            --accent-blue: #4a90d9;
+        }
+
+        body {
+            font-family: var(--font);
+            background: #0a0a0a;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* ── OPTION SELECTOR BAR ── */
+        .option-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 14px 24px;
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .option-bar-label {
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.4);
+            margin-right: 8px;
+        }
+
+        .option-btn {
+            font-family: var(--font);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            padding: 8px 18px;
+            border-radius: 100px;
+            border: 1.5px solid rgba(255,255,255,0.15);
+            background: transparent;
+            color: rgba(255,255,255,0.6);
+            cursor: pointer;
+            transition: all 0.25s ease;
+            white-space: nowrap;
+        }
+
+        .option-btn:hover {
+            border-color: rgba(255,255,255,0.35);
+            color: #fff;
+        }
+
+        .option-btn.active {
+            background: var(--accent-blue);
+            border-color: var(--accent-blue);
+            color: #fff;
+        }
+
+        .option-btn .swatch {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 6px;
+            vertical-align: middle;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        /* ── OPTION PANELS ── */
+        .option-panel {
+            display: none;
+            min-height: 100vh;
+            padding-top: 60px;
+        }
+
+        .option-panel.active {
+            display: block;
+        }
+
+        /* ── WIREFRAME SKELETON ── */
+        .wf-page {
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+            transition: background 0.5s ease;
+        }
+
+        /* Dot texture overlay */
+        .wf-page::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28'%3E%3Ccircle cx='1' cy='1' r='1' fill='rgba(255,255,255,0.18)'/%3E%3C/svg%3E");
+            background-size: 28px 28px;
+            opacity: 0.12;
+            pointer-events: none;
+            mask-image: radial-gradient(ellipse 100% 100% at 50% 50%, black 40%, transparent 100%);
+            -webkit-mask-image: radial-gradient(ellipse 100% 100% at 50% 50%, black 40%, transparent 100%);
+        }
+
+        /* Blue glow */
+        .wf-page::after {
+            content: '';
+            position: absolute;
+            top: -10%; right: -5%;
+            width: 70%; height: 80%;
+            background: radial-gradient(ellipse at 70% 30%, rgba(74, 144, 217, 0.06) 0%, transparent 65%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ── NAV ── */
+        .wf-nav {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            padding: 0 40px;
+            z-index: 2;
+        }
+
+        .wf-nav-logo {
+            width: 140px;
+            height: 18px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 3px;
+        }
+
+        .wf-nav-links {
+            display: flex;
+            gap: 24px;
+            margin-left: auto;
+            margin-right: 20px;
+        }
+
+        .wf-nav-link {
+            width: 52px;
+            height: 8px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 4px;
+        }
+
+        .wf-nav-cta {
+            width: 80px;
+            height: 30px;
+            border-radius: 100px;
+            border: 1.5px solid rgba(74, 144, 217, 0.4);
+            background: rgba(74, 144, 217, 0.12);
+        }
+
+        /* ── MAIN LAYOUT ── */
+        .wf-layout {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: 30% 70%;
+            height: calc(80vh - 80px);
+            margin-top: 80px;
+        }
+
+        /* ── LEFT COLUMN ── */
+        .wf-left {
+            display: flex;
+            flex-direction: column;
+            padding: 40px 20px 0 92px;
+            border-right: 1px solid rgba(255,255,255,0.04);
+        }
+
+        .wf-headline {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            padding-top: 40px;
+        }
+
+        .wf-text-line {
+            height: 12px;
+            background: rgba(255,255,255,0.25);
+            border-radius: 6px;
+        }
+
+        .wf-text-line.w70 { width: 70%; }
+        .wf-text-line.w85 { width: 85%; }
+        .wf-text-line.w60 { width: 60%; }
+        .wf-text-line.w40 { width: 40%; }
+
+        .wf-text-accent {
+            height: 12px;
+            width: 65%;
+            background: rgba(74, 144, 217, 0.5);
+            border-radius: 6px;
+        }
+
+        .wf-cta {
+            margin-top: 24px;
+            width: 160px;
+            height: 38px;
+            border-radius: 100px;
+            border: 1.5px solid rgba(74, 144, 217, 0.45);
+            background: linear-gradient(135deg, rgba(74, 144, 217, 0.22), rgba(30, 60, 120, 0.35));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .wf-cta-text {
+            width: 100px;
+            height: 8px;
+            background: rgba(255,255,255,0.5);
+            border-radius: 4px;
+        }
+
+        .wf-cta-arrow {
+            width: 10px;
+            height: 10px;
+            border-top: 1.5px solid rgba(147, 197, 253, 0.7);
+            border-right: 1.5px solid rgba(147, 197, 253, 0.7);
+            transform: rotate(45deg);
+        }
+
+        /* ── RIGHT COLUMN — BENTO GRID ── */
+        .wf-right {
+            display: flex;
+            flex-direction: column;
+            padding: 12px 16px 16px;
+        }
+
+        .wf-bento {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .wf-card {
+            border-radius: 14px;
+            border: 1px solid rgba(74, 144, 217, 0.18);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .wf-card-bg {
+            position: absolute;
+            inset: 0;
+            opacity: 0.35;
+            border-radius: 14px;
+        }
+
+        .wf-card--vast .wf-card-bg { background: linear-gradient(135deg, #1a3a5c, #0d2240); }
+        .wf-card--cora .wf-card-bg { background: linear-gradient(135deg, #2a1a4c, #1a0d30); }
+        .wf-card--exo .wf-card-bg { background: linear-gradient(135deg, #1a4c2a, #0d3020); }
+        .wf-card--robco .wf-card-bg { background: linear-gradient(135deg, #3a2a1a, #2a1a0d); }
+        .wf-card--torq .wf-card-bg { background: linear-gradient(135deg, #1a2a4c, #0d1a30); }
+        .wf-card--aai .wf-card-bg { background: linear-gradient(135deg, #4c1a3a, #300d2a); }
+        .wf-card--silver .wf-card-bg { background: linear-gradient(135deg, #1a3a4c, #0d2a30); }
+
+        .wf-card--featured {
+            grid-row: span 2;
+        }
+
+        .wf-card--featured .wf-card-bg { background: linear-gradient(135deg, #1a3a5c, #0d2240); }
+
+        .wf-card-content {
+            position: relative;
+            z-index: 1;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 18px;
+        }
+
+        .wf-card-top {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .wf-card-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.12);
+        }
+
+        .wf-card-tag {
+            height: 20px;
+            padding: 0 10px;
+            border-radius: 100px;
+            background: rgba(255,255,255,0.08);
+            display: flex;
+            align-items: center;
+        }
+
+        .wf-card-tag-text {
+            width: 60px;
+            height: 6px;
+            background: rgba(255,255,255,0.25);
+            border-radius: 3px;
+        }
+
+        .wf-card-bottom {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .wf-card-name {
+            height: 14px;
+            width: 70%;
+            background: rgba(255,255,255,0.65);
+            border-radius: 4px;
+        }
+
+        .wf-card--featured .wf-card-name {
+            height: 18px;
+            width: 50%;
+        }
+
+        .wf-card-desc {
+            height: 8px;
+            width: 90%;
+            background: rgba(255,255,255,0.15);
+            border-radius: 4px;
+        }
+
+        /* Bottom row: 4 small cards */
+        .wf-bento-row4 {
+            grid-column: span 2;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .wf-bento-footer {
+            display: flex;
+            justify-content: flex-end;
+            padding: 10px 0;
+        }
+
+        .wf-view-all {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .wf-view-all-text {
+            width: 100px;
+            height: 8px;
+            background: rgba(147, 197, 253, 0.45);
+            border-radius: 4px;
+        }
+
+        .wf-view-all-arrow {
+            width: 8px;
+            height: 8px;
+            border-top: 1.5px solid rgba(147, 197, 253, 0.5);
+            border-right: 1.5px solid rgba(147, 197, 253, 0.5);
+            transform: rotate(45deg);
+        }
+
+        /* ── BOTTOM ZONE ── */
+        .wf-bottom {
+            position: relative;
+            z-index: 1;
+            height: 20vh;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            align-items: center;
+            border-top: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .wf-bottom-left {
+            margin-left: 92px;
+            padding: 0 20px;
+            display: flex;
+            gap: 40px;
+        }
+
+        .wf-stat {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .wf-stat + .wf-stat {
+            border-left: 1px solid rgba(255,255,255,0.06);
+            padding-left: 40px;
+        }
+
+        .wf-stat-value {
+            height: 22px;
+            width: 60px;
+            background: rgba(255,255,255,0.55);
+            border-radius: 4px;
+        }
+
+        .wf-stat-label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+        }
+
+        .wf-stat-label-line {
+            height: 5px;
+            width: 48px;
+            background: rgba(255,255,255,0.12);
+            border-radius: 3px;
+        }
+
+        .wf-bottom-center {
+            justify-self: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            max-width: 400px;
+        }
+
+        .wf-tagline-line {
+            height: 10px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 5px;
+        }
+
+        .wf-tagline-line.w100 { width: 380px; }
+        .wf-tagline-line.w80 { width: 300px; }
+
+        .wf-tagline-accent {
+            height: 10px;
+            width: 340px;
+            background: rgba(147, 197, 253, 0.25);
+            border-radius: 5px;
+        }
+
+        .wf-bottom-right {
+            padding: 0 16px;
+            display: flex;
+            gap: 36px;
+        }
+
+        .wf-clock {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .wf-clock-face {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.08);
+            position: relative;
+        }
+
+        .wf-clock-hand1 {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 1.5px;
+            height: 14px;
+            background: rgba(255,255,255,0.6);
+            transform-origin: top center;
+            transform: rotate(30deg);
+            border-radius: 1px;
+        }
+
+        .wf-clock-hand2 {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 1px;
+            height: 18px;
+            background: rgba(255,255,255,0.4);
+            transform-origin: top center;
+            transform: rotate(-60deg);
+            border-radius: 1px;
+        }
+
+        .wf-clock-dot {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 4px;
+            height: 4px;
+            background: var(--accent-blue);
+            border-radius: 50%;
+        }
+
+        .wf-clock-city {
+            width: 40px;
+            height: 5px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 3px;
+        }
+
+        .wf-clock-time {
+            width: 32px;
+            height: 7px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 4px;
+        }
+
+        /* ── COLOR INFO BADGE ── */
+        .color-badge {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 20px;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 100px;
+        }
+
+        .color-badge-swatch {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+
+        .color-badge-text {
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            color: rgba(255,255,255,0.8);
+        }
+
+        .color-badge-hex {
+            font-size: 0.72rem;
+            font-weight: 400;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            color: rgba(255,255,255,0.45);
+        }
+
+        .color-badge-compare {
+            font-size: 0.65rem;
+            color: rgba(255,255,255,0.3);
+            border-left: 1px solid rgba(255,255,255,0.1);
+            padding-left: 12px;
+        }
+
+        /* ── COMPARISON STRIP ── */
+        .compare-strip {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            height: 60px;
+        }
+
+        .compare-swatch {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            color: rgba(255,255,255,0.6);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-bottom: 2px solid transparent;
+        }
+
+        .compare-swatch:hover {
+            color: #fff;
+        }
+
+        .compare-swatch.active-swatch {
+            border-bottom-color: var(--accent-blue);
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ── OPTION SELECTOR ── -->
+    <div class="option-bar">
+        <span class="option-bar-label">Background</span>
+        <button class="option-btn active" data-option="current" title="Current production background">
+            <span class="swatch" style="background:#000a1f;"></span>Current (#000a1f)
+        </button>
+        <button class="option-btn" data-option="a" title="Lighter: Slate Navy">
+            <span class="swatch" style="background:#0d1b2a;"></span>A · Slate Navy
+        </button>
+        <button class="option-btn" data-option="b" title="Lighter: Midnight Blue">
+            <span class="swatch" style="background:#0f2847;"></span>B · Midnight Blue
+        </button>
+        <button class="option-btn" data-option="c" title="Lightest: Steel Blue">
+            <span class="swatch" style="background:#162d50;"></span>C · Steel Blue
+        </button>
+        <button class="option-btn" data-option="d" title="Wildcard: Deep Graphite">
+            <span class="swatch" style="background:#1c1c2e;"></span>D · Deep Graphite
+        </button>
+    </div>
+
+    <!-- ── COMPARISON STRIP ── -->
+    <div class="compare-strip" style="margin-top:56px;">
+        <div class="compare-swatch active-swatch" style="background:#000a1f;" data-option="current">CURRENT · #000a1f</div>
+        <div class="compare-swatch" style="background:#0d1b2a;" data-option="a">A · #0d1b2a</div>
+        <div class="compare-swatch" style="background:#0f2847;" data-option="b">B · #0f2847</div>
+        <div class="compare-swatch" style="background:#162d50;" data-option="c">C · #162d50</div>
+        <div class="compare-swatch" style="background:#1c1c2e;" data-option="d">D · #1c1c2e</div>
+    </div>
+
+    <!-- ════════════════════════════════════════════
+         CURRENT — #000a1f (production)
+         ════════════════════════════════════════════ -->
+    <div class="option-panel active" id="panel-current">
+        <div class="wf-page" style="background:#000a1f;">
+            <!-- Nav -->
+            <div class="wf-nav">
+                <div class="wf-nav-logo"></div>
+                <div class="wf-nav-links">
+                    <div class="wf-nav-link"></div>
+                    <div class="wf-nav-link"></div>
+                    <div class="wf-nav-link"></div>
+                    <div class="wf-nav-link"></div>
+                    <div class="wf-nav-link"></div>
+                </div>
+                <div class="wf-nav-cta"></div>
+            </div>
+            <!-- Main -->
+            <div class="wf-layout">
+                <div class="wf-left">
+                    <div class="wf-headline">
+                        <div class="wf-text-line w85"></div>
+                        <div class="wf-text-line w70"></div>
+                        <div class="wf-text-line w60"></div>
+                        <div class="wf-text-line w40"></div>
+                        <div class="wf-text-accent"></div>
+                        <div class="wf-cta"><div class="wf-cta-text"></div><div class="wf-cta-arrow"></div></div>
+                    </div>
+                </div>
+                <div class="wf-right">
+                    <div class="wf-bento">
+                        <div class="wf-card wf-card--vast wf-card--featured"><div class="wf-card-bg"></div><div class="wf-card-content"><div class="wf-card-top"><div class="wf-card-icon"></div><div class="wf-card-tag"><div class="wf-card-tag-text"></div></div></div><div class="wf-card-bottom"><div class="wf-card-name"></div><div class="wf-card-desc"></div></div></div></div>
+                        <div class="wf-card wf-card--cora"><div class="wf-card-bg"></div><div class="wf-card-content"><div class="wf-card-top"><div class="wf-card-icon"></div><div class="wf-card-tag"><div class="wf-card-tag-text"></div></div></div><div class="wf-card-bottom"><div class="wf-card-name"></div><div class="wf-card-desc"></div></div></div></div>
+                        <div class="wf-card wf-card--exo"><div class="wf-card-bg"></div><div class="wf-card-content"><div class="wf-card-top"><div class="wf-card-icon"></div><div class="wf-card-tag"><div class="wf-card-tag-text"></div></div></div><div class="wf-card-bottom"><div class="wf-card-name"></div><div class="wf-card-desc"></div></div></div></div>
+                        <div class="wf-bento-row4">
+                            <div class="wf-card wf-card--robco"><div class="wf-card-bg"></div><div class="wf-card-content"><div class="wf-card-top"><div class="wf-card-icon"></div></div><div class="wf-card-bottom"><div class="wf-card-name"></div></div></div></div>
+                            <div class="wf-card wf-card--torq"><div class="wf-card-bg"></div><div class="wf-card-content"><div class="wf-card-top"><div class="wf-card-icon"></div></div><div class="wf-card-bottom"><div class="wf-card-name"></div></div></div></div>
+                            <div class="wf-card wf-card--aai"><div class="wf-card-bg"></div><div class="wf-card-content"><div class="wf-card-top"><div class="wf-card-icon"></div></div><div class="wf-card-bottom"><div class="wf-card-name"></div></div></div></div>
+                            <div class="wf-card wf-card--silver"><div class="wf-card-bg"></div><div class="wf-card-content"><div class="wf-card-top"><div class="wf-card-icon"></div></div><div class="wf-card-bottom"><div class="wf-card-name"></div></div></div></div>
+                        </div>
+                    </div>
+                    <div class="wf-bento-footer"><div class="wf-view-all"><div class="wf-view-all-text"></div><div class="wf-view-all-arrow"></div></div></div>
+                </div>
+            </div>
+            <!-- Bottom -->
+            <div class="wf-bottom">
+                <div class="wf-bottom-left">
+                    <div class="wf-stat"><div class="wf-stat-value"></div><div class="wf-stat-label"><div class="wf-stat-label-line"></div><div class="wf-stat-label-line" style="width:36px;"></div></div></div>
+                    <div class="wf-stat"><div class="wf-stat-value"></div><div class="wf-stat-label"><div class="wf-stat-label-line"></div><div class="wf-stat-label-line" style="width:36px;"></div></div></div>
+                    <div class="wf-stat"><div class="wf-stat-value"></div><div class="wf-stat-label"><div class="wf-stat-label-line"></div><div class="wf-stat-label-line" style="width:36px;"></div></div></div>
+                </div>
+                <div class="wf-bottom-center">
+                    <div class="wf-tagline-line w100"></div>
+                    <div class="wf-tagline-accent"></div>
+                </div>
+                <div class="wf-bottom-right">
+                    <div class="wf-clock"><div class="wf-clock-face"><div class="wf-clock-hand1"></div><div class="wf-clock-hand2"></div><div class="wf-clock-dot"></div></div><div class="wf-clock-city"></div><div class="wf-clock-time"></div></div>
+                    <div class="wf-clock"><div class="wf-clock-face"><div class="wf-clock-hand1" style="transform:rotate(90deg);"></div><div class="wf-clock-hand2" style="transform:rotate(10deg);"></div><div class="wf-clock-dot"></div></div><div class="wf-clock-city"></div><div class="wf-clock-time"></div></div>
+                    <div class="wf-clock"><div class="wf-clock-face"><div class="wf-clock-hand1" style="transform:rotate(-20deg);"></div><div class="wf-clock-hand2" style="transform:rotate(45deg);"></div><div class="wf-clock-dot"></div></div><div class="wf-clock-city"></div><div class="wf-clock-time"></div></div>
+                </div>
+            </div>
+            <div class="color-badge">
+                <div class="color-badge-swatch" style="background:#000a1f;"></div>
+                <span class="color-badge-text">Current Production</span>
+                <span class="color-badge-hex">#000a1f</span>
+                <span class="color-badge-compare">Nearly black — hard to see on low-brightness displays</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ════════════════════════════════════════════
+         OPTION A — Slate Navy #0d1b2a
+         ════════════════════════════════════════════ -->
+    <div class="option-panel" id="panel-a">
+        <div class="wf-page" style="background:#0d1b2a;">
+            <div class="wf-nav"><div class="wf-nav-logo"></div><div class="wf-nav-links"><div class="wf-nav-link"></div><div class="wf-nav-link"></div><div class="wf-nav-link"></div><div class="wf-nav-link"></div><div class="wf-nav-link"></div></div><div class="wf-nav-cta"></div></div>
+            <div class="wf-layout">
+                <div class="wf-left">
+                    <div class="wf-headline">
+                        <div class="wf-text-line w85"></div><div class="wf-text-line w70"></div><div class="wf-text-line w60"></div><div class="wf-text-line w40"></div><div class="wf-text-accent"></div>
+                        <div class="wf-cta"><div class="wf-cta-text"></div><div class="wf-cta-arrow"></div></div>
+                    </div>
+                </div>
+                <div class="wf-right">
+                    <div class="wf-bento">
+                        <div class="wf-card wf-card--vast wf-card--featured"><div class="wf-card-bg"></div><div class="wf-card-content"><div class="wf-card-top"><div class="wf-card-icon"></div><div class="wf-card-tag"><div class="wf-card-tag-text"></div></div></div><div class="wf-card-bottom"><div class="wf-card-name"></div><div class="wf-card-desc"></div></div></div></div>
+                        <div class="wf-card wf-card--cora"><div class="wf-card-bg"></div><div class="wf-card-content"><div class="wf-card-top"><div class="wf-card-icon"></div><div class="wf-card-tag"><div class="wf-card-tag-text"></div></div></div><div class="wf-card-bottom"><div class="wf-card-name"></div><div class="wf-card-desc"></div></div></div></div>
+                        <div class="wf-card wf-card--exo"><div class="wf-card-bg"></div><div class="wf-card-content"><div class="wf-card-top"><div class="wf-card-icon"></div><div class="wf-card-tag"><div class="wf-card-tag-text"></div></div></div><div class="wf-card-bottom"><div class="wf-card-name"></div><div class="wf-card-desc"></div></div></div></div>
+                        <div class="wf-bento-row4">
+                            <div class="wf-card wf-card--robco"><div class="wf-card-bg"></div><div class="wf-card-content"><div class="wf-card-top"><div class="wf-card-icon"></div></div><div class="wf-card-bottom"><div class="wf-card-name"></div></div></div></div>
+                            <div class="wf-card wf-card--torq"><div class="wf-card-bg"></div><div class="wf-card-content"><div class="wf-card-top"><div class="wf-card-icon"></div></div><div class="wf-card-bottom"><div class="wf-card-name"></div></div></div></div>
+                            <div class="wf-card wf-card--aai"><div class="wf-card-bg"></div><div class="wf-card-content"><div class="wf-card-top"><div class="wf-card-icon"></div></div><div class="wf-card-bottom"><div class="wf-card-name"></div></div></div></div>
+                            <div class="wf-card wf-card--silver"><div class="wf-card-bg"></div><div class="wf-card-content"><div class="wf-card-top"><div class="wf-card-icon"></div></div><div class="wf-card-bottom"><div class="wf-card-name"></div></div></div></div>
+                        </div>
+                    </div>
+                    <div class="wf-bento-footer"><div class="wf-view-all"><div class="wf-view-all-text"></div><div class="wf-view-all-arrow"></div></div></div>
+                </div>
+            </div>
+            <div class="wf-bottom">
+                <div class="wf-bottom-left">
+                    <div class="wf-stat"><div class="wf-stat-value"></div><div class="wf-stat-label"><div class="wf-stat-label-line"></div><div class="wf-stat-label-line" style="width:36px;"></div></div></div>
+                    <div class="wf-stat"><div class="wf-stat-value"></div><div class="wf-stat-label"><div class="wf-stat-label-line"></div><div class="wf-stat-label-line" style="width:36px;"></div></div></div>
+                    <div class="wf-stat"><div class="wf-stat-value"></div><div class="wf-stat-label"><div class="wf-stat-label-line"></div><div class="wf-stat-label-line" style="width:36px;"></div></div></div>
+                </div>
+                <div class="wf-bottom-center"><div class="wf-tagline-line w100"></div><div class="wf-tagline-accent"></div></div>
+                <div class="wf-bottom-right">
+                    <div class="wf-clock"><div class="wf-clock-face"><div class="wf-clock-hand1"></div><div class="wf-clock-hand2"></div><div class="wf-clock-dot"></div></div><div class="wf-clock-city"></div><div class="wf-clock-time"></div></div>
+                    <div class="wf-clock"><div class="wf-clock-face"><div class="wf-clock-hand1" style="transform:rotate(90deg);"></div><div class="wf-clock-hand2" style="transform:rotate(10deg);"></div><div class="wf-clock-dot"></div></div><div class="wf-clock-city"></div><div class="wf-clock-time"></div></div>
+                    <div class="wf-clock"><div class="wf-clock-face"><div class="wf-clock-hand1" style="transform:rotate(-20deg);"></div><div class="wf-clock-hand2" style="transform:rotate(45deg);"></div><div class="wf-clock-dot"></div></div><div class="wf-clock-city"></div><div class="wf-clock-time"></div></div>
+                </div>
+            </div>
+            <div class="color-badge">
+                <div class="color-badge-swatch" style="background:#0d1b2a;"></div>
+                <span class="color-badge-text">Option A — Slate Navy</span>
+                <span class="color-badge-hex">#0d1b2a</span>
+                <span class="color-badge-compare">+1 lightness step — clearly navy, not black</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ════════════════════════════════════════════
+         OPTION B — Midnight Blue #0f2847
+         ════════════════════════════════════════════ -->
+    <div class="option-panel" id="panel-b">
+        <div class="wf-page" style="background:#0f2847;">
+            <div class="wf-nav"><div class="wf-nav-logo"></div><div class="wf-nav-links"><div class="wf-nav-link"></div><div class="wf-nav-link"></div><div class="wf-nav-link"></div><div class="wf-nav-link"></div><div class="wf-nav-link"></div></div><div class="wf-nav-cta"></div></div>
+            <div class="wf-layout">
+                <div class="wf-left">
+                    <div class="wf-headline">
+                        <div class="wf-text-line w85"></div><div class="wf-text-line w70"></div><div class="wf-text-line w60"></div><div class="wf-text-line w40"></div><div class="wf-text-accent"></div>
+                        <div class="wf-cta"><div class="wf-cta-text"></div><div class="wf-cta-arrow"></div></div>
+                    </div>
+                </div>
+                <div class="wf-right">
+                    <div class="wf-bento">
+                        <div class="wf-card wf-card--vast wf-card--featured"><div class="wf-card-bg"></div><div class="wf-card-content"><div class="wf-card-top"><div class="wf-card-icon"></div><div class="wf-card-tag"><div class="wf-card-tag-text"></div></div></div><div class="wf-card-bottom"><div class="wf-card-name"></div><div class="wf-card-desc"></div></div></div></div>
+                        <div class="wf-card wf-card--cora"><div class="wf-card-bg"></div><div class="wf-card-content"><div class="wf-card-top"><div class="wf-card-icon"></div><div class="wf-card-tag"><div class="wf-card-tag-text"></div></div></div><div class="wf-card-bottom"><div class="wf-card-name"></div><div class="wf-card-desc"></div></div></div></div>
+                        <div class="wf-card wf-card--exo"><div class="wf-card-bg"></div><div class="wf-card-content"><div class="wf-card-top"><div class="wf-card-icon"></div><div class="wf-card-tag"><div class="wf-card-tag-text"></div></div></div><div class="wf-card-bottom"><div class="wf-card-name"></div><div class="wf-card-desc"></div></div></div></div>
+                        <div class="wf-bento-row4">
+                            <div class="wf-card wf-card--robco"><div class="wf-card-bg"></div><div class="wf-card-content"><div class="wf-card-top"><div class="wf-card-icon"></div></div><div class="wf-card-bottom"><div class="wf-card-name"></div></div></div></div>
+                            <div class="wf-card wf-card--torq"><div class="wf-card-bg"></div><div class="wf-card-content"><div class="wf-card-top"><div class="wf-card-icon"></div></div><div class="wf-card-bottom"><div class="wf-card-name"></div></div></div></div>
+                            <div class="wf-card wf-card--aai"><div class="wf-card-bg"></div><div class="wf-card-content"><div class="wf-card-top"><div class="wf-card-icon"></div></div><div class="wf-card-bottom"><div class="wf-card-name"></div></div></div></div>
+                            <div class="wf-card wf-card--silver"><div class="wf-card-bg"></div><div class="wf-card-content"><div class="wf-card-top"><div class="wf-card-icon"></div></div><div class="wf-card-bottom"><div class="wf-card-name"></div></div></div></div>
+                        </div>
+                    </div>
+                    <div class="wf-bento-footer"><div class="wf-view-all"><div class="wf-view-all-text"></div><div class="wf-view-all-arrow"></div></div></div>
+                </div>
+            </div>
+            <div class="wf-bottom">
+                <div class="wf-bottom-left">
+                    <div class="wf-stat"><div class="wf-stat-value"></div><div class="wf-stat-label"><div class="wf-stat-label-line"></div><div class="wf-stat-label-line" style="width:36px;"></div></div></div>
+                    <div class="wf-stat"><div class="wf-stat-value"></div><div class="wf-stat-label"><div class="wf-stat-label-line"></div><div class="wf-stat-label-line" style="width:36px;"></div></div></div>
+                    <div class="wf-stat"><div class="wf-stat-value"></div><div class="wf-stat-label"><div class="wf-stat-label-line"></div><div class="wf-stat-label-line" style="width:36px;"></div></div></div>
+                </div>
+                <div class="wf-bottom-center"><div class="wf-tagline-line w100"></div><div class="wf-tagline-accent"></div></div>
+                <div class="wf-bottom-right">
+                    <div class="wf-clock"><div class="wf-clock-face"><div class="wf-clock-hand1"></div><div class="wf-clock-hand2"></div><div class="wf-clock-dot"></div></div><div class="wf-clock-city"></div><div class="wf-clock-time"></div></div>
+                    <div class="wf-clock"><div class="wf-clock-face"><div class="wf-clock-hand1" style="transform:rotate(90deg);"></div><div class="wf-clock-hand2" style="transform:rotate(10deg);"></div><div class="wf-clock-dot"></div></div><div class="wf-clock-city"></div><div class="wf-clock-time"></div></div>
+                    <div class="wf-clock"><div class="wf-clock-face"><div class="wf-clock-hand1" style="transform:rotate(-20deg);"></div><div class="wf-clock-hand2" style="transform:rotate(45deg);"></div><div class="wf-clock-dot"></div></div><div class="wf-clock-city"></div><div class="wf-clock-time"></div></div>
+                </div>
+            </div>
+            <div class="color-badge">
+                <div class="color-badge-swatch" style="background:#0f2847;"></div>
+                <span class="color-badge-text">Option B — Midnight Blue</span>
+                <span class="color-badge-hex">#0f2847</span>
+                <span class="color-badge-compare">+2 steps — rich blue, clearly visible on dim screens</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ════════════════════════════════════════════
+         OPTION C — Steel Blue #162d50
+         ════════════════════════════════════════════ -->
+    <div class="option-panel" id="panel-c">
+        <div class="wf-page" style="background:#162d50;">
+            <div class="wf-nav"><div class="wf-nav-logo"></div><div class="wf-nav-links"><div class="wf-nav-link"></div><div class="wf-nav-link"></div><div class="wf-nav-link"></div><div class="wf-nav-link"></div><div class="wf-nav-link"></div></div><div class="wf-nav-cta"></div></div>
+            <div class="wf-layout">
+                <div class="wf-left">
+                    <div class="wf-headline">
+                        <div class="wf-text-line w85"></div><div class="wf-text-line w70"></div><div class="wf-text-line w60"></div><div class="wf-text-line w40"></div><div class="wf-text-accent"></div>
+                        <div class="wf-cta"><div class="wf-cta-text"></div><div class="wf-cta-arrow"></div></div>
+                    </div>
+                </div>
+                <div class="wf-right">
+                    <div class="wf-bento">
+                        <div class="wf-card wf-card--vast wf-card--featured"><div class="wf-card-bg"></div><div class="wf-card-content"><div class="wf-card-top"><div class="wf-card-icon"></div><div class="wf-card-tag"><div class="wf-card-tag-text"></div></div></div><div class="wf-card-bottom"><div class="wf-card-name"></div><div class="wf-card-desc"></div></div></div></div>
+                        <div class="wf-card wf-card--cora"><div class="wf-card-bg"></div><div class="wf-card-content"><div class="wf-card-top"><div class="wf-card-icon"></div><div class="wf-card-tag"><div class="wf-card-tag-text"></div></div></div><div class="wf-card-bottom"><div class="wf-card-name"></div><div class="wf-card-desc"></div></div></div></div>
+                        <div class="wf-card wf-card--exo"><div class="wf-card-bg"></div><div class="wf-card-content"><div class="wf-card-top"><div class="wf-card-icon"></div><div class="wf-card-tag"><div class="wf-card-tag-text"></div></div></div><div class="wf-card-bottom"><div class="wf-card-name"></div><div class="wf-card-desc"></div></div></div></div>
+                        <div class="wf-bento-row4">
+                            <div class="wf-card wf-card--robco"><div class="wf-card-bg"></div><div class="wf-card-content"><div class="wf-card-top"><div class="wf-card-icon"></div></div><div class="wf-card-bottom"><div class="wf-card-name"></div></div></div></div>
+                            <div class="wf-card wf-card--torq"><div class="wf-card-bg"></div><div class="wf-card-content"><div class="wf-card-top"><div class="wf-card-icon"></div></div><div class="wf-card-bottom"><div class="wf-card-name"></div></div></div></div>
+                            <div class="wf-card wf-card--aai"><div class="wf-card-bg"></div><div class="wf-card-content"><div class="wf-card-top"><div class="wf-card-icon"></div></div><div class="wf-card-bottom"><div class="wf-card-name"></div></div></div></div>
+                            <div class="wf-card wf-card--silver"><div class="wf-card-bg"></div><div class="wf-card-content"><div class="wf-card-top"><div class="wf-card-icon"></div></div><div class="wf-card-bottom"><div class="wf-card-name"></div></div></div></div>
+                        </div>
+                    </div>
+                    <div class="wf-bento-footer"><div class="wf-view-all"><div class="wf-view-all-text"></div><div class="wf-view-all-arrow"></div></div></div>
+                </div>
+            </div>
+            <div class="wf-bottom">
+                <div class="wf-bottom-left">
+                    <div class="wf-stat"><div class="wf-stat-value"></div><div class="wf-stat-label"><div class="wf-stat-label-line"></div><div class="wf-stat-label-line" style="width:36px;"></div></div></div>
+                    <div class="wf-stat"><div class="wf-stat-value"></div><div class="wf-stat-label"><div class="wf-stat-label-line"></div><div class="wf-stat-label-line" style="width:36px;"></div></div></div>
+                    <div class="wf-stat"><div class="wf-stat-value"></div><div class="wf-stat-label"><div class="wf-stat-label-line"></div><div class="wf-stat-label-line" style="width:36px;"></div></div></div>
+                </div>
+                <div class="wf-bottom-center"><div class="wf-tagline-line w100"></div><div class="wf-tagline-accent"></div></div>
+                <div class="wf-bottom-right">
+                    <div class="wf-clock"><div class="wf-clock-face"><div class="wf-clock-hand1"></div><div class="wf-clock-hand2"></div><div class="wf-clock-dot"></div></div><div class="wf-clock-city"></div><div class="wf-clock-time"></div></div>
+                    <div class="wf-clock"><div class="wf-clock-face"><div class="wf-clock-hand1" style="transform:rotate(90deg);"></div><div class="wf-clock-hand2" style="transform:rotate(10deg);"></div><div class="wf-clock-dot"></div></div><div class="wf-clock-city"></div><div class="wf-clock-time"></div></div>
+                    <div class="wf-clock"><div class="wf-clock-face"><div class="wf-clock-hand1" style="transform:rotate(-20deg);"></div><div class="wf-clock-hand2" style="transform:rotate(45deg);"></div><div class="wf-clock-dot"></div></div><div class="wf-clock-city"></div><div class="wf-clock-time"></div></div>
+                </div>
+            </div>
+            <div class="color-badge">
+                <div class="color-badge-swatch" style="background:#162d50;"></div>
+                <span class="color-badge-text">Option C — Steel Blue</span>
+                <span class="color-badge-hex">#162d50</span>
+                <span class="color-badge-compare">+3 steps — lightest blue, unmistakably navy even at 20% brightness</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ════════════════════════════════════════════
+         OPTION D — Deep Graphite #1c1c2e (wildcard)
+         ════════════════════════════════════════════ -->
+    <div class="option-panel" id="panel-d">
+        <div class="wf-page" style="background:#1c1c2e;">
+            <div class="wf-nav"><div class="wf-nav-logo"></div><div class="wf-nav-links"><div class="wf-nav-link"></div><div class="wf-nav-link"></div><div class="wf-nav-link"></div><div class="wf-nav-link"></div><div class="wf-nav-link"></div></div><div class="wf-nav-cta"></div></div>
+            <div class="wf-layout">
+                <div class="wf-left">
+                    <div class="wf-headline">
+                        <div class="wf-text-line w85"></div><div class="wf-text-line w70"></div><div class="wf-text-line w60"></div><div class="wf-text-line w40"></div><div class="wf-text-accent"></div>
+                        <div class="wf-cta"><div class="wf-cta-text"></div><div class="wf-cta-arrow"></div></div>
+                    </div>
+                </div>
+                <div class="wf-right">
+                    <div class="wf-bento">
+                        <div class="wf-card wf-card--vast wf-card--featured"><div class="wf-card-bg"></div><div class="wf-card-content"><div class="wf-card-top"><div class="wf-card-icon"></div><div class="wf-card-tag"><div class="wf-card-tag-text"></div></div></div><div class="wf-card-bottom"><div class="wf-card-name"></div><div class="wf-card-desc"></div></div></div></div>
+                        <div class="wf-card wf-card--cora"><div class="wf-card-bg"></div><div class="wf-card-content"><div class="wf-card-top"><div class="wf-card-icon"></div><div class="wf-card-tag"><div class="wf-card-tag-text"></div></div></div><div class="wf-card-bottom"><div class="wf-card-name"></div><div class="wf-card-desc"></div></div></div></div>
+                        <div class="wf-card wf-card--exo"><div class="wf-card-bg"></div><div class="wf-card-content"><div class="wf-card-top"><div class="wf-card-icon"></div><div class="wf-card-tag"><div class="wf-card-tag-text"></div></div></div><div class="wf-card-bottom"><div class="wf-card-name"></div><div class="wf-card-desc"></div></div></div></div>
+                        <div class="wf-bento-row4">
+                            <div class="wf-card wf-card--robco"><div class="wf-card-bg"></div><div class="wf-card-content"><div class="wf-card-top"><div class="wf-card-icon"></div></div><div class="wf-card-bottom"><div class="wf-card-name"></div></div></div></div>
+                            <div class="wf-card wf-card--torq"><div class="wf-card-bg"></div><div class="wf-card-content"><div class="wf-card-top"><div class="wf-card-icon"></div></div><div class="wf-card-bottom"><div class="wf-card-name"></div></div></div></div>
+                            <div class="wf-card wf-card--aai"><div class="wf-card-bg"></div><div class="wf-card-content"><div class="wf-card-top"><div class="wf-card-icon"></div></div><div class="wf-card-bottom"><div class="wf-card-name"></div></div></div></div>
+                            <div class="wf-card wf-card--silver"><div class="wf-card-bg"></div><div class="wf-card-content"><div class="wf-card-top"><div class="wf-card-icon"></div></div><div class="wf-card-bottom"><div class="wf-card-name"></div></div></div></div>
+                        </div>
+                    </div>
+                    <div class="wf-bento-footer"><div class="wf-view-all"><div class="wf-view-all-text"></div><div class="wf-view-all-arrow"></div></div></div>
+                </div>
+            </div>
+            <div class="wf-bottom">
+                <div class="wf-bottom-left">
+                    <div class="wf-stat"><div class="wf-stat-value"></div><div class="wf-stat-label"><div class="wf-stat-label-line"></div><div class="wf-stat-label-line" style="width:36px;"></div></div></div>
+                    <div class="wf-stat"><div class="wf-stat-value"></div><div class="wf-stat-label"><div class="wf-stat-label-line"></div><div class="wf-stat-label-line" style="width:36px;"></div></div></div>
+                    <div class="wf-stat"><div class="wf-stat-value"></div><div class="wf-stat-label"><div class="wf-stat-label-line"></div><div class="wf-stat-label-line" style="width:36px;"></div></div></div>
+                </div>
+                <div class="wf-bottom-center"><div class="wf-tagline-line w100"></div><div class="wf-tagline-accent"></div></div>
+                <div class="wf-bottom-right">
+                    <div class="wf-clock"><div class="wf-clock-face"><div class="wf-clock-hand1"></div><div class="wf-clock-hand2"></div><div class="wf-clock-dot"></div></div><div class="wf-clock-city"></div><div class="wf-clock-time"></div></div>
+                    <div class="wf-clock"><div class="wf-clock-face"><div class="wf-clock-hand1" style="transform:rotate(90deg);"></div><div class="wf-clock-hand2" style="transform:rotate(10deg);"></div><div class="wf-clock-dot"></div></div><div class="wf-clock-city"></div><div class="wf-clock-time"></div></div>
+                    <div class="wf-clock"><div class="wf-clock-face"><div class="wf-clock-hand1" style="transform:rotate(-20deg);"></div><div class="wf-clock-hand2" style="transform:rotate(45deg);"></div><div class="wf-clock-dot"></div></div><div class="wf-clock-city"></div><div class="wf-clock-time"></div></div>
+                </div>
+            </div>
+            <div class="color-badge">
+                <div class="color-badge-swatch" style="background:#1c1c2e;"></div>
+                <span class="color-badge-text">Option D — Deep Graphite</span>
+                <span class="color-badge-hex">#1c1c2e</span>
+                <span class="color-badge-compare">Wildcard: warm slate-purple — sophisticated, non-blue, not black</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Option switching
+        const buttons = document.querySelectorAll('.option-btn');
+        const panels = document.querySelectorAll('.option-panel');
+        const swatches = document.querySelectorAll('.compare-swatch');
+
+        function activate(option) {
+            buttons.forEach(b => b.classList.toggle('active', b.dataset.option === option));
+            panels.forEach(p => p.classList.toggle('active', p.id === 'panel-' + option));
+            swatches.forEach(s => s.classList.toggle('active-swatch', s.dataset.option === option));
+        }
+
+        buttons.forEach(b => b.addEventListener('click', () => activate(b.dataset.option)));
+        swatches.forEach(s => s.addEventListener('click', () => activate(s.dataset.option)));
+    </script>
+
+</body>
+</html>
