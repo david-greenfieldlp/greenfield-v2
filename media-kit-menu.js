@@ -11,16 +11,18 @@
     var POPUP_ID = 'mediaKitPopup';
     var ZIP_PATH = 'assets/media-kit/greenfield-media-kit.zip';
     var popup = null;
+    var lastPointerType = 'mouse';
+
+    /* ── Track pointer type for hybrid device support ── */
+    document.addEventListener('pointerdown', function (e) {
+        lastPointerType = e.pointerType;
+    });
 
     /* ── Resolve zip path relative to page depth ── */
     function resolveZipPath() {
-        var navLogo = document.querySelector('.nav-logo');
-        if (navLogo) {
-            var href = navLogo.getAttribute('href') || '';
-            var base = href.replace('index.html', '');
-            return base + ZIP_PATH;
-        }
-        return ZIP_PATH;
+        var mount = document.getElementById('site-footer-mount');
+        var base = mount ? (mount.getAttribute('data-base-path') || '') : '';
+        return base + ZIP_PATH;
     }
 
     /* ── Create the popup element (once, reused) ── */
@@ -41,12 +43,13 @@
                 '<span>Download our media kit</span>' +
             '</a>';
 
-        popup.querySelector('.mk-popup-link').href = resolveZipPath();
+        var link = popup.querySelector('.mk-popup-link');
+        link.href = resolveZipPath();
         document.body.appendChild(popup);
 
-        /* Close after clicking the download link */
-        popup.querySelector('.mk-popup-link').addEventListener('click', function () {
-            hidePopup();
+        /* Close after clicking the download link (deferred to avoid racing the download) */
+        link.addEventListener('click', function () {
+            setTimeout(hidePopup, 100);
         });
 
         return popup;
@@ -92,8 +95,8 @@
     document.addEventListener('contextmenu', function (e) {
         if (!isLogoTarget(e.target)) return;
 
-        /* Desktop only: skip if touch device */
-        if ('ontouchstart' in window || navigator.maxTouchPoints > 0) return;
+        /* Only respond to mouse right-clicks, not touch long-press */
+        if (lastPointerType !== 'mouse') return;
 
         e.preventDefault();
         showPopup(e.clientX, e.clientY);
@@ -111,12 +114,16 @@
 
     /* ── Escape key to dismiss ── */
     document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape') hidePopup();
+        if (e.key === 'Escape' && popup && popup.classList.contains('mk-popup-visible')) {
+            hidePopup();
+        }
     });
 
     /* ── Dismiss on scroll ── */
     window.addEventListener('scroll', function () {
-        hidePopup();
+        if (popup && popup.classList.contains('mk-popup-visible')) {
+            hidePopup();
+        }
     }, { passive: true });
 
 })();
