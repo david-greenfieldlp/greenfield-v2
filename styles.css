@@ -2129,3 +2129,51 @@ sup { font-size: 0.6em; vertical-align: super; }
     }
 
 }
+
+/* ========== MEDIA KIT CONTEXT MENU POPUP ========== */
+.mk-popup {
+    position: fixed;
+    z-index: 10000;
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(6px) scale(0.96);
+    transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+.mk-popup.mk-popup-visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+}
+
+.mk-popup-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 20px;
+    border-radius: 12px;
+    background: rgba(1, 17, 50, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(6, 196, 162, 0.2);
+    color: var(--white);
+    font-family: var(--font);
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+    text-decoration: none;
+    cursor: pointer;
+    transition: border-color 0.2s ease, background 0.2s ease;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(6, 196, 162, 0.08);
+}
+
+.mk-popup-link:hover {
+    border-color: rgba(6, 196, 162, 0.4);
+    background: rgba(1, 17, 50, 1);
+}
+
+.mk-popup-icon {
+    flex-shrink: 0;
+    color: rgba(6, 196, 162, 0.8);
+}
