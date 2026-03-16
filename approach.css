@@ -5,42 +5,15 @@
 /* ---------- PAGE BODY ---------- */
 .approach-body {
     background: var(--navy-deep);
-    /* Propagates scroll-snap to the viewport — window is the single scroll context */
-    scroll-snap-type: y mandatory;
-}
-
-/* Enable smooth scroll for dot-nav & scrollIntoView on approach page */
-html:has(body.approach-body) {
-    scroll-behavior: smooth;
 }
 
 /* ============================================
-   SCROLL-SNAP CONTAINER
+   SECTION LAYOUT (snap removed — normal scroll)
    ============================================ */
 
-.snap-container {
-    /* Scroll is now handled by body — no inner scroll context */
-}
-
 .snap-section {
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
-    height: 100vh;
-    overflow: hidden;
+    min-height: 100vh;
     position: relative;
-}
-
-/* Footer: flexible height, snaps at end */
-.snap-section--footer {
-    height: auto;
-    min-height: 60vh;
-    scroll-snap-align: end;
-    overflow: hidden;
-}
-
-/* Sections that may overflow their viewport (tabs, thesis) */
-.snap-section--scrollable {
-    overflow-y: auto;
 }
 
 /* ============================================
@@ -187,7 +160,7 @@ html:has(body.approach-body) {
    ============================================ */
 
 /* Hero banner — full viewport */
-.snap-container .approach-banner {
+.approach-main .approach-banner {
     height: 100vh;
     min-height: 100vh;
     display: flex;
@@ -195,7 +168,7 @@ html:has(body.approach-body) {
     justify-content: center;
 }
 
-.snap-container .approach-banner-text {
+.approach-main .approach-banner-text {
     position: relative;
     top: auto;
     bottom: auto;
@@ -207,31 +180,31 @@ html:has(body.approach-body) {
 
 
 /* Hero/tabs — centre the card in viewport */
-.snap-container .approach-hero {
+.approach-main .approach-hero {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.snap-container .approach-hero-inner {
+.approach-main .approach-hero-inner {
     padding-top: clamp(20px, 3vh, 40px);
     padding-bottom: clamp(20px, 3vh, 40px);
 }
 
 /* G²M cards section — centre content */
-.snap-container .g2m-section {
+.approach-main .g2m-section {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.snap-container .g2m-content {
+.approach-main .g2m-content {
     padding-top: clamp(40px, 4vw, 64px);
     padding-bottom: clamp(40px, 4vw, 64px);
 }
 
 /* Thesis section — centre the 2-col grid */
-.snap-container .g2m-thesis {
+.approach-main .g2m-thesis {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -239,7 +212,7 @@ html:has(body.approach-body) {
 }
 
 /* Mission alt — already flex centred, just ensure 100vh */
-.snap-container .g2m-mission-alt {
+.approach-main .g2m-mission-alt {
     min-height: 100vh;
     height: 100vh;
 }
@@ -285,7 +258,7 @@ html:has(body.approach-body) {
     }
 
     /* --- Disable snap-scroll entirely --- */
-    .snap-container {
+    .approach-main {
         scroll-snap-type: none;
         height: auto;
         overflow-y: visible;
@@ -313,7 +286,7 @@ html:has(body.approach-body) {
         display: none;
     }
 
-    .snap-container .approach-banner-ctas {
+    .approach-main .approach-banner-ctas {
         display: none;
     }
 
@@ -321,15 +294,15 @@ html:has(body.approach-body) {
         display: none;
     }
 
-    /* --- Override all .snap-container section overrides --- */
-    .snap-container .approach-banner {
+    /* --- Override all .approach-main section overrides --- */
+    .approach-main .approach-banner {
         height: auto;
         min-height: 60vh;
         display: flex;
         align-items: center;
     }
 
-    .snap-container .approach-banner-text {
+    .approach-main .approach-banner-text {
         position: relative;
         top: auto;
         bottom: auto;
@@ -341,28 +314,28 @@ html:has(body.approach-body) {
         pointer-events: auto;
     }
 
-    .snap-container .approach-hero {
+    .approach-main .approach-hero {
         display: block;
     }
 
-    .snap-container .g2m-section {
+    .approach-main .g2m-section {
         display: block;
     }
 
-    .snap-container .g2m-thesis {
+    .approach-main .g2m-thesis {
         display: block;
         padding: clamp(48px, 8vw, 64px) 0;
     }
 
-    .snap-container .g2m-mission-alt {
+    .approach-main .g2m-mission-alt {
         height: auto;
         min-height: 60vh;
         overflow: hidden;
     }
 
     /* Section dividers on mobile */
-    .snap-container #g2m-thesis::before,
-    .snap-container #g2m-flywheel::before {
+    .approach-main #g2m-thesis::before,
+    .approach-main #g2m-flywheel::before {
         content: '';
         display: block;
         position: absolute;
@@ -374,7 +347,7 @@ html:has(body.approach-body) {
         background: rgba(255, 255, 255, 0.15);
     }
 
-    .snap-container .g2m-mission-alt-bg {
+    .approach-main .g2m-mission-alt-bg {
         inset: 0;
         background-size: cover;
         background-position: center top;
@@ -382,7 +355,7 @@ html:has(body.approach-body) {
     }
 
     /* Flip veil: reveal peak at top, dark at bottom where text lives */
-    .snap-container .g2m-mission-alt-veil {
+    .approach-main .g2m-mission-alt-veil {
         background: linear-gradient(
             to bottom,
             rgba(0, 10, 31, 0.05) 0%,
@@ -397,25 +370,25 @@ html:has(body.approach-body) {
         min-height: 60vh;
     }
 
-    .snap-container .approach-banner-headline {
+    .approach-main .approach-banner-headline {
         font-size: clamp(1.4rem, 6vw, 2rem);
     }
 
-    .snap-container .approach-banner-headline-wrap {
+    .approach-main .approach-banner-headline-wrap {
         gap: 12px;
     }
 
-    .snap-container .approach-banner-text {
+    .approach-main .approach-banner-text {
         padding-bottom: 48px;
     }
 
     /* --- Inflection --- */
-    .snap-container .approach-inflection {
+    .approach-main .approach-inflection {
         padding-bottom: 32px;
     }
 
     /* --- Flywheel --- */
-    .snap-container .approach-flywheel {
+    .approach-main .approach-flywheel {
         padding-top: clamp(64px, 10vh, 96px);
     }
 
@@ -725,7 +698,7 @@ html:has(body.approach-body) {
     position: relative;
 }
 
-.snap-container .approach-accordion {
+.approach-main .approach-accordion {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -923,14 +896,14 @@ html:has(body.approach-body) {
     position: relative;
 }
 
-.snap-container .approach-flywheel {
+.approach-main .approach-flywheel {
     display: flex;
     align-items: flex-start;
     justify-content: center;
     padding: clamp(100px, 13vh, 130px) 0 0;
 }
 /* Trim body margin so cycle-note stays within the 800px viewport boundary */
-.snap-container .approach-flywheel-body {
+.approach-main .approach-flywheel-body {
     margin-bottom: 44px;
 }
 
