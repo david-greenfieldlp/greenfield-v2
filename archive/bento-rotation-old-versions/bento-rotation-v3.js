@@ -1,7 +1,7 @@
 /* ============================================
    BENTO GRID ROTATION — Landing V3
    8 slots, clockwise rotation
-   10-company pool (8 initial + 2 staged)
+   13-company pool (8 initial + 5 staged)
 
    Clockwise slot order:
      0 = VAST Data   (large left card — entry)
@@ -12,15 +12,18 @@
      5 = Torq        (bottom row, 3rd / middle)
      6 = RobCo       (bottom row, 2nd from left)
      7 = Commcrete   (bottom row, leftmost — exit)
+
+   Staged cycle order (after Commcrete):
+     BigPanda → Oligo Security → GoodShip → Capitolis → Sett → loop
    ============================================ */
 
 (function () {
     'use strict';
 
-    const ROTATION_INTERVAL = 7000;   // ms between rotations
+    const ROTATION_INTERVAL = 5000;   // ms between rotations
     const FADE_DURATION     = 0.6;    // seconds per crossfade
     const STAGGER_DELAY     = 0.07;   // seconds between each slot's fade
-    const INITIAL_DELAY     = 4000;   // ms before first rotation
+    const INITIAL_DELAY     = 2000;   // ms before first rotation
     const SLOT_COUNT        = 8;
 
     // ── 10-company pool ────────────────────────────
@@ -34,8 +37,11 @@
         { id: 'robco',      name: 'RobCo',      sector: 'Deep Tech',         category: 'deep-tech',     description: 'The Robot Company centered on Software and AI',             round: 'Series C',     year: 2026, favicon: 'assets/Favicons/robco favicon.png',                         bg: 'assets/portfolio bgs/robco bg.png'        },
         { id: 'commcrete',  name: 'Commcrete',  sector: 'Defense',           category: 'defense',       description: 'Connect Beyond Borders',                                   round: 'Series A',     year: 2024, favicon: 'assets/Favicons/Commcrete.png',                             bg: 'assets/portfolio bgs/Commcrete.png'       },
         // Staged — cycle in after initial rotation
-        { id: 'regulus',    name: 'Regulus',    sector: 'Defense',           category: 'defense',       description: 'Next Generation Counter Unmanned Systems',                 round: 'Led Series B', year: 2025, favicon: 'assets/Favicons/regulus favicon.png',                       bg: 'assets/portfolio bgs/regulus bg.png'      },
+        { id: 'bigpanda',   name: 'BigPanda',   sector: 'IT Infrastructure', category: 'it-infra',      description: 'Event Correlation & Automation Platform',                  round: 'Led Series B', year: 2017, favicon: 'assets/Favicons/bigpanda favicon.png',                      bg: 'assets/portfolio bgs/Bigpanda bg.png'     },
+        { id: 'oligo',      name: 'Oligo Security', sector: 'Cybersecurity', category: 'cybersecurity', description: "AppSec Like You've Never Seen Before",                      round: 'Led Series B', year: 2024, favicon: 'assets/Favicons/Oligo Favicon.png',                         bg: 'assets/portfolio bgs/Oligo bg.png'        },
         { id: 'goodship',   name: 'GoodShip',   sector: 'Vertical AI',       category: 'vertical-ai',   description: 'AI Freight Orchestration & Procurement',                   round: 'Led Series B', year: 2025, favicon: 'assets/Favicons/Goodship favicon.png',                      bg: 'assets/portfolio bgs/Goodship bg.png'     },
+        { id: 'capitolis',  name: 'Capitolis',  sector: 'Fintech',           category: 'fintech',       description: 'Safer and more Vibrant Capital Markets',                   round: 'Series D',     year: 2022, favicon: 'assets/Favicons/Capitolis favicon.png',                     bg: 'assets/portfolio bgs/Capitolis bg.png'    },
+        { id: 'sett',       name: 'Sett',       sector: 'Vertical AI',       category: 'vertical-ai',   description: 'Creative Performance AI Platform',                         round: 'Led Series B', year: 2026, favicon: 'assets/Favicons/Sett favicon.png',                          bg: 'assets/portfolio bgs/Sett bg.png'         },
     ];
 
     // ── Initial slot → company mapping (clockwise) ─
