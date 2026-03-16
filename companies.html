@@ -305,6 +305,20 @@
             // Long description
             var longDesc = company.longDescription || cleanDesc(company);
 
+            // Co-Investors logos
+            var coInvestorsHtml = '';
+            if (company.coInvestors && company.coInvestors.length) {
+                var logosHtml = '';
+                company.coInvestors.forEach(function (inv) {
+                    logosHtml += '<div class="expand-coinvestor-logo"><img src="' + inv.logo + '" alt="' + inv.name + '"></div>';
+                });
+                coInvestorsHtml =
+                    '<div class="expand-coinvestors">' +
+                        '<span class="expand-meta-label">Co-Investors</span>' +
+                        '<div class="expand-coinvestors-row">' + logosHtml + '</div>' +
+                    '</div>';
+            }
+
             // Testimonial block
             var testimonialHtml = '';
             if (company.testimonial) {
@@ -340,6 +354,7 @@
                     '</div>' +
                     '<div class="expand-right">' +
                         '<div class="expand-long-desc">' + longDesc + '</div>' +
+                        coInvestorsHtml +
                         testimonialHtml +
                         '<a href="' + websiteUrl + '" target="_blank" rel="noopener" class="expand-website-link">Visit ' + websiteDomain + ' ' + arrowSVG + '</a>' +
                     '</div>' +
