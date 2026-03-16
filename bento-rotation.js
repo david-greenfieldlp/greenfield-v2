@@ -8,10 +8,10 @@
     'use strict';
 
     // ── Configuration ──────────────────────────────
-    const ROTATION_INTERVAL = 7000;   // ms between rotations
+    const ROTATION_INTERVAL = 5000;   // ms between rotations
     const FADE_DURATION     = 0.6;    // seconds per crossfade (0.3 out + 0.3 in)
     const STAGGER_DELAY     = 0.07;   // seconds between each slot's fade
-    const INITIAL_DELAY     = 4000;   // ms before first rotation (let entry anims finish)
+    const INITIAL_DELAY     = 2000;   // ms before first rotation (let entry anims finish)
 
     // ── Slot order (clockwise path) ────────────────
     //  Desktop: 0 = featured (entry) → 1 → 2 → 3 → 4 → 5 → 6 (exit)
@@ -40,10 +40,10 @@
     const initialSlotIds = isMobile ? initialSlotIdsMobile : initialSlotIdsDesktop;
 
     // ── Build full rotation queue ──────────────────
-    //  Only rotate through these 9 companies on the homepage.
+    //  Clockwise: initial 7 slots, then staged companies cycle through after Commcrete.
     const ROTATION_WHITELIST = [
-        'vast', 'exodigo', 'coralogix', 'commcrete', 'regulus',
-        'silverfort', 'aai', 'robco', 'torq'
+        'vast', 'exodigo', 'coralogix', 'silverfort', 'aai', 'torq', 'robco',
+        'commcrete', 'bigpanda', 'oligo', 'goodship', 'capitolis', 'sett'
     ];
     const stagedIds = ROTATION_WHITELIST
         .filter(id => !initialSlotIds.includes(id));
