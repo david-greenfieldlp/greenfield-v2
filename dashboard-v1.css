@@ -8,7 +8,7 @@
     height: 100vh;
     overflow: hidden;
     padding-top: 80px;
-    background: var(--navy-deep);
+    background: linear-gradient(to bottom, #000a1f 0%, #000a1f 50%, #0f2847 100%);
     position: relative;
 }
 
