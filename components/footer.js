@@ -50,7 +50,7 @@
                         '<a href="' + basePath + 'index.html">Home</a>' +
                         '<a href="' + basePath + 'approach.html">Approach</a>' +
                         '<a href="' + basePath + 'approach.html#g2m-platform">G<sup>2</sup>M</a>' +
-                        '<a href="' + basePath + 'companies.html">Portfolio</a>' +
+                        '<a href="' + basePath + 'portfolio.html">Portfolio</a>' +
                         '<a href="' + basePath + 'team.html">Team</a>' +
                         '<a href="' + basePath + 'knowledge/">Knowledge</a>' +
                         '<a href="#">Careers</a>' +

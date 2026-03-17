@@ -26,8 +26,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="dashboard-v1.css">
+    <link rel="stylesheet" href="styles.min.css">
+    <link rel="stylesheet" href="dashboard-v1.min.css">
     <style>
         .error-page {
             display: flex;
@@ -128,7 +128,7 @@
                 </svg>
             </a>
             <nav class="nav-links" id="navLinks">
-                <a href="companies.html" class="nav-link">Portfolio</a>
+                <a href="portfolio.html" class="nav-link">Portfolio</a>
                 <a href="approach.html" class="nav-link">Approach</a>
                 <a href="team.html" class="nav-link">Team</a>
                 <a href="knowledge/" class="nav-link">Knowledge</a>
@@ -149,7 +149,7 @@
     <!-- Mobile Menu Overlay -->
     <div class="mobile-menu" id="mobileMenu">
         <div class="mobile-menu-inner">
-            <a href="companies.html" class="mobile-menu-link">Portfolio</a>
+            <a href="portfolio.html" class="mobile-menu-link">Portfolio</a>
             <a href="approach.html" class="mobile-menu-link">Approach</a>
             <a href="team.html" class="mobile-menu-link">Team</a>
             <a href="knowledge/" class="mobile-menu-link">Knowledge</a>
@@ -169,7 +169,7 @@
                     <svg viewBox="0 0 16 16" fill="none"><path d="M8 1L1 7.5H4V14.5H7V10H9V14.5H12V7.5H15L8 1Z" fill="currentColor"/></svg>
                     Homepage
                 </a>
-                <a href="companies.html" class="error-link">Portfolio</a>
+                <a href="portfolio.html" class="error-link">Portfolio</a>
                 <a href="approach.html" class="error-link">Approach</a>
                 <a href="knowledge/" class="error-link">Knowledge</a>
                 <a href="team.html" class="error-link">Team</a>
@@ -177,6 +177,26 @@
         </main>
     </div>
 
+
+    <!-- Smart redirects for old URLs -->
+    <script>
+    (function() {
+        var p = window.location.pathname.replace(/\/$/, '');
+        var map = {
+            '/blog':              '/knowledge/',
+            '/blog-posts':        '/knowledge/',
+            '/knowledge-hub':     '/knowledge/',
+            '/our-companies':     '/portfolio.html',
+            '/companies':         '/portfolio.html',
+            '/investment-approach':'/approach.html'
+        };
+        if (map[p]) { window.location.replace(map[p]); return; }
+        var m = p.match(/^\/(blog|blog-posts|knowledge-hub)\/(.+)/);
+        if (m) { window.location.replace('/knowledge/' + m[2]); return; }
+        if (p === '/legal/privacy-policy')    { window.location.replace('/privacy-policy.html'); return; }
+        if (p === '/legal/terms-of-service')  { window.location.replace('/terms-of-service.html'); return; }
+    })();
+    </script>
     <script src="nav-scroll.js" defer></script>
     <script src="media-kit-menu.js" defer></script>
     <script src="follow-popup.js" defer></script>

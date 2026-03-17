@@ -184,7 +184,7 @@ function initMobileTapReveal() {
             // Second tap → navigate to portfolio page with popup
             if (isAlreadyTapped) {
                 const companyId = card.getAttribute('data-company-id');
-                if (companyId) window.location.href = 'companies.html?company=' + companyId;
+                if (companyId) window.location.href = 'portfolio.html?company=' + companyId;
                 return;
             }
 
@@ -226,7 +226,7 @@ function initBentoCardLinks() {
         function navigate(e) {
             // Don't intercept clicks on existing links
             if (e.target && e.target.closest && e.target.closest('a')) return;
-            window.location.href = 'companies.html?company=' + companyId;
+            window.location.href = 'portfolio.html?company=' + companyId;
         }
 
         card.addEventListener('click', navigate);

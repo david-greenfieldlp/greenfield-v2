@@ -169,6 +169,7 @@ function getPosts() {
         var authors = parseAuthors(authorStr);
 
         var postDate = data.date || new Date();
+        var modifiedDate = data.modified || data.updated || null;
 
         return {
             title: data.title || 'Untitled',
@@ -177,6 +178,7 @@ function getPosts() {
             dateFull: formatDate(postDate),
             dateShort: formatDateShort(postDate),
             dateISO: isoDate(postDate),
+            modifiedISO: modifiedDate ? isoDate(modifiedDate) : '',
             author: authorStr,
             authors: authors,
             cover_image: data.cover_image || '',
@@ -320,7 +322,11 @@ function buildPosts(posts, categoryIndex) {
             .replace(/\{\{og_image\}\}/g, ogImage)
             .replace(/\{\{title_json\}\}/g, jsonEscape(post.title))
             .replace(/\{\{excerpt_json\}\}/g, jsonEscape(post.excerpt))
-            .replace(/\{\{author_json\}\}/g, jsonEscape(post.author));
+            .replace(/\{\{author_json\}\}/g, jsonEscape(post.author))
+            .replace(/\{\{modified_iso\}\}/g, post.modifiedISO)
+            .replace(/\{\{modified_time_tag\}\}/g, post.modifiedISO
+                ? '<meta property="article:modified_time" content="' + post.modifiedISO + '">'
+                : '');
 
         fs.writeFileSync(path.join(postDir, 'index.html'), html, 'utf-8');
         console.log('  Built: knowledge/' + post.slug + '/index.html');
@@ -368,7 +374,7 @@ function buildSitemap(posts) {
     var staticPages = [
         { url: '/',                    priority: '1.0',  changefreq: 'weekly' },
         { url: '/approach.html',       priority: '0.8',  changefreq: 'monthly' },
-        { url: '/companies.html',      priority: '0.8',  changefreq: 'monthly' },
+        { url: '/portfolio.html',      priority: '0.8',  changefreq: 'monthly' },
         { url: '/team.html',           priority: '0.7',  changefreq: 'monthly' },
         { url: '/knowledge/',          priority: '0.9',  changefreq: 'weekly' },
         { url: '/privacy-policy.html', priority: '0.3',  changefreq: 'yearly' },

@@ -57,6 +57,56 @@
     }
     </script>
 
+    <!-- Structured Data: FAQPage (hidden, SEO only) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What stage does Greenfield Partners invest at?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Greenfield Partners invests globally at the Early Growth stage, when companies have achieved product-market fit and need to build a scalable, efficient go-to-market engine to unlock global scale."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What is Greenfield's G2M Flywheel?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "The G2M (Greenfield Growth Momentum) Flywheel is a quarterly operating model consisting of four phases: Diagnose, Prioritize, Execute, and Evaluate. Each cycle builds systematic advantages that compound over time, turning insights into playbooks and playbooks into durable growth."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What is ORION?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "ORION is Greenfield's proprietary AI and data platform that integrates with a portfolio company's CRM, financial, and operational data to benchmark performance against hundreds of datapoints. It produces quantified health scores with actionable diagnostics, early warning systems, and GTM recommendations."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What are the Seven Pillars of Efficient Growth?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "The Seven Pillars are Greenfield's framework for diagnosing and optimizing go-to-market performance: Market Strategy (Foundation), Sales Execution (Revenue Engine), Pipeline Generation, Marketing & Demand Gen, Customer Success & Expansion, Revenue Operations, and Organizational Readiness. Every diagnostic and playbook maps to these core building blocks."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How does Greenfield help portfolio companies scale?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Greenfield deploys specialized operators from its G2M Squad covering sales, enablement, strategy, partnerships, and more to implement playbooks hands-on. Rather than just quarterly board meetings with feedback after the fact, Greenfield provides quarterly operating sprints with hands-on execution."
+                }
+            }
+        ]
+    }
+    </script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -65,9 +115,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="g2m.css">
-    <link rel="stylesheet" href="approach.css?v=23">
+    <link rel="stylesheet" href="styles.min.css">
+    <link rel="stylesheet" href="g2m.min.css">
+    <link rel="stylesheet" href="approach.min.css">
 
 </head>
 <body class="approach-body">
@@ -94,7 +144,7 @@
             </a>
 
             <nav class="nav-links" id="navLinks">
-                <a href="companies.html" class="nav-link">Portfolio</a>
+                <a href="portfolio.html" class="nav-link">Portfolio</a>
                 <a href="approach.html" class="nav-link nav-link-active">Approach</a>
                 <a href="team.html" class="nav-link">Team</a>
                 <a href="knowledge/" class="nav-link">Knowledge</a>
@@ -120,7 +170,7 @@
     <!-- MOBILE MENU OVERLAY -->
     <div class="mobile-menu" id="mobileMenu">
         <div class="mobile-menu-inner">
-            <a href="companies.html" class="mobile-menu-link">Portfolio</a>
+            <a href="portfolio.html" class="mobile-menu-link">Portfolio</a>
             <a href="approach.html" class="mobile-menu-link">Approach</a>
             <a href="team.html" class="mobile-menu-link">Team</a>
             <a href="knowledge/" class="mobile-menu-link">Knowledge</a>
@@ -611,7 +661,7 @@
                                 </svg>
                             </div>
                             <div class="orion-feature-text">
-                                <h4 class="orion-feature-title">Benchmark Intelligence</h4>
+                                <h3 class="orion-feature-title">Benchmark Intelligence</h3>
                                 <p class="orion-feature-desc">Compare your KPIs against hundreds of comparable companies.
                                     ORION surfaces where you stand on pipeline health, win rate, CAC efficiency,
                                     and ARR growth — with precise peer benchmarks at every stage.</p>
@@ -627,7 +677,7 @@
                                 </svg>
                             </div>
                             <div class="orion-feature-text">
-                                <h4 class="orion-feature-title">Early Warning System</h4>
+                                <h3 class="orion-feature-title">Early Warning System</h3>
                                 <p class="orion-feature-desc">Detect risks and opportunities before they surface in your
                                     board deck. ORION monitors growth trajectory, retention signals, and expansion
                                     readiness to give you a 60–90 day look-ahead window.</p>
@@ -645,7 +695,7 @@
                                 </svg>
                             </div>
                             <div class="orion-feature-text">
-                                <h4 class="orion-feature-title">GTM Diagnostics</h4>
+                                <h3 class="orion-feature-title">GTM Diagnostics</h3>
                                 <p class="orion-feature-desc">Score your go-to-market across every dimension — strategy,
                                     pipeline, sales execution, and marketing. Quantified pillar scores and
                                     prioritized recommendations tell you exactly what to fix first.</p>
@@ -849,7 +899,7 @@
                         <div class="pillar-row-header">
                             <span class="pillar-number">01</span>
                             <div class="pillar-sep"></div>
-                            <h4 class="pillar-title">Market Strategy</h4>
+                            <h3 class="pillar-title">Market Strategy</h3>
                             <span class="pillar-sublabel">(Foundation)</span>
                             <div class="pillar-chevron">
                                 <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
@@ -872,7 +922,7 @@
                         <div class="pillar-row-header">
                             <span class="pillar-number">02</span>
                             <div class="pillar-sep"></div>
-                            <h4 class="pillar-title">Sales Execution</h4>
+                            <h3 class="pillar-title">Sales Execution</h3>
                             <span class="pillar-sublabel">(Revenue Engine)</span>
                             <div class="pillar-chevron">
                                 <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
@@ -895,7 +945,7 @@
                         <div class="pillar-row-header">
                             <span class="pillar-number">03</span>
                             <div class="pillar-sep"></div>
-                            <h4 class="pillar-title">Pipeline Generation</h4>
+                            <h3 class="pillar-title">Pipeline Generation</h3>
                             <span class="pillar-sublabel">(Demand)</span>
                             <div class="pillar-chevron">
                                 <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
@@ -918,7 +968,7 @@
                         <div class="pillar-row-header">
                             <span class="pillar-number">04</span>
                             <div class="pillar-sep"></div>
-                            <h4 class="pillar-title">People &amp; Organization</h4>
+                            <h3 class="pillar-title">People &amp; Organization</h3>
                             <span class="pillar-sublabel">(Team Building)</span>
                             <div class="pillar-chevron">
                                 <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
@@ -941,7 +991,7 @@
                         <div class="pillar-row-header">
                             <span class="pillar-number">05</span>
                             <div class="pillar-sep"></div>
-                            <h4 class="pillar-title">Operational Infrastructure</h4>
+                            <h3 class="pillar-title">Operational Infrastructure</h3>
                             <span class="pillar-sublabel">(Systems)</span>
                             <div class="pillar-chevron">
                                 <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
@@ -964,7 +1014,7 @@
                         <div class="pillar-row-header">
                             <span class="pillar-number">06</span>
                             <div class="pillar-sep"></div>
-                            <h4 class="pillar-title">Partnerships &amp; Alliances</h4>
+                            <h3 class="pillar-title">Partnerships &amp; Alliances</h3>
                             <span class="pillar-sublabel">(Ecosystem)</span>
                             <div class="pillar-chevron">
                                 <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
@@ -987,7 +1037,7 @@
                         <div class="pillar-row-header">
                             <span class="pillar-number">07</span>
                             <div class="pillar-sep"></div>
-                            <h4 class="pillar-title">Customer Success</h4>
+                            <h3 class="pillar-title">Customer Success</h3>
                             <span class="pillar-sublabel">(Retention &amp; Growth)</span>
                             <div class="pillar-chevron">
                                 <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
@@ -1295,7 +1345,7 @@
                     </div><!-- /.t2-content-col -->
 
                     <!-- CTA — outside the fade group, always visible -->
-                    <a href="companies.html" class="t2-portfolio-cta">
+                    <a href="portfolio.html" class="t2-portfolio-cta">
                         Our Portfolio
                         <svg width="13" height="13" viewBox="0 0 14 14" fill="none" aria-hidden="true">
                             <path d="M1 13L13 1M13 1H3M13 1V11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
