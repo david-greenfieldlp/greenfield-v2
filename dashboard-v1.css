@@ -901,8 +901,13 @@
     .v1-tagline { font-size: clamp(0.95rem, 3.5vw, 1.1rem); }
 
     .v1-clocks {
-        justify-content: center;
-        gap: 32px;
+        width: 100%;
+        gap: 0;
+        justify-content: space-around;
+    }
+    .clock-item {
+        flex: 1 1 0%;
+        min-width: 0;
     }
 
     .clock-face {
