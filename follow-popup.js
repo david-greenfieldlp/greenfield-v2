@@ -113,14 +113,15 @@
         el.classList.remove('fu-popup-visible');
         popupRenderedAt = Date.now();
 
-        /* Center on screen */
-        var popW = 300; /* will be overridden by CSS on mobile */
+        /* Anchor near top so the keyboard doesn't push it off-screen.
+           Using a fixed top value instead of 50%/translate keeps the
+           popup stable when the virtual keyboard opens. */
         el.style.left = '50%';
-        el.style.top = '50%';
-        el.style.transform = 'translate(-50%, -50%) scale(0.96)';
+        el.style.top = '15vh';
+        el.style.transform = 'translateX(-50%) scale(0.96)';
 
         el.classList.add('fu-popup-visible');
-        el.style.transform = 'translate(-50%, -50%) scale(1)';
+        el.style.transform = 'translateX(-50%) scale(1)';
     }
 
     function hidePopup() {
@@ -325,9 +326,19 @@
     });
 
     /* ── Dismiss on scroll ── */
+    /* Skip dismiss if a popup input has focus (mobile keyboard
+       opening triggers scroll/resize — hiding the popup while
+       the user is typing is the bug we're fixing). */
+
+    function popupInputHasFocus() {
+        if (!popup) return false;
+        var active = document.activeElement;
+        return active && popup.contains(active) &&
+               (active.tagName === 'INPUT' || active.tagName === 'TEXTAREA');
+    }
 
     window.addEventListener('scroll', function () {
-        if (popup && popup.classList.contains('fu-popup-visible')) {
+        if (popup && popup.classList.contains('fu-popup-visible') && !popupInputHasFocus()) {
             hidePopup();
         }
     }, { passive: true });
@@ -336,7 +347,7 @@
     var snapEl = document.getElementById('mainSnap');
     if (snapEl) {
         snapEl.addEventListener('scroll', function () {
-            if (popup && popup.classList.contains('fu-popup-visible')) {
+            if (popup && popup.classList.contains('fu-popup-visible') && !popupInputHasFocus()) {
                 hidePopup();
             }
         }, { passive: true });
