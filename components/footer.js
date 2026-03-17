@@ -25,6 +25,7 @@
                     '<form class="fc-cta-form" id="mc-footer-form">' +
                         '<div class="fc-input-group">' +
                             '<input type="text" class="fc-input" id="mc-name" placeholder="First Name" aria-label="First Name" autocomplete="given-name">' +
+                            '<input type="text" name="company" id="mc-hp" class="hp-field" tabindex="-1" aria-hidden="true" autocomplete="off">' +
                             '<input type="email" class="fc-input" id="mc-email" placeholder="Email" aria-label="Email" autocomplete="email" required>' +
                             '<button type="submit" class="fc-submit" id="mc-submit" aria-label="Subscribe">' +
                                 '<svg width="16" height="16" viewBox="0 0 14 14" fill="none">' +
@@ -101,6 +102,13 @@
     var feedback = document.getElementById('mc-feedback');
 
     if (!form) return;
+
+    /* ── Anti-spam: honeypot, timing gate, rate limit ── */
+    var hpInput = document.getElementById('mc-hp');
+    var formRenderedAt = Date.now();
+    var submitCount = 0;
+    var MAX_SUBMITS = 3;
+    var MIN_TIME_MS = 3000; /* reject if submitted in < 3 seconds */
 
     function getFormLocation() {
         var path = window.location.pathname;
@@ -222,6 +230,24 @@
         e.preventDefault();
         showFeedback('clear', '');
 
+        /* Anti-spam: honeypot — if filled, silently fake success */
+        if (hpInput && hpInput.value) {
+            showSuccess();
+            return;
+        }
+
+        /* Anti-spam: timing gate — reject instant submissions */
+        if (Date.now() - formRenderedAt < MIN_TIME_MS) {
+            showSuccess();
+            return;
+        }
+
+        /* Anti-spam: rate limit — max submissions per session */
+        if (submitCount >= MAX_SUBMITS) {
+            showFeedback('error', 'Too many attempts. Please refresh the page.');
+            return;
+        }
+
         var email = emailInput.value.trim();
         var nameParts = parseName(nameInput.value);
 
@@ -236,6 +262,7 @@
             return;
         }
 
+        submitCount++;
         setLoading(true);
         submitToMailchimp(email, nameParts.fname, nameParts.lname);
     });
