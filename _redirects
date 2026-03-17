@@ -1,0 +1,19 @@
+# Cloudflare Pages redirects (also works on Netlify)
+# Format: from  to  status
+
+# Blog path aliases → Knowledge hub
+/blog/*           /knowledge/:splat  301
+/blog-posts/*     /knowledge/:splat  301
+/knowledge-hub/*  /knowledge/:splat  301
+/blog             /knowledge/        301
+/blog-posts       /knowledge/        301
+/knowledge-hub    /knowledge/        301
+
+# Old company/approach paths
+/companies        /portfolio.html    301
+/our-companies    /portfolio.html    301
+/investment-approach /approach.html  301
+
+# Old legal paths
+/legal/privacy-policy  /privacy-policy.html  301
+/legal/terms-of-service /terms-of-service.html 301

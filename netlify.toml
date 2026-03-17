@@ -2,6 +2,78 @@
   command = "cp knowledge/admin/config.production.yml knowledge/admin/config.yml && npm run build"
   publish = "."
 
+# ── Server-side 301 redirects ──────────────────
+# force = true ensures these take priority over static stub files on disk
+
+# Blog path aliases → Knowledge hub
+[[redirects]]
+  from = "/blog/*"
+  to = "/knowledge/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blog-posts/*"
+  to = "/knowledge/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/knowledge-hub/*"
+  to = "/knowledge/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blog"
+  to = "/knowledge/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blog-posts"
+  to = "/knowledge/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/knowledge-hub"
+  to = "/knowledge/"
+  status = 301
+  force = true
+
+# Old company/approach paths
+[[redirects]]
+  from = "/companies"
+  to = "/portfolio.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/our-companies"
+  to = "/portfolio.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/investment-approach"
+  to = "/approach.html"
+  status = 301
+  force = true
+
+# Old legal paths
+[[redirects]]
+  from = "/legal/privacy-policy"
+  to = "/privacy-policy.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/legal/terms-of-service"
+  to = "/terms-of-service.html"
+  status = 301
+  force = true
+
 [[headers]]
   for = "/knowledge/admin/*"
   [headers.values]
