@@ -74,6 +74,10 @@
   status = 301
   force = true
 
+# ── Asset optimization (interim until Cloudflare migration) ──
+[build.processing.images]
+  compress = true
+
 [[headers]]
   for = "/knowledge/admin/*"
   [headers.values]
