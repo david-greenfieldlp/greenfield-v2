@@ -737,9 +737,17 @@
     .dashboard-body { overflow-x: hidden; }
     .dashboard-main { overflow-x: hidden; padding-top: 72px; }
 
-    /* Allow nav to get scrolled bg on mobile */
+    /* Allow nav to get scrolled bg on mobile.
+       Base .nav-dashboard forces transparent !important — override
+       when .scrolled is present so the blue banner shows on scroll. */
     .nav-dashboard {
         transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+    .nav-dashboard.scrolled {
+        background: rgba(1, 17, 50, 0.97) !important;
+        backdrop-filter: blur(20px) saturate(180%) !important;
+        -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+        box-shadow: 0 1px 0 rgba(255, 255, 255, 0.05) !important;
     }
 
     /* Delta: add gap reset */
