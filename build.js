@@ -10,6 +10,10 @@ const path = require('path');
 const matter = require('gray-matter');
 const { marked } = require('marked');
 
+// ── SEO ───────────────────────────────────────
+var SITE_URL = 'https://greenfield-growth.com';
+var OG_IMAGE_DEFAULT = SITE_URL + '/assets/images/greenfield-partners.jpg';
+
 // ── Paths ─────────────────────────────────────
 const ROOT = __dirname;
 const CONTENT_DIR = path.join(ROOT, 'content', 'blog');
@@ -50,6 +54,11 @@ var MONTHS_SHORT = [
 var COVER_FALLBACK = 'background: linear-gradient(135deg, #011132 0%, #021b4a 100%)';
 
 // ── Helpers ───────────────────────────────────
+function jsonEscape(str) {
+    if (!str) return '';
+    return str.replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n');
+}
+
 function ensureDir(dir) {
     if (!fs.existsSync(dir)) {
         fs.mkdirSync(dir, { recursive: true });
@@ -284,6 +293,12 @@ function buildPosts(posts, categoryIndex) {
         var catClass = categoryClass(post.category);
         var relatedHTML = buildRelatedHTML(post, categoryIndex);
 
+        // SEO template variables
+        var canonicalUrl = SITE_URL + '/knowledge/' + post.slug + '/';
+        var ogImage = (post.cover_image && post.cover_image.indexOf('http') === 0)
+            ? post.cover_image
+            : OG_IMAGE_DEFAULT;
+
         var html = template
             .replace(/\{\{title\}\}/g, post.title)
             .replace(/\{\{date\}\}/g, post.dateFull)
@@ -300,7 +315,12 @@ function buildPosts(posts, categoryIndex) {
             .replace(/\{\{cover_html\}\}/g, coverHTML)
             .replace(/\{\{body\}\}/g, post.body)
             .replace(/\{\{slug\}\}/g, post.slug)
-            .replace(/\{\{related_articles\}\}/g, relatedHTML);
+            .replace(/\{\{related_articles\}\}/g, relatedHTML)
+            .replace(/\{\{canonical_url\}\}/g, canonicalUrl)
+            .replace(/\{\{og_image\}\}/g, ogImage)
+            .replace(/\{\{title_json\}\}/g, jsonEscape(post.title))
+            .replace(/\{\{excerpt_json\}\}/g, jsonEscape(post.excerpt))
+            .replace(/\{\{author_json\}\}/g, jsonEscape(post.author));
 
         fs.writeFileSync(path.join(postDir, 'index.html'), html, 'utf-8');
         console.log('  Built: knowledge/' + post.slug + '/index.html');
@@ -341,6 +361,49 @@ function preserveAdmin() {
     }
 }
 
+// ── Generate sitemap.xml ─────────────────────
+function buildSitemap(posts) {
+    var today = new Date().toISOString().split('T')[0];
+
+    var staticPages = [
+        { url: '/',                    priority: '1.0',  changefreq: 'weekly' },
+        { url: '/approach.html',       priority: '0.8',  changefreq: 'monthly' },
+        { url: '/companies.html',      priority: '0.8',  changefreq: 'monthly' },
+        { url: '/team.html',           priority: '0.7',  changefreq: 'monthly' },
+        { url: '/knowledge/',          priority: '0.9',  changefreq: 'weekly' },
+        { url: '/privacy-policy.html', priority: '0.3',  changefreq: 'yearly' },
+        { url: '/terms-of-service.html', priority: '0.3', changefreq: 'yearly' }
+    ];
+
+    var xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
+    xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
+
+    // Static pages
+    staticPages.forEach(function (page) {
+        xml += '  <url>\n';
+        xml += '    <loc>' + SITE_URL + page.url + '</loc>\n';
+        xml += '    <lastmod>' + today + '</lastmod>\n';
+        xml += '    <changefreq>' + page.changefreq + '</changefreq>\n';
+        xml += '    <priority>' + page.priority + '</priority>\n';
+        xml += '  </url>\n';
+    });
+
+    // Blog posts
+    posts.forEach(function (post) {
+        xml += '  <url>\n';
+        xml += '    <loc>' + SITE_URL + '/knowledge/' + post.slug + '/</loc>\n';
+        xml += '    <lastmod>' + post.dateISO + '</lastmod>\n';
+        xml += '    <changefreq>monthly</changefreq>\n';
+        xml += '    <priority>0.6</priority>\n';
+        xml += '  </url>\n';
+    });
+
+    xml += '</urlset>\n';
+
+    fs.writeFileSync(path.join(ROOT, 'sitemap.xml'), xml, 'utf-8');
+    console.log('  Built: sitemap.xml (' + (staticPages.length + posts.length) + ' URLs)');
+}
+
 // ── Main ──────────────────────────────────────
 function main() {
     console.log('\n🔨 Building Greenfield Knowledge blog...\n');
@@ -353,6 +416,7 @@ function main() {
     var categoryIndex = buildCategoryIndex(posts);
     buildPosts(posts, categoryIndex);
     buildListing(posts);
+    buildSitemap(posts);
     preserveAdmin();
 
     console.log('\n✅ Blog build complete!\n');
