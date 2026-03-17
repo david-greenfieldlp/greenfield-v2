@@ -889,7 +889,10 @@
 
     /* ── Bottom zone: delta padding from 900px ── */
     .v1-bottom { gap: 0; }
-    .v1-bottom-left { padding: 48px 0; }
+    .v1-bottom-left {
+        padding: 48px 0;
+        width: 100%; /* prevent shrink-to-fit so metrics fills viewport width */
+    }
     .v1-bottom-right { padding: 48px 0 64px; }
 
     .v1-clocks {
@@ -900,6 +903,20 @@
     .clock-face {
         width: 56px;
         height: 56px;
+    }
+
+    /* Metrics: equal distribution across full viewport width */
+    .v1-metrics {
+        gap: 0;
+        width: 100%;
+    }
+    .v1-stat {
+        padding: 0 10px;
+        flex: 1 1 0;
+        min-width: 0;
+    }
+    .v1-stat + .v1-stat {
+        padding-left: 10px; /* symmetric with right — overrides base 33px/24px */
     }
 
     /* Metrics sizing — delta from 900px */
