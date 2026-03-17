@@ -893,7 +893,12 @@
         padding: 48px 0;
         width: 100%; /* prevent shrink-to-fit so metrics fills viewport width */
     }
-    .v1-bottom-right { padding: 48px 0 64px; }
+    .v1-bottom-right {
+        padding: 48px 0 64px;
+        width: 100%; /* match border width to metrics + tagline sections */
+    }
+
+    .v1-tagline { font-size: clamp(0.95rem, 3.5vw, 1.1rem); }
 
     .v1-clocks {
         justify-content: center;
