@@ -410,6 +410,172 @@ function buildSitemap(posts) {
     console.log('  Built: sitemap.xml (' + (staticPages.length + posts.length) + ' URLs)');
 }
 
+// ── Pre-render portfolio page for SEO ────────
+function buildPortfolio() {
+    var portfolioFile = path.join(ROOT, 'portfolio.html');
+    var dataFile = path.join(ROOT, 'portfolio-data.js');
+
+    if (!fs.existsSync(portfolioFile) || !fs.existsSync(dataFile)) {
+        console.log('  Portfolio: skipped (files not found)');
+        return;
+    }
+
+    // Parse PORTFOLIO array from portfolio-data.js
+    var dataSrc = fs.readFileSync(dataFile, 'utf-8');
+    var fn = new Function(dataSrc.replace(/^const /, 'var ') + '\nreturn PORTFOLIO;');
+    var companies = fn();
+
+    // Sort alphabetically (matches client-side sort)
+    companies.sort(function (a, b) { return a.name.localeCompare(b.name); });
+
+    // Category labels (matches client-side mapping)
+    var catLabels = {
+        'ai-infra': 'AI Infrastructure',
+        'aai': 'AI Infrastructure',
+        'cybersecurity': 'Cybersecurity',
+        'deep-tech': 'Deep Tech',
+        'defense': 'Defense',
+        'fintech': 'Fintech',
+        'internet': 'Internet / Digital Media',
+        'it-infra': 'IT Infrastructure',
+        'vertical-ai': 'Vertical AI'
+    };
+
+    var arrowSVG = '<svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M1 13L13 1M13 1H3M13 1V11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+    // ── Build grid cards (matches buildCard() in portfolio.html) ──
+    var gridHtml = companies.map(function (c) {
+        var sector = catLabels[c.category] || c.sector;
+        var desc = c.description.replace(/<br\s*\/?>/gi, ' ');
+        var exitedBadge = c.status === 'exited'
+            ? '<span class="bento-card-exited-badge">Exited</span>' : '';
+
+        return '<div class="bento-card" data-category="' + c.category + '" data-company-id="' + c.id + '" role="button" tabindex="0">' +
+            '<div class="bento-card-bg bento-card-bg-img" style="background-image: url(\'' + c.bg + '\')"></div>' +
+            '<div class="bento-card-bg-overlay"></div>' +
+            '<div class="bento-card-glow"></div>' +
+            exitedBadge +
+            '<div class="bento-card-content">' +
+                '<div class="bento-card-top">' +
+                    '<div class="bento-card-icon">' +
+                        '<img src="' + c.favicon + '" alt="' + c.name + '" loading="lazy" class="bento-card-logo-img">' +
+                    '</div>' +
+                    '<span class="bento-card-tag">' + sector + '</span>' +
+                '</div>' +
+                '<div class="bento-card-bottom">' +
+                    '<h2 class="bento-card-name">' + c.name + '</h2>' +
+                    '<p class="bento-card-desc">' + desc + '</p>' +
+                    '<div class="bento-card-meta">' +
+                        '<span class="bento-card-stage">' + c.round + '</span>' +
+                        '<span class="bento-card-divider">&middot;</span>' +
+                        '<span class="bento-card-location">' + c.year + '</span>' +
+                    '</div>' +
+                '</div>' +
+            '</div>' +
+            '<div class="bento-card-hover-line"></div>' +
+        '</div>';
+    }).join('\n                    ');
+
+    // ── Build list rows (matches buildRow() in portfolio.html) ──
+    var listHeader = '<div class="list-header">' +
+        '<span class="list-header-label">Company</span>' +
+        '<span class="list-header-label">Sector</span>' +
+        '<span class="list-header-label">About</span>' +
+        '<span class="list-header-label">CEO</span>' +
+        '<span class="list-header-label">First Partnered</span>' +
+        '<span class="list-header-label">Website</span>' +
+    '</div>';
+
+    var listRows = companies.map(function (c) {
+        var sector = catLabels[c.category] || c.sector;
+        var desc = c.description.replace(/<br\s*\/?>/gi, ' ');
+        var exitedBadge = c.status === 'exited'
+            ? '<span class="list-exited-badge">Exited</span>' : '';
+        var ceo = c.ceo || '';
+        var partnered = c.round + ' | ' + c.year;
+        var websiteUrl = c.website || '#';
+        var logoSrc = c.logo || c.favicon;
+
+        return '<div class="list-row" data-company-id="' + c.id + '" role="button" tabindex="0">' +
+            '<div class="list-logo">' +
+                '<img src="' + logoSrc + '" alt="' + c.name + '" loading="lazy" class="list-logo-img">' +
+                exitedBadge +
+            '</div>' +
+            '<span class="list-sector">' + sector + '</span>' +
+            '<span class="list-description">' + desc + '</span>' +
+            '<span class="list-ceo">' + ceo + '</span>' +
+            '<span class="list-partnered">' + partnered + '</span>' +
+            '<a href="' + websiteUrl + '" target="_blank" rel="noopener" class="list-website">Visit ' + arrowSVG + '</a>' +
+        '</div>';
+    }).join('\n                    ');
+
+    var listHtml = listHeader + '\n                    ' + listRows;
+
+    // ── Build CollectionPage schema ──
+    var schemaItems = companies.map(function (c) {
+        var item = {
+            '@type': 'Organization',
+            'name': c.name,
+            'description': (c.longDescription || c.description || '').replace(/<br\s*\/?>/gi, ' ')
+        };
+        if (c.website) item.url = c.website;
+        return item;
+    });
+
+    var collectionSchema = {
+        '@context': 'https://schema.org',
+        '@type': 'CollectionPage',
+        'name': 'Portfolio | Greenfield Partners',
+        'description': "Explore Greenfield Partners' portfolio of high-growth companies across AI infrastructure, cybersecurity, deep tech, and more.",
+        'url': SITE_URL + '/portfolio.html',
+        'mainEntity': {
+            '@type': 'ItemList',
+            'numberOfItems': companies.length,
+            'itemListElement': companies.map(function (c, i) {
+                var item = {
+                    '@type': 'ListItem',
+                    'position': i + 1,
+                    'item': {
+                        '@type': 'Organization',
+                        'name': c.name,
+                        'description': (c.longDescription || c.description || '').replace(/<br\s*\/?>/gi, ' ')
+                    }
+                };
+                if (c.website) item.item.url = c.website;
+                return item;
+            })
+        }
+    };
+
+    var schemaTag = '<script type="application/ld+json">\n    ' +
+        JSON.stringify(collectionSchema, null, 4).split('\n').join('\n    ') +
+        '\n    </script>';
+
+    // ── Inject into portfolio.html ──
+    var html = fs.readFileSync(portfolioFile, 'utf-8');
+
+    // Replace grid content between markers
+    html = html.replace(
+        /<!-- PORTFOLIO-GRID-START -->[\s\S]*?<!-- PORTFOLIO-GRID-END -->/,
+        '<!-- PORTFOLIO-GRID-START -->\n                    ' + gridHtml + '\n                    <!-- PORTFOLIO-GRID-END -->'
+    );
+
+    // Replace list content between markers
+    html = html.replace(
+        /<!-- PORTFOLIO-LIST-START -->[\s\S]*?<!-- PORTFOLIO-LIST-END -->/,
+        '<!-- PORTFOLIO-LIST-START -->\n                    ' + listHtml + '\n                    <!-- PORTFOLIO-LIST-END -->'
+    );
+
+    // Replace schema between markers
+    html = html.replace(
+        /<!-- PORTFOLIO-SCHEMA-START -->[\s\S]*?<!-- PORTFOLIO-SCHEMA-END -->/,
+        '<!-- PORTFOLIO-SCHEMA-START -->\n    ' + schemaTag + '\n    <!-- PORTFOLIO-SCHEMA-END -->'
+    );
+
+    fs.writeFileSync(portfolioFile, html, 'utf-8');
+    console.log('  Built: portfolio.html (pre-rendered ' + companies.length + ' companies)');
+}
+
 // ── Main ──────────────────────────────────────
 function main() {
     console.log('\n🔨 Building Greenfield Knowledge blog...\n');
@@ -423,6 +589,7 @@ function main() {
     buildPosts(posts, categoryIndex);
     buildListing(posts);
     buildSitemap(posts);
+    buildPortfolio();
     preserveAdmin();
 
     console.log('\n✅ Blog build complete!\n');
