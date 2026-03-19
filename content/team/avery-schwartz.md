@@ -1,0 +1,32 @@
+---
+name: "Avery Schwartz"
+slug: "avery"
+role: "Venture Partner"
+team: "investment"
+location: "Tel Aviv"
+photo: "assets/team/investment team/Avery.png"
+linkedin: "https://www.linkedin.com/in/avery-e-schwartz/"
+sort_order: 4
+portfolio_logos:
+  - src: "assets/portfolio assets/portfolio logos w/VAST w.svg"
+    alt: "VAST Data"
+  - src: "assets/portfolio assets/portfolio logos w/Torq w.avif"
+    alt: "Torq"
+  - src: "assets/portfolio assets/portfolio logos w/capitolis w.avif"
+    alt: "Capitolis"
+  - src: "assets/portfolio assets/portfolio logos w/Silverfort w.png"
+    alt: "Silverfort"
+  - src: "assets/portfolio assets/portfolio logos w/cynet w.svg"
+    alt: "Cynet"
+  - src: "assets/portfolio assets/portfolio logos w/equitybee w.svg"
+    alt: "EquityBee"
+  - src: "assets/portfolio assets/portfolio logos w/flolive w.svg"
+    alt: "floLIVE"
+  - src: "assets/portfolio assets/portfolio logos w/guardicore w.svg"
+    alt: "Guardicore"
+  - src: "assets/portfolio assets/portfolio logos w/Oligo security logo white.png"
+    alt: "Oligo Security"
+  - src: "assets/portfolio assets/portfolio logos w/Panorays w.svg"
+    alt: "Panorays"
+---
+Avery joined Greenfield in 2018 following 7 years in investment banking at Goldman Sachs, both in Israel and in London. At GS, he helped lead several investments in Israeli technology companies, in addition to traditional M&A and financing transactions. Prior to Goldman Sachs, Avery worked in the advisory practice of PwC at the valuation and strategy group, at a microfinance startup, and at the mission of Israel to the UN.

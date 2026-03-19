@@ -17,6 +17,7 @@ var OG_IMAGE_DEFAULT = SITE_URL + '/assets/images/greenfield-partners.jpg';
 // ── Paths ─────────────────────────────────────
 const ROOT = __dirname;
 const CONTENT_DIR = path.join(ROOT, 'content', 'blog');
+const TEAM_DIR = path.join(ROOT, 'content', 'team');
 const AUTHORS_FILE = path.join(ROOT, 'content', 'authors.json');
 const TEMPLATES_DIR = path.join(ROOT, 'templates');
 const OUTPUT_DIR = path.join(ROOT, 'knowledge');
@@ -576,6 +577,192 @@ function buildPortfolio() {
     console.log('  Built: portfolio.html (pre-rendered ' + companies.length + ' companies)');
 }
 
+// ── Build team page from content/team/*.md ────
+function buildTeam() {
+    var teamFile = path.join(ROOT, 'team.html');
+
+    if (!fs.existsSync(TEAM_DIR) || !fs.existsSync(teamFile)) {
+        console.log('  Team: skipped (content/team/ or team.html not found)');
+        return;
+    }
+
+    var files = fs.readdirSync(TEAM_DIR).filter(function (f) {
+        return f.endsWith('.md');
+    });
+
+    // Parse all team member markdown files
+    var members = files.map(function (file) {
+        var raw = fs.readFileSync(path.join(TEAM_DIR, file), 'utf-8');
+        var parsed = matter(raw);
+        var data = parsed.data;
+        var bio = parsed.content.trim();
+
+        return {
+            name: data.name || '',
+            slug: data.slug || '',
+            role: data.role || '',
+            team: data.team || 'investment',
+            location: data.location || '',
+            photo: data.photo || '',
+            linkedin: data.linkedin || '',
+            sort_order: data.sort_order || 99,
+            portfolio_logos: data.portfolio_logos || [],
+            bio: bio,
+            file: file
+        };
+    });
+
+    // Group by team section
+    var groups = { investment: [], platform: [], advisors: [] };
+    members.forEach(function (m) {
+        if (groups[m.team]) {
+            groups[m.team].push(m);
+        }
+    });
+
+    // Sort each group by sort_order
+    Object.keys(groups).forEach(function (key) {
+        groups[key].sort(function (a, b) { return a.sort_order - b.sort_order; });
+    });
+
+    // ── Generate card HTML for interactive members (investment + platform) ──
+    function buildInteractiveCard(m) {
+        return '' +
+            '                        <div class="td-card" data-member="' + m.slug + '">\n' +
+            '                            <div class="td-card-photo-wrap td-card-clickable" aria-label="View ' + m.name + '\'s profile" role="button" tabindex="0">\n' +
+            '                                <img src="' + m.photo + '" alt="' + m.name + '" loading="lazy" class="td-card-photo">\n' +
+            '                            </div>\n' +
+            '                            <div class="td-card-info">\n' +
+            '                                <div class="td-card-name-row">\n' +
+            '                                    <p class="td-card-name">' + m.name + '</p>\n' +
+            '                                    <a href="' + m.linkedin + '" class="td-card-linkedin" aria-label="' + m.name + ' on LinkedIn" target="_blank" rel="noopener"><svg width="14" height="14"><use href="#icon-linkedin"/></svg></a>\n' +
+            '                                </div>\n' +
+            '                                <p class="td-card-title">' + m.role + '</p>\n' +
+            '                            </div>\n' +
+            '                        </div>';
+    }
+
+    // ── Generate card HTML for static members (advisors) ──
+    function buildStaticCard(m) {
+        var linkedinHtml = m.linkedin
+            ? '\n                                    <a href="' + m.linkedin + '" class="td-card-linkedin" aria-label="' + m.name + ' on LinkedIn" target="_blank" rel="noopener"><svg width="14" height="14"><use href="#icon-linkedin"/></svg></a>'
+            : '';
+
+        return '' +
+            '                        <div class="td-card td-card--static">\n' +
+            '                            <div class="td-card-photo-wrap">\n' +
+            '                                <img src="' + m.photo + '" alt="' + m.name + '" loading="lazy" class="td-card-photo">\n' +
+            '                            </div>\n' +
+            '                            <div class="td-card-info">\n' +
+            '                                <div class="td-card-name-row">\n' +
+            '                                    <p class="td-card-name">' + m.name + '</p>' +
+            linkedinHtml + '\n' +
+            '                                </div>\n' +
+            '                            </div>\n' +
+            '                        </div>';
+    }
+
+    var investmentCards = groups.investment.map(buildInteractiveCard).join('\n');
+    var platformCards = groups.platform.map(buildInteractiveCard).join('\n');
+    var advisorCards = groups.advisors.map(buildStaticCard).join('\n');
+
+    // ── Generate teamData JS object (for overlay system) ──
+    var interactiveMembers = groups.investment.concat(groups.platform);
+    var teamDataEntries = interactiveMembers.map(function (m) {
+        // Escape single quotes and newlines for JS string literals
+        var jsBio = m.bio.replace(/'/g, "\\'").replace(/\n/g, '\\n');
+        var entry = '            ' + m.slug + ': {\n' +
+            "                name: '" + m.name.replace(/'/g, "\\'") + "',\n" +
+            "                title: '" + m.role.replace(/'/g, "\\'") + "',\n" +
+            "                location: '" + m.location + "',\n" +
+            "                photo: '" + m.photo + "',\n" +
+            "                linkedin: '" + m.linkedin + "',\n" +
+            "                bio: '" + jsBio + "'";
+
+        if (m.portfolio_logos.length > 0) {
+            var logoEntries = m.portfolio_logos.map(function (logo) {
+                return "                    { src: '" + logo.src + "', alt: '" + logo.alt.replace(/'/g, "\\'") + "' }";
+            }).join(',\n');
+            entry += ',\n                portfolioLogos: [\n' + logoEntries + '\n                ]';
+        }
+
+        entry += '\n            }';
+        return entry;
+    }).join(',\n');
+
+    var teamDataJs = '        var teamData = {\n' + teamDataEntries + '\n        };';
+
+    // ── Generate JSON-LD Person schema ──
+    var allMembers = groups.investment.concat(groups.platform);
+    var schemaPersons = allMembers.map(function (m) {
+        var photoUrl = SITE_URL + '/' + m.photo.replace(/ /g, '%20');
+        return {
+            '@context': 'https://schema.org',
+            '@type': 'Person',
+            'name': m.name,
+            'jobTitle': m.role,
+            'worksFor': { '@type': 'Organization', 'name': 'Greenfield Partners' },
+            'image': photoUrl,
+            'sameAs': m.linkedin
+        };
+    });
+
+    var schemaTag = '    <script type="application/ld+json">\n    ' +
+        JSON.stringify(schemaPersons, null, 4).split('\n').join('\n    ') +
+        '\n    </script>';
+
+    // ── Auto-generate content/authors.json from team data ──
+    var authorsObj = {};
+    allMembers.forEach(function (m) {
+        authorsObj[m.name] = {
+            role: m.role,
+            photo: '/' + m.photo
+        };
+    });
+    // Add fallback entries for generic authoring
+    authorsObj['Greenfield Team'] = { role: 'Greenfield Partners', photo: null };
+    authorsObj['Greenfield Partners'] = { role: '', photo: null };
+
+    fs.writeFileSync(AUTHORS_FILE, JSON.stringify(authorsObj, null, 2) + '\n', 'utf-8');
+    console.log('  Updated: content/authors.json (' + allMembers.length + ' team members + 2 fallbacks)');
+
+    // ── Inject into team.html ──
+    var html = fs.readFileSync(teamFile, 'utf-8');
+
+    // Replace investment team cards
+    html = html.replace(
+        /<!-- TEAM-INVESTMENT-START -->[\s\S]*?<!-- TEAM-INVESTMENT-END -->/,
+        '<!-- TEAM-INVESTMENT-START -->\n' + investmentCards + '\n                    <!-- TEAM-INVESTMENT-END -->'
+    );
+
+    // Replace platform team cards
+    html = html.replace(
+        /<!-- TEAM-PLATFORM-START -->[\s\S]*?<!-- TEAM-PLATFORM-END -->/,
+        '<!-- TEAM-PLATFORM-START -->\n' + platformCards + '\n                    <!-- TEAM-PLATFORM-END -->'
+    );
+
+    // Replace advisors cards
+    html = html.replace(
+        /<!-- TEAM-ADVISORS-START -->[\s\S]*?<!-- TEAM-ADVISORS-END -->/,
+        '<!-- TEAM-ADVISORS-START -->\n' + advisorCards + '\n                    <!-- TEAM-ADVISORS-END -->'
+    );
+
+    // Replace teamData JS object (markers are wrapped in JS comments: // <!-- ... -->)
+    html = html.replace(
+        /\/\/ <!-- TEAM-DATA-JS-START -->[\s\S]*?\/\/ <!-- TEAM-DATA-JS-END -->/,
+        '// <!-- TEAM-DATA-JS-START -->\n' + teamDataJs + '\n        // <!-- TEAM-DATA-JS-END -->'
+    );
+
+    // Replace JSON-LD Person schema
+    html = html.replace(
+        /<!-- TEAM-SCHEMA-START -->[\s\S]*?<!-- TEAM-SCHEMA-END -->/,
+        '<!-- TEAM-SCHEMA-START -->\n' + schemaTag + '\n    <!-- TEAM-SCHEMA-END -->'
+    );
+
+    fs.writeFileSync(teamFile, html, 'utf-8');
+    console.log('  Built: team.html (pre-rendered ' + members.length + ' team members)');
+}
+
 // ── Main ──────────────────────────────────────
 function main() {
     console.log('\n🔨 Building Greenfield Knowledge blog...\n');
@@ -590,6 +777,7 @@ function main() {
     buildListing(posts);
     buildSitemap(posts);
     buildPortfolio();
+    buildTeam();
     preserveAdmin();
 
     console.log('\n✅ Blog build complete!\n');
