@@ -115,6 +115,7 @@ function initEntryAnimations() {
         y: 15,
         opacity: 0,
         duration: 0.6,
+        clearProps: 'transform,opacity', // prevent inline transform conflicting with CSS hover transition
     })
     // Bento cards stagger in
     .from('.dashboard-bento-grid .bento-card', {
@@ -249,10 +250,9 @@ function initBentoCardLinks() {
 const ANIMATED_SELECTORS = '.clock-item, .v1-stat, .v1-headline-text, .v1-cta-btn, .dashboard-bento-grid .bento-card';
 
 function forceVisible() {
-    document.querySelectorAll(ANIMATED_SELECTORS).forEach(el => {
-        el.style.opacity = '1';
-        el.style.transform = 'none';
-    });
+    // Use gsap.set() instead of direct style manipulation so CSS transitions
+    // on elements like .v1-cta-btn are not triggered by the inline style change
+    gsap.set(ANIMATED_SELECTORS, { opacity: 1, clearProps: 'transform' });
 }
 
 
