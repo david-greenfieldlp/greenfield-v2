@@ -99,35 +99,42 @@ function initCounters() {
 // 4. ENTRY ANIMATIONS (fade-in on load)
 // ==========================================
 function initEntryAnimations() {
+    // Pre-hide all elements that will animate in, before the timeline starts.
+    // Without this, elements sit at their natural (visible) position until their
+    // tween position is reached in the sequence — causing a visible flash/jump.
+    gsap.set('.v1-headline-text, .v1-cta-btn, .dashboard-bento-grid .bento-card, .clock-item, .v1-stat', {
+        autoAlpha: 0,
+    });
+
     const tl = gsap.timeline({
         defaults: { ease: 'power3.out' },
-        delay: 0.3, // slight delay after page load
+        delay: 0.3,
     });
 
     // Headline text
     tl.from('.v1-headline-text', {
         y: 30,
-        opacity: 0,
+        autoAlpha: 0,
         duration: 1,
     })
     // Headline button — enters immediately after headline text finishes
     .from('.v1-cta-btn', {
         y: 15,
-        opacity: 0,
+        autoAlpha: 0,
         duration: 0.6,
-        clearProps: 'transform,opacity', // prevent inline transform conflicting with CSS hover transition
+        clearProps: 'transform,opacity,visibility', // prevent inline styles conflicting with CSS hover transition
     })
     // Bento cards stagger in
     .from('.dashboard-bento-grid .bento-card', {
         y: 20,
-        opacity: 0,
+        autoAlpha: 0,
         duration: 0.7,
         stagger: 0.06,
     }, '-=0.5')
     // Clocks
     .from('.clock-item', {
         y: 15,
-        opacity: 0,
+        autoAlpha: 0,
         scale: 0.9,
         duration: 0.6,
         stagger: 0.12,
@@ -136,7 +143,7 @@ function initEntryAnimations() {
     // Stats
     .from('.v1-stat', {
         y: 15,
-        opacity: 0,
+        autoAlpha: 0,
         duration: 0.6,
         stagger: 0.08,
     }, '-=0.4');
@@ -250,9 +257,9 @@ function initBentoCardLinks() {
 const ANIMATED_SELECTORS = '.clock-item, .v1-stat, .v1-headline-text, .v1-cta-btn, .dashboard-bento-grid .bento-card';
 
 function forceVisible() {
-    // Use gsap.set() instead of direct style manipulation so CSS transitions
-    // on elements like .v1-cta-btn are not triggered by the inline style change
-    gsap.set(ANIMATED_SELECTORS, { opacity: 1, clearProps: 'transform' });
+    // Use gsap.set() to bypass CSS transitions, and clear all GSAP-set inline
+    // styles (opacity, visibility, transform) so elements return to natural state
+    gsap.set(ANIMATED_SELECTORS, { clearProps: 'opacity,visibility,transform' });
 }
 
 
