@@ -1,7 +1,7 @@
 ---
 title: Current State of AI
-slug: current-ai
-date: 2026-03-19
+slug: state-of-ai
+date: 2026-03-23
 author: Raz Mangel
 cover_image: /assets/images/blog/images.jpeg
 excerpt: "The first major theme in AI today is adoption. Many organizations are
@@ -13,7 +13,7 @@ excerpt: "The first major theme in AI today is adoption. Many organizations are
   but most companies are still early in learning how to turn scattered tools
   into durable advantage."
 category: Insights
-draft: true
+draft: false
 ---
 # The Current State of AI: From Hype to Infrastructure
 
