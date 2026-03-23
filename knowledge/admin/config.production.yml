@@ -30,3 +30,35 @@ collections:
           - "Market"
       - { label: "Draft", name: "draft", widget: "boolean", default: true }
       - { label: "Body", name: "body", widget: "markdown" }
+
+  - name: "team"
+    label: "Team Members"
+    folder: "content/team"
+    create: true
+    slug: "{{slug}}"
+    sortable_fields: ["sort_order", "name"]
+    summary: "{{name}} — {{role}} ({{team}})"
+    fields:
+      - { label: "Name", name: "name", widget: "string" }
+      - { label: "Slug", name: "slug", widget: "string", hint: "camelCase key used for overlay system (e.g. shay, danielMilstein)" }
+      - { label: "Role", name: "role", widget: "string" }
+      - label: "Team"
+        name: "team"
+        widget: "select"
+        options:
+          - { label: "Investment Team", value: "investment" }
+          - { label: "Platform Team", value: "platform" }
+          - { label: "Advisors", value: "advisors" }
+      - { label: "Location", name: "location", widget: "string", required: false }
+      - { label: "Photo", name: "photo", widget: "image" }
+      - { label: "LinkedIn URL", name: "linkedin", widget: "string", required: false }
+      - { label: "Sort Order", name: "sort_order", widget: "number", value_type: "int", hint: "Display position within team section (1 = first)" }
+      - label: "Portfolio Logos"
+        name: "portfolio_logos"
+        widget: "list"
+        required: false
+        hint: "Companies this person works with (investment team only)"
+        fields:
+          - { label: "Logo Path", name: "src", widget: "string" }
+          - { label: "Company Name", name: "alt", widget: "string" }
+      - { label: "Bio", name: "body", widget: "markdown", required: false }
