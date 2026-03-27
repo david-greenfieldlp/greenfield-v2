@@ -83,10 +83,9 @@
 }
 
 .v1-accent {
-    font-style: italic;
+    font-style: normal;
     font-weight: 400;
     color: var(--accent-blue);
-    margin-right: 0.2em;
 }
 
 /* ── CTA Button: Why Partner with Us ── */
@@ -261,7 +260,7 @@
 }
 
 .v1-tagline-accent {
-    font-style: italic;
+    font-style: normal;
     color: rgba(147, 197, 253, 0.6);
 }
 
