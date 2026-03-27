@@ -1,7 +1,7 @@
 ---
 name: "Raz Mangel"
 slug: "raz"
-role: "Partner"
+role: "General Partner"
 team: "investment"
 location: "Tel Aviv"
 photo: "assets/team/investment team/Raz.png"

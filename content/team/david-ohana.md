@@ -1,7 +1,7 @@
 ---
 name: "David Ohana"
 slug: "david"
-role: "VC Operations Associate"
+role: "VC Operations"
 team: "platform"
 location: "Tel Aviv"
 photo: "assets/team/platform team/David.png"

@@ -1,7 +1,7 @@
 ---
 name: "Ariella Taub"
 slug: "ariella"
-role: "Go To Market Operations"
+role: "Go to Market Platform"
 team: "platform"
 location: "Tel Aviv"
 photo: "assets/team/platform team/Ariella.png"

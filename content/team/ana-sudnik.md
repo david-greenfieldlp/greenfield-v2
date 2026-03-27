@@ -1,7 +1,7 @@
 ---
 name: "Ana Sudnik"
 slug: "ana"
-role: "CFO"
+role: "Partner & CFO"
 team: "platform"
 location: "Tel Aviv"
 photo: "assets/team/platform team/Ana.png"

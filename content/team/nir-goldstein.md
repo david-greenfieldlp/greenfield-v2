@@ -1,7 +1,7 @@
 ---
 name: "Nir Goldstein"
 slug: "nir"
-role: "Operating Partner"
+role: "Operating Partner, Head of G^2M Platform"
 team: "platform"
 location: "Tel Aviv"
 photo: "assets/team/platform team/Nir.png"

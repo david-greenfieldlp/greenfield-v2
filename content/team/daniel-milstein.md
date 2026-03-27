@@ -1,7 +1,7 @@
 ---
 name: "Daniel Milstein"
 slug: "danielMilstein"
-role: "Director of Capital Formation"
+role: "Partner, Head of Capital Formation"
 team: "platform"
 location: "Tel Aviv"
 photo: "assets/team/platform team/Daniel.png"
