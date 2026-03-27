@@ -24,7 +24,7 @@ const PORTFOLIO = [
         featured: true,
         status: 'active',
         ceo: 'Renen Hallak',
-        dealTeam: ['Avery Schwartz (Board Observer)', 'Yuda Doron', 'Shay Grinfeld', 'Raz Mangel'],
+        dealTeam: ['Avery Schwartz', 'Yuda Doron', 'Shay Grinfeld', 'Raz Mangel'],
         testimonial: {
             quote: 'When we first partnered with Greenfield, they rolled up their sleeves, dug into the Excel, and helped us highlight how the company could shine through the metrics. Greenfield brought an analytical perspective that we didn\'t have internally, guiding us throughout our entire journey. They were true professionals in every interaction, and from the initial investment onward, they consistently acted in the best interests of the company at every step.',
             author: 'Renen Hallak',
@@ -47,8 +47,8 @@ const PORTFOLIO = [
     {
         id: 'coralogix',
         name: 'Coralogix',
-        sector: 'IT Infrastructure',
-        category: 'it-infra',
+        sector: 'AI Infrastructure',
+        category: 'ai-infra',
         description: 'Observability and Security that Scale with You',
         longDescription: 'Coralogix is the leading stateful streaming platform for modern engineering teams, rebuilding the path to observability using a real-time streaming analytics pipeline that provides monitoring, visualization, and alerting capabilities without the burden of indexing. Its mission is to make observability accessible to all, enabling users to define different data pipelines per use case, providing deep insights for less than half the cost.',
         round: 'Led Series C',
@@ -56,7 +56,7 @@ const PORTFOLIO = [
         featured: false,
         status: 'active',
         ceo: 'Ariel Assaraf',
-        dealTeam: ['Shay Grinfeld (Board Member)', 'Raz Mangel', 'Meir Cohen'],
+        dealTeam: ['Shay Grinfeld', 'Raz Mangel', 'Meir Cohen'],
         testimonial: {
             quote: 'Greenfield partnered with us at a critical point in our company\'s growth. They introduced us to key metrics for our north star, helping us focus on what truly drives growth. With their guidance we became a data-driven company, providing us with the expertise we needed to scale effectively.',
             author: 'Ariel Assaraf',
@@ -87,7 +87,7 @@ const PORTFOLIO = [
         featured: false,
         status: 'active',
         ceo: 'Jeremy Suard',
-        dealTeam: ['Raz Mangel (Board Member)', 'Ortal Sasson', 'Lior Sulkin-Levy'],
+        dealTeam: ['Raz Mangel', 'Ortal Sasson', 'Lior Sulkin-Levy'],
         testimonial: {
             quote: 'We wanted a conversation with investors who truly understand us. I value investors who recognize that I need the freedom to make my own mistakes and ultimately make my own decisions. The Greenfield team grasped this quickly, which is exactly what I was looking for. We\'re a complex business, but that instant click of understanding, which we saw during the due diligence process, was exactly what we needed.',
             author: 'Jeremy Suard',
@@ -145,7 +145,7 @@ const PORTFOLIO = [
         featured: false,
         status: 'active',
         ceo: 'Ofer Smadari',
-        dealTeam: ['Avery Schwartz (Board Member)', 'Itay Inbar', 'Meir Cohen'],
+        dealTeam: ['Avery Schwartz', 'Itay Inbar', 'Meir Cohen'],
         testimonial: null,
         coInvestors: [
             { name: 'BVP', logo: 'assets/coinvestors/bvp.png' },
@@ -199,7 +199,7 @@ const PORTFOLIO = [
         featured: false,
         status: 'active',
         ceo: 'Hed Kovetz',
-        dealTeam: ['Avery Schwartz (Board Member)', 'Raz Mangel', 'Ortal Sasson'],
+        dealTeam: ['Avery Schwartz', 'Raz Mangel', 'Ortal Sasson'],
         testimonial: null,
         coInvestors: [
             { name: 'Brighton Park Capital', logo: 'assets/coinvestors/brighton-park-capital.png' },
@@ -220,8 +220,8 @@ const PORTFOLIO = [
     {
         id: 'bigpanda',
         name: 'BigPanda',
-        sector: 'IT Infrastructure',
-        category: 'it-infra',
+        sector: 'AI Infrastructure',
+        category: 'ai-infra',
         description: 'Event Correlation & Automation Platform',
         longDescription: 'BigPanda helps businesses prevent and resolve IT outages with its platform for Event Correlation and Automation, powered by AIOps. BigPanda captures alerts, changes, and topology data from across an enterprise\u2019s disparate tools and uses machine learning to reduce IT noise, detect incidents, and surface their probable root cause \u2013 in real time.',
         round: 'Led Series B',
@@ -229,7 +229,7 @@ const PORTFOLIO = [
         featured: false,
         status: 'active',
         ceo: 'Assaf Resnick',
-        dealTeam: ['Shay Grinfeld (Board Member)', 'Yuda Doron', 'Raz Mangel'],
+        dealTeam: ['Shay Grinfeld', 'Yuda Doron', 'Raz Mangel'],
         testimonial: {
             quote: 'Greenfield invested the time to build a trusting relationship with us over the years. My experience with Shay and the team convinced me that having smart, pleasant partners is more valuable than just big investor names\u2014they help you make good decisions in both good times and bad. As a young company, we hadn\u2019t fully considered scaling, organizational DNA, or data-driven strategies, but Greenfield\u2019s involvement opened our eyes and made us much smarter about building a scalable, data-driven company.',
             author: 'Assaf Resnick',
@@ -260,7 +260,7 @@ const PORTFOLIO = [
         featured: false,
         status: 'active',
         ceo: 'Gil Mandelzis',
-        dealTeam: ['Shay Grinfeld (Board Observer)', 'Avery Schwartz', 'Ortal Sasson'],
+        dealTeam: ['Shay Grinfeld', 'Avery Schwartz', 'Ortal Sasson'],
         testimonial: null,
         coInvestors: [
             { name: '9Yards', logo: 'assets/coinvestors/9yards.png' },
@@ -287,7 +287,7 @@ const PORTFOLIO = [
         featured: false,
         status: 'active',
         ceo: 'Ryan Soskin',
-        dealTeam: ['Itay Inbar (Board Member)', 'Shay Grinfeld (Board Observer)', 'Olivia Levine'],
+        dealTeam: ['Itay Inbar', 'Shay Grinfeld', 'Olivia Levine'],
         testimonial: null,
         coInvestors: [
             { name: 'BVP', logo: 'assets/coinvestors/bvp.png' },
@@ -304,8 +304,8 @@ const PORTFOLIO = [
     {
         id: 'regulus',
         name: 'Regulus',
-        sector: 'Defense',
-        category: 'defense',
+        sector: 'Deep Tech',
+        category: 'deep-tech',
         description: 'Next Generation Counter Unmanned Systems',
         longDescription: 'Regulus Cyber is a leading expert in software-based GPS/GNSS security with two product lines \u2013 Ring C-UxS \u2013 providing groundbreaking C-UxS capabilities against uncrewed systems, and Pyramid GNSS \u2013 protecting against GNSS spoofing & jamming attacks. Both technologies are commercial and employed by Defense, Police and HLS, and defense units worldwide.',
         round: 'Led Series B',
@@ -313,7 +313,7 @@ const PORTFOLIO = [
         featured: false,
         status: 'active',
         ceo: 'Yonatan Zur',
-        dealTeam: ['Raz Mangel (Board Member)', 'Meir Cohen', 'Josh Trup'],
+        dealTeam: ['Raz Mangel', 'Meir Cohen', 'Josh Trup'],
         testimonial: null,
         coInvestors: [
             { name: 'Deep Insight', logo: 'assets/coinvestors/deep-insight.png' },
@@ -330,8 +330,8 @@ const PORTFOLIO = [
     {
         id: 'commcrete',
         name: 'Commcrete',
-        sector: 'Defense',
-        category: 'defense',
+        sector: 'Deep Tech',
+        category: 'deep-tech',
         description: 'Connect Beyond Borders',
         longDescription: 'Commcrete is a deep-tech SATCOM solutions company delivering breakthrough satellite communication systems for emergency, remote commercial operations and defense. With a platform engineered for low-profile, high-reliability, rapid-deployment in austere environments, Commcrete offers plug-and-play solutions that combine critical C4I capabilities with energy efficiency, stealth, and unmatched simplicity.',
         round: 'Led Series A',
@@ -339,7 +339,7 @@ const PORTFOLIO = [
         featured: false,
         status: 'active',
         ceo: 'Itzik Daniel Michaeli',
-        dealTeam: ['Raz Mangel (Board Member)', 'Meir Cohen'],
+        dealTeam: ['Raz Mangel', 'Meir Cohen'],
         testimonial: null,
         coInvestors: [
             { name: 'Prof. Amnon Shashua', logo: 'assets/coinvestors/amnon-shashua.png' },
@@ -395,7 +395,7 @@ const PORTFOLIO = [
         featured: false,
         status: 'active',
         ceo: 'Jason Magee',
-        dealTeam: ['Avery Schwartz (Board Member)', 'Daniel Milstein', 'Ortal Sasson'],
+        dealTeam: ['Avery Schwartz', 'Daniel Milstein', 'Ortal Sasson'],
         testimonial: null,
         coInvestors: [
             { name: 'BlueRed Partners', logo: 'assets/coinvestors/bluered-partners.png' },
@@ -422,7 +422,7 @@ const PORTFOLIO = [
         featured: false,
         status: 'active',
         ceo: 'Ronnen Lovinger',
-        dealTeam: ['Yuda Doron (Board Member)', 'Itay Inbar'],
+        dealTeam: ['Yuda Doron', 'Itay Inbar'],
         testimonial: null,
         coInvestors: [
             { name: 'Atreides', logo: 'assets/coinvestors/atreides.png' },
@@ -449,7 +449,7 @@ const PORTFOLIO = [
         featured: false,
         status: 'active',
         ceo: 'Alon Joffe',
-        dealTeam: ['Shay Grinfeld (Board Member)', 'Itay Inbar'],
+        dealTeam: ['Shay Grinfeld', 'Itay Inbar'],
         testimonial: null,
         coInvestors: [
             { name: '8Roads', logo: 'assets/coinvestors/8roads.png' },
@@ -476,7 +476,7 @@ const PORTFOLIO = [
         featured: false,
         status: 'active',
         ceo: 'Oren Barzilai',
-        dealTeam: ['Avery Schwartz (Board Observer)'],
+        dealTeam: ['Avery Schwartz'],
         testimonial: null,
         coInvestors: [
             { name: 'Battery', logo: 'assets/coinvestors/battery.png' },
@@ -502,7 +502,7 @@ const PORTFOLIO = [
         featured: false,
         status: 'active',
         ceo: 'Nir Shalom',
-        dealTeam: ['Avery Schwartz (Board Member)', 'Meir Cohen'],
+        dealTeam: ['Avery Schwartz', 'Meir Cohen'],
         testimonial: null,
         coInvestors: [
             { name: '83North', logo: 'assets/coinvestors/83north.png' },
@@ -557,7 +557,7 @@ const PORTFOLIO = [
         featured: false,
         status: 'active',
         ceo: 'Shay Eyal',
-        dealTeam: ['Shay Grinfeld (Board Member)', 'Raz Mangel'],
+        dealTeam: ['Shay Grinfeld', 'Raz Mangel'],
         testimonial: null,
         coInvestors: [
             { name: '83North', logo: 'assets/coinvestors/83north.png' },
@@ -581,7 +581,7 @@ const PORTFOLIO = [
         featured: false,
         status: 'active',
         ceo: 'Nadav Czerninski',
-        dealTeam: ['Avery Schwartz (Board Member)', 'Raz Mangel', 'Josh Trup'],
+        dealTeam: ['Avery Schwartz', 'Raz Mangel', 'Josh Trup'],
         testimonial: null,
         coInvestors: [
             { name: 'Ballistic', logo: 'assets/coinvestors/ballistic.png' },
@@ -608,7 +608,7 @@ const PORTFOLIO = [
         featured: false,
         status: 'active',
         ceo: 'Matan Or-El',
-        dealTeam: ['Avery Schwartz (Board Member)', 'Itay Inbar'],
+        dealTeam: ['Avery Schwartz', 'Itay Inbar'],
         testimonial: null,
         coInvestors: [
             { name: 'Aleph', logo: 'assets/coinvestors/aleph.png' },
@@ -636,7 +636,7 @@ const PORTFOLIO = [
         status: 'exited',
         exitLabel: 'Acquired by Applied Systems',
         ceo: 'Elad Tsur',
-        dealTeam: ['Yuda Doron (Board Observer)', 'Raz Mangel', 'Meir Cohen'],
+        dealTeam: ['Yuda Doron', 'Raz Mangel', 'Meir Cohen'],
         testimonial: null,
         coInvestors: [
             { name: '8Roads', logo: 'assets/coinvestors/8roads.png' },
@@ -655,8 +655,8 @@ const PORTFOLIO = [
     {
         id: 'quali',
         name: 'Quali',
-        sector: 'IT Infrastructure',
-        category: 'it-infra',
+        sector: 'AI Infrastructure',
+        category: 'ai-infra',
         description: 'Cloud Infrastructure, Fast and Efficient',
         longDescription: 'Quali delivers Infrastructure Automation at Scale to complex on-premise, hybrid, and cloud environments. Quali\u2019s award-winning CloudShell platform creates self-service, on-demand automation solutions that increase engineering productivity, cut cloud costs, and optimize infrastructure utilization.',
         round: 'Led Series C',
@@ -664,7 +664,7 @@ const PORTFOLIO = [
         featured: false,
         status: 'active',
         ceo: 'Lior Koriat',
-        dealTeam: ['Shay Grinfeld (Board Member)', 'Raz Mangel'],
+        dealTeam: ['Shay Grinfeld', 'Raz Mangel'],
         testimonial: null,
         coInvestors: [
             { name: 'Dell Technologies', logo: 'assets/coinvestors/dell-technologies.png' },
@@ -689,7 +689,7 @@ const PORTFOLIO = [
         featured: false,
         status: 'active',
         ceo: 'Amit Carmi',
-        dealTeam: ['Raz Mangel (Board Member)', 'Meir Cohen'],
+        dealTeam: ['Raz Mangel', 'Meir Cohen'],
         testimonial: null,
         coInvestors: [
             { name: 'Bessemer Venture Partners', logo: 'assets/coinvestors/bessemer.png' },
