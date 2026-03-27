@@ -493,7 +493,7 @@ function buildPortfolio() {
         var exitedBadge = c.status === 'exited'
             ? '<span class="list-exited-badge">Exited</span>' : '';
         var ceo = c.ceo || '';
-        var partnered = c.round + ' | ' + c.year;
+        var partnered = c.year;
         var websiteUrl = c.website || '#';
         var logoSrc = c.logo || c.favicon;
 

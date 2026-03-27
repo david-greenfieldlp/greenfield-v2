@@ -921,7 +921,7 @@
     max-height: 100%;
     object-fit: contain;
     opacity: 0.8;
-    filter: brightness(1.1);
+    filter: grayscale(1) brightness(0) invert(1);
     transition: opacity 0.3s ease;
 }
 

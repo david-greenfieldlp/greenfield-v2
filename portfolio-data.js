@@ -24,7 +24,7 @@ const PORTFOLIO = [
         featured: true,
         status: 'active',
         ceo: 'Renen Hallak',
-        dealTeam: ['Avery Schwartz', 'Yuda Doron', 'Shay Grinfeld', 'Raz Mangel'],
+        dealTeam: ['Yuda Doron', 'Shay Grinfeld', 'Raz Mangel', 'Avery Schwartz'],
         testimonial: {
             quote: 'When we first partnered with Greenfield, they rolled up their sleeves, dug into the Excel, and helped us highlight how the company could shine through the metrics. Greenfield brought an analytical perspective that we didn\'t have internally, guiding us throughout our entire journey. They were true professionals in every interaction, and from the initial investment onward, they consistently acted in the best interests of the company at every step.',
             author: 'Renen Hallak',
@@ -145,7 +145,7 @@ const PORTFOLIO = [
         featured: false,
         status: 'active',
         ceo: 'Ofer Smadari',
-        dealTeam: ['Avery Schwartz', 'Itay Inbar', 'Meir Cohen'],
+        dealTeam: ['Itay Inbar', 'Meir Cohen', 'Avery Schwartz'],
         testimonial: null,
         coInvestors: [
             { name: 'BVP', logo: 'assets/coinvestors/bvp.png' },
@@ -199,7 +199,7 @@ const PORTFOLIO = [
         featured: false,
         status: 'active',
         ceo: 'Hed Kovetz',
-        dealTeam: ['Avery Schwartz', 'Raz Mangel', 'Ortal Sasson'],
+        dealTeam: ['Raz Mangel', 'Ortal Sasson', 'Avery Schwartz'],
         testimonial: null,
         coInvestors: [
             { name: 'Brighton Park Capital', logo: 'assets/coinvestors/brighton-park-capital.png' },
@@ -260,7 +260,7 @@ const PORTFOLIO = [
         featured: false,
         status: 'active',
         ceo: 'Gil Mandelzis',
-        dealTeam: ['Shay Grinfeld', 'Avery Schwartz', 'Ortal Sasson'],
+        dealTeam: ['Shay Grinfeld', 'Ortal Sasson', 'Daniel Milstein', 'Avery Schwartz'],
         testimonial: null,
         coInvestors: [
             { name: '9Yards', logo: 'assets/coinvestors/9yards.png' },
@@ -395,7 +395,7 @@ const PORTFOLIO = [
         featured: false,
         status: 'active',
         ceo: 'Jason Magee',
-        dealTeam: ['Avery Schwartz', 'Daniel Milstein', 'Ortal Sasson'],
+        dealTeam: ['Daniel Milstein', 'Ortal Sasson', 'Avery Schwartz'],
         testimonial: null,
         coInvestors: [
             { name: 'BlueRed Partners', logo: 'assets/coinvestors/bluered-partners.png' },
@@ -476,7 +476,7 @@ const PORTFOLIO = [
         featured: false,
         status: 'active',
         ceo: 'Oren Barzilai',
-        dealTeam: ['Avery Schwartz'],
+        dealTeam: ['Daniel Milstein', 'Shay Grinfeld', 'Avery Schwartz'],
         testimonial: null,
         coInvestors: [
             { name: 'Battery', logo: 'assets/coinvestors/battery.png' },
@@ -502,7 +502,7 @@ const PORTFOLIO = [
         featured: false,
         status: 'active',
         ceo: 'Nir Shalom',
-        dealTeam: ['Avery Schwartz', 'Meir Cohen'],
+        dealTeam: ['Meir Cohen', 'Avery Schwartz'],
         testimonial: null,
         coInvestors: [
             { name: '83North', logo: 'assets/coinvestors/83north.png' },
@@ -530,7 +530,7 @@ const PORTFOLIO = [
         status: 'exited',
         exitLabel: 'Acquired by Akamai',
         ceo: 'Pavel Gurvich',
-        dealTeam: ['Yuda Doron', 'Avery Schwartz', 'Raz Mangel'],
+        dealTeam: ['Yuda Doron', 'Raz Mangel', 'Avery Schwartz'],
         testimonial: null,
         coInvestors: [
             { name: '83North', logo: 'assets/coinvestors/83north.png' },
@@ -581,7 +581,7 @@ const PORTFOLIO = [
         featured: false,
         status: 'active',
         ceo: 'Nadav Czerninski',
-        dealTeam: ['Avery Schwartz', 'Raz Mangel', 'Josh Trup'],
+        dealTeam: ['Raz Mangel', 'Josh Trup', 'Avery Schwartz'],
         testimonial: null,
         coInvestors: [
             { name: 'Ballistic', logo: 'assets/coinvestors/ballistic.png' },
@@ -608,7 +608,7 @@ const PORTFOLIO = [
         featured: false,
         status: 'active',
         ceo: 'Matan Or-El',
-        dealTeam: ['Avery Schwartz', 'Itay Inbar'],
+        dealTeam: ['Itay Inbar', 'Avery Schwartz'],
         testimonial: null,
         coInvestors: [
             { name: 'Aleph', logo: 'assets/coinvestors/aleph.png' },
