@@ -193,14 +193,14 @@
         <button class="snap-dot" data-section="3" aria-label="Thesis">
             <span class="snap-dot-label">Thesis</span>
         </button>
-        <button class="snap-dot" data-section="4" aria-label="G2M Flywheel">
-            <span class="snap-dot-label">Flywheel</span>
+        <button class="snap-dot" data-section="4" aria-label="Seven Pillars">
+            <span class="snap-dot-label">7 Pillars</span>
         </button>
         <button class="snap-dot" data-section="5" aria-label="ORION Platform">
             <span class="snap-dot-label">ORION</span>
         </button>
-        <button class="snap-dot" data-section="6" aria-label="Seven Pillars">
-            <span class="snap-dot-label">7 Pillars</span>
+        <button class="snap-dot" data-section="6" aria-label="G2M Flywheel">
+            <span class="snap-dot-label">Flywheel</span>
         </button>
         <button class="snap-dot" data-scroll-to="expert-network" aria-label="Experts">
             <span class="snap-dot-label">Experts</span>
@@ -531,106 +531,191 @@
         <!-- end science of growth -->
 
         <!-- ══════════════════════════════════════
-             SECTION 8: G²M FLYWHEEL
+             SECTION 10: SEVEN PILLARS
              ══════════════════════════════════════ -->
-        <section class="snap-section snap-section--scrollable approach-flywheel"
-                 id="g2m-flywheel" data-theme="dark">
-            <div class="approach-flywheel-inner">
+        <section class="snap-section snap-section--scrollable approach-pillars" id="seven-pillars" data-theme="dark">
+            <div class="approach-pillars-inner">
 
-                <!-- Headline -->
-                <h2 class="approach-flywheel-heading snap-reveal">
-                    The G<sup>2</sup>M Flywheel: Compounding Growth Quarter After Quarter
-                </h2>
-
-                <!-- Teal divider -->
-                <div class="approach-flywheel-divider"></div>
-
-                <!-- Body text -->
-                <p class="approach-flywheel-body snap-reveal snap-reveal--delay-1">
-                    Most companies get quarterly board meetings with feedback after the fact.
-                    We provide quarterly operating sprints with hands-on execution. Each cycle
-                    builds systematic advantages that compound over time.
-                </p>
-
-                <!-- Horizontal Stepper -->
-                <div class="flywheel-stepper snap-reveal snap-reveal--delay-2" role="tablist" aria-label="Flywheel steps">
-
-                    <!-- Progress track (background + filled portion) -->
-                    <div class="flywheel-track">
-                        <div class="flywheel-track-fill" id="flywheelTrackFill"></div>
-                    </div>
-
-                    <!-- Step pins -->
-                    <button class="flywheel-pin flywheel-pin--active" role="tab"
-                            aria-selected="true" data-flywheel="0">
-                        <span class="flywheel-pin-number">01</span>
-                        <span class="flywheel-pin-label">Diagnose</span>
-                    </button>
-
-                    <button class="flywheel-pin" role="tab"
-                            aria-selected="false" data-flywheel="1">
-                        <span class="flywheel-pin-number">02</span>
-                        <span class="flywheel-pin-label">Prioritize</span>
-                    </button>
-
-                    <button class="flywheel-pin" role="tab"
-                            aria-selected="false" data-flywheel="2">
-                        <span class="flywheel-pin-number">03</span>
-                        <span class="flywheel-pin-label">Execute</span>
-                    </button>
-
-                    <button class="flywheel-pin" role="tab"
-                            aria-selected="false" data-flywheel="3">
-                        <span class="flywheel-pin-number">04</span>
-                        <span class="flywheel-pin-label">Evaluate</span>
-                    </button>
+                <!-- Heading -->
+                <div class="pillars-header-block">
+                    <h2 class="pillars-heading snap-reveal">
+                        The Seven Pillars<br class="pillars-heading-break"> of Efficient Growth
+                    </h2>
+                    <div class="pillars-divider snap-reveal snap-reveal--delay-1"></div>
+                    <p class="pillars-description snap-reveal snap-reveal--delay-2">
+                        Every diagnostic pinpoints exactly which pillar needs attention.<br>
+                        Every playbook maps to specific building blocks.
+                    </p>
                 </div>
 
-                <!-- Content Card -->
-                <div class="flywheel-card snap-reveal snap-reveal--delay-3">
+                <!-- Accordion list -->
+                <div class="pillar-list snap-reveal snap-reveal--delay-3">
 
-                    <div class="flywheel-panel flywheel-panel--active" data-flywheel-panel="0" role="tabpanel">
-                        <h3 class="flywheel-panel-title">Diagnose</h3>
-                        <div class="flywheel-panel-divider"></div>
-                        <p class="flywheel-panel-body">ORION, our proprietary data platform, can integrate with your CRM, financial, and operational data to benchmark performance against hundreds of datapoints. This produces a quantified health score with actionable diagnostics.</p>
-                    </div>
+                    <button class="pillar-item" data-pillar="0">
+                        <div class="pillar-row-header">
+                            <span class="pillar-number">01</span>
+                            <div class="pillar-sep"></div>
+                            <h3 class="pillar-title">Market Strategy</h3>
+                            <span class="pillar-sublabel">(Foundation)</span>
+                            <div class="pillar-chevron">
+                                <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
+                                    <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="pillar-body">
+                            <div class="pillar-body-inner">
+                                <p class="pillar-playbooks">
+                                    <span class="pillar-playbooks-label">Playbooks include:</span>
+                                    ICP definition, market segmentation, competitive positioning, pricing &amp; packaging, GTM motion selection, territory design
+                                </p>
+                                <p class="pillar-more">…and more</p>
+                            </div>
+                        </div>
+                    </button>
 
-                    <div class="flywheel-panel" data-flywheel-panel="1" role="tabpanel">
-                        <h3 class="flywheel-panel-title">Prioritize</h3>
-                        <div class="flywheel-panel-divider"></div>
-                        <p class="flywheel-panel-body">We work with the entire management team to select interventions with clear goals, timelines, and owners, allocating resources on only what moves the needle most.</p>
-                    </div>
+                    <button class="pillar-item" data-pillar="1">
+                        <div class="pillar-row-header">
+                            <span class="pillar-number">02</span>
+                            <div class="pillar-sep"></div>
+                            <h3 class="pillar-title">Sales Execution</h3>
+                            <span class="pillar-sublabel">(Revenue Engine)</span>
+                            <div class="pillar-chevron">
+                                <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
+                                    <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="pillar-body">
+                            <div class="pillar-body-inner">
+                                <p class="pillar-playbooks">
+                                    <span class="pillar-playbooks-label">Playbooks include:</span>
+                                    Qualification frameworks, discovery methodology, proposal process, objection handling, closing playbooks, forecasting cadence
+                                </p>
+                                <p class="pillar-more">…and more</p>
+                            </div>
+                        </div>
+                    </button>
 
-                    <div class="flywheel-panel" data-flywheel-panel="2" role="tabpanel">
-                        <h3 class="flywheel-panel-title">Execute</h3>
-                        <div class="flywheel-panel-divider"></div>
-                        <p class="flywheel-panel-body">We deploy specialized operators from our G<sup>2</sup>M Squad covering sales, enablement, strategy, partnerships, and more to implement playbooks hands-on.</p>
-                    </div>
+                    <button class="pillar-item" data-pillar="2">
+                        <div class="pillar-row-header">
+                            <span class="pillar-number">03</span>
+                            <div class="pillar-sep"></div>
+                            <h3 class="pillar-title">Pipeline Generation</h3>
+                            <span class="pillar-sublabel">(Demand)</span>
+                            <div class="pillar-chevron">
+                                <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
+                                    <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="pillar-body">
+                            <div class="pillar-body-inner">
+                                <p class="pillar-playbooks">
+                                    <span class="pillar-playbooks-label">Playbooks include:</span>
+                                    Outbound prospecting, inbound content strategy, paid acquisition, ABM programs, event marketing, SDR playbook design
+                                </p>
+                                <p class="pillar-more">…and more</p>
+                            </div>
+                        </div>
+                    </button>
 
-                    <div class="flywheel-panel" data-flywheel-panel="3" role="tabpanel">
-                        <h3 class="flywheel-panel-title">Evaluate</h3>
-                        <div class="flywheel-panel-divider"></div>
-                        <p class="flywheel-panel-body">We measure outcomes vs. objectives through ORION dashboards, updating playbooks based on learnings and defining next quarter&rsquo;s priorities.</p>
-                    </div>
+                    <button class="pillar-item" data-pillar="3">
+                        <div class="pillar-row-header">
+                            <span class="pillar-number">04</span>
+                            <div class="pillar-sep"></div>
+                            <h3 class="pillar-title">People &amp; Organization</h3>
+                            <span class="pillar-sublabel">(Team Building)</span>
+                            <div class="pillar-chevron">
+                                <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
+                                    <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="pillar-body">
+                            <div class="pillar-body-inner">
+                                <p class="pillar-playbooks">
+                                    <span class="pillar-playbooks-label">Playbooks include:</span>
+                                    Hiring, onboarding, training, career growth, compensation, performance management, retention
+                                </p>
+                                <p class="pillar-more">…and more</p>
+                            </div>
+                        </div>
+                    </button>
 
-                    <!-- Card navigation -->
-                    <div class="flywheel-card-nav">
-                        <button class="flywheel-nav-btn flywheel-nav-prev" id="flywheelPrev">
-                            &#8249; Previous
-                        </button>
-                        <button class="flywheel-nav-btn flywheel-nav-next" id="flywheelNext">
-                            Next &#8250;
-                        </button>
-                    </div>
+                    <button class="pillar-item" data-pillar="4">
+                        <div class="pillar-row-header">
+                            <span class="pillar-number">05</span>
+                            <div class="pillar-sep"></div>
+                            <h3 class="pillar-title">Operational Infrastructure</h3>
+                            <span class="pillar-sublabel">(Systems)</span>
+                            <div class="pillar-chevron">
+                                <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
+                                    <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="pillar-body">
+                            <div class="pillar-body-inner">
+                                <p class="pillar-playbooks">
+                                    <span class="pillar-playbooks-label">Playbooks include:</span>
+                                    CRM architecture, tech stack audit, analytics dashboards, process documentation, OKR frameworks, RevOps design
+                                </p>
+                                <p class="pillar-more">…and more</p>
+                            </div>
+                        </div>
+                    </button>
 
-                </div>
+                    <button class="pillar-item" data-pillar="5">
+                        <div class="pillar-row-header">
+                            <span class="pillar-number">06</span>
+                            <div class="pillar-sep"></div>
+                            <h3 class="pillar-title">Partnerships &amp; Alliances</h3>
+                            <span class="pillar-sublabel">(Ecosystem)</span>
+                            <div class="pillar-chevron">
+                                <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
+                                    <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="pillar-body">
+                            <div class="pillar-body-inner">
+                                <p class="pillar-playbooks">
+                                    <span class="pillar-playbooks-label">Playbooks include:</span>
+                                    Partner program design, co-selling motions, channel enablement, integration partnerships, referral programs, alliance strategy
+                                </p>
+                                <p class="pillar-more">…and more</p>
+                            </div>
+                        </div>
+                    </button>
 
-                <!-- Cycle note -->
-                <p class="flywheel-cycle-note">↻ Cycle repeats each quarter</p>
+                    <button class="pillar-item" data-pillar="6">
+                        <div class="pillar-row-header">
+                            <span class="pillar-number">07</span>
+                            <div class="pillar-sep"></div>
+                            <h3 class="pillar-title">Customer Success</h3>
+                            <span class="pillar-sublabel">(Retention &amp; Growth)</span>
+                            <div class="pillar-chevron">
+                                <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
+                                    <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="pillar-body">
+                            <div class="pillar-body-inner">
+                                <p class="pillar-playbooks">
+                                    <span class="pillar-playbooks-label">Playbooks include:</span>
+                                    Onboarding programs, QBR frameworks, expansion playbooks, health scoring, churn prevention, voice of customer
+                                </p>
+                                <p class="pillar-more">…and more</p>
+                            </div>
+                        </div>
+                    </button>
 
-            </div>
+                </div><!-- /.pillar-list -->
+            </div><!-- /.approach-pillars-inner -->
         </section>
-        <!-- end g2m flywheel -->
+        <!-- end seven pillars -->
 
         <!-- ══════════════════════════════════════
              SECTION 9: ORION PLATFORM
@@ -878,191 +963,106 @@
         <!-- end orion platform -->
 
         <!-- ══════════════════════════════════════
-             SECTION 10: SEVEN PILLARS
+             SECTION 8: G²M FLYWHEEL
              ══════════════════════════════════════ -->
-        <section class="snap-section snap-section--scrollable approach-pillars" id="seven-pillars" data-theme="dark">
-            <div class="approach-pillars-inner">
+        <section class="snap-section snap-section--scrollable approach-flywheel"
+                 id="g2m-flywheel" data-theme="dark">
+            <div class="approach-flywheel-inner">
 
-                <!-- Heading -->
-                <div class="pillars-header-block">
-                    <h2 class="pillars-heading snap-reveal">
-                        The Seven Pillars<br class="pillars-heading-break"> of Efficient Growth
-                    </h2>
-                    <div class="pillars-divider snap-reveal snap-reveal--delay-1"></div>
-                    <p class="pillars-description snap-reveal snap-reveal--delay-2">
-                        Every diagnostic pinpoints exactly which pillar needs attention.<br>
-                        Every playbook maps to specific building blocks.
-                    </p>
+                <!-- Headline -->
+                <h2 class="approach-flywheel-heading snap-reveal">
+                    The G<sup>2</sup>M Flywheel: Compounding Growth Quarter After Quarter
+                </h2>
+
+                <!-- Teal divider -->
+                <div class="approach-flywheel-divider"></div>
+
+                <!-- Body text -->
+                <p class="approach-flywheel-body snap-reveal snap-reveal--delay-1">
+                    Most companies get quarterly board meetings with feedback after the fact.
+                    We provide quarterly operating sprints with hands-on execution. Each cycle
+                    builds systematic advantages that compound over time.
+                </p>
+
+                <!-- Horizontal Stepper -->
+                <div class="flywheel-stepper snap-reveal snap-reveal--delay-2" role="tablist" aria-label="Flywheel steps">
+
+                    <!-- Progress track (background + filled portion) -->
+                    <div class="flywheel-track">
+                        <div class="flywheel-track-fill" id="flywheelTrackFill"></div>
+                    </div>
+
+                    <!-- Step pins -->
+                    <button class="flywheel-pin flywheel-pin--active" role="tab"
+                            aria-selected="true" data-flywheel="0">
+                        <span class="flywheel-pin-number">01</span>
+                        <span class="flywheel-pin-label">Diagnose</span>
+                    </button>
+
+                    <button class="flywheel-pin" role="tab"
+                            aria-selected="false" data-flywheel="1">
+                        <span class="flywheel-pin-number">02</span>
+                        <span class="flywheel-pin-label">Prioritize</span>
+                    </button>
+
+                    <button class="flywheel-pin" role="tab"
+                            aria-selected="false" data-flywheel="2">
+                        <span class="flywheel-pin-number">03</span>
+                        <span class="flywheel-pin-label">Execute</span>
+                    </button>
+
+                    <button class="flywheel-pin" role="tab"
+                            aria-selected="false" data-flywheel="3">
+                        <span class="flywheel-pin-number">04</span>
+                        <span class="flywheel-pin-label">Evaluate</span>
+                    </button>
                 </div>
 
-                <!-- Accordion list -->
-                <div class="pillar-list snap-reveal snap-reveal--delay-3">
+                <!-- Content Card -->
+                <div class="flywheel-card snap-reveal snap-reveal--delay-3">
 
-                    <button class="pillar-item" data-pillar="0">
-                        <div class="pillar-row-header">
-                            <span class="pillar-number">01</span>
-                            <div class="pillar-sep"></div>
-                            <h3 class="pillar-title">Market Strategy</h3>
-                            <span class="pillar-sublabel">(Foundation)</span>
-                            <div class="pillar-chevron">
-                                <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
-                                    <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="pillar-body">
-                            <div class="pillar-body-inner">
-                                <p class="pillar-playbooks">
-                                    <span class="pillar-playbooks-label">Playbooks include:</span>
-                                    ICP definition, market segmentation, competitive positioning, pricing &amp; packaging, GTM motion selection, territory design
-                                </p>
-                                <p class="pillar-more">…and more</p>
-                            </div>
-                        </div>
-                    </button>
+                    <div class="flywheel-panel flywheel-panel--active" data-flywheel-panel="0" role="tabpanel">
+                        <h3 class="flywheel-panel-title">Diagnose</h3>
+                        <div class="flywheel-panel-divider"></div>
+                        <p class="flywheel-panel-body">ORION, our proprietary data platform, can integrate with your CRM, financial, and operational data to benchmark performance against hundreds of datapoints. This produces a quantified health score with actionable diagnostics.</p>
+                    </div>
 
-                    <button class="pillar-item" data-pillar="1">
-                        <div class="pillar-row-header">
-                            <span class="pillar-number">02</span>
-                            <div class="pillar-sep"></div>
-                            <h3 class="pillar-title">Sales Execution</h3>
-                            <span class="pillar-sublabel">(Revenue Engine)</span>
-                            <div class="pillar-chevron">
-                                <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
-                                    <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="pillar-body">
-                            <div class="pillar-body-inner">
-                                <p class="pillar-playbooks">
-                                    <span class="pillar-playbooks-label">Playbooks include:</span>
-                                    Qualification frameworks, discovery methodology, proposal process, objection handling, closing playbooks, forecasting cadence
-                                </p>
-                                <p class="pillar-more">…and more</p>
-                            </div>
-                        </div>
-                    </button>
+                    <div class="flywheel-panel" data-flywheel-panel="1" role="tabpanel">
+                        <h3 class="flywheel-panel-title">Prioritize</h3>
+                        <div class="flywheel-panel-divider"></div>
+                        <p class="flywheel-panel-body">We work with the entire management team to select interventions with clear goals, timelines, and owners, allocating resources on only what moves the needle most.</p>
+                    </div>
 
-                    <button class="pillar-item" data-pillar="2">
-                        <div class="pillar-row-header">
-                            <span class="pillar-number">03</span>
-                            <div class="pillar-sep"></div>
-                            <h3 class="pillar-title">Pipeline Generation</h3>
-                            <span class="pillar-sublabel">(Demand)</span>
-                            <div class="pillar-chevron">
-                                <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
-                                    <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="pillar-body">
-                            <div class="pillar-body-inner">
-                                <p class="pillar-playbooks">
-                                    <span class="pillar-playbooks-label">Playbooks include:</span>
-                                    Outbound prospecting, inbound content strategy, paid acquisition, ABM programs, event marketing, SDR playbook design
-                                </p>
-                                <p class="pillar-more">…and more</p>
-                            </div>
-                        </div>
-                    </button>
+                    <div class="flywheel-panel" data-flywheel-panel="2" role="tabpanel">
+                        <h3 class="flywheel-panel-title">Execute</h3>
+                        <div class="flywheel-panel-divider"></div>
+                        <p class="flywheel-panel-body">We deploy specialized operators from our G<sup>2</sup>M Squad covering sales, enablement, strategy, partnerships, and more to implement playbooks hands-on.</p>
+                    </div>
 
-                    <button class="pillar-item" data-pillar="3">
-                        <div class="pillar-row-header">
-                            <span class="pillar-number">04</span>
-                            <div class="pillar-sep"></div>
-                            <h3 class="pillar-title">People &amp; Organization</h3>
-                            <span class="pillar-sublabel">(Team Building)</span>
-                            <div class="pillar-chevron">
-                                <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
-                                    <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="pillar-body">
-                            <div class="pillar-body-inner">
-                                <p class="pillar-playbooks">
-                                    <span class="pillar-playbooks-label">Playbooks include:</span>
-                                    Hiring, onboarding, training, career growth, compensation, performance management, retention
-                                </p>
-                                <p class="pillar-more">…and more</p>
-                            </div>
-                        </div>
-                    </button>
+                    <div class="flywheel-panel" data-flywheel-panel="3" role="tabpanel">
+                        <h3 class="flywheel-panel-title">Evaluate</h3>
+                        <div class="flywheel-panel-divider"></div>
+                        <p class="flywheel-panel-body">We measure outcomes vs. objectives through ORION dashboards, updating playbooks based on learnings and defining next quarter&rsquo;s priorities.</p>
+                    </div>
 
-                    <button class="pillar-item" data-pillar="4">
-                        <div class="pillar-row-header">
-                            <span class="pillar-number">05</span>
-                            <div class="pillar-sep"></div>
-                            <h3 class="pillar-title">Operational Infrastructure</h3>
-                            <span class="pillar-sublabel">(Systems)</span>
-                            <div class="pillar-chevron">
-                                <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
-                                    <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="pillar-body">
-                            <div class="pillar-body-inner">
-                                <p class="pillar-playbooks">
-                                    <span class="pillar-playbooks-label">Playbooks include:</span>
-                                    CRM architecture, tech stack audit, analytics dashboards, process documentation, OKR frameworks, RevOps design
-                                </p>
-                                <p class="pillar-more">…and more</p>
-                            </div>
-                        </div>
-                    </button>
+                    <!-- Card navigation -->
+                    <div class="flywheel-card-nav">
+                        <button class="flywheel-nav-btn flywheel-nav-prev" id="flywheelPrev">
+                            &#8249; Previous
+                        </button>
+                        <button class="flywheel-nav-btn flywheel-nav-next" id="flywheelNext">
+                            Next &#8250;
+                        </button>
+                    </div>
 
-                    <button class="pillar-item" data-pillar="5">
-                        <div class="pillar-row-header">
-                            <span class="pillar-number">06</span>
-                            <div class="pillar-sep"></div>
-                            <h3 class="pillar-title">Partnerships &amp; Alliances</h3>
-                            <span class="pillar-sublabel">(Ecosystem)</span>
-                            <div class="pillar-chevron">
-                                <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
-                                    <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="pillar-body">
-                            <div class="pillar-body-inner">
-                                <p class="pillar-playbooks">
-                                    <span class="pillar-playbooks-label">Playbooks include:</span>
-                                    Partner program design, co-selling motions, channel enablement, integration partnerships, referral programs, alliance strategy
-                                </p>
-                                <p class="pillar-more">…and more</p>
-                            </div>
-                        </div>
-                    </button>
+                </div>
 
-                    <button class="pillar-item" data-pillar="6">
-                        <div class="pillar-row-header">
-                            <span class="pillar-number">07</span>
-                            <div class="pillar-sep"></div>
-                            <h3 class="pillar-title">Customer Success</h3>
-                            <span class="pillar-sublabel">(Retention &amp; Growth)</span>
-                            <div class="pillar-chevron">
-                                <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
-                                    <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="pillar-body">
-                            <div class="pillar-body-inner">
-                                <p class="pillar-playbooks">
-                                    <span class="pillar-playbooks-label">Playbooks include:</span>
-                                    Onboarding programs, QBR frameworks, expansion playbooks, health scoring, churn prevention, voice of customer
-                                </p>
-                                <p class="pillar-more">…and more</p>
-                            </div>
-                        </div>
-                    </button>
+                <!-- Cycle note -->
+                <p class="flywheel-cycle-note">↻ Cycle repeats each quarter</p>
 
-                </div><!-- /.pillar-list -->
-            </div><!-- /.approach-pillars-inner -->
+            </div>
         </section>
-        <!-- end seven pillars -->
+        <!-- end g2m flywheel -->
 
     </main><!-- end snap container -->
 
@@ -1321,7 +1321,9 @@
                     <div class="t2-content-col">
 
                         <!-- Logo -->
-                        <img loading="lazy" class="t2-logo" id="testimonialLogo" src="" alt="">
+                        <a id="testimonialLogoLink" href="#" target="_blank" rel="noopener" style="display:inline-block;">
+                            <img loading="lazy" class="t2-logo" id="testimonialLogo" src="" alt="">
+                        </a>
 
                         <!-- Quote -->
                         <div class="t2-quote-block">
@@ -1371,6 +1373,7 @@
                     name: 'Renen Hallak',
                     title: 'CEO & Co-Founder',
                     company: 'VAST Data',
+                    companyId: 'vast',
                     photo: 'assets/Testimonial/renen-hallak.webp',
                     logo: 'assets/Testimonial/vast-data-logo.svg',
                     quote: 'When we first partnered with Greenfield, they rolled up their sleeves, dug into the Excel, and helped us highlight how the company could shine through the metrics. Greenfield brought an analytical perspective that we didn\'t have internally, guiding us throughout our entire journey. They were true professionals in every interaction, and from the initial investment onward, they consistently acted in the best interests of the company at every step.'
@@ -1379,6 +1382,7 @@
                     name: 'Assaf Resnick',
                     title: 'CEO & Co-Founder',
                     company: 'BigPanda',
+                    companyId: 'bigpanda',
                     photo: 'assets/Testimonial/assaf-resnick.avif',
                     logo: 'assets/Testimonial/bigpanda-logo.svg',
                     quote: 'Greenfield invested the time to build a trusting relationship with us over the years. My experience with Shay and the team convinced me that having smart, pleasant partners is more valuable than just big investor names—they help you make good decisions in both good times and bad. As a young company, we hadn\'t fully considered scaling, organizational DNA, or data-driven strategies, but Greenfield\'s involvement opened our eyes and made us much smarter about building a scalable, data-driven company.'
@@ -1387,6 +1391,7 @@
                     name: 'Ariel Assaraf',
                     title: 'CEO & Co-Founder',
                     company: 'Coralogix',
+                    companyId: 'coralogix',
                     photo: 'assets/Testimonial/ariel-assaraf.avif',
                     logo: 'assets/Testimonial/coralogix-logo.svg',
                     quote: 'Greenfield partnered with us at a critical point in our company\'s growth. They introduced us to key metrics for our north star, helping us focus on what truly drives growth. With their guidance we became a data-driven company, providing us with the expertise we needed to scale effectively.'
@@ -1395,6 +1400,7 @@
                     name: 'Jeremy Suard',
                     title: 'CEO & Co-Founder',
                     company: 'Exodigo',
+                    companyId: 'exodigo',
                     photo: 'assets/Testimonial/jeremy-suard.png',
                     logo: 'assets/Testimonial/exodigo-logo.svg',
                     quote: 'We wanted a conversation with investors who truly understand us. I value investors who recognize that I need the freedom to make my own mistakes and ultimately make my own decisions. The Greenfield team grasped this quickly, which is exactly what I was looking for. We\'re a complex business, but that instant click of understanding, which we saw during the due diligence process, was exactly what we needed.'
@@ -1406,8 +1412,9 @@
             var autoTimer   = null;
             var AUTO_MS     = 8000;
 
-            var photoEl  = document.getElementById('testimonialPhoto');
-            var logoEl   = document.getElementById('testimonialLogo');
+            var photoEl     = document.getElementById('testimonialPhoto');
+            var logoEl      = document.getElementById('testimonialLogo');
+            var logoLinkEl  = document.getElementById('testimonialLogoLink');
             var quoteEl  = document.getElementById('testimonialQuote');
             var nameEl   = document.getElementById('testimonialName');
             var roleEl   = document.getElementById('testimonialRole');
@@ -1431,6 +1438,9 @@
                 photoEl.alt = t.name;
                 logoEl.src  = t.logo;
                 logoEl.alt  = t.company;
+                if (logoLinkEl && t.companyId) {
+                    logoLinkEl.href = 'portfolio.html?company=' + t.companyId;
+                }
                 quoteEl.textContent = '\u201c' + t.quote + '\u201d';
                 nameEl.textContent  = t.name;
                 roleEl.textContent  = t.title + ', ' + t.company;

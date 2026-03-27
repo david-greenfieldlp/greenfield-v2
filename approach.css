@@ -2467,9 +2467,9 @@
 
 /* ── Company logo ── */
 .t2-logo {
-    height: 28px;
+    height: 44px;
     width: auto;
-    max-width: 140px;
+    max-width: 200px;
     object-fit: contain;
     object-position: left center;
     display: block;
